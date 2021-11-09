@@ -52,6 +52,9 @@ a:hover {
 .fs-60px {
     font-size: 3.75em;
 }
+.fs-80px {
+    font-size: 5em;
+}
 .fs-100px {
     font-size: 8.25em;
 }
@@ -69,9 +72,13 @@ a:hover {
         font-size: 1rem;
     }
 
+    &:disabled {
+        background: #F7F6FF;
+    }
+
     &.regular {
         padding: 8px;
-        height: 36px;
+        height: 38px;
 
         &::placeholder {
             color: $light-dark;
@@ -82,7 +89,18 @@ a:hover {
             color: $light-dark;
         }
     }
+}
 
+.form-control {
+    border: 1px solid #E5E5E5;
+
+    &:focus {
+        outline: 1px solid black;
+    }
+
+}
+.input-group-text {
+    color: $dark !important;
 }
 
 .login-btn {

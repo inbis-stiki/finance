@@ -11,8 +11,14 @@
                 <div class="row m-0 p-0 w-100">
                     <div class="col-12 col-lg-6 ps-0 d-flex flex-column">
                         <label class="mb-3">Upload Foto Kendaraan</label>
-                        <div class="upload-img">
+                        <div class="upload-img color-dark">
+                            <span class="iconify fs-80px mb-3 z-2" data-icon="ic:baseline-photo-camera"></span>
+                            <p class="z-2">Klik disini untuk upload foto</p>
 
+                            <input type="file" name="myImage" accept="image/png, image/gif, image/jpeg" id="imageInput" class="z-2"/>
+                            <div class="z-2"></div>
+                            
+                            <img src="" class="image-preview">
                         </div>
                     </div>
                     <div class="col-12 col-lg-6 pe-0 d-flex flex-column justify-content-between">
@@ -57,7 +63,7 @@
                 </div>
             </div>
         </div>
-        
+
         <div class="card-section">
             <div class="head">
                 <p>Instansi Penyewa</p>
