@@ -52,3 +52,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'welcome';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
+
+$route['adm_login'] = 'admin/Auth';
+$route['admin/dashboard'] = 'admin/Admin';
+$route['admin/form_pengajuan'] = 'admin/Admin/form_pengajuan';
+$route['admin/master_sparepart'] = 'admin/Admin/master_sparepart';
+
+// Pencatatan
+$route['admin/form_pengajuan/unit_kendaraan'] = 'admin/Admin/unit_kendaraan';
+$route['admin/form_pengajuan/jenis_biaya'] = 'admin/Admin/jenis_biaya';

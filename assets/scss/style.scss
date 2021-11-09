@@ -1,0 +1,117 @@
+@import "variables";
+@import "navigation";
+@import "content";
+
+* {
+    margin: 0;
+    padding: 0;
+
+    box-sizing: border-box;
+}
+
+body,
+html {
+    font-family: "Roboto", sans-serif !important;
+    color: $dark;
+
+    height: 100%;
+}
+
+@for $i from 1 to 9 {
+    .font-w-#{$i}00 {
+        font-weight: $i * 100 !important;
+    }
+}
+@for $i from 1 to 10 {
+    .opacity-#{$i} {
+        opacity: $i * 10% !important;
+    }
+}
+
+a,
+a:hover {
+    text-decoration: none;
+    color: inherit;
+}
+
+.fs-12px {
+    font-size: 0.75em;
+}
+.fs-14px {
+    font-size: 0.875em;
+}
+.fs-16px {
+    font-size: 1rem;
+}
+.fs-18px {
+    font-size: 1.125em;
+}
+.fs-36px {
+    font-size: 2.25em;
+}
+.fs-60px {
+    font-size: 3.75em;
+}
+.fs-100px {
+    font-size: 8.25em;
+}
+
+.login-input {
+    padding: 15px 24px;
+    border-radius: 4px;
+    border: 1px solid #E5E5E5;
+    font-size: 1rem;
+
+    width: 100%;
+
+    &::placeholder {
+        color: #C7D3CC;
+        font-size: 1rem;
+    }
+
+    &.regular {
+        padding: 8px;
+        height: 36px;
+
+        &::placeholder {
+            color: $light-dark;
+            font-size: 1rem;
+        }
+        
+        option[disabled] {
+            color: $light-dark;
+        }
+    }
+
+}
+
+.login-btn {
+    background: $primary;
+    border: 1px solid $primary;
+    border-radius: 6px;
+    color: white;
+    padding: 14px 64px;
+}
+
+.outline-none:focus {
+    outline: none !important;
+}
+
+.general-padding {
+    padding-left: $side-nav-w;
+    padding-top: $top-nav-h;
+}
+
+.h-70px {
+    height: 70px;
+}
+
+
+.color-light-dark { color: $light-dark; }
+.color-dark { color: $dark; }
+.color-darker { color: $darker; }
+.color-primary { color: $primary; }
+.color-secondary { color: $secondary; }
+.background-primary { background: $primary; }
+.background-secondary { background: $secondary; }
+.bg-light-purple { background: $light-purple; }
