@@ -1,0 +1,25 @@
+{
+  "name": "finance",
+  "version": "1.0.0",
+  "description": "What is CodeIgniter finance #1\r ###################",
+  "main": "index.js",
+  "dependencies": {
+    "node-sass": "^6.0.1",
+    "sass": "^1.43.4"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "sass": "node-sass -w assets/scss/ -o assets/src/css/ --recursive"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bijancot/finance.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bijancot/finance/issues"
+  },
+  "homepage": "https://github.com/bijancot/finance#readme"
+}
