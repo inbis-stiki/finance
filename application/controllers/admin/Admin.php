@@ -9,6 +9,11 @@ class Admin extends CI_Controller
 		$this->load->library('table');
 	}
 
+	function __construct(){
+        parent::__construct();
+        $this->load->model('m_region');
+    }
+
 	public function index()
 	{
 		$data['title']  = 'admin'; // PLACEHOLDER VARIABLE DATA
@@ -27,6 +32,15 @@ class Admin extends CI_Controller
 		]; // PLACEHOLDER VARIABLE DATA
 
 		$this->template->index('admin/master_sparepart', $data);
+	}
+
+	public function master_region()
+	{
+		$data['title']  = 'admin'; // PLACEHOLDER VARIABLE DATA
+
+		$this->data['region']=$this->m_region->get_region('master_region');
+
+		$this->template->index('admin/master_region', $this->data);
 	}
 
 	public function form_pengajuan()
