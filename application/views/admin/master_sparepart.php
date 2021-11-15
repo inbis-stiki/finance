@@ -11,48 +11,48 @@
                 <table class="table-custom">
                     <thead>
                         <tr>
-                            <th>No</th>
-                            <th>Jenis Sparepart</th>
-                            <th>Ideal Pemakaian</th>
-                            <th>Action</th>
+                            <?php
+                            $template = array('table_open' => '<table class="table-custom">');
+                            $this->table->set_template($template);
+                            $this->table->set_heading('No', 'Jenis Sparepart', 'Ideal Pemakaian', 'Action');
+                            ?>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td>1</td>
-                            <td>Set Kampas Rem</td>
-                            <td>12 bulan</td>
-                            <td>
-                                <button type="button" class="btn-table green" data-bs-toggle="modal" data-bs-target="#edit_masterSparepart">
-                                    Edit
-                                </button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Injektor</td>
-                            <td>12 bulan</td>
-                            <td>
-                                <button type="button" class="btn-table green" data-bs-toggle="modal" data-bs-target="#edit_masterSparepart">
-                                    Edit
-                                </button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>Radiator</td>
-                            <td>1 bulan</td>
-                            <td>
-                                <button type="button" class="btn-table green" data-bs-toggle="modal" data-bs-target="#edit_masterSparepart">
-                                    Edit
-                                </button>
-                            </td>
+                            <?php
+                            $no = 1;
+                            foreach ($Sparepart as $row) {
+                                if ($row->sparepart_bulan > 0) {
+                                    $this->table->add_row(
+                                        $no++,
+                                        $row->sparepart_nama,
+                                        $row->sparepart_bulan . ' Bulan',
+                                        '<button type="button" class="btn-table green" data-bs-toggle="modal" data-bs-target="#edit_masterSparepart">
+                                            Edit
+                                        </button>'
+                                    );
+                                } else {
+                                    $this->table->add_row(
+                                        $no++,
+                                        $row->sparepart_nama,
+                                        $row->sparepart_km . ' Km',
+                                        '<button type="button" class="btn-table green" data-bs-toggle="modal" data-bs-target="#edit_masterSparepart">
+                                            Edit
+                                        </button>'
+                                    );
+                                }
+
+                            ?>
+                            <?php }
+                            echo $this->table->generate(); ?>
                         </tr>
                     </tbody>
                 </table>
             </div>
-            <div class="foot">
-            </div>
+        </div>
+        <div class="foot">
         </div>
     </div>
+</div>
 </div>

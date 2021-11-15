@@ -7,11 +7,12 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body fs-14px pt-0 d-flex flex-column">
+                <?= form_open_multipart('admin/Sparepart/aksiTambahPart'); ?>
                 <div class="pb-4">
 
                     <div class="d-flex flex-column my-2 w-100">
                         <label class="my-2 color-secondary">Jenis Sparepart</label>
-                        <input type="text" class="login-input regular" placeholder="">
+                        <input type="text" class="login-input regular" name="jenis" placeholder="">
                     </div>
                     <div class="row m-0 p-0 w-full">
                         <label class="my-2 color-secondary ps-0">Ideal Penggantian</label>
@@ -28,10 +29,11 @@
                                 <label for="bulan" class="font-w-500 ms-2 me-3">Bulan</label>
                             </div>
                             <input type="number" id="bulan-txt" class="login-input regular" min="0" max="12" disabled>
-                        </div>   
+                        </div>
                     </div>
                 </div>
-                <button type="button" class="btn-table submit-modal" data-bs-dismiss="modal">Tambah data</button>
+                <button type="submit" class="btn-table submit-modal" data-bs-dismiss="modal">Tambah data</button>
+                <?= form_close() ?>
             </div>
         </div>
     </div>
@@ -68,7 +70,7 @@
                                 <label for="bulan2" class="font-w-500 ms-2 me-3">Bulan</label>
                             </div>
                             <input type="number" id="bulan-txt2" class="login-input regular" min="0" max="12" disabled>
-                        </div>   
+                        </div>
                     </div>
                 </div>
                 <div class="d-flex flex-row">
@@ -151,7 +153,7 @@
 <div class="modal fade" id="success" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content p-2">
-            
+
             <div class="modal-body fs-14px pt-0 d-flex flex-column align-items-center justify-content-center">
 
                 <span class="iconify fs-100px color-primary my-4" data-icon="fluent:checkmark-starburst-16-filled"></span>

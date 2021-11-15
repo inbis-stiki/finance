@@ -3,6 +3,11 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Admin extends CI_Controller
 {
+	public function __construct()
+	{
+		parent::__construct();
+		$this->load->library('table');
+	}
 
 	function __construct(){
         parent::__construct();
@@ -18,7 +23,13 @@ class Admin extends CI_Controller
 
 	public function master_sparepart()
 	{
-		$data['title']  = 'admin'; // PLACEHOLDER VARIABLE DATA
+		$this->load->model('M_Sparepart');
+		$dataPart = $this->M_Sparepart->getSparepart();
+
+		$data = [
+			'title' => "admin",
+			'Sparepart' => $dataPart,
+		]; // PLACEHOLDER VARIABLE DATA
 
 		$this->template->index('admin/master_sparepart', $data);
 	}
