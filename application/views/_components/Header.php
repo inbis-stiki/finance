@@ -14,6 +14,9 @@
     <script src="https://code.iconify.design/2/2.0.3/iconify.min.js"></script>
 
     <link rel="stylesheet" href="<?= site_url()?>assets/src/css/style.css">
-    
+
+    <!-- Datatables -->
+    <!-- <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/css/bootstrap.min.css"> -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap5.min.css">
 </head>
 <body>

@@ -57,7 +57,12 @@ $route['adm_login'] = 'admin/Auth';
 $route['admin/dashboard'] = 'admin/Admin';
 $route['admin/form_pengajuan'] = 'admin/Admin/form_pengajuan';
 $route['admin/master_sparepart'] = 'admin/Admin/master_sparepart';
+$route['admin/master_region'] = 'admin/Admin/master_region';
+$route['master_region'] = 'admin/Master_region';
+$route['simpan_region'] = 'admin/Master_region/simpan_region';
+$route['add_region'] = 'admin/Master_region/addRegion';
 
 // Pencatatan
 $route['admin/form_pengajuan/unit_kendaraan'] = 'admin/Admin/unit_kendaraan';
 $route['admin/form_pengajuan/jenis_biaya'] = 'admin/Admin/jenis_biaya';
+// $route['admin/add_kendaraan'] = 'admin/Unit_kendaraan/add_kendaraan';
