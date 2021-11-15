@@ -13,6 +13,9 @@
     <div class="nav-links <?= uri_string() == 'admin/master_sparepart' ? 'active':'' ?>">
         <a href="<?= site_url()?>admin/master_sparepart">Master Sparepart</a>
     </div>
+    <div class="nav-links <?= uri_string() == 'admin/master_region' ? 'active':'' ?>">
+        <a href="<?= site_url()?>admin/master_region">Master Region</a>
+    </div>
 </div>
 <div class="top-nav">
     <div class="d-flex flex-row justify-content-start align-items-center h-100 ps-4">
