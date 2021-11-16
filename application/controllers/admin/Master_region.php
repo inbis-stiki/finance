@@ -25,8 +25,8 @@ class Master_region extends CI_Controller
 
     function editRegion(){
         $id = $this->input->post('region_id');
-        $kota = $this->input->post('region_kota')
-        $this->M_region->editRegion($data, $id);
+        $kota = $this->input->post('region_kota');
+        $this->M_region->editRegion($kota, $id);
         redirect('admin/Admin/master_region');
     }
 }

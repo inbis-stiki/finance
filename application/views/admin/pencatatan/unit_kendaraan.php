@@ -1,6 +1,6 @@
 <div class="min-vh-100 general-padding bg-light-purple">
     <div class="p-5">
-    <?= form_open('admin/Unit_kendaraan/add_kendaraan');?>    
+    <?= form_open_multipart('admin/Unit_kendaraan/add_kendaraan');?>    
         <p class="mb-3 fs-5 font-w-500 color-darker">
             Pencatatan Unit Kendaraan
         </p>
@@ -32,7 +32,7 @@
                         <label class="my-3">Merk Kendaraan</label>
                         <input type="text" class="login-input regular" name="merk" placeholder="Masukkan Merk Kendaraan">
                         <label class="my-3">Tanggal Beli Kendaraan</label>
-                        <input type="date" class="login-input regular fs-16px" name="tanggal">
+                        <input type="date" class="login-input regular fs-16px" name="tanggal" id="datepicker">
                     </div>
                 </div>
             
@@ -47,10 +47,12 @@
                 <div class="row m-0 p-0 w-100">
                     <div class="col-12 col-lg-12 pe-0">
                         <label class="mb-3">Kota</label>
-                        <select name="kota" id="kota" class="form-control">
+                        <select name="kota" class="form-control">
+                        
                             <option value="" disabled selected>Pilih Kota</option>
-                               
-                            
+                            <?php foreach ($datakota as $key): ?>
+                            <option value="<?php echo $key->region_id ?>"><?php echo $key->region_kota ?></option>
+                            <?php endforeach?>
                         </select>
                     </div>
                 </div>

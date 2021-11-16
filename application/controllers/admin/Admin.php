@@ -52,9 +52,14 @@ class Admin extends CI_Controller
 
 	public function unit_kendaraan()
 	{
+		$this->load->model('M_kendaraan');
+
 		$data['title']  = 'admin'; // PLACEHOLDER VARIABLE DATA
 
+		$datakota = $this->M_kendaraan->getData();
+        $data['datakota'] = $datakota;
 		$this->template->index('admin/pencatatan/unit_kendaraan', $data);
+		
 	}
 
 	public function jenis_biaya()
