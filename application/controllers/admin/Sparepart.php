@@ -13,9 +13,15 @@ class Sparepart extends CI_Controller
     public function aksiTambahPart()
     {
         $data = [
+<<<<<<< Updated upstream
             "sparepart_nama"    => $_POST['jenis'],
             "sparepart_km"       => $_POST['ideal'],
             "sparepart_bulan"    => $_POST['ideal']
+=======
+            "sparepart_nama"     => $_POST['jenis'],
+            "sparepart_km"       => $_POST['km-txt'],
+            "sparepart_bulan"    => $_POST['bulan-txt']
+>>>>>>> Stashed changes
         ];
 
         $this->db->insert('master_sparepart', $data);
@@ -24,4 +30,17 @@ class Sparepart extends CI_Controller
         //$this->M_Sparepart->insert($sparepart_nama, $sparepart_km, $sparepart_bulan);
         redirect('admin/Admin/master_sparepart');
     }
+<<<<<<< Updated upstream
+=======
+
+    function editPart()
+    {
+        $id = $this->input->post('sparepart_id');
+        $nama = $this->input->post('jenis2');
+        $km = $this->input->post('km-txt2');
+        $bulan = $this->input->post('bulan-txt2');
+        $this->M_Sparepart->editPart($nama, $km, $bulan, $id);
+        redirect('admin/Admin/master_sparepart');
+    }
+>>>>>>> Stashed changes
 }
