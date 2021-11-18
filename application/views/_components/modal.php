@@ -107,11 +107,11 @@ foreach ($Sparepart as $row) :
 
                     <div class="d-flex flex-column my-2 w-100">
                         <label class="my-2 color-secondary">Nama Kota</label>
-                        <input type="text" class="login-input regular" name="kota" placeholder="">
+                        <input type="text" class="login-input regular" name="kota" placeholder="" required>
                     </div>
                     
                 </div>
-                <button type="submit" class="btn-table submit-modal" data-bs-dismiss="modal">Tambah data</button>
+                <button type="submit" class="btn-table submit-modal">Tambah data</button>
                 <?= form_close() ?>
             </div>
         </div>
