@@ -65,3 +65,4 @@ $route['add_region'] = 'admin/Master_region/addRegion';
 // Pencatatan
 $route['admin/form_pengajuan/unit_kendaraan'] = 'admin/Admin/unit_kendaraan';
 $route['admin/form_pengajuan/jenis_biaya'] = 'admin/Admin/jenis_biaya';
+
