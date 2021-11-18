@@ -26,13 +26,17 @@ class Sparepart extends CI_Controller
         redirect('admin/Admin/master_sparepart');
     }
 
-    function editPart()
+    function aksiEditPart()
     {
-        $id = $this->input->post('sparepart_id');
-        $nama = $this->input->post('jenis2');
-        $km = $this->input->post('km-txt2');
-        $bulan = $this->input->post('bulan-txt2');
-        $this->M_Sparepart->editPart($nama, $km, $bulan, $id);
+        $data = [
+            "sparepart_id"       => $this->input->post('sparepart_id'),
+            "sparepart_nama"     => $this->input->post('jenis2'),
+            "sparepart_km"       => $this->input->post('km-txt2'),
+            "sparepart_bulan"    => $this->input->post('bulan-txt2')
+        ];
+
+        $this->M_Sparepart->editPart($data);
+
         redirect('admin/Admin/master_sparepart');
     }
 }
