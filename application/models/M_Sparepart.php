@@ -32,9 +32,12 @@ class M_Sparepart extends CI_Model
 <<<<<<< Updated upstream
 =======
 
-    public function editPart($nama, $km, $bulan, $id)
+    public function editPart($data)
     {
-        $hasil = $this->db->query("Update master_sparepart SET sparepart_nama='$nama', sparepart_km='$km', sparepart_bulan='$bulan'  WHERE sparepart_id='$id'");
+        $this->db->where('sparepart_id', $data['sparepart_id']);
+        $this->db->update('master_sparepart', $data);
+
+        //$hasil = $this->db->query("Update master_sparepart SET sparepart_nama='$nama', sparepart_km='$km', sparepart_bulan='$bulan'  WHERE sparepart_id='$id'");
     }
 >>>>>>> Stashed changes
 }

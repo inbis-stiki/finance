@@ -59,6 +59,70 @@
                 </table>
             </div>
         </div>
+        <!-- Modal Edit Sparepart -->
+        <?php
+        foreach ($Sparepart as $row) :
+            $sparepart_id = $row->sparepart_id;
+            $sparepart_nama = $row->sparepart_nama;
+            $sparepart_km = $row->sparepart_km;
+            $sparepart_bulan = $row->sparepart_bulan;
+        ?>
+            <div class="modal fade" id="edit_masterSparepart<?= $sparepart_id ?>" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content p-2">
+                        <div class="modal-header">
+                            <p class="font-w-700 color-darker mb-0">Edit Sparepart</p>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body fs-14px pt-0 d-flex flex-column">
+                            <?= form_open_multipart('admin/Sparepart/aksiEditPart'); ?>
+                            <div class="pb-4">
+
+                                <div class="d-flex flex-column my-2 w-100">
+                                    <label class="font-w-400 my-2 color-secondary">Jenis Sparepart</label>
+                                    <input type="text" class="login-input regular" name="jenis2" value="<?= $sparepart_nama ?>" required>
+                                    <input type="hidden" id="sparepart_id" name="sparepart_id" value="<?= $sparepart_id ?>">
+                                </div>
+                                <div class="row m-0 p-0 w-full">
+                                    <label class="font-w-400 my-2 color-secondary ps-0">Ideal Penggantian</label>
+                                    <div class="col-6 ps-0 d-flex flex-row align-items-center">
+                                        <div class="d-flex flex-row align-items-center radio-wrapper">
+                                            <input type="radio" id="km2" value="km2" name="ideal2" class="pilih2" checked>
+                                            <label for="km2" class="font-w-500 ms-2 me-3">Kilometer</label>
+                                        </div>
+                                        <input type="number" name="km-txt2" id="pilihkm" class="login-input regular" min="0" value="<?= $sparepart_km ?>" required>
+                                    </div>
+                                    <div class="col-6 pe-0 d-flex flex-row align-items-center">
+                                        <div class="d-flex flex-row align-items-center radio-wrapper">
+                                            <input type="radio" id="bulan2" value="bulan" name="ideal2" class="pilih2">
+                                            <label for="bulan2" class="font-w-500 ms-2 me-3">Bulan</label>
+                                        </div>
+                                        <input type="number" name="bulan-txt2" id="pilihbln" class="login-input regular" min="0" max="12" value="<?= $sparepart_bulan ?>" disabled required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="d-flex flex-row">
+                                <button type="button" class="btn-table submit-modal outline me-1" data-bs-dismiss="modal">Hapus</button>
+                                <button type="submit" class="btn-table submit-modal ms-1" data-bs-dismiss="modal">Simpan</button>
+                            </div>
+                            <?= form_close() ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <?php endforeach; ?>
+        <script>
+            $('.pilih2').click(function() {
+                const inputann = $(this).val()
+                if (inputann == "km2") {
+                    $('#pilihkm').attr('disabled', false)
+                    $('#pilihbln').attr('disabled', true)
+                } else {
+                    $('#pilihkm').attr('disabled', true)
+                    $('#pilihbln').attr('disabled', false)
+                }
+            })
+        </script>
         <div class="foot">
         </div>
     </div>
