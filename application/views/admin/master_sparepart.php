@@ -28,7 +28,11 @@
                                         $no++,
                                         $row->sparepart_nama,
                                         $row->sparepart_bulan . ' Bulan',
+<<<<<<< Updated upstream
                                         '<button type="button" class="btn-table green" data-bs-toggle="modal" data-bs-target="#edit_masterSparepart">
+=======
+                                        '<button type="button" class="btn-table green edit_masterSparepart" data-bs-toggle="modal" data-bs-target="#edit_masterSparepart' . $row->sparepart_id . '">
+>>>>>>> Stashed changes
                                             Edit
                                         </button>'
                                     );
@@ -37,7 +41,11 @@
                                         $no++,
                                         $row->sparepart_nama,
                                         $row->sparepart_km . ' Km',
+<<<<<<< Updated upstream
                                         '<button type="button" class="btn-table green" data-bs-toggle="modal" data-bs-target="#edit_masterSparepart">
+=======
+                                        '<button type="button" class="btn-table green edit_masterSparepart" data-bs-toggle="modal" data-bs-target="#edit_masterSparepart' . $row->sparepart_id . '">
+>>>>>>> Stashed changes
                                             Edit
                                         </button>'
                                     );

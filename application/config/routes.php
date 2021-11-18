@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 /*
 | -------------------------------------------------------------------------
@@ -65,4 +65,7 @@ $route['add_region'] = 'admin/Master_region/addRegion';
 // Pencatatan
 $route['admin/form_pengajuan/unit_kendaraan'] = 'admin/Admin/unit_kendaraan';
 $route['admin/form_pengajuan/jenis_biaya'] = 'admin/Admin/jenis_biaya';
+<<<<<<< Updated upstream
 // $route['admin/add_kendaraan'] = 'admin/Unit_kendaraan/add_kendaraan';
+=======
+>>>>>>> Stashed changes
