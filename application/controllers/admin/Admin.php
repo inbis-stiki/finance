@@ -8,11 +8,14 @@ class Admin extends CI_Controller
 		parent::__construct();
 		$this->load->library('table');
 	}
+<<<<<<< Updated upstream
 
 	function __construct(){
         parent::__construct();
         $this->load->model('m_region');
     }
+=======
+>>>>>>> Stashed changes
 
 	public function index()
 	{
