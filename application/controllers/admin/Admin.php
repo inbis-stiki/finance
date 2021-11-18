@@ -7,15 +7,8 @@ class Admin extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->library('table');
+		$this->load->model('m_region');
 	}
-<<<<<<< Updated upstream
-
-	function __construct(){
-        parent::__construct();
-        $this->load->model('m_region');
-    }
-=======
->>>>>>> Stashed changes
 
 	public function index()
 	{
@@ -39,11 +32,15 @@ class Admin extends CI_Controller
 
 	public function master_region()
 	{
-		$data['title']  = 'admin'; // PLACEHOLDER VARIABLE DATA
+		$this->load->model('M_region');
+		$dataRegion = $this->M_region->getRegion();
 
-		$this->data['region']=$this->m_region->get_region('master_region');
+		$data = [
+			'title' => "admin",
+			'Region' => $dataRegion,
+		];
 
-		$this->template->index('admin/master_region', $this->data);
+		$this->template->index('admin/master_region', $data);
 	}
 
 	public function form_pengajuan()
@@ -55,9 +52,14 @@ class Admin extends CI_Controller
 
 	public function unit_kendaraan()
 	{
+		$this->load->model('M_kendaraan');
+
 		$data['title']  = 'admin'; // PLACEHOLDER VARIABLE DATA
 
+		$datakota = $this->M_kendaraan->getData();
+        $data['datakota'] = $datakota;
 		$this->template->index('admin/pencatatan/unit_kendaraan', $data);
+		
 	}
 
 	public function jenis_biaya()
