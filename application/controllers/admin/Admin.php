@@ -26,52 +26,75 @@ class Admin extends CI_Controller
 
 	public function master_sparepart()
 	{
+		$this->load->model('M_User');
 		$this->load->model('M_Sparepart');
 		$dataPart = $this->M_Sparepart->getSparepart();
 
 		$data = [
 			'title' => "admin",
 			'Sparepart' => $dataPart,
+			'auth' => $this->db->get_where('master_user', ['username' => $this->session->userdata('username')])->row_array()
 		]; // PLACEHOLDER VARIABLE DATA
 
 		$this->template->index('admin/master_sparepart', $data);
+		$this->load->view('_components/sideNavigation', $data);
 	}
 
 	public function master_region()
 	{
+		$this->load->model('M_User');
 		$this->load->model('M_region');
 		$dataRegion = $this->M_region->getRegion();
 
 		$data = [
 			'title' => "admin",
 			'Region' => $dataRegion,
+			'auth' => $this->db->get_where('master_user', ['username' => $this->session->userdata('username')])->row_array()
 		];
 
 		$this->template->index('admin/master_region', $data);
+		$this->load->view('_components/sideNavigation', $data);
 	}
 
 	public function form_pengajuan()
 	{
-		$data['title']  = 'admin'; // PLACEHOLDER VARIABLE DATA
+		$this->load->model('M_User');
+
+		$data = [
+			'title' => "admin",
+			'auth' => $this->db->get_where('master_user', ['username' => $this->session->userdata('username')])->row_array()
+		];
 
 		$this->template->index('admin/form_pengajuan', $data);
+		$this->load->view('_components/sideNavigation', $data);
 	}
 
 	public function unit_kendaraan()
 	{
+		$this->load->model('M_User');
 		$this->load->model('M_kendaraan');
 
-		$data['title']  = 'admin'; // PLACEHOLDER VARIABLE DATA
+		$data = [
+			'title' => "admin",
+			'auth' => $this->db->get_where('master_user', ['username' => $this->session->userdata('username')])->row_array()
+		];
 
 		$datakota = $this->M_kendaraan->getData();
 		$data['datakota'] = $datakota;
 		$this->template->index('admin/pencatatan/unit_kendaraan', $data);
+		$this->load->view('_components/sideNavigation', $data);
 	}
 
 	public function jenis_biaya()
 	{
-		$data['title']  = 'admin'; // PLACEHOLDER VARIABLE DATA
+		$this->load->model('M_User');
+
+		$data = [
+			'title' => "admin",
+			'auth' => $this->db->get_where('master_user', ['username' => $this->session->userdata('username')])->row_array()
+		];
 
 		$this->template->index('admin/pencatatan/jenis_biaya', $data);
+		$this->load->view('_components/sideNavigation', $data);
 	}
 }
