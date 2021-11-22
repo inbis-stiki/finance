@@ -12,9 +12,16 @@ class Admin extends CI_Controller
 
 	public function index()
 	{
-		$data['title']  = 'admin'; // PLACEHOLDER VARIABLE DATA
+		$this->load->model('M_User');
+		$datauser = $this->M_User->getUser();
+
+		$data = [
+			'title' => "admin",
+			'auth' => $this->db->get_where('master_user', ['username' => $this->session->userdata('username')])->row_array()
+		];
 
 		$this->template->index('admin/dashboard', $data);
+		$this->load->view('_components/sideNavigation', $data);
 	}
 
 	public function master_sparepart()
@@ -57,9 +64,8 @@ class Admin extends CI_Controller
 		$data['title']  = 'admin'; // PLACEHOLDER VARIABLE DATA
 
 		$datakota = $this->M_kendaraan->getData();
-        $data['datakota'] = $datakota;
+		$data['datakota'] = $datakota;
 		$this->template->index('admin/pencatatan/unit_kendaraan', $data);
-		
 	}
 
 	public function jenis_biaya()
