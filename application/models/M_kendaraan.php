@@ -37,7 +37,7 @@ class M_kendaraan extends CI_Model{
 
 				$query = $this->db->insert('master_kendaraan', $data);
 				if ($query = true) {
-					$this->session->set_flashdata('info', 'Data Berhasil di Simpan');
+					$this->session->set_flashdata('inserted', 'Yess');
 					// redirect('admin/pencatatan/unit_kendaraan');
 				}
 	        }else {
