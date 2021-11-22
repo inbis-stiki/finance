@@ -21,7 +21,7 @@
                                 <input type="radio" id="km" value="km" name="ideal" class="pilih" checked>
                                 <label for="km" class="font-w-500 ms-2 me-3">Kilometer</label>
                             </div>
-                            <input type="number" name="km-txt" id="input-km" class="login-input regular" min="0" required>
+                            <input type="number" name="km-txt" id="input-km" onkeypress="return isNumberKey(event)" class="login-input regular" min="0" required>
                         </div>
                         <div class="col-6 pe-0 d-flex flex-row align-items-center">
                             <div class="d-flex flex-row align-items-center radio-wrapper">
@@ -29,7 +29,7 @@
                                 <label for="bulan" class="font-w-500 ms-2 me-3">Bulan</label>
                             </div>
 
-                            <input type="number" name="bulan-txt" id="input-bulan" class="login-input regular" min="0" max="12" disabled required>
+                            <input type="number" name="bulan-txt" id="input-bulan" onkeypress="return isNumberKey(event)" class="login-input regular" min="0" disabled required>
                         </div>
                     </div>
                 </div>
