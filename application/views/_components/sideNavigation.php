@@ -18,8 +18,10 @@
     </div>
 </div>
 <div class="top-nav">
-    <div class="d-flex flex-row justify-content-start align-items-center h-100 ps-4">
-        <button type="submit" class="border-0 bg-transparent color-secondary fs-5"><span class="iconify" data-icon="fa-solid:search"></span></button>
-        <input type="text" class="outline-none border-0 ms-2 px-3 w-25" placeholder="Search">
+    <div class="d-flex justify-content-end align-items-center h-100 ps-4">
+        <a class="btn-table orange" style="margin-right: 10px;" href="<?= base_url('admin/Auth/logout'); ?>" data-toggle="modal" data-target="#logoutModal">
+            <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-white-400"></i>
+            Logout
+        </a>
     </div>
 </div>

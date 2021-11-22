@@ -5,6 +5,10 @@ class Unit_kendaraan extends CI_Controller{
     public function __construct()
     {
         parent::__construct();
+        if (empty($this->session->userdata('user_role'))) {
+			redirect('/');
+		}
+
         $this->load->helper(array('form', 'url'));
         $this->load->library('form_validation');
         $this->load->model('M_kendaraan', 'model');
@@ -34,5 +38,3 @@ class Unit_kendaraan extends CI_Controller{
         
     }
 }
-
-?>
