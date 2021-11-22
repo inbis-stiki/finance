@@ -2,19 +2,19 @@
     <div class="top-space"></div>
     <div class="profile-section">
         <img src="<?= site_url() ?>assets/src/img/cat.jpg" alt="">
-        <p class="mb-0">Alfian Mengsedih</p>
+        <p class="mb-0"><?= $auth['username']; ?></p>
     </div>
-    <div class="nav-links <?= uri_string() == 'admin/dashboard' ? 'active':'' ?>">
-        <a href="<?= site_url()?>admin/dashboard">Dashboard</a>
+    <div class="nav-links <?= uri_string() == 'admin/dashboard' ? 'active' : '' ?>">
+        <a href="<?= site_url() ?>admin/dashboard">Dashboard</a>
     </div>
-    <div class="nav-links <?= uri_string() == 'admin/form_pengajuan' ? 'active':'' ?>">
-        <a href="<?= site_url()?>admin/form_pengajuan">Form Pengajuan</a>
+    <div class="nav-links <?= uri_string() == 'admin/form_pengajuan' ? 'active' : '' ?>">
+        <a href="<?= site_url() ?>admin/form_pengajuan">Form Pengajuan</a>
     </div>
-    <div class="nav-links <?= uri_string() == 'admin/master_sparepart' ? 'active':'' ?>">
-        <a href="<?= site_url()?>admin/master_sparepart">Master Sparepart</a>
+    <div class="nav-links <?= uri_string() == 'admin/master_sparepart' ? 'active' : '' ?>">
+        <a href="<?= site_url() ?>admin/master_sparepart">Master Sparepart</a>
     </div>
-    <div class="nav-links <?= uri_string() == 'admin/master_region' ? 'active':'' ?>">
-        <a href="<?= site_url()?>admin/master_region">Master Region</a>
+    <div class="nav-links <?= uri_string() == 'admin/master_region' ? 'active' : '' ?>">
+        <a href="<?= site_url() ?>admin/master_region">Master Region</a>
     </div>
 </div>
 <div class="top-nav">

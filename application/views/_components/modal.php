@@ -56,7 +56,7 @@
                         <label class="my-2 color-secondary">Nama Kota</label>
                         <input type="text" class="login-input regular" name="kota" placeholder="" required>
                     </div>
-                    
+
                 </div>
                 <button type="submit" class="btn-table submit-modal">Tambah data</button>
                 <?= form_close() ?>
@@ -94,19 +94,6 @@
         } else {
             $('#input-km').attr('disabled', true)
             $('#input-bulan').attr('disabled', false)
-        }
-    })
-</script>
-
-<script>
-    $('.pilih2').click(function() {
-        const inputann = $(this).val()
-        if (inputann == "km2") {
-            $('#pilihkm').attr('disabled', false)
-            $('#pilihbln').attr('disabled', true)
-        } else {
-            $('#pilihkm').attr('disabled', true)
-            $('#pilihbln').attr('disabled', false)
         }
     })
 </script>
