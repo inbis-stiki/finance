@@ -6,6 +6,10 @@ class Master_region extends CI_Controller
     public function __construct()
     {
         parent::__construct();
+        if (empty($this->session->userdata('user_role'))) {
+            redirect('/');
+        }
+
         $this->load->helper(array('form', 'url'));
         $this->load->library('form_validation');
         $this->load->model('M_region');
@@ -24,7 +28,8 @@ class Master_region extends CI_Controller
         redirect('admin/Admin/master_region');
     }
 
-    function editRegion(){
+    function editRegion()
+    {
         $id = $this->input->post('region_id');
         $kota = $this->input->post('region_kota');
         $this->M_region->editRegion($kota, $id);

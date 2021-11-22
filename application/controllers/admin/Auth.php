@@ -47,13 +47,22 @@ class Auth extends CI_Controller
 				}
 			} else {
 				$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
-                Password yang anda masukan salah! </div>');
+                Username atau Password yang anda masukan salah! </div>');
 				redirect('admin/Auth');
 			}
 		} else {
 			$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
-            Username belum terdaftar! </div>');
+            Username atau Password yang anda masukan salah! </div>');
 			redirect('admin/Auth');
 		}
+	}
+
+	public function logout()
+	{
+		$this->session->unset_userdata('username');
+		$this->session->unset_userdata('user_role');
+
+		$this->session->set_flashdata('message', '<div class = "alert alert-success" role="alert">Anda telah Log Out</div>');
+		redirect('admin/Auth');
 	}
 }
