@@ -16,6 +16,12 @@
     <div class="nav-links <?= uri_string() == 'admin/master_region' ? 'active' : '' ?>">
         <a href="<?= site_url() ?>admin/master_region">Master Region</a>
     </div>
+    <div class="nav-links <?= uri_string() == 'admin/master_instansi' ? 'active' : '' ?>">
+        <a href="<?= site_url() ?>admin/master_instansi">Master Instansi</a>
+    </div>
+    <div class="nav-links <?= uri_string() == 'admin/master_pengeluaran' ? 'active' : '' ?>">
+        <a href="<?= site_url() ?>admin/master_pengeluaran">Master Pengeluaran</a>
+    </div>
 </div>
 <div class="top-nav">
     <div class="d-flex justify-content-end align-items-center h-100 ps-4">

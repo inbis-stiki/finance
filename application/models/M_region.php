@@ -7,6 +7,7 @@ class M_region extends CI_Model
     {
         $this->db->select('*');
         $this->db->from('master_region');
+        $this->db->where('deleted_date IS NULL', NULL, FALSE);
         $query = $this->db->get();
         return $query->result();
     }
@@ -20,7 +21,8 @@ class M_region extends CI_Model
         return "Berhasil insert";
     }
 
-    function editRegion($kota, $id){
+    function editRegion($kota, $id)
+    {
         $hasil = $this->db->query("Update master_region SET region_kota='$kota' WHERE region_id='$id'");
     }
 }
