@@ -101,4 +101,36 @@ class Admin extends CI_Controller
 		$this->template->index('admin/pencatatan/jenis_biaya', $data);
 		$this->load->view('_components/sideNavigation', $data);
 	}
+
+	public function master_instansi()
+	{
+		$this->load->model('M_User');
+		$this->load->model('M_Instansi');
+		$dataInstansi = $this->M_Instansi->getInstansi();
+
+		$data = [
+			'title' => "admin",
+			'Instansi' => $dataInstansi,
+			'auth' => $this->db->get_where('master_user', ['username' => $this->session->userdata('username')])->row_array()
+		];
+
+		$this->template->index('admin/master_instansi', $data);
+		$this->load->view('_components/sideNavigation', $data);
+	}
+
+	public function master_pengeluaran()
+	{
+		$this->load->model('M_User');
+		$this->load->model('M_Pengeluaran');
+		$dataPengeluaran = $this->M_Pengeluaran->getPengeluaran();
+
+		$data = [
+			'title' => "admin",
+			'Pengeluaran' => $dataPengeluaran,
+			'auth' => $this->db->get_where('master_user', ['username' => $this->session->userdata('username')])->row_array()
+		];
+
+		$this->template->index('admin/master_pengeluaran', $data);
+		$this->load->view('_components/sideNavigation', $data);
+	}
 }

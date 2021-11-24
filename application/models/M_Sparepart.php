@@ -11,6 +11,7 @@ class M_Sparepart extends CI_Model
     {
         $this->db->select('*');
         $this->db->from('master_sparepart');
+        $this->db->where('deleted_date IS NULL', NULL, FALSE);
         $query = $this->db->get();
         return $query->result();
     }
