@@ -51,4 +51,16 @@ class Instansi extends CI_Controller
 
         redirect('admin/Admin/master_instansi');
     }
+
+    public function aksiHapus()
+    {
+        $data = [
+            "instansi_id"       => $this->input->post('instansi_id'),
+            "deleted_date"  => date('Y-m-d H:i:s')
+        ];
+
+        $this->M_Instansi->editInstansi($data);
+
+        redirect('admin/Admin/master_instansi');
+    }
 }

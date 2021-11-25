@@ -21,8 +21,10 @@ class M_region extends CI_Model
         return "Berhasil insert";
     }
 
-    function editRegion($kota, $id)
+    function editRegion($data)
     {
-        $hasil = $this->db->query("Update master_region SET region_kota='$kota' WHERE region_id='$id'");
+        $this->db->where('region_id', $data['region_id']);
+        $this->db->update('master_region', $data);
+        // $hasil = $this->db->query("Update master_region SET region_kota='$kota' WHERE region_id='$id'");
     }
 }

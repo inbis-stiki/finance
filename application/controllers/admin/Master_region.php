@@ -30,9 +30,29 @@ class Master_region extends CI_Controller
 
     function editRegion()
     {
-        $id = $this->input->post('region_id');
-        $kota = $this->input->post('region_kota');
-        $this->M_region->editRegion($kota, $id);
+        $data = [
+            "region_id"       => $this->input->post('region_id'),
+            "region_kota"     => $this->input->post('region_kota')
+        ];
+
+        $this->M_region->editRegion($data);
+
+        redirect('admin/Admin/master_region');
+        // $id = $this->input->post('region_id');
+        // $kota = $this->input->post('region_kota');
+        // $this->M_region->editRegion($kota, $id);
+        // redirect('admin/Admin/master_region');
+    }
+
+    public function aksiHapus()
+    {
+        $data = [
+            "region_id"       => $this->input->post('region_id'),
+            "deleted_date"  => date('Y-m-d H:i:s')
+        ];
+
+        $this->M_region->editRegion($data);
+
         redirect('admin/Admin/master_region');
     }
 }
