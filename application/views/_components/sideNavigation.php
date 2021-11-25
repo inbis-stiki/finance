@@ -13,6 +13,9 @@
     <div class="nav-links <?= uri_string() == 'admin/master_sparepart' ? 'active' : '' ?>">
         <a href="<?= site_url() ?>admin/master_sparepart">Master Sparepart</a>
     </div>
+    <div class="nav-links <?= uri_string() == 'admin/master_kendaraan' ? 'active' : '' ?>">
+        <a href="<?= site_url() ?>admin/master_kendaraan">Master Kendaraan</a>
+    </div>
     <div class="nav-links <?= uri_string() == 'admin/master_region' ? 'active' : '' ?>">
         <a href="<?= site_url() ?>admin/master_region">Master Region</a>
     </div>

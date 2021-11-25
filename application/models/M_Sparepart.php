@@ -35,3 +35,4 @@ class M_Sparepart extends CI_Model
         //$hasil = $this->db->query("Update master_sparepart SET sparepart_nama='$nama', sparepart_km='$km', sparepart_bulan='$bulan'  WHERE sparepart_id='$id'");
     }
 }
+

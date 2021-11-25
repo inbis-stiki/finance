@@ -60,6 +60,22 @@ class Admin extends CI_Controller
 		$this->load->view('_components/sideNavigation', $data);
 	}
 
+	public function master_kendaraan()
+	{
+		$this->load->model('M_User');
+		$this->load->model('M_kendaraan_master');
+		$dataKendaraan = $this->M_kendaraan_master->getKendaraan();
+
+		$data = [
+			'title' => "admin",
+			'Kendaraan' => $dataKendaraan,
+			'auth' => $this->db->get_where('master_user', ['username' => $this->session->userdata('username')])->row_array()
+		];
+
+		$this->template->index('admin/master_kendaraan', $data);
+		$this->load->view('_components/sideNavigation', $data);
+	}
+
 	public function form_pengajuan()
 	{
 		$this->load->model('M_User');

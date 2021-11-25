@@ -87,3 +87,15 @@
     <?= form_close();?>
     </div>
 </div>
+
+<?php if((($this->session->flashdata('inserted'))) && $this->session->flashdata('inserted') != "") { ?>
+
+<script type="text/javascript">
+
+    $(document).ready(function(){
+      $('#success').modal('show');
+    });
+
+</script>
+
+<?php } ?>
