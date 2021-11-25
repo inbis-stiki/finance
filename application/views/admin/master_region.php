@@ -30,6 +30,11 @@
                                     <button type="button" class="btn-table green edit_masterRegion">
                                             Edit
                                         </button>
+                                    </a>
+                                    <a class="btn-table orange hapus_masterRegion" data-bs-toggle="modal" data-bs-target="#hapus_masterRegion' . $row->region_id . '" title="Hapus"
+                                    <button type="button" class="btn-table orange hapus_masterRegion">
+                                            Hapus
+                                        </button>
                                     </a>'
 
                                 );
@@ -47,33 +52,61 @@
             $region_id = $i->region_id;
             $region_kota = $i->region_kota;
         ?>
-        <div class="modal fade" id="edit_masterRegion<?php echo $region_id?>" nama="edit_masterRegion" method="POST" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content p-2">
-                    <div class="modal-header">
-                        <p class="font-w-700 color-darker mb-0">Edit Region</p>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <?= form_open_multipart('admin/Master_region/editRegion'); ?>
-                    <div class="modal-body fs-14px pt-0 d-flex flex-column">
-                        <div class="pb-4">
+            <div class="modal fade" id="edit_masterRegion<?php echo $region_id ?>" nama="edit_masterRegion" method="POST" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content p-2">
+                        <div class="modal-header">
+                            <p class="font-w-700 color-darker mb-0">Edit Region</p>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <?= form_open_multipart('admin/Master_region/editRegion'); ?>
+                        <div class="modal-body fs-14px pt-0 d-flex flex-column">
+                            <div class="pb-4">
 
-                            <div class="d-flex flex-column my-2 w-100">
-                                <label class="font-w-400 my-2 color-secondary">Nama Kota</label>
-                                <input type="text" class="form-control" id="region_kota" name="region_kota" value="<?php echo $region_kota?>">
-                                <input type="hidden" id="region_id" name="region_id" value="<?php echo $region_id?>">
+                                <div class="d-flex flex-column my-2 w-100">
+                                    <label class="font-w-400 my-2 color-secondary">Nama Kota</label>
+                                    <input type="text" class="form-control" id="region_kota" name="region_kota" value="<?php echo $region_kota ?>">
+                                    <input type="hidden" id="region_id" name="region_id" value="<?php echo $region_id ?>">
+                                </div>
+                            </div>
+                            <div class="d-flex flex-row">
+                                <button type="submit" class="btn-table submit-modal ms-1" data-bs-dismiss="modal">Simpan</button>
                             </div>
                         </div>
-                        <div class="d-flex flex-row">
-                            <button type="button" class="btn-table submit-modal outline me-1" data-bs-dismiss="modal">Hapus</button>
-                            <button type="submit" class="btn-table submit-modal ms-1" data-bs-dismiss="modal">Simpan</button>
-                        </div>
+                        <?= form_close() ?>
                     </div>
-                    <?= form_close() ?>
                 </div>
             </div>
-        </div>
-        <?php endforeach;?>
+        <?php endforeach; ?>
+
+        <?php foreach ($Region as $i) :
+            $region_id = $i->region_id;
+        ?>
+            <div class="modal fade" id="hapus_masterRegion<?php echo $region_id ?>" nama="hapus_masterRegion" method="POST" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content p-2">
+                        <div class="modal-header">
+                            <p class="font-w-700 color-darker mb-0">Hapus Region</p>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <?= form_open_multipart('admin/Master_region/aksiHapus'); ?>
+                        <div class="modal-body fs-14px pt-0 d-flex flex-column">
+                            <p class="font-w-700 color-darker mb-0">Apakah anda yakin menghapus data ini?</p>
+                            <input type="hidden" id="region_id" name="region_id" value="<?php echo $region_id ?>">
+                            <div class="pb-4">
+                                <div class="d-flex flex-column my-2 w-100">
+                                </div>
+                            </div>
+                            <div class="d-flex flex-row">
+                                <button type="button" class="btn-table submit-modal outline me-1" data-bs-dismiss="modal">Batal</button>
+                                <button type="submit" class="btn-table submit-modal ms-1" data-bs-dismiss="modal">Hapus</button>
+                            </div>
+                        </div>
+                        <?= form_close() ?>
+                    </div>
+                </div>
+            </div>
+        <?php endforeach; ?>
         <script type="text/javascript">
             // $('#tblRegion tbody').on('click', '.edit_masterRegion', function() {
             //     alert('oke');

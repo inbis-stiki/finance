@@ -43,4 +43,16 @@ class Sparepart extends CI_Controller
 
         redirect('admin/Admin/master_sparepart');
     }
+
+    public function aksiHapus()
+    {
+        $data = [
+            "sparepart_id"       => $this->input->post('sparepart_id'),
+            "deleted_date"  => date('Y-m-d H:i:s')
+        ];
+
+        $this->M_Sparepart->editPart($data);
+
+        redirect('admin/Admin/master_sparepart');
+    }
 }

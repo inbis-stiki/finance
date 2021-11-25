@@ -30,7 +30,10 @@
 
                                     '<button type="button" data-id="' . $row->instansi_id . '" data-nama="' . $row->instansi_nama . '" data-jenis="' . $row->instansi_jenis . '" class="btn-table green edit_masterInstansi btnEdit" data-bs-toggle="modal" data-bs-target="#edit_masterInstansi">
                                             Edit
-                                        </button>'
+                                        </button>
+                                    <button type="button" data-id="' . $row->instansi_id . '" class="btn-table orange hapus_masterInstansi btnEdit" data-bs-toggle="modal" data-bs-target="#hapus_masterInstansi">
+                                            Hapus
+                                    </button>'
                                 );
                             ?>
                             <?php }
@@ -114,8 +117,33 @@
                             </div>
                         </div>
                         <div class="d-flex flex-row">
-                            <button type="button" class="btn-table submit-modal outline me-1" data-bs-dismiss="modal">Hapus</button>
                             <button type="submit" class="btn-table submit-modal ms-1">Simpan</button>
+                        </div>
+                        <?= form_close() ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Hapus Instansi -->
+        <div class="modal fade" id="hapus_masterInstansi" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content p-2">
+                    <div class="modal-header">
+                        <p class="font-w-700 color-darker mb-0">Hapus Instansi</p>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body fs-14px pt-0 d-flex flex-column">
+                        <?= form_open_multipart('admin/Instansi/aksiHapus'); ?>
+                        <div class="pb-4">
+                            <div class="d-flex flex-column my-2 w-100">
+                                <p class="font-w-700 color-darker mb-0">Apakah anda yakin menghapus data ini ?</p>
+                                <input type="hidden" id="instansi_id" name="instansi_id" value="">
+                            </div>
+                        </div>
+                        <div class="d-flex flex-row">
+                            <button type="button" class="btn-table submit-modal outline me-1" data-bs-dismiss="modal">Batal</button>
+                            <button type="submit" class="btn-table submit-modal ms-1">Hapus</button>
                         </div>
                         <?= form_close() ?>
                     </div>
