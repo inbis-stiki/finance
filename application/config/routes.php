@@ -60,6 +60,7 @@ $route['admin/master_sparepart'] = 'admin/Admin/master_sparepart';
 $route['admin/master_region'] = 'admin/Admin/master_region';
 $route['admin/master_instansi'] = 'admin/Admin/master_instansi';
 $route['admin/master_pengeluaran'] = 'admin/Admin/master_pengeluaran';
+$route['admin/master_kendaraan'] = 'admin/Admin/master_kendaraan';
 $route['master_region'] = 'admin/Master_region';
 $route['simpan_region'] = 'admin/Master_region/simpan_region';
 $route['add_region'] = 'admin/Master_region/addRegion';
