@@ -20,19 +20,21 @@ class Unit_kendaraan extends CI_Controller{
     }
 
     public function add_kendaraan(){
-        
+        $selectedValue = explode('|', $_POST['kendaraan']);
+        $valueRangka = $selectedValue[0];
+        $valueStnk = $selectedValue[1];
+        $data = [
+            "no_rangka_kendaraan"    => $valueRangka,
+            "stnk_kendaraan"         => $valueStnk,
+            "id_region"              => $_POST['kota'],
+            "id_instansi"            => $_POST['instansi'],
+            "tr_kendaraan_start"     => $_POST['tanggal_start'],
+            "tr_kendaraan_end"       => $_POST['tanggal_end']
+        ];
 
+        $this->db->insert('transaksi_kendaraan', $data);
 
-        // $this->load->model('M_kendaraan', 'model');
-        $this->model->tambah();
-        // $instansi = $this->input->post('instansi');
-        // $jenis_instansi = $this->input->post('jenis_instansi');
-        // $stnk = $this->input->post('stnk');
-        // $rangka = $this->input->post('rangka');
-        // $merk = $this->input->post('merk');
-        // $tanggal = $this->input->post('tanggal');
-        // $kota = $this->input->post('kota');
-
+        $this->session->set_flashdata('sukses', "Data Berhasil Disimpan");
         
         redirect('admin/form_pengajuan/unit_kendaraan');
         
