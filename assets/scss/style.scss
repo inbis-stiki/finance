@@ -118,10 +118,18 @@ a:hover {
 .general-padding {
     padding-left: $side-nav-w;
     padding-top: $top-nav-h;
+
+    &.no-sidenav {
+        padding-left: 0;
+    }
 }
 
 .h-70px {
     height: 70px;
+}
+
+.cursor-pointer {
+    cursor: pointer;
 }
 
 
