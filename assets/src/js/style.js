@@ -69,3 +69,14 @@ $('.change-image').on('click', function() {
 	$control.css('display', 'none');
 	$('.image-button').css('display', 'block');
 });
+
+$('.accordion-nav').on('click', function() {
+    $('.accordion-nav').not(this).removeClass('active');
+    $(this).toggleClass('active');
+});
+
+$('#toggleSideNav').on('click', function() {
+    $('.general-padding').toggleClass('no-sidenav');
+    $('.top-nav').toggleClass('no-sidenav');
+    $('.side-nav').toggleClass('no-sidenav');
+});
