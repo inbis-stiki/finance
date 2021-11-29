@@ -21,8 +21,10 @@ class M_kendaraan_master extends CI_Model
         return "Berhasil insert";
     }
 
-    function editRegion($kota, $id)
+    function editKendaraan($data)
     {
-        $hasil = $this->db->query("Update master_region SET region_kota='$kota' WHERE region_id='$id'");
+        $this->db->where('kendaraan_no_rangka', $data['kendaraan_no_rangka']);
+        $this->db->update('master_kendaraan', $data);
+        // $hasil = $this->db->query("Update master_region SET region_kota='$kota' WHERE region_id='$id'");
     }
 }
