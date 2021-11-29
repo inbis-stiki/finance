@@ -53,11 +53,22 @@ class Master_kendaraan extends CI_Controller
         }
     }
 
-    function editRegion()
+    function editKendaraan()
     {
-        $id = $this->input->post('region_id');
-        $kota = $this->input->post('region_kota');
-        $this->M_region->editRegion($kota, $id);
-        redirect('admin/Admin/master_region');
+        $data = [
+            "kendaraan_no_rangka"        => $this->input->post('kendaraan_no_rangka'),
+            "kendaraan_stnk"             => $this->input->post('kendaraan_stnk'),
+            "kendaraan_merk"             => $this->input->post('kendaraan_merk'),
+            "kendaraan_tanggal_beli"     => $this->input->post('kendaraan_tanggal_beli')
+        ];
+
+        $this->M_kendaraan_master->editKendaraan($data);
+
+        // $rangka = $this->input->post('kendaraan_no_rangka');
+        // $stnk = $this->input->post('kendaraan_stnk');
+        // $merk = $this->input->post('kendaraan_merk');
+        // $tanggal = $this->input->post('kendaraan_tanggal_beli');
+        // $this->M_region->editRegion($rangka, $stnk, $merk, $tanggal);
+        redirect('admin/Admin/master_kendaraan');
     }
 }
