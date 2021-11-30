@@ -67,7 +67,7 @@ class Driver extends CI_Controller
         // $merk = $this->input->post('kendaraan_merk');
         // $tanggal = $this->input->post('kendaraan_tanggal_beli');
         // $this->M_region->editRegion($rangka, $stnk, $merk, $tanggal);
-        redirect('admin/Admin/master_kendaraan');
+        redirect('admin/master_kendaraan');
     }
 
     public function aksiHapus()
@@ -79,6 +79,6 @@ class Driver extends CI_Controller
 
         $this->M_Driver->editDriver($data);
 
-        redirect('admin/Admin/master_driver');
+        redirect('admin/master_driver');
     }
 }

@@ -185,7 +185,7 @@
 
 .btn-table {
   background: #4F48ED;
-  color: white;
+  color: white !important;
   border: 1px solid #4F48ED;
   border-radius: 8px;
   padding: 0px 20px;
@@ -193,6 +193,12 @@
   .btn-table.green {
     border: 1px solid #55C860;
     background: #55C860; }
+  .btn-table.orange{
+    border: 1px solid #f39c12;
+    background: #f39c12 }
+  .btn-table.red{
+    border: 1px solid #e74c3c;
+    background: #e74c3c }
   .btn-table.submit-modal {
     width: 100%;
     padding: 10px 20px; }

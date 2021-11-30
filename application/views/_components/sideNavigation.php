@@ -12,7 +12,10 @@
         <div class="nav-links <?= uri_string() == 'admin/form_pengajuan' ? 'active' : '' ?>">
             <a href="<?= site_url() ?>admin/form_pengajuan">Form Pengajuan</a>
         </div>
-        <div class="nav-links accordion-nav">
+        <?php
+            $active = (uri_string() == 'admin/master_driver' || uri_string() == 'admin/master_region' || uri_string() == 'admin/master_instansi' || uri_string() == 'admin/master_sparepart' || uri_string() == 'admin/master_kendaraan' || uri_string() == 'admin/master_pengeluaran' ? "active" : "");
+        ?>
+        <div class="nav-links accordion-nav <?= $active?>">
             <div class="position-relative">
                 <a>Master</a>
                 <span class="iconify chevron" data-icon="akar-icons:chevron-left"></span>
@@ -24,7 +27,7 @@
                 <a href="<?= site_url() ?>admin/master_instansi">Master Instansi</a>
                 <a href="<?= site_url() ?>admin/master_sparepart">Master Sparepart</a>
                 <a href="<?= site_url() ?>admin/master_kendaraan">Master Kendaraan</a>
-                <a href="<?= site_url() ?>admin/master_pengeluaran">Master Pengeluaran</a>
+                <a href="<?= site_url() ?>admin/master_pengeluaran">Master Jenis Pengeluaran</a>
             </div>
         </div>
     </div>

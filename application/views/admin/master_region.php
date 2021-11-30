@@ -4,7 +4,7 @@
             <p class="mb-0 fs-5 font-w-500 color-darker">
                 Master Region
             </p>
-            <button type="button" class="btn-table" data-bs-toggle="modal" data-bs-target="#add_masterRegion">Add</button>
+            <button type="button" class="btn-table green" data-bs-toggle="modal" data-bs-target="#add_masterRegion">Add</button>
         </div>
         <div class="card-section">
             <div class="body">
@@ -26,12 +26,12 @@
                                 $this->table->add_row(
                                     $no++,
                                     $row->region_kota,
-                                    '<a class="btn-table green edit_masterRegion" data-bs-toggle="modal" data-bs-target="#edit_masterRegion' . $row->region_id . '" title="Edit"
-                                    <button type="button" class="btn-table green edit_masterRegion">
+                                    '<a class="btn-table edit_masterRegion" data-bs-toggle="modal" data-bs-target="#edit_masterRegion' . $row->region_id . '" title="Edit"
+                                    <button type="button" class="btn-table edit_masterRegion">
                                             Edit
                                         </button>
-                                    </a>
-                                    <a class="btn-table orange hapus_masterRegion" data-bs-toggle="modal" data-bs-target="#hapus_masterRegion' . $row->region_id . '" title="Hapus"
+                                    </a> &nbsp;
+                                    <a class="btn-table red hapus_masterRegion" data-bs-toggle="modal" data-bs-target="#hapus_masterRegion' . $row->region_id . '" title="Hapus"
                                     <button type="button" class="btn-table orange hapus_masterRegion">
                                             Hapus
                                         </button>

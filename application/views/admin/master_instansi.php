@@ -4,7 +4,7 @@
             <p class="mb-0 fs-5 font-w-500 color-darker">
                 Master Instansi
             </p>
-            <button type="button" class="btn-table" data-bs-toggle="modal" data-bs-target="#add_masterInstansi">Add</button>
+            <button type="button" class="btn-table green" data-bs-toggle="modal" data-bs-target="#add_masterInstansi">Add</button>
         </div>
         <div class="card-section">
             <div class="body">
@@ -28,10 +28,10 @@
                                     $row->instansi_nama,
                                     $row->instansi_jenis,
 
-                                    '<button type="button" data-id="' . $row->instansi_id . '" data-nama="' . $row->instansi_nama . '" data-jenis="' . $row->instansi_jenis . '" class="btn-table green edit_masterInstansi btnEdit" data-bs-toggle="modal" data-bs-target="#edit_masterInstansi">
+                                    '<button type="button" data-id="' . $row->instansi_id . '" data-nama="' . $row->instansi_nama . '" data-jenis="' . $row->instansi_jenis . '" class="btn-table edit_masterInstansi btnEdit" data-bs-toggle="modal" data-bs-target="#edit_masterInstansi">
                                             Edit
                                         </button>
-                                    <button type="button" data-id="' . $row->instansi_id . '" class="btn-table orange hapus_masterInstansi btnEdit" data-bs-toggle="modal" data-bs-target="#hapus_masterInstansi">
+                                    <button type="button" data-id="' . $row->instansi_id . '" class="btn-table red hapus_masterInstansi btnEdit" data-bs-toggle="modal" data-bs-target="#hapus_masterInstansi">
                                             Hapus
                                     </button>'
                                 );
@@ -71,7 +71,7 @@
                                 <div class="col-6 pe-0 d-flex flex-row align-items-center">
                                     <div class="d-flex flex-row align-items-center radio-wrapper">
                                         <input type="radio" value="nonbumn" name="jenis" class="pilih">
-                                        <label for="nonbumn" class="font-w-500 ms-2 me-3">Non BUNM</label>
+                                        <label for="nonbumn" class="font-w-500 ms-2 me-3">Non BUMN</label>
                                     </div>
                                 </div>
                             </div>
@@ -111,7 +111,7 @@
                                 <div class="col-6 pe-0 d-flex flex-row align-items-center">
                                     <div class="d-flex flex-row align-items-center radio-wrapper">
                                         <input type="radio" id="nonbumn" value="Non BUMN" name="jenis" class="pilih2">
-                                        <label for="nonbumn" class="font-w-500 ms-2 me-3">Non BUNM</label>
+                                        <label for="nonbumn" class="font-w-500 ms-2 me-3">Non BUMN</label>
                                     </div>
                                 </div>
                             </div>
