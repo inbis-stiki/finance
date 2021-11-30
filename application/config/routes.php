@@ -64,6 +64,7 @@ $route['admin/master_kendaraan'] = 'admin/Admin/master_kendaraan';
 $route['master_region'] = 'admin/Master_region';
 $route['simpan_region'] = 'admin/Master_region/simpan_region';
 $route['add_region'] = 'admin/Master_region/addRegion';
+$route['admin/master_kendaraan/add_kendaraan'] = 'admin/Admin/tambah_kendaraan';
 
 // Pencatatan
 $route['admin/form_pengajuan/unit_kendaraan'] = 'admin/Admin/unit_kendaraan';

@@ -76,6 +76,26 @@ class Admin extends CI_Controller
 		$this->load->view('_components/sideNavigation', $data);
 	}
 
+	public function tambah_kendaraan()
+	{
+		$this->load->model('M_User');
+		$this->load->model('M_add_kendaraan');
+
+		$datakota = $this->M_add_kendaraan->getData();
+		$datakendaraan = $this->M_add_kendaraan->getKendaraan();
+		$datainstansi = $this->M_add_kendaraan->getInstansi();
+
+		$data = [
+			'title' => "admin",
+			'auth' => $this->db->get_where('master_user', ['username' => $this->session->userdata('username')])->row_array(),
+			'datakota' => $datakota,
+			'datakendaraan' => $datakendaraan,
+			'datainstansi' => $datainstansi
+		];
+
+		$this->template->index('admin/add_kendaraan', $data);
+		$this->load->view('_components/sideNavigation', $data);	}
+
 	public function form_pengajuan()
 	{
 		$this->load->model('M_User');
