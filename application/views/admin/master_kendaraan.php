@@ -7,7 +7,7 @@
             <a href="<?php echo site_url(); ?>admin/Admin/tambah_kendaraan">
                 <button type="button" class="btn-table">Add</button>
             </a>
-            <button type="button" class="btn-table" data-bs-toggle="modal" data-bs-target="#add_masterKendaraan">Add</button>
+
         </div>
         <div class="card-section">
             <div class="body">
@@ -57,43 +57,14 @@
             $kendaraan_foto = $i->kendaraan_foto;
 
         ?>
-<<<<<<< Updated upstream
-        <div class="modal fade" id="edit_masterKendaraan<?php echo $kendaraan_no_rangka?>" nama="edit_masterKendaraan" method="POST" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content p-2">
-                    <div class="modal-header">
-                        <p class="font-w-700 color-darker mb-0">Edit Kendaraan</p>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <?= form_open_multipart('admin/Master_region/editRegion'); ?>
-                    <div class="modal-body fs-14px pt-0 d-flex flex-column">
-                        <div class="pb-4">
-
-                            <div class="d-flex flex-column my-2 w-100">
-                                <label class="font-w-400 my-2 color-secondary">Nama Kota</label>
-                                <input type="text" class="form-control" id="region_kota" name="region_kota" value="<?php echo $region_kota?>">
-                                <input type="hidden" id="region_id" name="region_id" value="<?php echo $region_id?>">
-                            </div>
-                        </div>
-                        <div class="d-flex flex-row">
-                            <button type="button" class="btn-table submit-modal outline me-1" data-bs-dismiss="modal">Hapus</button>
-                            <button type="submit" class="btn-table submit-modal ms-1" data-bs-dismiss="modal">Simpan</button>
-                        </div>
-                    </div>
-                    <?= form_close() ?>
-                </div>
-            </div>
-        </div>
-        <?php endforeach;?>
-=======
             <div class="modal fade" id="edit_masterKendaraan<?php echo $kendaraan_no_rangka ?>" nama="edit_masterKendaraan" method="POST" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered modal-xl">
                     <div class="modal-content p-2">
                         <div class="modal-header">
-                            <p class="font-w-700 color-darker mb-0">Tambah Kendaraan</p>
+                            <p class="font-w-700 color-darker mb-0">Edit Kendaraan</p>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <?= form_open_multipart('admin/Master_kendaraan/editKendaraan'); ?>
+                        <?= form_open_multipart('admin/Master_kendaraan/updateKendaraan'); ?>
                         <div class="modal-body row m-0 p-0 w-100">
 
                             <div class="col-12 col-lg-6 ps-0 d-flex flex-column">
@@ -102,10 +73,10 @@
                                     <span class="iconify fs-80px mb-3 z-2" data-icon="ic:baseline-photo-camera"></span>
                                     <p class="z-2">Klik disini untuk upload foto</p>
 
-                                    <input type="file" name="foto" accept="image/png, image/gif, image/jpeg" id="imageInput" class="z-2" />
+                                    <input type="file" name="kendaraan_foto" accept="image/png, image/gif, image/jpeg" id="imageInput" class="z-2" />
                                     <div class="z-2"></div>
 
-                                    <img src="" class="image-preview">
+                                    <img src="<?php echo base_url() . '/assets/images/fotokendaraan/' . $kendaraan_foto ?>" class="image-preview">
                                 </div>
                                 <small><?php if (isset($error)) {
                                             echo $error;
@@ -121,7 +92,7 @@
                                 <label class="my-3">Tanggal Beli Kendaraan</label>
                                 <input type="date" class="login-input regular fs-16px" id="kendaraan_tanggal_beli" name="kendaraan_tanggal_beli" value="<?= $kendaraan_tanggal_beli ?>" required>
                             </div>
-                            <button type="submit" class="btn-table submit-modal">Tambah data</button>
+                            <button type="submit" class="btn-table submit-modal">Edit data</button>
 
                         </div>
                         <?= form_close() ?>
@@ -129,7 +100,6 @@
                 </div>
             </div>
         <?php endforeach; ?>
->>>>>>> Stashed changes
         <script type="text/javascript">
             // $('#tblRegion tbody').on('click', '.edit_masterRegion', function() {
             //     alert('oke');
