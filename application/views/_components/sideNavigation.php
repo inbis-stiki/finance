@@ -12,67 +12,19 @@
         <div class="nav-links <?= uri_string() == 'admin/form_pengajuan' ? 'active' : '' ?>">
             <a href="<?= site_url() ?>admin/form_pengajuan">Form Pengajuan</a>
         </div>
-        <div class="nav-links <?= uri_string() == 'admin/master_sparepart' ? 'active' : '' ?>">
-            <a href="<?= site_url() ?>admin/master_sparepart">Master Sparepart</a>
-        </div>
-        <div class="nav-links <?= uri_string() == 'admin/master_kendaraan' ? 'active' : '' ?>">
-            <a href="<?= site_url() ?>admin/master_kendaraan">Master Kendaraan</a>
-        </div>
-        <div class="nav-links <?= uri_string() == 'admin/master_region' ? 'active' : '' ?>">
-            <a href="<?= site_url() ?>admin/master_region">Master Region</a>
-        </div>
-        <div class="nav-links <?= uri_string() == 'admin/master_instansi' ? 'active' : '' ?>">
-            <a href="<?= site_url() ?>admin/master_instansi">Master Instansi</a>
-        </div>
-        <div class="nav-links <?= uri_string() == 'admin/master_pengeluaran' ? 'active' : '' ?>">
-            <a href="<?= site_url() ?>admin/master_pengeluaran">Master Pengeluaran</a>
-        </div>
         <div class="nav-links accordion-nav">
             <div class="position-relative">
-                <a>Accordion 1</a>
+                <a>Master</a>
                 <span class="iconify chevron" data-icon="akar-icons:chevron-left"></span>
             </div>
 
             <div class="sub-nav">
-                <a href="#">Yeabwoi 1</a>
-                <a href="#">Yeabwoi 2</a>
-                <a href="#">Yeabwoi 3</a>
-            </div>
-        </div>
-        <div class="nav-links accordion-nav">
-            <div class="position-relative">
-                <a>Accordion 2</a>
-                <span class="iconify chevron" data-icon="akar-icons:chevron-left"></span>
-            </div>
-
-            <div class="sub-nav">
-                <a href="#">Yeabwoi 1</a>
-                <a href="#">Yeabwoi 2</a>
-                <a href="#">Yeabwoi 3</a>
-            </div>
-        </div>
-        <div class="nav-links accordion-nav">
-            <div class="position-relative">
-                <a>Accordion 3</a>
-                <span class="iconify chevron" data-icon="akar-icons:chevron-left"></span>
-            </div>
-
-            <div class="sub-nav">
-                <a href="#">Yeabwoi 1</a>
-                <a href="#">Yeabwoi 2</a>
-                <a href="#">Yeabwoi 3</a>
-            </div>
-        </div>
-        <div class="nav-links accordion-nav">
-            <div class="position-relative">
-                <a>Accordion 4</a>
-                <span class="iconify chevron" data-icon="akar-icons:chevron-left"></span>
-            </div>
-
-            <div class="sub-nav">
-                <a href="#">Yeabwoi 1</a>
-                <a href="#">Yeabwoi 2</a>
-                <a href="#">Yeabwoi 3</a>
+                <a href="<?= site_url() ?>admin/master_driver">Master Driver</a>
+                <a href="<?= site_url() ?>admin/master_region">Master Region</a>
+                <a href="<?= site_url() ?>admin/master_instansi">Master Instansi</a>
+                <a href="<?= site_url() ?>admin/master_sparepart">Master Sparepart</a>
+                <a href="<?= site_url() ?>admin/master_kendaraan">Master Kendaraan</a>
+                <a href="<?= site_url() ?>admin/master_pengeluaran">Master Pengeluaran</a>
             </div>
         </div>
     </div>

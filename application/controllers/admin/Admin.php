@@ -174,4 +174,20 @@ class Admin extends CI_Controller
 		$this->template->index('admin/master_pengeluaran', $data);
 		$this->load->view('_components/sideNavigation', $data);
 	}
+
+	public function master_driver()
+	{
+		$this->load->model('M_User');
+		$this->load->model('M_Driver');
+		$dataDriver = $this->M_Driver->getDriver();
+
+		$data = [
+			'title' => "admin",
+			'Driver' => $dataDriver,
+			'auth' => $this->db->get_where('master_user', ['username' => $this->session->userdata('username')])->row_array()
+		];
+
+		$this->template->index('admin/driver/master_driver', $data);
+		$this->load->view('_components/sideNavigation', $data);
+	}
 }
