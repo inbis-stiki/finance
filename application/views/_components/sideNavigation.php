@@ -4,6 +4,7 @@
         <img src="<?= site_url() ?>assets/src/img/cat.jpg" alt="">
         <p class="mb-0"><?= $auth['username']; ?></p>
     </div>
+<<<<<<< Updated upstream
     <div class="nav-links <?= uri_string() == 'admin/dashboard' ? 'active' : '' ?>">
         <a href="<?= site_url() ?>admin/dashboard">Dashboard</a>
     </div>
@@ -24,6 +25,31 @@
     </div>
     <div class="nav-links <?= uri_string() == 'admin/master_pengeluaran' ? 'active' : '' ?>">
         <a href="<?= site_url() ?>admin/master_pengeluaran">Master Pengeluaran</a>
+=======
+    <div class="nav-section">
+
+        <div class="nav-links <?= uri_string() == 'admin/dashboard' ? 'active' : '' ?>">
+            <a href="<?= site_url() ?>admin/dashboard">Dashboard</a>
+        </div>
+        <div class="nav-links <?= uri_string() == 'admin/form_pengajuan' ? 'active' : '' ?>">
+            <a href="<?= site_url() ?>admin/form_pengajuan">Form Pengajuan</a>
+        </div>
+        <div class="nav-links accordion-nav">
+            <div class="position-relative">
+                <a>Master</a>
+                <span class="iconify chevron" data-icon="akar-icons:chevron-left"></span>
+            </div>
+
+            <div class="sub-nav">
+                <a href="<?= site_url() ?>admin/master_driver">Master Driver</a>
+                <a href="<?= site_url() ?>admin/master_region">Master Region</a>
+                <a href="<?= site_url() ?>admin/master_instansi">Master Instansi</a>
+                <a href="<?= site_url() ?>admin/master_sparepart">Master Sparepart</a>
+                <a href="<?= site_url() ?>admin/master_kendaraan">Master Kendaraan</a>
+                <a href="<?= site_url() ?>admin/master_pengeluaran">Master Pengeluaran</a>
+            </div>
+        </div>
+>>>>>>> Stashed changes
     </div>
 </div>
 <div class="top-nav">
