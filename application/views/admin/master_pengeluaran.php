@@ -4,7 +4,7 @@
             <p class="mb-0 fs-5 font-w-500 color-darker">
                 Master Jenis Pengeluaran
             </p>
-            <button type="button" class="btn-table" data-bs-toggle="modal" data-bs-target="#add_masterPengeluaran">Add</button>
+            <button type="button" class="btn-table green" data-bs-toggle="modal" data-bs-target="#add_masterPengeluaran">Add</button>
         </div>
         <div class="card-section">
             <div class="body">
@@ -28,10 +28,10 @@
                                     $row->pengeluaran_jenis,
                                     $row->pengeluaran_group,
 
-                                    '<button type="button" data-id="' . $row->pengeluaran_id . '" data-jenis="' . $row->pengeluaran_jenis . '" data-group="' . $row->pengeluaran_group . '" class="btn-table green edit_masterPengeluaran btnEdit" data-bs-toggle="modal" data-bs-target="#edit_masterPengeluaran">
+                                    '<button type="button" data-id="' . $row->pengeluaran_id . '" data-jenis="' . $row->pengeluaran_jenis . '" data-group="' . $row->pengeluaran_group . '" class="btn-table edit_masterPengeluaran btnEdit" data-bs-toggle="modal" data-bs-target="#edit_masterPengeluaran">
                                             Edit
                                         </button>
-                                    <button type="button" data-id="' . $row->pengeluaran_id . '" class="btn-table orange hapus_masterPengeluaran btnEdit" data-bs-toggle="modal" data-bs-target="#hapus_masterPengeluaran">
+                                    <button type="button" data-id="' . $row->pengeluaran_id . '" class="btn-table red hapus_masterPengeluaran btnEdit" data-bs-toggle="modal" data-bs-target="#hapus_masterPengeluaran">
                                             Hapus
                                     </button>'
                                 );
@@ -62,7 +62,12 @@
                             </div>
                             <div class="d-flex flex-column my-2 w-100">
                                 <label class="my-2 color-secondary">Group Pengeluaran</label>
-                                <input type="text" class="login-input regular" name="group" placeholder="" required>
+                                <select class="login-input regular" name="group" id="" required>
+                                    <option value="">Pilih Group</option>
+                                    <option value="Administrasi">Administrasi</option>
+                                    <option value="Maintenance">Maintenance</option>
+                                    <option value="Expense">Expense</option>
+                                </select>
                             </div>
                         </div>
                         <button type="submit" class="btn-table submit-modal">Tambah data</button>
@@ -85,12 +90,16 @@
                         <div class="pb-4">
                             <div class="d-flex flex-column my-2 w-100">
                                 <label class="font-w-400 my-2 color-secondary">Jenis Pengeluaran</label>
-                                <input type="text" class="login-input regular" name="jenis" value="" required>
+                                <input type="text" class="login-input regular" id="pengeluaran_jenis" name="jenis" value="" required>
                                 <input type="hidden" id="pengeluaran_id" name="pengeluaran_id" value="">
                             </div>
                             <div class="d-flex flex-column my-2 w-100">
-                                <label class="font-w-400 my-2 color-secondary">Group Pengeluaran</label>
-                                <input type="text" class="login-input regular" name="group" value="" required>
+                                <select class="login-input regular" name="group" id="pengeluaran_group" required>
+                                    <option value="">Pilih Group</option>
+                                    <option value="Administrasi">Administrasi</option>
+                                    <option value="Maintenance">Maintenance</option>
+                                    <option value="Expense">Expense</option>
+                                </select>
                             </div>
                         </div>
                         <div class="d-flex flex-row">
@@ -133,8 +142,8 @@
                 const jenis = $(this).data('jenis')
                 const group = $(this).data('group')
 
-                $('input[name=jenis]').val(jenis);
-                $('input[name=group]').val(group);
+                $('#pengeluaran_jenis').val(jenis);
+                $('#pengeluaran_group').val(group);
                 $('input[name=pengeluaran_id]').val(id);
             })
         </script>

@@ -36,7 +36,7 @@ class Instansi extends CI_Controller
         $this->session->set_flashdata('sukses', "Data Berhasil Disimpan");
 
         //$this->M_Sparepart->insert($sparepart_nama, $sparepart_km, $sparepart_bulan);
-        redirect('admin/Admin/master_instansi');
+        redirect('admin/master_instansi');
     }
 
     function aksiEditInstansi()
@@ -49,7 +49,7 @@ class Instansi extends CI_Controller
 
         $this->M_Instansi->editInstansi($data);
 
-        redirect('admin/Admin/master_instansi');
+        redirect('admin/master_instansi');
     }
 
     public function aksiHapus()
@@ -61,6 +61,6 @@ class Instansi extends CI_Controller
 
         $this->M_Instansi->editInstansi($data);
 
-        redirect('admin/Admin/master_instansi');
+        redirect('admin/master_instansi');
     }
 }

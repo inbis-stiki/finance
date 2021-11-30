@@ -5,7 +5,7 @@
                 Master Kendaraan
             </p>
             <a href="<?php echo site_url(); ?>admin/Admin/tambah_kendaraan">
-                <button type="button" class="btn-table">Add</button>
+                <button type="button" class="btn-table green">Add</button>
             </a>
 
         </div>
@@ -26,14 +26,15 @@
                             <?php
                             $no = 1;
                             foreach ($Kendaraan as $row) {
+                                $tgl = date_format(date_create($row->kendaraan_tanggal_beli), 'j M Y');
                                 $this->table->add_row(
                                     $no++,
                                     $row->kendaraan_no_rangka,
                                     $row->kendaraan_stnk,
                                     $row->kendaraan_merk,
-                                    $row->kendaraan_tanggal_beli,
-                                    '<a class="btn-table green edit_masterKendaraan" data-bs-toggle="modal" data-bs-target="#edit_masterKendaraan' . $row->kendaraan_no_rangka . '" title="Edit"
-                                    <button type="button" class="btn-table green edit_masterKendaraan">
+                                    $tgl,
+                                    '<a class="btn-table edit_masterKendaraan" data-bs-toggle="modal" data-bs-target="#edit_masterKendaraan' . $row->kendaraan_no_rangka . '" title="Edit"
+                                    <button type="button" class="btn-table edit_masterKendaraan">
                                             Edit
                                         </button>
                                     </a>'
