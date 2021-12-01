@@ -12,6 +12,7 @@ class Admin extends CI_Controller
 
 		$this->load->library('table');
 		$this->load->model('m_region');
+		$this->load->model('M_Driver');
 	}
 
 	public function index()
@@ -95,6 +96,24 @@ class Admin extends CI_Controller
 
 		$this->template->index('admin/add_kendaraan', $data);
 		$this->load->view('_components/sideNavigation', $data);	}
+	
+
+	public function tambah_driver(){
+		$data['title'] = 'admin';
+		$data['auth'] = $this->db->get_where('master_user', ['username' => $this->session->userdata('username')])->row_array();
+		
+		$this->template->index('admin/add_driver', $data);
+		$this->load->view('_components/sideNavigation', $data);	
+	}
+	
+	public function ubah_driver($id){
+		$data['title'] = 'admin';
+		$data['auth'] = $this->db->get_where('master_user', ['username' => $this->session->userdata('username')])->row_array();
+		$data['driver'] = $this->M_Driver->getById($id);
+		
+		$this->template->index('admin/edit_driver', $data);
+		$this->load->view('_components/sideNavigation', $data);	
+	}
 
 	public function form_pengajuan()
 	{

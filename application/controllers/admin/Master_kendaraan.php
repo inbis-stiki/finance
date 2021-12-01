@@ -47,6 +47,7 @@ class Master_kendaraan extends CI_Controller
                     redirect('admin/master_kendaraan');
                 }
             } else {
+                print_r($this->upload->errir_display());
                 die("gagal upload");
             }
         } else {
