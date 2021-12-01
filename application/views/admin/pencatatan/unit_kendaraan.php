@@ -3,7 +3,7 @@
         <?php echo validation_errors(); ?>
         <?= form_open_multipart('admin/Unit_kendaraan/add_kendaraan'); ?>
         <p class="mb-3 fs-5 font-w-500 color-darker">
-            Pencatatan Unit Kendaraan
+            Transaksi Peminjaman
         </p>
         <div class="card-section">
             <div class="head">

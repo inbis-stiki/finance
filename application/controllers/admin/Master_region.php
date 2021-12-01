@@ -25,7 +25,7 @@ class Master_region extends CI_Controller
         $this->session->set_flashdata('sukses', "Data Berhasil Disimpan");
 
         //$this->M_Sparepart->insert($sparepart_nama, $sparepart_km, $sparepart_bulan);
-        redirect('admin/Admin/master_region');
+        redirect('admin/master_region');
     }
 
     function editRegion()
@@ -37,11 +37,11 @@ class Master_region extends CI_Controller
 
         $this->M_region->editRegion($data);
 
-        redirect('admin/Admin/master_region');
+        redirect('admin/master_region');
         // $id = $this->input->post('region_id');
         // $kota = $this->input->post('region_kota');
         // $this->M_region->editRegion($kota, $id);
-        // redirect('admin/Admin/master_region');
+        // redirect('admin/master_region');
     }
 
     public function aksiHapus()
@@ -53,6 +53,6 @@ class Master_region extends CI_Controller
 
         $this->M_region->editRegion($data);
 
-        redirect('admin/Admin/master_region');
+        redirect('admin/master_region');
     }
 }

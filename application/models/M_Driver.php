@@ -27,4 +27,14 @@ class M_Driver extends CI_Model
         $this->db->update('master_driver', $data);
         // $hasil = $this->db->query("Update master_region SET region_kota='$kota' WHERE region_id='$id'");
     }
+    public function insert($param){
+        $this->db->insert('master_driver', $param);
+    }
+    
+    public function getById($id){
+        return $this->db->get_where('master_driver', ['driver_nik' => $id])->row();
+    }
+    public function update($param){
+        $this->db->where('driver_nik', $param['driver_nik'])->update('master_driver', $param);
+    }
 }

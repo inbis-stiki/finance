@@ -4,11 +4,7 @@
             <p class="mb-0 fs-5 font-w-500 color-darker">
                 Master Wilayah
             </p>
-<<<<<<< Updated upstream
-            <button type="button" class="btn-table" data-bs-toggle="modal" data-bs-target="#add_masterRegion">Add</button>
-=======
             <button type="button" class="btn-table green" data-bs-toggle="modal" data-bs-target="#add_masterRegion">Tambah</button>
->>>>>>> Stashed changes
         </div>
         <div class="card-section">
             <div class="body">
@@ -30,21 +26,12 @@
                                 $this->table->add_row(
                                     $no++,
                                     $row->region_kota,
-<<<<<<< Updated upstream
-                                    '<a class="btn-table green edit_masterRegion" data-bs-toggle="modal" data-bs-target="#edit_masterRegion' . $row->region_id . '" title="Edit"
-                                    <button type="button" class="btn-table green edit_masterRegion">
-                                            Edit
-                                        </button>
-                                    </a>
-                                    <a class="btn-table orange hapus_masterRegion" data-bs-toggle="modal" data-bs-target="#hapus_masterRegion' . $row->region_id . '" title="Hapus"
-=======
                                     '<a class="btn-table edit_masterRegion" data-bs-toggle="modal" data-bs-target="#edit_masterRegion' . $row->region_id . '" title="Edit"
                                     <button type="button" class="btn-table edit_masterRegion">
                                         <span class="iconify-inline" data-icon="bx:bx-edit" data-width="20" data-height="20"></span>
                                     </button>
                                     </a> &nbsp;
                                     <a class="btn-table red hapus_masterRegion" data-bs-toggle="modal" data-bs-target="#hapus_masterRegion' . $row->region_id . '" title="Hapus"
->>>>>>> Stashed changes
                                     <button type="button" class="btn-table orange hapus_masterRegion">
                                         <span class="iconify-inline" data-icon="carbon:trash-can"data-width="20" data-height="20"></span>
                                     </button>
@@ -78,7 +65,7 @@
 
                                 <div class="d-flex flex-column my-2 w-100">
                                     <label class="font-w-400 my-2 color-secondary">Nama Kota</label>
-                                    <input type="text" class="form-control" id="region_kota" name="region_kota" value="<?php echo $region_kota ?>">
+                                    <input type="text" class="form-control" id="region_kota" name="region_kota" value="<?php echo $region_kota ?>" required>
                                     <input type="hidden" id="region_id" name="region_id" value="<?php echo $region_id ?>">
                                 </div>
                             </div>
@@ -111,7 +98,6 @@
                                 </div>
                             </div>
                             <div class="d-flex flex-row">
-                                <button type="button" class="btn-table submit-modal outline me-1" data-bs-dismiss="modal">Batal</button>
                                 <button type="submit" class="btn-table submit-modal ms-1" data-bs-dismiss="modal">Hapus</button>
                             </div>
                         </div>

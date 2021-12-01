@@ -41,7 +41,7 @@ class Auth extends CI_Controller
 				if ($user['user_role'] == 1) {
 					$this->load->view('_components/sideNavigation', $data);
 					$this->session->set_userdata($data);
-					redirect('admin/Admin');
+					redirect('admin/dashboard');
 				} else {
 					echo 'Ini untuk management';
 				}

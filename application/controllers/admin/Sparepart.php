@@ -27,7 +27,7 @@ class Sparepart extends CI_Controller
         $this->session->set_flashdata('sukses', "Data Berhasil Disimpan");
 
         //$this->M_Sparepart->insert($sparepart_nama, $sparepart_km, $sparepart_bulan);
-        redirect('admin/Admin/master_sparepart');
+        redirect('admin/master_sparepart');
     }
 
     function aksiEditPart()
@@ -41,7 +41,7 @@ class Sparepart extends CI_Controller
 
         $this->M_Sparepart->editPart($data);
 
-        redirect('admin/Admin/master_sparepart');
+        redirect('admin/master_sparepart');
     }
 
     public function aksiHapus()
@@ -53,6 +53,6 @@ class Sparepart extends CI_Controller
 
         $this->M_Sparepart->editPart($data);
 
-        redirect('admin/Admin/master_sparepart');
+        redirect('admin/master_sparepart');
     }
 }

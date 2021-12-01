@@ -11,10 +11,6 @@
         </div>
         <!-- <div class="nav-links <?= uri_string() == 'admin/form_pengajuan' ? 'active' : '' ?>">
             <a href="<?= site_url() ?>admin/form_pengajuan">Form Pengajuan</a>
-<<<<<<< Updated upstream
-        </div>
-        <div class="nav-links accordion-nav">
-=======
         </div> -->
         <?php
         $active = (uri_string() == 'admin/master_driver' || uri_string() == 'admin/master_region' || uri_string() == 'admin/master_instansi' || uri_string() == 'admin/master_sparepart' || uri_string() == 'admin/master_kendaraan' || uri_string() == 'admin/master_pengeluaran' ? "active" : "");
@@ -36,28 +32,18 @@
         </div>
 
         <div class="nav-links accordion-nav <?= $active ?>">
->>>>>>> Stashed changes
             <div class="position-relative">
                 <a>Master</a>
                 <span class="iconify chevron" data-icon="akar-icons:chevron-left"></span>
             </div>
 
             <div class="sub-nav">
-<<<<<<< Updated upstream
-                <a href="<?= site_url() ?>admin/master_driver">Master Driver</a>
-                <a href="<?= site_url() ?>admin/master_region">Master Region</a>
-                <a href="<?= site_url() ?>admin/master_instansi">Master Instansi</a>
-                <a href="<?= site_url() ?>admin/master_sparepart">Master Sparepart</a>
-                <a href="<?= site_url() ?>admin/master_kendaraan">Master Kendaraan</a>
-                <a href="<?= site_url() ?>admin/master_pengeluaran">Master Pengeluaran</a>
-=======
                 <a href="<?= site_url() ?>admin/master_driver">Driver</a>
                 <a href="<?= site_url() ?>admin/master_region">Wilayah</a>
                 <a href="<?= site_url() ?>admin/master_instansi">Instansi</a>
                 <a href="<?= site_url() ?>admin/master_sparepart">Sparepart</a>
                 <a href="<?= site_url() ?>admin/master_kendaraan">Kendaraan</a>
                 <a href="<?= site_url() ?>admin/master_pengeluaran">Jenis Pengeluaran</a>
->>>>>>> Stashed changes
             </div>
         </div>
     </div>

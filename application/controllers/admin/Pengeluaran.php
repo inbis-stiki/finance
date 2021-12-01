@@ -26,7 +26,7 @@ class Pengeluaran extends CI_Controller
         $this->session->set_flashdata('sukses', "Data Berhasil Disimpan");
 
         //$this->M_Sparepart->insert($sparepart_nama, $sparepart_km, $sparepart_bulan);
-        redirect('admin/Admin/master_pengeluaran');
+        redirect('admin/master_pengeluaran');
     }
 
     function aksiEditPengeluaran()
@@ -39,7 +39,7 @@ class Pengeluaran extends CI_Controller
 
         $this->M_Pengeluaran->editPengeluaran($data);
 
-        redirect('admin/Admin/master_pengeluaran');
+        redirect('admin/master_pengeluaran');
     }
 
     public function aksiHapus()
@@ -51,6 +51,6 @@ class Pengeluaran extends CI_Controller
 
         $this->M_Pengeluaran->editPengeluaran($data);
 
-        redirect('admin/Admin/master_pengeluaran');
+        redirect('admin/master_pengeluaran');
     }
 }
