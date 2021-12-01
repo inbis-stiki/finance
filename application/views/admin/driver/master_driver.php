@@ -66,7 +66,6 @@
                             </div>
                         </div>
                         <div class="d-flex flex-row">
-                            <button type="button" class="btn-table submit-modal outline me-1" data-bs-dismiss="modal">Batal</button>
                             <button type="submit" class="btn-table submit-modal ms-1">Hapus</button>
                         </div>
                         <?= form_close() ?>

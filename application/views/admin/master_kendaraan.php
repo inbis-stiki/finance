@@ -38,6 +38,7 @@
                                             Foto
                                         </button>
                                     </a>'
+
                                 );
 
                             ?>
@@ -65,7 +66,7 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body row m-0 p-0 w-100">
-                            <img src="" alt="">
+
                         </div>
                     </div>
                 </div>

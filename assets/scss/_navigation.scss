@@ -83,10 +83,6 @@ $top-nav-h: 56px;
                 pointer-events: all;
                 position: relative;
 
-                .sublink.active {
-                    background: $dark-primary;
-                }
-
                 a {
                     padding-left: 2.5rem;
                     padding-right: 2.125rem;
