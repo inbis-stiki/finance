@@ -52,7 +52,7 @@ class M_kendaraan extends CI_Model{
 
     function getData()
     {
-        $query = $this->db->query("SELECT * FROM master_region order by region_kota asc");
+        $query = $this->db->query("SELECT * FROM master_region WHERE deleted_date IS NULL order by region_kota asc");
 
         return $query->result();
     }
