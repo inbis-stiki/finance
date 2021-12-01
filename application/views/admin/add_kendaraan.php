@@ -11,7 +11,23 @@
             </div>
             <div class="body form">
                 <div class="row m-0 p-0 w-100">
-                    <div class="col-12 col-lg-6 ps-0 d-flex flex-column">
+                    <div class="col-12 col-lg-12 pe-0 d-flex flex-column justify-content-between">
+                      <?php
+                            if(!empty($this->session->flashdata('err_msg'))){
+                                echo '
+                                    <div class="alert alert-danger" role="alert">
+                                    '.$this->session->flashdata('err_msg').'
+                                    </div>
+                                ';        
+                            }
+                            if(!empty($this->session->flashdata('succ_msg'))){
+                                echo '
+                                    <div class="alert alert-success" role="alert">
+                                        '.$this->session->flashdata('succ_msg').'
+                                    </div>
+                                ';        
+                            }
+                        ?>
                         <label class="mb-3">Upload Foto Kendaraan</label>
                         <div>
                             <input type="file" name="foto[]" accept=".jpg,.png,.jpeg" multiple>
@@ -28,16 +44,14 @@
                         <small><?php if (isset($error)) {
                                     echo $error;
                                 } ?></small>
-                    </div>
-                    <div class="col-12 col-lg-6 pe-0 d-flex flex-column justify-content-between">
-                        <label class="mb-3">Nomor Rangka Kendaraan</label>
-                        <input type="text" class="login-input regular" name="rangka" placeholder="Masukkan nomor Rangka kendaraan" required>
-                        <label class="my-3">Nomor STNK Kendaraan</label>
-                        <input type="text" class="login-input regular" name="stnk" placeholder="Masukkan nomor STNK kendaraan" required>
-                        <label class="my-3">Merk Kendaraan</label>
-                        <input type="text" class="login-input regular" name="merk" placeholder="Masukkan Merk Kendaraan" required>
-                        <label class="my-3">Tanggal Beli Kendaraan</label>
-                        <input type="date" class="login-input regular fs-16px" name="tanggal" id="datepicker" required>
+                        <label class="my-3">Nomor Rangka</label>
+                        <input type="text" class="login-input regular" name="rangka" placeholder="Nomor Rangka" value="<?= !empty($temp['rangka']) ? $temp['rangka'] : "" ?>" required>
+                        <label class="my-3">Nomor STNK</label>
+                        <input type="text" class="login-input regular" name="stnk" placeholder="Nomor STNK" value="<?= !empty($temp['stnk']) ? $temp['stnk'] : "" ?>" required>
+                        <label class="my-3">Merk</label>
+                        <input type="text" class="login-input regular" name="merk" placeholder="Merk" value="<?= !empty($temp['merk']) ? $temp['merk'] : "" ?>" required>
+                        <label class="my-3">Tanggal Beli</label>
+                        <input type="date" class="login-input regular fs-16px" name="tanggal" id="datepicker" value="<?= !empty($temp['tanggal']) ? $temp['tanggal'] : "" ?>" required>
                     </div>
                 </div>
 

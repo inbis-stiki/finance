@@ -35,7 +35,7 @@
                                     $tgl,
                                     '<a class="btn-table edit_masterKendaraan" data-bs-toggle="modal" data-bs-target="#edit_masterKendaraan' . $row->kendaraan_no_rangka . '" title="Edit"
                                     <button type="button" class="btn-table edit_masterKendaraan">
-                                            Edit
+                                            Foto
                                         </button>
                                     </a>'
 
@@ -62,41 +62,12 @@
                 <div class="modal-dialog modal-dialog-centered modal-xl">
                     <div class="modal-content p-2">
                         <div class="modal-header">
-                            <p class="font-w-700 color-darker mb-0">Edit Kendaraan</p>
+                            <p class="font-w-700 color-darker mb-0">Foto Kendaraan</p>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <?= form_open_multipart('admin/Master_kendaraan/updateKendaraan'); ?>
                         <div class="modal-body row m-0 p-0 w-100">
 
-                            <div class="col-12 col-lg-6 ps-0 d-flex flex-column">
-                                <label class="mb-3">Upload Foto Kendaraan</label>
-                                <div class="upload-img color-dark">
-                                    <span class="iconify fs-80px mb-3 z-2" data-icon="ic:baseline-photo-camera"></span>
-                                    <p class="z-2">Klik disini untuk upload foto</p>
-
-                                    <input type="file" name="kendaraan_foto" accept="image/png, image/gif, image/jpeg" id="imageInput" class="z-2" />
-                                    <div class="z-2"></div>
-
-                                    <img src="<?php echo base_url() . '/assets/images/fotokendaraan/' . $kendaraan_foto ?>" class="image-preview">
-                                </div>
-                                <small><?php if (isset($error)) {
-                                            echo $error;
-                                        } ?></small>
-                            </div>
-                            <div class="col-12 col-lg-6 pe-0 d-flex flex-column justify-content-between">
-                                <label class="my-3">Nomor Rangka Kendaraan</label>
-                                <input type="text" class="login-input regular" id="kendaraan_no_rangka" name="kendaraan_no_rangka" value="<?= $kendaraan_no_rangka ?>" disabled>
-                                <label class="mb-3">Nomor STNK Kendaraan</label>
-                                <input type="text" class="login-input regular" id="kendaraan_stnk" name="kendaraan_stnk" value="<?= $kendaraan_stnk ?>" required>
-                                <label class="my-3">Merk Kendaraan</label>
-                                <input type="text" class="login-input regular" id="kendaraan_merk" name="kendaraan_merk" value="<?= $kendaraan_merk ?>" required>
-                                <label class="my-3">Tanggal Beli Kendaraan</label>
-                                <input type="date" class="login-input regular fs-16px" id="kendaraan_tanggal_beli" name="kendaraan_tanggal_beli" value="<?= $kendaraan_tanggal_beli ?>" required>
-                            </div>
-                            <button type="submit" class="btn-table submit-modal">Edit data</button>
-
                         </div>
-                        <?= form_close() ?>
                     </div>
                 </div>
             </div>
