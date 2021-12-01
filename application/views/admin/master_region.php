@@ -2,9 +2,13 @@
     <div class="p-5">
         <div class="d-flex flex-row justify-content-between align-items-center mb-4">
             <p class="mb-0 fs-5 font-w-500 color-darker">
-                Master Region
+                Master Wilayah
             </p>
+<<<<<<< Updated upstream
             <button type="button" class="btn-table" data-bs-toggle="modal" data-bs-target="#add_masterRegion">Add</button>
+=======
+            <button type="button" class="btn-table green" data-bs-toggle="modal" data-bs-target="#add_masterRegion">Tambah</button>
+>>>>>>> Stashed changes
         </div>
         <div class="card-section">
             <div class="body">
@@ -14,7 +18,7 @@
                             <?php
                             $template = array('table_open' => '<table class="table-custom">');
                             $this->table->set_template($template);
-                            $this->table->set_heading('No', 'Nama Kota', 'Action');
+                            $this->table->set_heading('No', 'Nama Kota', 'Aksi');
                             ?>
                         </tr>
                     </thead>
@@ -26,15 +30,24 @@
                                 $this->table->add_row(
                                     $no++,
                                     $row->region_kota,
+<<<<<<< Updated upstream
                                     '<a class="btn-table green edit_masterRegion" data-bs-toggle="modal" data-bs-target="#edit_masterRegion' . $row->region_id . '" title="Edit"
                                     <button type="button" class="btn-table green edit_masterRegion">
                                             Edit
                                         </button>
                                     </a>
                                     <a class="btn-table orange hapus_masterRegion" data-bs-toggle="modal" data-bs-target="#hapus_masterRegion' . $row->region_id . '" title="Hapus"
+=======
+                                    '<a class="btn-table edit_masterRegion" data-bs-toggle="modal" data-bs-target="#edit_masterRegion' . $row->region_id . '" title="Edit"
+                                    <button type="button" class="btn-table edit_masterRegion">
+                                        <span class="iconify-inline" data-icon="bx:bx-edit" data-width="20" data-height="20"></span>
+                                    </button>
+                                    </a> &nbsp;
+                                    <a class="btn-table red hapus_masterRegion" data-bs-toggle="modal" data-bs-target="#hapus_masterRegion' . $row->region_id . '" title="Hapus"
+>>>>>>> Stashed changes
                                     <button type="button" class="btn-table orange hapus_masterRegion">
-                                            Hapus
-                                        </button>
+                                        <span class="iconify-inline" data-icon="carbon:trash-can"data-width="20" data-height="20"></span>
+                                    </button>
                                     </a>'
 
                                 );
@@ -56,7 +69,7 @@
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content p-2">
                         <div class="modal-header">
-                            <p class="font-w-700 color-darker mb-0">Edit Region</p>
+                            <p class="font-w-700 color-darker mb-0">Ubah Data Wilayah</p>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <?= form_open_multipart('admin/Master_region/editRegion'); ?>
@@ -86,7 +99,7 @@
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content p-2">
                         <div class="modal-header">
-                            <p class="font-w-700 color-darker mb-0">Hapus Region</p>
+                            <p class="font-w-700 color-darker mb-0">Hapus Wilayah</p>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <?= form_open_multipart('admin/Master_region/aksiHapus'); ?>

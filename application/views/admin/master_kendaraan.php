@@ -5,7 +5,11 @@
                 Master Kendaraan
             </p>
             <a href="<?php echo site_url(); ?>admin/Admin/tambah_kendaraan">
+<<<<<<< Updated upstream
                 <button type="button" class="btn-table">Add</button>
+=======
+                <button type="button" class="btn-table green">Tambah</button>
+>>>>>>> Stashed changes
             </a>
 
         </div>
@@ -17,7 +21,7 @@
                             <?php
                             $template = array('table_open' => '<table class="table-custom">');
                             $this->table->set_template($template);
-                            $this->table->set_heading('No', 'No. Rangka', 'No. STNK', 'Merk', 'Tanggal Beli', 'Action');
+                            $this->table->set_heading('No', 'No. Rangka', 'No. STNK', 'Merk', 'Tanggal Beli', 'Aksi');
                             ?>
                         </tr>
                     </thead>
@@ -31,12 +35,24 @@
                                     $row->kendaraan_no_rangka,
                                     $row->kendaraan_stnk,
                                     $row->kendaraan_merk,
+<<<<<<< Updated upstream
                                     $row->kendaraan_tanggal_beli,
                                     '<a class="btn-table green edit_masterKendaraan" data-bs-toggle="modal" data-bs-target="#edit_masterKendaraan' . $row->kendaraan_no_rangka . '" title="Edit"
                                     <button type="button" class="btn-table green edit_masterKendaraan">
                                             Edit
                                         </button>
                                     </a>'
+=======
+                                    $tgl,
+                                    '<a class="btn-table orange edit_masterKendaraan" data-bs-toggle="modal" data-bs-target="#edit_masterKendaraan' . $row->kendaraan_no_rangka . '" title="Edit"
+                                    <button type="button" class="btn-table edit_masterKendaraan">
+                                        <span class="iconify-inline" data-icon="ic:baseline-insert-photo" data-width="20" data-height="21"></span>
+                                    </button>
+                                    </a>
+                                    <button type="button" class="btn-table edit_masterKendaraan btnEdit" data-bs-toggle="modal" data-bs-target="#edit_masterKendaraan">
+                                            <span class="iconify-inline" data-icon="bx:bx-edit" data-width="20" data-height="20"></span>
+                                        </button>'
+>>>>>>> Stashed changes
 
                                 );
 

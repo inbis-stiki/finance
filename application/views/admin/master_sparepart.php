@@ -4,7 +4,11 @@
             <p class="mb-0 fs-5 font-w-500 color-darker">
                 Master Sparepart
             </p>
+<<<<<<< Updated upstream
             <button type="button" class="btn-table" data-bs-toggle="modal" data-bs-target="#add_masterSparepart">Add</button>
+=======
+            <button type="button" class="btn-table green" data-bs-toggle="modal" data-bs-target="#add_masterSparepart">Tambah</button>
+>>>>>>> Stashed changes
         </div>
         <div class="card-section">
             <div class="body">
@@ -14,7 +18,7 @@
                             <?php
                             $template = array('table_open' => '<table id="tableSparepart" class="table-custom">');
                             $this->table->set_template($template);
-                            $this->table->set_heading('No', 'Jenis Sparepart', 'Ideal Pemakaian', 'Action');
+                            $this->table->set_heading('No', 'Jenis Sparepart', 'Ideal Pemakaian', 'Aksi');
                             ?>
                         </tr>
                     </thead>
@@ -29,11 +33,19 @@
                                         $row->sparepart_nama,
                                         $row->sparepart_bulan . ' Bulan',
 
+<<<<<<< Updated upstream
                                         '<button type="button" data-id="' . $row->sparepart_id . '" data-nama="' . $row->sparepart_nama . '" data-km="' . $row->sparepart_km . '" data-bulan="' . $row->sparepart_bulan . '" class="btn-table green edit_masterSparepart btnEdit" data-bs-toggle="modal" data-bs-target="#edit_masterSparepart">
                                             Edit
                                         </button>
                                         <button type="button" data-id="' . $row->sparepart_id . '" data-nama="' . $row->sparepart_nama . '" data-km="' . $row->sparepart_km . '" data-bulan="' . $row->sparepart_bulan . '" class="btn-table orange hapus_masterSparepart btnEdit" data-bs-toggle="modal" data-bs-target="#hapus_masterSparepart">
                                             Hapus
+=======
+                                        '<button type="button" data-id="' . $row->sparepart_id . '" data-nama="' . $row->sparepart_nama . '" data-km="' . $row->sparepart_km . '" data-bulan="' . $row->sparepart_bulan . '" class="btn-table edit_masterSparepart btnEdit" data-bs-toggle="modal" data-bs-target="#edit_masterSparepart">
+                                            <span class="iconify-inline" data-icon="bx:bx-edit" data-width="20" data-height="20"></span>
+                                        </button>
+                                        <button type="button" data-id="' . $row->sparepart_id . '" data-nama="' . $row->sparepart_nama . '" data-km="' . $row->sparepart_km . '" data-bulan="' . $row->sparepart_bulan . '" class="btn-table red hapus_masterSparepart btnEdit" data-bs-toggle="modal" data-bs-target="#hapus_masterSparepart">
+                                            <span class="iconify-inline" data-icon="carbon:trash-can"data-width="20" data-height="20"></span>
+>>>>>>> Stashed changes
                                         </button>'
                                     );
                                 } else {
@@ -41,11 +53,19 @@
                                         $no++,
                                         $row->sparepart_nama,
                                         $row->sparepart_km . ' Km',
+<<<<<<< Updated upstream
                                         '<button type="button" data-id="' . $row->sparepart_id . '" data-nama="' . $row->sparepart_nama . '" data-km="' . $row->sparepart_km . '" data-bulan="' . $row->sparepart_bulan . '" class="btn-table green edit_masterSparepart btnEdit" data-bs-toggle="modal" data-bs-target="#edit_masterSparepart">
                                             Edit
                                         </button>
                                         <button type="button" data-id="' . $row->sparepart_id . '" data-nama="' . $row->sparepart_nama . '" data-km="' . $row->sparepart_km . '" data-bulan="' . $row->sparepart_bulan . '" class="btn-table orange hapus_masterSparepart btnEdit" data-bs-toggle="modal" data-bs-target="#hapus_masterSparepart">
                                             Hapus
+=======
+                                        '<button type="button" data-id="' . $row->sparepart_id . '" data-nama="' . $row->sparepart_nama . '" data-km="' . $row->sparepart_km . '" data-bulan="' . $row->sparepart_bulan . '" class="btn-table edit_masterSparepart btnEdit" data-bs-toggle="modal" data-bs-target="#edit_masterSparepart">
+                                            <span class="iconify-inline" data-icon="bx:bx-edit" data-width="20" data-height="20"></span>
+                                        </button>
+                                        <button type="button" data-id="' . $row->sparepart_id . '" data-nama="' . $row->sparepart_nama . '" data-km="' . $row->sparepart_km . '" data-bulan="' . $row->sparepart_bulan . '" class="btn-table red hapus_masterSparepart btnEdit" data-bs-toggle="modal" data-bs-target="#hapus_masterSparepart">
+                                            <span class="iconify-inline" data-icon="carbon:trash-can"data-width="20" data-height="20"></span>
+>>>>>>> Stashed changes
                                         </button>'
                                     );
                                 }
@@ -63,7 +83,7 @@
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content p-2">
                     <div class="modal-header">
-                        <p class="font-w-700 color-darker mb-0">Edit Sparepart</p>
+                        <p class="font-w-700 color-darker mb-0">Ubah Data Sparepart</p>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body fs-14px pt-0 d-flex flex-column">

@@ -4,7 +4,11 @@
             <p class="mb-0 fs-5 font-w-500 color-darker">
                 Master Driver
             </p>
+<<<<<<< Updated upstream
             <a href="<?= base_url('Driver/aksiTambahDriver/'); ?>" class="btn-table" type="button">Add</a>
+=======
+            <a href="<?= base_url('admin/tambah_driver'); ?>" class="btn-table green" type="button">Tambah</a>
+>>>>>>> Stashed changes
             <!-- <button type="button" class="btn-table" data-bs-toggle="modal">Add</button> -->
         </div>
         <div class="card-section">
@@ -15,7 +19,7 @@
                             <?php
                             $template = array('table_open' => '<table id="tableDriver" class="table-custom">');
                             $this->table->set_template($template);
-                            $this->table->set_heading('No', 'Nama Driver', 'Foto Driver', 'KTP Driver', 'Alamat Driver', 'Nomor Telepon Driver', 'Action');
+                            $this->table->set_heading('No', 'Nama Driver', 'Foto Driver', 'KTP Driver', 'Alamat Driver', 'Nomor Telepon Driver', 'Aksi');
                             ?>
                         </tr>
                     </thead>
@@ -33,11 +37,19 @@
                                     $row->driver_telepon,
 
                                     '
+<<<<<<< Updated upstream
                                     <a href="' .  base_url("Driver/editDriver/" . $row->driver_nik) . '" type="button" class="btn-table green edit_masterDriver btnEdit">
                                     Edit
                                     </a>
                                     <button type="button" data-id="' . $row->driver_nik . '" class="btn-table orange hapus_masterDriver btnHapus" data-bs-toggle="modal" data-bs-target="#hapus_masterDriver">
                                             Hapus
+=======
+                                    <a href="' .  base_url("admin/ubah_driver/" . $row->driver_nik) . '" type="button" class="btn-table edit_masterDriver btnEdit">
+                                    <span class="iconify-inline" data-icon="bx:bx-edit" data-width="20" data-height="20"></span>
+                                    </a>&nbsp;
+                                    <button type="button" data-id="' . $row->driver_nik . '" class="btn-table red hapus_masterDriver btnHapus" data-bs-toggle="modal" data-bs-target="#hapus_masterDriver">
+                                    <span class="iconify-inline" data-icon="carbon:trash-can"data-width="20" data-height="20"></span>
+>>>>>>> Stashed changes
                                     </button>'
                                 );
                             ?>

@@ -51,7 +51,7 @@
             </div>
         </div>
         <button type="submit" class="btn-table submit-modal">
-            Submit Data
+            Kirim Data
         </button>
         <?= form_close(); ?>
     </div>

@@ -15,7 +15,7 @@
         </div>
         <div class="ms-auto col-12 col-lg-6 mt-3 pe-0 input-administrasi">
             <button class="btn-table submit-modal" id="input-administrasi">
-                Input Data
+                Masukkan Data
             </button>
         </div>
     </div>
@@ -75,5 +75,5 @@
 </div>
 
 <button class="btn-table submit-modal submit-administrasi absolute disabled" data-bs-toggle="modal" data-bs-target="#success" disabled>
-    Submit Data
+    Simpan Data
 </button>
