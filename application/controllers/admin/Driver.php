@@ -12,43 +12,64 @@ class Driver extends CI_Controller
 
         $this->load->helper(array('form', 'url', 'date'));
         $this->load->library('form_validation');
+        $this->load->library('upload');
         $this->load->model('M_Driver');
+    }
+
+    public function vAdd(){
+
     }
 
     public function aksiTambahDriver()
     {
-        //get foto
-        $config['upload_path'] = './assets/images/fotodriver';
-        $config['allowed_types'] = 'jpg|png|jpeg';
-        $config['max_size'] = '2048';  //2MB max
-        $config['max_width'] = '4480'; // pixel
-        $config['max_height'] = '4480'; // pixel
-        $config['file_name'] = $_FILES['foto']['name'];
-
-        $this->upload->initialize($config);
-
-        if (!empty($_FILES['foto']['name'])) {
-            if ($this->upload->do_upload('foto')) {
-                $fotodriver = $this->upload->data();
-                $data = [
-                    'driver_nik'              => $this->input->post('nik'),
-                    'driver_nama'             => $this->input->post('nama'),
-                    'driver_foto'             => $fotodriver['file_name'],
-                    'driver_foto_ktp'         => $fotodriver['file_name'],
-                    'driver_alamat'           => $this->input->post('alamat'),
-                    'driver_telepon'          => $this->input->post('telepon')
-                ];
-
-                $query = $this->db->insert('master_driver', $data);
-                if ($query = true) {
-                    $this->session->set_flashdata('inserted', 'Yess');
-                    redirect('admin/master_driver');
-                }
-            } else {
-                die("gagal upload");
-            }
-        } else {
+        $uploadFoto = $this->upload_image('foto');
+        if($uploadFoto['status' == false]){
+            redirect('admin/tambah_driver');
         }
+        
+        $uploadKTP = $this->upload_image('ktp');
+        if($uploadKTP['status' == false]){
+            redirect('admin/tambah_driver');
+        }
+
+        $formData['driver_nik']         = $_POST['nik'];
+        $formData['driver_nama']        = $_POST['nama'];
+        $formData['driver_foto']        = $uploadFoto['link'];
+        $formData['driver_foto_ktp']    = $uploadKTP['link'];
+        $formData['driver_alamat']      = $_POST['alamat'];
+        $formData['driver_telepon']     = $_POST['telp'];
+
+        $this->M_Driver->insert($formData);
+        redirect('admin/master_driver');
+    }
+    public function aksiUbahDriver()
+    {
+        if(!empty($_FILES['foto']['name'])){
+            $uploadFoto = $this->upload_image('foto');
+            if($uploadFoto['status' == false]){
+                redirect('admin/tambah_driver');
+            }else{
+                $formData['driver_foto'] = $uploadFoto['link'];
+            }
+        }
+
+        if(!empty($_FILES['ktp']['name'])){
+            $uploadKTP = $this->upload_image('ktp');
+            if($uploadKTP['status' == false]){
+                redirect('admin/tambah_driver');
+            }else{
+                $formData['driver_foto_ktp'] = $uploadKTP['link'];
+            }
+        }
+        
+
+        $formData['driver_nik']         = $_POST['nik'];
+        $formData['driver_nama']        = $_POST['nama'];
+        $formData['driver_alamat']      = $_POST['alamat'];
+        $formData['driver_telepon']     = $_POST['telp'];
+
+        $this->M_Driver->update($formData);
+        redirect('admin/master_driver');
     }
 
     function editKendaraan()
@@ -81,4 +102,30 @@ class Driver extends CI_Controller
 
         redirect('admin/master_driver');
     }
+
+    public function upload_image($resource){
+        $path = './assets/images/driver/'.$resource;
+        $conf['upload_path']    = $path;
+        $conf['allowed_types']  = "jpg|png|jpeg|bmp";
+        $conf['max_size']       = 2048;
+        $conf['file_name']      = time();
+        $conf['encrypt_name']   = TRUE;
+
+        $this->upload->initialize($conf);
+        if($this->upload->do_upload($resource)){
+            $img = $this->upload->data();
+            return [
+                    'status'=> true,
+                    'msg'   => 'Data berhasil terupload',
+                    'link'  => base_url($path.'/'.$img['file_name'])
+                ];
+        }else{
+            return [
+                'status'=> false,
+                'msg'   => $this->upload->display_errors(),
+            ];
+        }
+    }
+
+    
 }

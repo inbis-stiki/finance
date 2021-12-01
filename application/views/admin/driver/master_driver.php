@@ -4,7 +4,7 @@
             <p class="mb-0 fs-5 font-w-500 color-darker">
                 Master Driver
             </p>
-            <a href="<?= base_url('Driver/aksiTambahDriver/'); ?>" class="btn-table green" type="button">Add</a>
+            <a href="<?= base_url('admin/tambah_driver'); ?>" class="btn-table green" type="button">Add</a>
             <!-- <button type="button" class="btn-table" data-bs-toggle="modal">Add</button> -->
         </div>
         <div class="card-section">
@@ -33,9 +33,9 @@
                                     $row->driver_telepon,
 
                                     '
-                                    <a href="' .  base_url("Driver/editDriver/" . $row->driver_nik) . '" type="button" class="btn-table edit_masterDriver btnEdit">
+                                    <a href="' .  base_url("admin/ubah_driver/" . $row->driver_nik) . '" type="button" class="btn-table edit_masterDriver btnEdit">
                                     Edit
-                                    </a>
+                                    </a>&nbsp;
                                     <button type="button" data-id="' . $row->driver_nik . '" class="btn-table red hapus_masterDriver btnHapus" data-bs-toggle="modal" data-bs-target="#hapus_masterDriver">
                                             Hapus
                                     </button>'

@@ -14,7 +14,7 @@
                     <div class="col-12 col-lg-6 ps-0 d-flex flex-column">
                         <label class="mb-3">Upload Foto Kendaraan</label>
                         <div>
-                            <input type="file" name="foto[]" multiple>
+                            <input type="file" name="foto[]" accept=".jpg,.png,.jpeg" multiple>
                         </div>
                         <!-- <div class="upload-img color-dark">
                             <span class="iconify fs-80px mb-3 z-2" data-icon="ic:baseline-photo-camera"></span>

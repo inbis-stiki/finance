@@ -67,6 +67,12 @@ $route['simpan_region'] = 'admin/Master_region/simpan_region';
 $route['add_region'] = 'admin/Master_region/addRegion';
 $route['admin/master_kendaraan/add_kendaraan'] = 'admin/Admin/tambah_kendaraan';
 
+// Driver
+$route['admin/tambah_driver']       = 'admin/Admin/tambah_driver';
+$route['admin/ubah_driver/(:any)']  = 'admin/Admin/ubah_driver/$1';
+$route['admin/aksiTambahDriver']    = 'admin/Driver/aksiTambahDriver';
+$route['admin/aksiUbahDriver']      = 'admin/Driver/aksiUbahDriver';
+
 // Pencatatan
 $route['admin/form_pengajuan/unit_kendaraan'] = 'admin/Admin/unit_kendaraan';
 $route['admin/form_pengajuan/jenis_biaya'] = 'admin/Admin/jenis_biaya';

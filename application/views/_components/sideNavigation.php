@@ -22,12 +22,12 @@
             </div>
 
             <div class="sub-nav">
-                <a href="<?= site_url() ?>admin/master_driver">Master Driver</a>
-                <a href="<?= site_url() ?>admin/master_region">Master Region</a>
-                <a href="<?= site_url() ?>admin/master_instansi">Master Instansi</a>
-                <a href="<?= site_url() ?>admin/master_sparepart">Master Sparepart</a>
-                <a href="<?= site_url() ?>admin/master_kendaraan">Master Kendaraan</a>
-                <a href="<?= site_url() ?>admin/master_pengeluaran">Master Jenis Pengeluaran</a>
+                <a href="<?= site_url() ?>admin/master_driver">Driver</a>
+                <a href="<?= site_url() ?>admin/master_region">Region</a>
+                <a href="<?= site_url() ?>admin/master_instansi">Instansi</a>
+                <a href="<?= site_url() ?>admin/master_sparepart">Sparepart</a>
+                <a href="<?= site_url() ?>admin/master_kendaraan">Kendaraan</a>
+                <a href="<?= site_url() ?>admin/master_pengeluaran">Jenis Pengeluaran</a>
             </div>
         </div>
     </div>
