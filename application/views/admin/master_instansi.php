@@ -8,7 +8,7 @@
         </div>
         <div class="card-section">
             <div class="body">
-                <table class="table-custom">
+                <table>
                     <thead>
                         <tr>
                             <?php
