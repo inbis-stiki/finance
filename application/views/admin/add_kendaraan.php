@@ -30,7 +30,7 @@
                         ?>
                         <label class="mb-3">Upload Foto Kendaraan</label>
                         <div>
-                            <input type="file" name="foto[]" accept=".jpg,.png,.jpeg" multiple>
+                            <input type="file" name="foto[]" accept=".jpg,.png,.jpeg" multiple requried>
                         </div>
                         <!-- <div class="upload-img color-dark">
                             <span class="iconify fs-80px mb-3 z-2" data-icon="ic:baseline-photo-camera"></span>
