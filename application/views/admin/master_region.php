@@ -65,7 +65,7 @@
 
                                 <div class="d-flex flex-column my-2 w-100">
                                     <label class="font-w-400 my-2 color-secondary">Nama Kota</label>
-                                    <input type="text" class="form-control" id="region_kota" name="region_kota" value="<?php echo $region_kota ?>">
+                                    <input type="text" class="form-control" id="region_kota" name="region_kota" value="<?php echo $region_kota ?>" required>
                                     <input type="hidden" id="region_id" name="region_id" value="<?php echo $region_id ?>">
                                 </div>
                             </div>
@@ -98,7 +98,6 @@
                                 </div>
                             </div>
                             <div class="d-flex flex-row">
-                                <button type="button" class="btn-table submit-modal outline me-1" data-bs-dismiss="modal">Batal</button>
                                 <button type="submit" class="btn-table submit-modal ms-1" data-bs-dismiss="modal">Hapus</button>
                             </div>
                         </div>
