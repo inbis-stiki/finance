@@ -4,7 +4,7 @@
             <p class="mb-0 fs-5 font-w-500 color-darker">
                 Master Instansi
             </p>
-            <button type="button" class="btn-table green" data-bs-toggle="modal" data-bs-target="#add_masterInstansi">Add</button>
+            <button type="button" class="btn-table green" data-bs-toggle="modal" data-bs-target="#add_masterInstansi">Tambah</button>
         </div>
         <div class="card-section">
             <div class="body">
@@ -14,7 +14,7 @@
                             <?php
                             $template = array('table_open' => '<table id="tableInstansi" class="table-custom">');
                             $this->table->set_template($template);
-                            $this->table->set_heading('No', 'Nama Instansi', 'Jenis Instansi', 'Action');
+                            $this->table->set_heading('No', 'Nama Instansi', 'Jenis Instansi', 'Aksi');
                             ?>
                         </tr>
                     </thead>
@@ -29,10 +29,10 @@
                                     $row->instansi_jenis,
 
                                     '<button type="button" data-id="' . $row->instansi_id . '" data-nama="' . $row->instansi_nama . '" data-jenis="' . $row->instansi_jenis . '" class="btn-table edit_masterInstansi btnEdit" data-bs-toggle="modal" data-bs-target="#edit_masterInstansi">
-                                            Edit
-                                        </button>
+                                        <span class="iconify-inline" data-icon="bx:bx-edit" data-width="20" data-height="20"></span>
+                                    </button>
                                     <button type="button" data-id="' . $row->instansi_id . '" class="btn-table red hapus_masterInstansi btnEdit" data-bs-toggle="modal" data-bs-target="#hapus_masterInstansi">
-                                            Hapus
+                                        <span class="iconify-inline" data-icon="carbon:trash-can"data-width="20" data-height="20"></span>
                                     </button>'
                                 );
                             ?>
@@ -88,7 +88,7 @@
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content p-2">
                     <div class="modal-header">
-                        <p class="font-w-700 color-darker mb-0">Edit Instansi</p>
+                        <p class="font-w-700 color-darker mb-0">Ubah Data Instansi</p>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body fs-14px pt-0 d-flex flex-column">

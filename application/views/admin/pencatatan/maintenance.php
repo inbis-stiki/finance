@@ -30,7 +30,7 @@
         </div>
         <div class="col-12 col-lg-6 mt-auto mb-3 pe-0 input-maintenance">
             <button class="btn-table submit-modal" id="input-maintenance">
-                Input Data
+                Masukkan Data
             </button>
         </div>
     </div>
@@ -107,5 +107,5 @@
 </div>
 
 <button class="btn-table submit-modal submit-maintenance absolute disabled" data-bs-toggle="modal" data-bs-target="#success" disabled>
-    Submit Data
+    Simpan Data
 </button>

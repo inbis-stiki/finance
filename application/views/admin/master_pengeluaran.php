@@ -4,7 +4,7 @@
             <p class="mb-0 fs-5 font-w-500 color-darker">
                 Master Jenis Pengeluaran
             </p>
-            <button type="button" class="btn-table green" data-bs-toggle="modal" data-bs-target="#add_masterPengeluaran">Add</button>
+            <button type="button" class="btn-table green" data-bs-toggle="modal" data-bs-target="#add_masterPengeluaran">Tambah</button>
         </div>
         <div class="card-section">
             <div class="body">
@@ -14,7 +14,7 @@
                             <?php
                             $template = array('table_open' => '<table id="tablePengeluaran" class="table-custom">');
                             $this->table->set_template($template);
-                            $this->table->set_heading('No', 'Jenis Pengeluaran', 'Grup Pengeluaran', 'Action');
+                            $this->table->set_heading('No', 'Jenis Pengeluaran', 'Grup Pengeluaran', 'Aksi');
                             ?>
                         </tr>
                     </thead>
@@ -29,10 +29,10 @@
                                     $row->pengeluaran_group,
 
                                     '<button type="button" data-id="' . $row->pengeluaran_id . '" data-jenis="' . $row->pengeluaran_jenis . '" data-group="' . $row->pengeluaran_group . '" class="btn-table edit_masterPengeluaran btnEdit" data-bs-toggle="modal" data-bs-target="#edit_masterPengeluaran">
-                                            Edit
-                                        </button>
+                                        <span class="iconify-inline" data-icon="bx:bx-edit" data-width="20" data-height="20"></span>
+                                    </button>
                                     <button type="button" data-id="' . $row->pengeluaran_id . '" class="btn-table red hapus_masterPengeluaran btnEdit" data-bs-toggle="modal" data-bs-target="#hapus_masterPengeluaran">
-                                            Hapus
+                                        <span class="iconify-inline" data-icon="carbon:trash-can"data-width="20" data-height="20"></span>
                                     </button>'
                                 );
                             ?>
@@ -82,7 +82,7 @@
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content p-2">
                     <div class="modal-header">
-                        <p class="font-w-700 color-darker mb-0">Edit Jenis Pengeluaran</p>
+                        <p class="font-w-700 color-darker mb-0">Ubah Data Jenis Pengeluaran</p>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body fs-14px pt-0 d-flex flex-column">

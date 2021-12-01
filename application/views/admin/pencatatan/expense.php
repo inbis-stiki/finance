@@ -15,7 +15,7 @@
         </div>
         <div class="ms-auto col-12 col-lg-6 mt-3 pe-0 input-expense">
             <button class="btn-table submit-modal" id="input-expense">
-                Input Data
+                Masukkan Data
             </button>
         </div>
     </div>
@@ -48,12 +48,12 @@
         </div>
     </div>
     <!-- END OF LOOP -->
-    
+
     <button class="btn-table add-entry mt-3" data-bs-toggle="modal" data-bs-target="#success">
         Tambah Data
     </button>
 </div>
 
 <button class="btn-table submit-modal submit-expense absolute disabled" data-bs-toggle="modal" data-bs-target="#success" disabled>
-    Submit Data
+    Simpan Data
 </button>
