@@ -98,6 +98,10 @@
         border: 1px solid $green;
         background: $green;
     }
+    &.red {
+        border: 1px solid $red;
+        background: $red;
+    }
 
     &.submit-modal {
         width: 100%;

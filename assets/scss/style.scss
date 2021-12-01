@@ -141,3 +141,21 @@ a:hover {
 .background-primary { background: $primary; }
 .background-secondary { background: $secondary; }
 .bg-light-purple { background: $light-purple; }
+
+.dataTables_length {
+    padding-left: 1rem;
+    padding-top: 1rem;
+}
+
+.dataTables_filter {
+    padding-right: 1rem;
+}
+
+.dataTables_info {
+    padding-left: 1rem;
+}
+
+.dataTables_paginate {
+    padding-right: 1rem;
+    padding-bottom: 1rem;
+}

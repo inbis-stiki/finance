@@ -80,3 +80,7 @@ $('#toggleSideNav').on('click', function() {
     $('.top-nav').toggleClass('no-sidenav');
     $('.side-nav').toggleClass('no-sidenav');
 });
+
+$(document).ready(function() {
+    $('#tableInstansi').DataTable();
+});
