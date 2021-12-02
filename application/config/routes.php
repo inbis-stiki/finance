@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 /*
 | -------------------------------------------------------------------------
@@ -57,6 +57,21 @@ $route['adm_login'] = 'admin/Auth';
 $route['admin/dashboard'] = 'admin/Admin';
 $route['admin/form_pengajuan'] = 'admin/Admin/form_pengajuan';
 $route['admin/master_sparepart'] = 'admin/Admin/master_sparepart';
+$route['admin/master_region'] = 'admin/Admin/master_region';
+$route['admin/master_instansi'] = 'admin/Admin/master_instansi';
+$route['admin/master_pengeluaran'] = 'admin/Admin/master_pengeluaran';
+$route['admin/master_kendaraan'] = 'admin/Admin/master_kendaraan';
+$route['admin/master_driver'] = 'admin/Admin/master_driver';
+$route['master_region'] = 'admin/Master_region';
+$route['simpan_region'] = 'admin/Master_region/simpan_region';
+$route['add_region'] = 'admin/Master_region/addRegion';
+$route['admin/master_kendaraan/add_kendaraan'] = 'admin/Admin/tambah_kendaraan';
+
+// Driver
+$route['admin/tambah_driver']       = 'admin/Admin/tambah_driver';
+$route['admin/ubah_driver/(:any)']  = 'admin/Admin/ubah_driver/$1';
+$route['admin/aksiTambahDriver']    = 'admin/Driver/aksiTambahDriver';
+$route['admin/aksiUbahDriver']      = 'admin/Driver/aksiUbahDriver';
 
 // Pencatatan
 $route['admin/form_pengajuan/unit_kendaraan'] = 'admin/Admin/unit_kendaraan';
