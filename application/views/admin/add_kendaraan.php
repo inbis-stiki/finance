@@ -1,7 +1,7 @@
 <div class="min-vh-100 general-padding bg-light-purple">
     <div class="p-5">
         <?php echo validation_errors(); ?>
-        <?= form_open_multipart('admin/Tambah_kendaraan/aksiTambahKendaraan'); ?>
+        <?= form_open_multipart('admin/aksiTambahKendaraan'); ?>
         <p class="mb-3 fs-5 font-w-500 color-darker">
             Master Tambah Kendaraan
         </p>
