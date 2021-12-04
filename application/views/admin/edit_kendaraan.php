@@ -58,7 +58,8 @@
                         <input type="text" class="login-input regular" placeholder="Nomor Rangka" value="<?= $kendaraan->kendaraan_no_rangka ?>" disabled>
                         <input type="hidden" name="rangka" value="<?= $kendaraan->kendaraan_no_rangka ?>">
                         <label class="my-3">Nomor STNK</label>
-                        <input type="text" class="login-input regular" name="stnk" placeholder="Nomor STNK" value="<?= $kendaraan->kendaraan_stnk ?>" required>
+                        <input type="text" class="login-input regular" name="stnk" placeholder="Nomor STNK" value="<?= $kendaraan->kendaraan_stnk ?>" disabled>
+                        <input type="hidden" class="login-input regular" value="<?= $kendaraan->kendaraan_stnk ?>">
                         <label class="my-3">Merk</label>
                         <input type="text" class="login-input regular" name="merk" placeholder="Merk" value="<?= $kendaraan->kendaraan_merk ?>" required>
                         <label class="my-3">Tanggal Beli</label>
