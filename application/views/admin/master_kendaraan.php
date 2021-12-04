@@ -59,7 +59,7 @@
             // $i = 0;
             $kendaraan_foto = $i->kendaraan_foto;
             $kendaraan_foto = json_decode($kendaraan_foto);
-            var_dump($kendaraan_foto);
+            // var_dump($kendaraan_foto);
 
             // if ($i++ > count($kendaraan_foto)) break;
 
