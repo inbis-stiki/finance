@@ -66,7 +66,7 @@
                         <label class="my-3">Status Kendaraan</label>
                         <select class="login-input regular" name="status" id="" required>
                             <option value="">Pilih Status</option>
-                            <option value="1">Aktif</option>
+                            <option value="1" selected>Aktif</option>
                             <option value="0">Nonaktif</option>
                         </select>
                     </div>

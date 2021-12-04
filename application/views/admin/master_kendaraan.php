@@ -59,7 +59,7 @@
             // $i = 0;
             $kendaraan_foto = $i->kendaraan_foto;
             $kendaraan_foto = json_decode($kendaraan_foto);
-            var_dump($kendaraan_foto);
+            // var_dump($kendaraan_foto);
 
             // if ($i++ > count($kendaraan_foto)) break;
 
@@ -72,9 +72,31 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body row m-0 p-0 w-100">
-                            <?php foreach ($kendaraan_foto as $fotok) : ?>
-                                <img src="<?php echo base_url() . '/assets/images/fotokendaraan/' . $fotok ?>" style="width:200px">
-                            <?php endforeach; ?>
+                            <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                                <div class="carousel-inner">
+                                    <?php $i = 0;
+                                    foreach ($kendaraan_foto as $fotok) : ?>
+                                        <?php if ($i == 0) : ?>
+                                            <div class="carousel-item active">
+                                                <img class="d-block mx-auto" src="<?php echo base_url() . '/assets/images/fotokendaraan/' . $fotok ?>" width="500px" height="300px">
+                                            </div>
+                                        <?php else : ?>
+                                            <div class="carousel-item">
+                                                <img class="d-block mx-auto" src="<?php echo base_url() . '/assets/images/fotokendaraan/' . $fotok ?>" width="500px" height="300px">
+                                            </div>
+                                    <?php endif;
+                                        $i++;
+                                    endforeach; ?>
+                                </div>
+                                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Previous</span>
+                                </button>
+                                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Next</span>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
