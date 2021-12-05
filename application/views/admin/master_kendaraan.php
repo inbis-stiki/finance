@@ -33,13 +33,14 @@
                                     $row->kendaraan_stnk,
                                     $row->kendaraan_merk,
                                     $tgl,
-                                    '<a class="btn-table orange view_masterKendaraan" data-bs-toggle="modal" data-bs-target="#view_masterKendaraan' . $row->kendaraan_no_rangka . '" title="Edit"
-                                    <button type="button" class="btn-table edit_masterKendaraan">
+                                    '
+                                    <button type="button" class="btn-table orange view_masterKendaraan" data-bs-toggle="modal" data-bs-target="#view_masterKendaraan' . $row->kendaraan_no_rangka . '" title="Foto">
                                         <span class="iconify-inline" data-icon="ic:baseline-insert-photo" data-width="20" data-height="21"></span>
                                     </button>
-                                    </a>
-                                    <a href="' .  base_url("admin/ubah_kendaraan/" . $row->kendaraan_no_rangka) . '" type="button" class="btn-table edit_masterKendaraan btnEdit">
-                                    <span class="iconify-inline" data-icon="bx:bx-edit" data-width="20" data-height="20"></span>
+                                    <a href="' .  base_url("admin/ubah_kendaraan/" . $row->kendaraan_no_rangka) . '" >
+                                        <button type="button" class="btn-table edit_masterKendaraan btnEdit" title="Ubah">
+                                            <span class="iconify-inline" data-icon="bx:bx-edit" data-width="20" data-height="20"></span>
+                                        </button>
                                     </a>'
 
                                 );

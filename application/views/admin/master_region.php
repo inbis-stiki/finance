@@ -26,17 +26,13 @@
                                 $this->table->add_row(
                                     $no++,
                                     $row->region_kota,
-                                    '<a class="btn-table edit_masterRegion" data-bs-toggle="modal" data-bs-target="#edit_masterRegion' . $row->region_id . '" title="Edit"
-                                    <button type="button" class="btn-table edit_masterRegion">
+                                    '
+                                    <button type="button" class="btn-table edit_masterRegion" data-bs-toggle="modal" data-bs-target="#edit_masterRegion' . $row->region_id . '" title="Edit">
                                         <span class="iconify-inline" data-icon="bx:bx-edit" data-width="20" data-height="20"></span>
                                     </button>
-                                    </a> &nbsp;
-                                    <a class="btn-table red hapus_masterRegion" data-bs-toggle="modal" data-bs-target="#hapus_masterRegion' . $row->region_id . '" title="Hapus"
-                                    <button type="button" class="btn-table orange hapus_masterRegion">
+                                    <button type="button" class="btn-table red hapus_masterRegion" data-bs-toggle="modal" data-bs-target="#hapus_masterRegion' . $row->region_id . '" title="Hapus">
                                         <span class="iconify-inline" data-icon="carbon:trash-can"data-width="20" data-height="20"></span>
-                                    </button>
-                                    </a>'
-
+                                    </button>'
                                 );
 
                             ?>
