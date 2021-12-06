@@ -1,13 +1,13 @@
 <div class="side-nav">
     <div class="top-space"></div>
     <div class="profile-section">
-        <img src="<?= site_url() ?>assets/src/img/cat.jpg" alt="">
+        <img src="<?= site_url() ?>assets/src/img/admin.png" alt="">
         <p class="mb-0"><?= $auth['username']; ?></p>
     </div>
     <div class="nav-section">
 
         <div class="nav-links <?= uri_string() == 'admin/dashboard' ? 'active' : '' ?>">
-            <a href="<?= site_url() ?>admin/dashboard">Halaman Utama</a>
+            <a href="<?= site_url() ?>admin/dashboard">Dashboard</a>
         </div>
         <!-- <div class="nav-links <?= uri_string() == 'admin/form_pengajuan' ? 'active' : '' ?>">
             <a href="<?= site_url() ?>admin/form_pengajuan">Form Pengajuan</a>

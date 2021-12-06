@@ -7,6 +7,9 @@ class Welcome extends CI_Controller
 	public function __construct()
 	{
 		parent::__construct();
+		if ($this->session->userdata('user_role') == TRUE) {
+			redirect('admin/dashboard');
+		}
 		$this->load->library('form_validation');
 	}
 
