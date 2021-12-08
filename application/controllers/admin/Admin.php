@@ -18,10 +18,15 @@ class Admin extends CI_Controller
 	public function index()
 	{
 		$this->load->model('M_User');
+		$this->load->model('M_dashboard');
 		$datauser = $this->M_User->getUser();
+		$dataDaftarKendaraan = $this->M_dashboard->getDaftarKendaraan();
+		$dataGlobalCost = $this->M_dashboard->getGlobalCost();
 
 		$data = [
 			'title' => "admin",
+			'GlobalCost' => $dataGlobalCost,
+			'DaftarKendaraan' => $dataDaftarKendaraan,
 			'auth' => $this->db->get_where('master_user', ['username' => $this->session->userdata('username')])->row_array()
 		];
 
