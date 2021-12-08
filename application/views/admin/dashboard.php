@@ -9,38 +9,33 @@
                 <table class="table-custom">
                     <thead>
                         <tr>
-                            <th>No. STNK</th>
-                            <th>Instansi</th>
-                            <th>Area Operasional</th>
-                            <th>Jumlah Transaksi</th>
-                            <th>Total Transaksi</th>
-                            <th>Action</th>
+                            <?php
+                            $template = array('table_open' => '<table id="tblDashboard" class="table-custom">');
+                            $this->table->set_template($template);
+                            $this->table->set_heading('No', 'No. STNK', 'Merk', 'Umur Kendaraan', 'Region', 'Jumlah Transaksi', 'Total transaksi');
+                            ?>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td>BG 1989 AD</td>
-                            <td>PT. Sinar Wahana Surya</td>
-                            <td>Surabaya</td>
-                            <td>30 Transaksi</td>
-                            <td>Rp1,460,700</td>
-                            <td><button type="button" class="btn-table">View</button></td>
-                        </tr>
-                        <tr>
-                            <td>N 1670 AY</td>
-                            <td>PT. Sinar Wahana Surya</td>
-                            <td>Surabaya</td>
-                            <td>30 Transaksi</td>
-                            <td>Rp1,460,700</td>
-                            <td><button type="button" class="btn-table">View</button></td>
-                        </tr>
-                        <tr>
-                            <td>N 5271 AD</td>
-                            <td>PT. Sinar Wahana Surya</td>
-                            <td>Surabaya</td>
-                            <td>30 Transaksi</td>
-                            <td>Rp1,460,700</td>
-                            <td><button type="button" class="btn-table">View</button></td>
+                            <?php
+                            $no = 1;
+                            foreach ($GlobalCost as $row) {
+                                // $tgl = date_format(date_create($row->kendaraan_tanggal_beli), 'j M Y');
+                                $this->table->add_row(
+                                    $no++,
+                                    $row->stnk_kendaraan,
+                                    $row->kendaraan_merk,
+                                    $row->umur_kendaraan,
+                                    $row->region_kota,
+                                    $row->jumlah_transaksi,
+                                    $row->total_transaksi
+
+                                );
+
+                            ?>
+                            <?php }
+                            echo $this->table->generate(); ?>
                         </tr>
                     </tbody>
                 </table>
@@ -56,34 +51,33 @@
                 <table class="table-custom">
                     <thead>
                         <tr>
-                            <th>No. STNK</th>
-                            <th>Instansi</th>
-                            <th>Area Operasional</th>
-                            <th>Jumlah Transaksi</th>
-                            <th>Total Transaksi</th>
+                            <!-- <?php
+                            $template = array('table_open' => '<table id="tblDashboard" class="table-custom">');
+                            $this->table->set_template($template);
+                            $this->table->set_heading('No','No. STNK', 'Merk', 'Umur Kendaraan', 'Region', 'Jumlah Transaksi', 'Total transaksi');
+                            ?> -->
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>BG 1989 AD</td>
-                            <td>PT. Sinar Wahana Surya</td>
-                            <td>Surabaya</td>
-                            <td>30 Transaksi</td>
-                            <td>Rp1,460,700</td>
-                        </tr>
-                        <tr>
-                            <td>N 1670 AY</td>
-                            <td>PT. Sinar Wahana Surya</td>
-                            <td>Surabaya</td>
-                            <td>30 Transaksi</td>
-                            <td>Rp1,460,700</td>
-                        </tr>
-                        <tr>
-                            <td>N 5271 AD</td>
-                            <td>PT. Sinar Wahana Surya</td>
-                            <td>Surabaya</td>
-                            <td>30 Transaksi</td>
-                            <td>Rp1,460,700</td>
+                    <tr>
+                            <?php
+                            $no = 1;
+                            foreach ($DaftarKendaraan as $row) {
+                                // $tgl = date_format(date_create($row->kendaraan_tanggal_beli), 'j M Y');
+                                $this->table->add_row(
+                                    $no++,
+                                    $row->stnk_kendaraan,
+                                    $row->kendaraan_merk,
+                                    $row->umur_kendaraan,
+                                    $row->region_kota,
+                                    $row->jumlah_transaksi,
+                                    $row->total_transaksi
+
+                                );
+
+                            ?>
+                            <?php }
+                            echo $this->table->generate(); ?>
                         </tr>
                     </tbody>
                 </table>
