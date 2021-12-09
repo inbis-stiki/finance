@@ -21,7 +21,6 @@
                             <?php
                             $no = 1;
                             foreach ($GlobalCost as $row) {
-                                // $tgl = date_format(date_create($row->kendaraan_tanggal_beli), 'j M Y');
                                 $this->table->add_row(
                                     $no++,
                                     $row->stnk_kendaraan,
