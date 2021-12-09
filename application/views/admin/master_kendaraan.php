@@ -17,7 +17,7 @@
                             <?php
                             $template = array('table_open' => '<table class="table-custom">');
                             $this->table->set_template($template);
-                            $this->table->set_heading('No', 'No. Rangka', 'No. STNK', 'Merk', 'Tanggal Beli', 'Aksi');
+                            $this->table->set_heading('No', 'No. Rangka', 'No. STNK', 'Merk', 'Tanggal Beli', 'Umur', 'Aksi');
                             ?>
                         </tr>
                     </thead>
@@ -27,12 +27,15 @@
                             $no = 1;
                             foreach ($Kendaraan as $row) {
                                 $tgl = date_format(date_create($row->kendaraan_tanggal_beli), 'j M Y');
+                                $currentDate = date("j M Y");
+                                $umur = date_diff(date_create($row->kendaraan_tanggal_beli), date_create($currentDate));
                                 $this->table->add_row(
                                     $no++,
                                     $row->kendaraan_no_rangka,
                                     $row->kendaraan_stnk,
                                     $row->kendaraan_merk,
                                     $tgl,
+                                    $umur->format("%y"). " Tahun",
                                     '
                                     <button type="button" class="btn-table orange view_masterKendaraan" data-bs-toggle="modal" data-bs-target="#view_masterKendaraan' . $row->kendaraan_no_rangka . '" title="Foto">
                                         <span class="iconify-inline" data-icon="ic:baseline-insert-photo" data-width="20" data-height="21"></span>
@@ -97,6 +100,7 @@
                                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                                     <span class="visually-hidden">Next</span>
                                 </button>
+                                
                             </div>
                         </div>
                     </div>
