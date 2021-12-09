@@ -60,11 +60,12 @@ class Master_kendaraan extends CI_Controller
                 }
             }
             $data = array(
-                'kendaraan_no_rangka'         => $this->input->post('rangka'),
-                'kendaraan_stnk'             => $this->input->post('stnk'),
+                'kendaraan_no_rangka'         => strtoupper($this->input->post('rangka')),
+                'kendaraan_stnk'             => strtoupper($this->input->post('stnk')),
                 'kendaraan_merk'             => $this->input->post('merk'),
                 'kendaraan_tanggal_beli'     => $this->input->post('tanggal'),
-                'kendaraan_foto'            => $fotokendaraan
+                'kendaraan_kapasitas_tangki'     => $this->input->post('tangki'),
+                'kendaraan_foto'            => str_replace(" ", "_", $fotokendaraan)
             );
 
             // $this->db->query("CALL disable_kendaraan('" . $data_lama['kendaraan_no_rangka'] . "')");
