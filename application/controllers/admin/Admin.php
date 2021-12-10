@@ -100,16 +100,16 @@ class Admin extends CI_Controller
 		];
 
 		$this->template->index('admin/add_kendaraan', $data);
-		$this->load->view('_components/sideNavigation', $data);	
+		$this->load->view('_components/sideNavigation', $data);
 	}
-	
+
 	public function ubah_kendaraan($id)
 	{
 		$this->load->model('M_User');
 		$this->load->model('M_kendaraan_master');
 		$dataEdit = $this->M_kendaraan_master->getById($id);
 
-		
+
 
 		$data = [
 			'title' => "admin",
@@ -119,24 +119,26 @@ class Admin extends CI_Controller
 
 
 		$this->template->index('admin/edit_kendaraan', $data);
-		$this->load->view('_components/sideNavigation', $data);	
+		$this->load->view('_components/sideNavigation', $data);
 	}
 
-	public function tambah_driver(){
+	public function tambah_driver()
+	{
 		$data['title'] = 'admin';
 		$data['auth'] = $this->db->get_where('master_user', ['username' => $this->session->userdata('username')])->row_array();
-		
+
 		$this->template->index('admin/add_driver', $data);
-		$this->load->view('_components/sideNavigation', $data);	
+		$this->load->view('_components/sideNavigation', $data);
 	}
-	
-	public function ubah_driver($id){
+
+	public function ubah_driver($id)
+	{
 		$data['title'] = 'admin';
 		$data['auth'] = $this->db->get_where('master_user', ['username' => $this->session->userdata('username')])->row_array();
 		$data['driver'] = $this->M_Driver->getById($id);
-		
+
 		$this->template->index('admin/edit_driver', $data);
-		$this->load->view('_components/sideNavigation', $data);	
+		$this->load->view('_components/sideNavigation', $data);
 	}
 
 	public function form_pengajuan()
@@ -186,19 +188,21 @@ class Admin extends CI_Controller
 		$this->load->view('_components/sideNavigation', $data);
 	}
 
-	public function master_instansi()
+	public function master_klien()
 	{
 		$this->load->model('M_User');
-		$this->load->model('M_Instansi');
-		$dataInstansi = $this->M_Instansi->getInstansi();
+		$this->load->model('M_Klien');
+		$dataKlien = $this->M_Klien->getKlien();
+		$dataWilayah = $this->M_Klien->getWilayah();
 
 		$data = [
 			'title' => "admin",
-			'Instansi' => $dataInstansi,
+			'Klien' => $dataKlien,
+			'Wilayah' => $dataWilayah,
 			'auth' => $this->db->get_where('master_user', ['username' => $this->session->userdata('username')])->row_array()
 		];
 
-		$this->template->index('admin/master_instansi', $data);
+		$this->template->index('admin/master_klien', $data);
 		$this->load->view('_components/sideNavigation', $data);
 	}
 
