@@ -36,7 +36,7 @@
             </div>
         </div>
         <button type="submit" class="btn-table submit-modal">
-            Submit Data
+            SImpan Data
         </button>
         <?= form_close(); ?>
     </div>

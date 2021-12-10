@@ -1,7 +1,7 @@
 <div class="min-vh-100 general-padding bg-light-purple">
     <div class="p-5">
         <?php echo validation_errors(); ?>
-        <?= form_open_multipart('admin/Tambah_kendaraan/aksiTambahKendaraan'); ?>
+        <?= form_open_multipart('admin/aksiTambahKendaraan'); ?>
         <p class="mb-3 fs-5 font-w-500 color-darker">
             Master Tambah Kendaraan
         </p>
@@ -45,11 +45,13 @@
                                     echo $error;
                                 } ?></small>
                         <label class="my-3">Nomor Rangka</label>
-                        <input type="text" class="login-input regular" name="rangka" placeholder="Nomor Rangka" value="<?= !empty($temp['rangka']) ? $temp['rangka'] : "" ?>" required>
+                        <input type="text" class="login-input regular" style="text-transform:uppercase" name="rangka" value="<?= !empty($temp['rangka']) ? $temp['rangka'] : "" ?>" required>
                         <label class="my-3">Nomor STNK</label>
-                        <input type="text" class="login-input regular" name="stnk" placeholder="Nomor STNK" value="<?= !empty($temp['stnk']) ? $temp['stnk'] : "" ?>" required>
+                        <input type="text" class="login-input regular" style="text-transform:uppercase" name="stnk" value="<?= !empty($temp['stnk']) ? $temp['stnk'] : "" ?>" required>
                         <label class="my-3">Merk</label>
-                        <input type="text" class="login-input regular" name="merk" placeholder="Merk" value="<?= !empty($temp['merk']) ? $temp['merk'] : "" ?>" required>
+                        <input type="text" class="login-input regular" name="merk" value="<?= !empty($temp['merk']) ? $temp['merk'] : "" ?>" required>
+                        <label class="my-3">Kapasitas Tangki</label>
+                        <input type="number" class="login-input regular" name="tangki" value="<?= !empty($temp['tangki']) ? $temp['tangki'] : "" ?>" required>
                         <label class="my-3">Tanggal Beli</label>
                         <input type="date" class="login-input regular fs-16px" name="tanggal" id="datepicker" value="<?= !empty($temp['tanggal']) ? $temp['tanggal'] : "" ?>" required>
                     </div>
@@ -58,7 +60,7 @@
             </div>
         </div>
         <button type="submit" class="btn-table submit-modal">
-            Submit Data
+            SImpan Data
         </button>
         <?= form_close(); ?>
     </div>

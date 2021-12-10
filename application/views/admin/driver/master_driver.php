@@ -33,11 +33,13 @@
                                     $row->driver_telepon,
 
                                     '
-                                    <a href="' .  base_url("admin/ubah_driver/" . $row->driver_nik) . '" type="button" class="btn-table edit_masterDriver btnEdit">
-                                    <span class="iconify-inline" data-icon="bx:bx-edit" data-width="20" data-height="20"></span>
-                                    </a>&nbsp;
+                                    <a href="' .  base_url("admin/ubah_driver/" . $row->driver_nik) . '" >
+                                        <button type="button" class="btn-table edit_masterDriver btnEdit">
+                                            <span class="iconify-inline" data-icon="bx:bx-edit" data-width="20" data-height="20"></span>
+                                        </button>
+                                    </a>
                                     <button type="button" data-id="' . $row->driver_nik . '" class="btn-table red hapus_masterDriver btnHapus" data-bs-toggle="modal" data-bs-target="#hapus_masterDriver">
-                                    <span class="iconify-inline" data-icon="carbon:trash-can"data-width="20" data-height="20"></span>
+                                        <span class="iconify-inline" data-icon="carbon:trash-can"data-width="20" data-height="20"></span>
                                     </button>'
                                 );
                             ?>

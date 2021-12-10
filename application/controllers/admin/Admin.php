@@ -18,10 +18,15 @@ class Admin extends CI_Controller
 	public function index()
 	{
 		$this->load->model('M_User');
+		$this->load->model('M_dashboard');
 		$datauser = $this->M_User->getUser();
+		$dataDaftarKendaraan = $this->M_dashboard->getDaftarKendaraan();
+		$dataGlobalCost = $this->M_dashboard->getGlobalCost();
 
 		$data = [
 			'title' => "admin",
+			'GlobalCost' => $dataGlobalCost,
+			'DaftarKendaraan' => $dataDaftarKendaraan,
 			'auth' => $this->db->get_where('master_user', ['username' => $this->session->userdata('username')])->row_array()
 		];
 
@@ -95,8 +100,27 @@ class Admin extends CI_Controller
 		];
 
 		$this->template->index('admin/add_kendaraan', $data);
-		$this->load->view('_components/sideNavigation', $data);	}
+		$this->load->view('_components/sideNavigation', $data);	
+	}
 	
+	public function ubah_kendaraan($id)
+	{
+		$this->load->model('M_User');
+		$this->load->model('M_kendaraan_master');
+		$dataEdit = $this->M_kendaraan_master->getById($id);
+
+		
+
+		$data = [
+			'title' => "admin",
+			'auth' => $this->db->get_where('master_user', ['username' => $this->session->userdata('username')])->row_array(),
+			'kendaraan' => $dataEdit
+		];
+
+
+		$this->template->index('admin/edit_kendaraan', $data);
+		$this->load->view('_components/sideNavigation', $data);	
+	}
 
 	public function tambah_driver(){
 		$data['title'] = 'admin';

@@ -17,7 +17,7 @@
                             <?php
                             $template = array('table_open' => '<table class="table-custom">');
                             $this->table->set_template($template);
-                            $this->table->set_heading('No', 'No. Rangka', 'No. STNK', 'Merk', 'Tanggal Beli', 'Aksi');
+                            $this->table->set_heading('No', 'No. Rangka', 'No. STNK', 'Merk', 'Tanggal Beli', 'Umur', 'Aksi');
                             ?>
                         </tr>
                     </thead>
@@ -27,20 +27,24 @@
                             $no = 1;
                             foreach ($Kendaraan as $row) {
                                 $tgl = date_format(date_create($row->kendaraan_tanggal_beli), 'j M Y');
+                                $currentDate = date("j M Y");
+                                $umur = date_diff(date_create($row->kendaraan_tanggal_beli), date_create($currentDate));
                                 $this->table->add_row(
                                     $no++,
                                     $row->kendaraan_no_rangka,
                                     $row->kendaraan_stnk,
                                     $row->kendaraan_merk,
                                     $tgl,
-                                    '<a class="btn-table orange edit_masterKendaraan" data-bs-toggle="modal" data-bs-target="#edit_masterKendaraan' . $row->kendaraan_no_rangka . '" title="Edit"
-                                    <button type="button" class="btn-table edit_masterKendaraan">
+                                    $umur->format("%y"). " Tahun",
+                                    '
+                                    <button type="button" class="btn-table orange view_masterKendaraan" data-bs-toggle="modal" data-bs-target="#view_masterKendaraan' . $row->kendaraan_no_rangka . '" title="Foto">
                                         <span class="iconify-inline" data-icon="ic:baseline-insert-photo" data-width="20" data-height="21"></span>
                                     </button>
-                                    </a>
-                                    <button type="button" class="btn-table edit_masterKendaraan btnEdit" data-bs-toggle="modal" data-bs-target="#edit_masterKendaraan">
+                                    <a href="' .  base_url("admin/ubah_kendaraan/" . $row->kendaraan_no_rangka) . '" >
+                                        <button type="button" class="btn-table edit_masterKendaraan btnEdit" title="Ubah">
                                             <span class="iconify-inline" data-icon="bx:bx-edit" data-width="20" data-height="20"></span>
-                                        </button>'
+                                        </button>
+                                    </a>'
 
                                 );
 
@@ -55,13 +59,16 @@
         <?php
         foreach ($Kendaraan as $i) :
             $kendaraan_no_rangka = $i->kendaraan_no_rangka;
-            $kendaraan_stnk = $i->kendaraan_stnk;
-            $kendaraan_merk = $i->kendaraan_merk;
-            $kendaraan_tanggal_beli = $i->kendaraan_tanggal_beli;
+
+            // $i = 0;
             $kendaraan_foto = $i->kendaraan_foto;
+            $kendaraan_foto = json_decode($kendaraan_foto);
+            // var_dump($kendaraan_foto);
+
+            // if ($i++ > count($kendaraan_foto)) break;
 
         ?>
-            <div class="modal fade" id="edit_masterKendaraan<?php echo $kendaraan_no_rangka ?>" nama="edit_masterKendaraan" method="POST" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal fade" id="view_masterKendaraan<?php echo $kendaraan_no_rangka ?>" nama="view_masterKendaraan" method="POST" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered modal-xl">
                     <div class="modal-content p-2">
                         <div class="modal-header">
@@ -69,7 +76,32 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body row m-0 p-0 w-100">
-
+                            <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                                <div class="carousel-inner">
+                                    <?php $i = 0;
+                                    foreach ($kendaraan_foto as $fotok) : ?>
+                                        <?php if ($i == 0) : ?>
+                                            <div class="carousel-item active">
+                                                <img class="d-block mx-auto" src="<?php echo base_url() . '/assets/images/fotokendaraan/' . $fotok ?>" width="500px" height="300px">
+                                            </div>
+                                        <?php else : ?>
+                                            <div class="carousel-item">
+                                                <img class="d-block mx-auto" src="<?php echo base_url() . '/assets/images/fotokendaraan/' . $fotok ?>" width="500px" height="300px">
+                                            </div>
+                                    <?php endif;
+                                        $i++;
+                                    endforeach; ?>
+                                </div>
+                                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Previous</span>
+                                </button>
+                                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Next</span>
+                                </button>
+                                
+                            </div>
                         </div>
                     </div>
                 </div>

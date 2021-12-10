@@ -2,7 +2,7 @@
     <div class="p-5">
         <div class="d-flex flex-row justify-content-between align-items-center mb-4">
             <p class="mb-0 fs-5 font-w-500 color-darker">
-                Master Instansi
+                Master Klien
             </p>
             <button type="button" class="btn-table green" data-bs-toggle="modal" data-bs-target="#add_masterInstansi">Tambah</button>
         </div>
@@ -14,7 +14,7 @@
                             <?php
                             $template = array('table_open' => '<table id="tableInstansi" class="table-custom">');
                             $this->table->set_template($template);
-                            $this->table->set_heading('No', 'Nama Instansi', 'Jenis Instansi', 'Aksi');
+                            $this->table->set_heading('No', 'Nama Klien', 'Jenis', 'Aksi');
                             ?>
                         </tr>
                     </thead>
