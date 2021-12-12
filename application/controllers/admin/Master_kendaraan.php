@@ -64,6 +64,8 @@ class Master_kendaraan extends CI_Controller
                 'kendaraan_stnk'             => strtoupper($this->input->post('stnk')),
                 'kendaraan_merk'             => $this->input->post('merk'),
                 'kendaraan_tanggal_beli'     => $this->input->post('tanggal'),
+                'kendaraan_deadlinesim'     => $this->input->post('pajak'),
+                'kendaraan_deadlinekir'     => $this->input->post('kir'),
                 'kendaraan_kapasitas_tangki'     => $this->input->post('tangki'),
                 'kendaraan_foto'            => str_replace(" ", "_", $fotokendaraan)
             );
