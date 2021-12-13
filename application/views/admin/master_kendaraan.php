@@ -44,6 +44,11 @@
                                         <button type="button" class="btn-table edit_masterKendaraan btnEdit" title="Ubah">
                                             <span class="iconify-inline" data-icon="bx:bx-edit" data-width="20" data-height="20"></span>
                                         </button>
+                                    </a>
+                                    <a href="' .  base_url("admin/ubah_stnk/" . $row->kendaraan_no_rangka) . '" >
+                                        <button type="button" class="btn-table edit_masterKendaraan btnEdit" title="Ubah STNK">
+                                            <span class="iconify-inline" data-icon="bx:bx-edit" data-width="20" data-height="20"></span>
+                                        </button>
                                     </a>'
 
                                 );

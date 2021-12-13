@@ -122,8 +122,30 @@ class Admin extends CI_Controller
 		$this->load->view('_components/sideNavigation', $data);
 	}
 
+
+	public function ubah_stnk($id)
+	{
+		$this->load->model('M_User');
+		$this->load->model('M_kendaraan_master');
+		$dataEdit = $this->M_kendaraan_master->getById($id);
+
+		
+
+		$data = [
+			'title' => "admin",
+			'auth' => $this->db->get_where('master_user', ['username' => $this->session->userdata('username')])->row_array(),
+			'kendaraan' => $dataEdit
+		];
+
+
+		$this->template->index('admin/edit_stnk', $data);
+		$this->load->view('_components/sideNavigation', $data);	
+	}
+
+	
 	public function tambah_driver()
 	{
+
 		$data['title'] = 'admin';
 		$data['auth'] = $this->db->get_where('master_user', ['username' => $this->session->userdata('username')])->row_array();
 

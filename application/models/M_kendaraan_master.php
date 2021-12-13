@@ -31,7 +31,7 @@ class M_kendaraan_master extends CI_Model
     }
 
     public function getById($id){
-        return $this->db->get_where('master_kendaraan', ['kendaraan_no_rangka' => $id])->row();
+        return $this->db->get_where('master_kendaraan', ['kendaraan_no_rangka' => $id, 'disabled_date' => null])->row();
     }
 
     public function update($where, $data ){
