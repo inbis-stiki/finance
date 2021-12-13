@@ -73,9 +73,12 @@ $route['admin/ubah_driver/(:any)']  = 'admin/Admin/ubah_driver/$1';
 $route['admin/aksiTambahDriver']    = 'admin/Driver/aksiTambahDriver';
 $route['admin/aksiUbahDriver']      = 'admin/Driver/aksiUbahDriver';
 
+// Kendaraan
 $route['admin/aksiTambahKendaraan']      = 'admin/Master_kendaraan/aksiTambahKendaraan';
 $route['admin/ubah_kendaraan/(:any)']  = 'admin/Admin/ubah_kendaraan/$1';
 $route['admin/aksiUbahKendaraan']      = 'admin/Master_kendaraan/aksiUbahKendaraan';
+$route['admin/ubah_stnk/(:any)']  = 'admin/Admin/ubah_stnk/$1';
+$route['admin/aksiUbahStnk']      = 'admin/Master_kendaraan/aksiUbahStnk';
 
 // Pencatatan
 $route['admin/form_pengajuan/unit_kendaraan'] = 'admin/Admin/unit_kendaraan';
