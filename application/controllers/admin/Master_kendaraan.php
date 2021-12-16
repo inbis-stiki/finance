@@ -218,7 +218,12 @@ class Master_kendaraan extends CI_Controller
             // var_dump($_FILES['foto']);
             // echo json_encode($_FILES['foto']['name']);
             // die;
+            $fotolama = json_decode($this->input->post('fotolama'));
             $fotokendaraan = json_encode($_FILES['foto']['name']);
+            
+            array_push($fotolama, $_FILES['foto']['name']);
+            // var_dump($fotolama);
+            // die;
             $files = $_FILES['foto'];
 
             $this->upload->initialize($config);
@@ -239,18 +244,24 @@ class Master_kendaraan extends CI_Controller
     
                     $config['file_name'] = $fileName;
     
+                    array_push($fotolama, $fileName);
+
                     $this->upload->initialize($config);
     
-                    if ($this->upload->do_upload('images[]')) {
-                        $tmpdata = $this->upload->data();
-                        // $fotokendaraan .= $tmpdata['file_name'] . ", ";
-                    } else {
-                        return false;
-                    }
+                    // if ($this->upload->do_upload('images[]')) {
+                    //     $tmpdata = $this->upload->data();
+                    //     // $attachment_session_data =
+                    //     // $fotokendaraan .= $tmpdata['file_name'] . ", ";
+                    // } else {
+                    //     return false;
+                    // }
                 }
                 $data['kendaraan_foto'] = str_replace(" ", "_", $fotokendaraan);
-            //     var_dump($data);
+                // var_dump($fotolama);
+                // die;
             // die;
+            } else {
+                $data['kendaraan_foto'] = str_replace(" ", "_", $this->input->post('fotolama'));
             }
             
             $data['kendaraan_no_rangka'] = strtoupper($this->input->post('rangka'));
