@@ -51,10 +51,10 @@ class Klien extends CI_Controller
     function aksiEditKlien()
     {
         $data = [
-            "client_nama"       => $this->input->post('klien'),
+            "client_nama"       => $this->input->post('nama'),
             "client_jenis"      => $this->input->post('jenis'),
-            "client_alamat"     => $this->input->post('instansi_id'),
-            "client_contact"    => $this->input->post('alamat'),
+            "client_alamat"     => $this->input->post('alamat'),
+            "client_contact"    => $this->input->post('kontak'),
             "client_npwp"       => $this->input->post('npwp'),
             "client_norek"      => $this->input->post('norek'),
             "id_region"         => $this->input->post('group')
@@ -68,7 +68,7 @@ class Klien extends CI_Controller
     public function aksiHapus()
     {
         $data = [
-            "client_nama"       => $this->input->post('client_nama'),
+            "client_nama"   => $this->input->post('nama'),
             "deleted_date"  => date('Y-m-d H:i:s')
         ];
 
