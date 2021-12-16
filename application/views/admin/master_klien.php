@@ -31,9 +31,9 @@
                                     $row->client_contact,
                                     $row->client_npwp,
                                     $row->client_norek,
-                                    $row->region_kota,
+                                    $row->dropdown_list,
 
-                                    '<button type="button" data-nama="' . $row->client_nama . '" data-jenis="' . $row->client_jenis . '" data-alamat="' . $row->client_alamat . '" data-kontak="' . $row->client_contact . '" data-npwp="' . $row->client_npwp . '" data-norek="' . $row->client_norek . '" data-group="' . $row->id_region . '" class="btn-table edit_masterKlien btnEdit" data-bs-toggle="modal" data-bs-target="#edit_masterKlien">
+                                    '<button type="button" data-nama="' . $row->client_nama . '" data-jenis="' . $row->client_jenis . '" data-alamat="' . $row->client_alamat . '" data-kontak="' . $row->client_contact . '" data-npwp="' . $row->client_npwp . '" data-norek="' . $row->client_norek . '" data-group="' . $row->dropdown_id . '" class="btn-table edit_masterKlien btnEdit" data-bs-toggle="modal" data-bs-target="#edit_masterKlien">
                                         <span class="iconify-inline" data-icon="bx:bx-edit" data-width="20" data-height="20"></span>
                                     </button>
                                     <button type="button" data-nama="' . $row->client_nama . '" class="btn-table red hapus_masterKlien btnEdit" data-bs-toggle="modal" data-bs-target="#hapus_masterKlien">
@@ -85,7 +85,7 @@
                                 <select class="login-input regular" name="group" id="wilayahKlien" required>
                                     <option value="" disabled selected>Pilih Wilayah</option>
                                     <?php foreach ($Wilayah as $row) : ?>
-                                        <option value="<?= $row->region_id ?>"><?= $row->region_kota ?></option>
+                                        <option value="<?= $row->dropdown_id ?>"><?= $row->dropdown_list ?></option>
                                     <?php endforeach ?>
                                 </select>
                             </div>
@@ -149,7 +149,7 @@
                                 <label class="my-2 color-secondary">Wilayah Klien</label>
                                 <select class="login-input regular" name="group" id="wilayahKlien">
                                     <?php foreach ($Wilayah as $row) { ?>
-                                        <option value="<?= $row->region_id ?>"><?= $row->region_kota ?></option>
+                                        <option value="<?= $row->dropdown_id ?>"><?= $row->dropdown_list ?></option>
                                     <?php } ?>
                                 </select>
                             </div>

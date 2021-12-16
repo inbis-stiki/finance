@@ -26,7 +26,7 @@ class Klien extends CI_Controller
                 "client_contact"     => $_POST['kontak'],
                 "client_npwp"        => $_POST['npwp'],
                 "client_norek"       => $_POST['norek'],
-                "id_region"          => $_POST['group']
+                "dropdown_id"          => $_POST['group']
             ];
         } else {
             $data = [
@@ -37,7 +37,7 @@ class Klien extends CI_Controller
                 "client_contact"     => $_POST['kontak'],
                 "client_npwp"        => $_POST['npwp'],
                 "client_norek"       => $_POST['norek'],
-                "id_region"          => $_POST['group']
+                "dropdown_id"          => $_POST['group']
             ];
         }
 
@@ -57,7 +57,7 @@ class Klien extends CI_Controller
             "client_contact"    => $this->input->post('kontak'),
             "client_npwp"       => $this->input->post('npwp'),
             "client_norek"      => $this->input->post('norek'),
-            "id_region"         => $this->input->post('group')
+            "dropdown_id"         => $this->input->post('group')
         ];
 
         $this->M_Klien->editKlien($data);
