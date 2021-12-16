@@ -7,7 +7,7 @@ class M_Klien extends CI_Model
     {
         $this->db->select('*');
         $this->db->from('master_client');
-        $this->db->join('master_region', 'master_client.id_region = master_region.region_id');
+        $this->db->join('master_dropdown', 'master_client.dropdown_id = master_dropdown.dropdown_id');
         $this->db->where('master_client.deleted_date IS NULL', NULL, FALSE);
         $query = $this->db->get();
         return $query->result();
@@ -16,16 +16,16 @@ class M_Klien extends CI_Model
     public function getWilayah()
     {
         $this->db->select('*');
-        $this->db->from('master_region');
+        $this->db->from('master_dropdown');
         $this->db->where('deleted_date IS NULL', NULL, FALSE);
-        $this->db->order_by('region_kota ASC');
+        $this->db->where('dropdown_menu', 'Wilayah');
         $query = $this->db->get();
         return $query->result();
 
         //$query = $this->db->query("SELECT * FROM master_region WHERE deleted_date IS NULL order by region_kota asc");
     }
 
-    public function insert($client_nama, $client_jenis, $client_alamat, $client_contact, $client_npwp, $client_norek, $id_region)
+    public function insert($client_nama, $client_jenis, $client_alamat, $client_contact, $client_npwp, $client_norek, $dropdown_id)
     {
         $arr = [
             'client_nama'     => $client_nama,
@@ -34,7 +34,7 @@ class M_Klien extends CI_Model
             'client_contact'  => $client_contact,
             'client_npwp'     => $client_npwp,
             'client_norek'    => $client_norek,
-            'id_region'       => $id_region
+            'dropdown_id'     => $dropdown_id
         ];
         $this->db->insert('master_client', $arr);
         return "Berhasil insert";
