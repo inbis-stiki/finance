@@ -122,10 +122,6 @@ class Admin extends CI_Controller
 		$this->load->view('_components/sideNavigation', $data);
 	}
 
-<<<<<<< Updated upstream
-	public function tambah_driver()
-	{
-=======
 
 	public function ubah_stnk($id)
 	{
@@ -152,7 +148,6 @@ class Admin extends CI_Controller
 
 		$dataSIM = $this->M_Driver->getSIM();
 
->>>>>>> Stashed changes
 		$data['title'] = 'admin';
 		$data['Sim'] = $dataSIM;
 		$data['auth'] = $this->db->get_where('master_user', ['username' => $this->session->userdata('username')])->row_array();

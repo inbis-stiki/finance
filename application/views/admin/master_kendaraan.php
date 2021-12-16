@@ -35,13 +35,18 @@
                                     $row->kendaraan_stnk,
                                     $row->kendaraan_merk,
                                     $tgl,
-                                    $umur->format("%y"). " Tahun",
+                                    $umur->format("%y") . " Tahun",
                                     '
                                     <button type="button" class="btn-table orange view_masterKendaraan" data-bs-toggle="modal" data-bs-target="#view_masterKendaraan' . $row->kendaraan_no_rangka . '" title="Foto">
                                         <span class="iconify-inline" data-icon="ic:baseline-insert-photo" data-width="20" data-height="21"></span>
                                     </button>
                                     <a href="' .  base_url("admin/ubah_kendaraan/" . $row->kendaraan_no_rangka) . '" >
                                         <button type="button" class="btn-table edit_masterKendaraan btnEdit" title="Ubah">
+                                            <span class="iconify-inline" data-icon="bx:bx-edit" data-width="20" data-height="20"></span>
+                                        </button>
+                                    </a>
+                                    <a href="' .  base_url("admin/ubah_stnk/" . $row->kendaraan_no_rangka) . '" >
+                                        <button type="button" class="btn-table edit_masterKendaraan btnEdit" title="Ubah STNK">
                                             <span class="iconify-inline" data-icon="bx:bx-edit" data-width="20" data-height="20"></span>
                                         </button>
                                     </a>'
@@ -81,11 +86,11 @@
                                     <?php $i = 0;
                                     foreach ($kendaraan_foto as $fotok) : ?>
                                         <?php if ($i == 0) : ?>
-                                            <div class="carousel-item active">
+                                            <div class="carousel-item active" id="carousel1">
                                                 <img class="d-block mx-auto" src="<?php echo base_url() . '/assets/images/fotokendaraan/' . $fotok ?>" width="500px" height="300px">
                                             </div>
                                         <?php else : ?>
-                                            <div class="carousel-item">
+                                            <div class="carousel-item" id="carousel2">
                                                 <img class="d-block mx-auto" src="<?php echo base_url() . '/assets/images/fotokendaraan/' . $fotok ?>" width="500px" height="300px">
                                             </div>
                                     <?php endif;
@@ -100,7 +105,7 @@
                                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                                     <span class="visually-hidden">Next</span>
                                 </button>
-                                
+
                             </div>
                         </div>
                     </div>
@@ -115,6 +120,15 @@
             //     const region_kota = $(this).data('region_kota');
             //     $('#region_kota').val(region_id);
             // })
+        </script>
+        
+        <!-- Image Zoom -->
+        <script src="<?= site_url() ?>/assets/plugin/image-zoom/jquery.zoom.js"></script>
+        <script>
+            if ($ && $.fn.zoom) {
+                $('#carousel1').zoom();
+                $('#carousel2').zoom();
+            }
         </script>
 
         <div class="foot">

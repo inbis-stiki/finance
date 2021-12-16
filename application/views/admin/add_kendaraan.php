@@ -54,6 +54,10 @@
                         <input type="number" class="login-input regular" name="tangki" value="<?= !empty($temp['tangki']) ? $temp['tangki'] : "" ?>" required>
                         <label class="my-3">Tanggal Beli</label>
                         <input type="date" class="login-input regular fs-16px" name="tanggal" id="datepicker" value="<?= !empty($temp['tanggal']) ? $temp['tanggal'] : "" ?>" required>
+                        <label class="my-3">Tanggal Deadline Bayar Pajak</label>
+                        <input type="date" class="login-input regular fs-16px" name="pajak" id="datepicker" value="<?= !empty($temp['pajak']) ? $temp['pajak'] : "" ?>" required>
+                        <label class="my-3">Tanggal Deadline Bayar KIR</label>
+                        <input type="date" class="login-input regular fs-16px" name="kir" id="datepicker" value="<?= !empty($temp['kir']) ? $temp['kir'] : "" ?>" required>
                     </div>
                 </div>
 
