@@ -16,19 +16,19 @@ class Driver extends CI_Controller
         $this->load->model('M_Driver');
     }
 
-    public function vAdd(){
-
+    public function vAdd()
+    {
     }
 
     public function aksiTambahDriver()
     {
         $uploadFoto = $this->upload_image('foto');
-        if($uploadFoto['status' == false]){
+        if ($uploadFoto['status' == false]) {
             redirect('admin/tambah_driver');
         }
-        
+
         $uploadKTP = $this->upload_image('ktp');
-        if($uploadKTP['status' == false]){
+        if ($uploadKTP['status' == false]) {
             redirect('admin/tambah_driver');
         }
 
@@ -38,30 +38,32 @@ class Driver extends CI_Controller
         $formData['driver_foto_ktp']    = $uploadKTP['link'];
         $formData['driver_alamat']      = $_POST['alamat'];
         $formData['driver_telepon']     = $_POST['telp'];
+        $formData['dropdown_id']        = implode(";", $_POST['sim']);
 
+        print_r($formData['dropdown_id']);
         $this->M_Driver->insert($formData);
         redirect('admin/master_driver');
     }
     public function aksiUbahDriver()
     {
-        if(!empty($_FILES['foto']['name'])){
+        if (!empty($_FILES['foto']['name'])) {
             $uploadFoto = $this->upload_image('foto');
-            if($uploadFoto['status' == false]){
+            if ($uploadFoto['status' == false]) {
                 redirect('admin/tambah_driver');
-            }else{
+            } else {
                 $formData['driver_foto'] = $uploadFoto['link'];
             }
         }
 
-        if(!empty($_FILES['ktp']['name'])){
+        if (!empty($_FILES['ktp']['name'])) {
             $uploadKTP = $this->upload_image('ktp');
-            if($uploadKTP['status' == false]){
+            if ($uploadKTP['status' == false]) {
                 redirect('admin/tambah_driver');
-            }else{
+            } else {
                 $formData['driver_foto_ktp'] = $uploadKTP['link'];
             }
         }
-        
+
 
         $formData['driver_nik']         = $_POST['nik'];
         $formData['driver_nama']        = $_POST['nama'];
@@ -103,8 +105,9 @@ class Driver extends CI_Controller
         redirect('admin/master_driver');
     }
 
-    public function upload_image($resource){
-        $path = './assets/images/driver/'.$resource;
+    public function upload_image($resource)
+    {
+        $path = './assets/images/driver/' . $resource;
         $conf['upload_path']    = $path;
         $conf['allowed_types']  = "jpg|png|jpeg|bmp";
         $conf['max_size']       = 2048;
@@ -112,20 +115,18 @@ class Driver extends CI_Controller
         $conf['encrypt_name']   = TRUE;
 
         $this->upload->initialize($conf);
-        if($this->upload->do_upload($resource)){
+        if ($this->upload->do_upload($resource)) {
             $img = $this->upload->data();
             return [
-                    'status'=> true,
-                    'msg'   => 'Data berhasil terupload',
-                    'link'  => base_url($path.'/'.$img['file_name'])
-                ];
-        }else{
+                'status' => true,
+                'msg'   => 'Data berhasil terupload',
+                'link'  => base_url($path . '/' . $img['file_name'])
+            ];
+        } else {
             return [
-                'status'=> false,
+                'status' => false,
                 'msg'   => $this->upload->display_errors(),
             ];
         }
     }
-
-    
 }

@@ -17,26 +17,32 @@
                         <label class="my-3">Nama</label>
                         <input type="text" class="login-input regular" name="nama" placeholder="Nama" required>
                         <label class="my-3">Foto</label>
-                            <div id="boxImg" class="text-center mb-3 p-3" style="border: 1px solid #ddd;border-radius: 10px;cursor: pointer;">
-                                <img style="max-width: 250px;" id="blah" class="" src="<?= base_url('assets/images/dummy-post.jpg')?>" />
-                            </div>
+                        <div id="boxImg" class="text-center mb-3 p-3" style="border: 1px solid #ddd;border-radius: 10px;cursor: pointer;">
+                            <img style="max-width: 250px;" id="blah" class="" src="<?= base_url('assets/images/dummy-post.jpg') ?>" />
+                        </div>
                         <input type="file" accept=".jpg,.png,.jpeg,.bmp" class="login-auth" name="foto" style="cursor: pointer;" id="imgPoster" required>
                         <label class="my-3">Foto KTP</label>
-                            <div id="boxImg2" class="text-center mb-3 p-3" style="border: 1px solid #ddd;border-radius: 10px;cursor: pointer;">
-                                <img style="max-width: 250px;" id="blah2" class="" src="<?= base_url('assets/images/dummy-post.jpg')?>" />
-                            </div>
+                        <div id="boxImg2" class="text-center mb-3 p-3" style="border: 1px solid #ddd;border-radius: 10px;cursor: pointer;">
+                            <img style="max-width: 250px;" id="blah2" class="" src="<?= base_url('assets/images/dummy-post.jpg') ?>" />
+                        </div>
                         <input type="file" accept=".jpg,.png,.jpeg,.bmp" class="login-auth" name="ktp" style="cursor: pointer;" id="imgPoster2" required>
                         <label class="my-3">Alamat</label>
                         <input type="text" class="login-input regular" name="alamat" placeholder="Alamat" required>
                         <label class="my-3">Telefon</label>
                         <input type="telp" class="login-input regular" onkeypress="return isNumberKey(event)" name="telp" placeholder="Telefon" required>
+                        <label class="my-3">SIM Driver</label>
+                        <select class="js-example-basic-multiple" name="sim[]" multiple="multiple">
+                            <?php foreach ($Sim as $row) : ?>
+                                <option value="<?= $row->dropdown_id ?>"><?= $row->dropdown_list ?></option>
+                            <?php endforeach ?>
+                        </select>
                     </div>
                 </div>
 
             </div>
         </div>
         <button type="submit" class="btn-table submit-modal">
-            SImpan Data
+            Simpan Data
         </button>
         <?= form_close(); ?>
     </div>
@@ -48,7 +54,6 @@
         $(document).ready(function() {
             $('#success').modal('show');
         });
-        
     </script>
 <?php } ?>
 <script>
@@ -56,46 +61,51 @@
         if (input.files && input.files[0]) {
             var reader = new FileReader();
 
-            reader.onload = function (e) {
+            reader.onload = function(e) {
                 $('#blah').attr('src', e.target.result);
             }
 
             reader.readAsDataURL(input.files[0]);
         }
     }
-    
-    $("#boxImg").click(function(){
+
+    $("#boxImg").click(function() {
         $('#imgPoster').click();
     });
 
-    $("#imgPoster").change(function(){
+    $("#imgPoster").change(function() {
         readURL(this);
     });
-    
+
     function readURL2(input) {
         if (input.files && input.files[0]) {
             var reader = new FileReader();
 
-            reader.onload = function (e) {
+            reader.onload = function(e) {
                 $('#blah2').attr('src', e.target.result);
             }
 
             reader.readAsDataURL(input.files[0]);
         }
     }
-    
-    $("#boxImg2").click(function(){
+
+    $("#boxImg2").click(function() {
         $('#imgPoster2').click();
     });
 
-    $("#imgPoster2").change(function(){
+    $("#imgPoster2").change(function() {
         readURL2(this);
     });
 
-    function isNumberKey(evt){
+    function isNumberKey(evt) {
         var charCode = (evt.which) ? evt.which : evt.keyCode
         if (charCode > 31 && (charCode < 48 || charCode > 57))
-        return false;
+            return false;
         return true;
     }
+</script>
+<script>
+    $(document).ready(function() {
+        $('.js-example-basic-multiple').select2();
+    });
 </script>

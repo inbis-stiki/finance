@@ -129,7 +129,7 @@ class Admin extends CI_Controller
 		$this->load->model('M_kendaraan_master');
 		$dataEdit = $this->M_kendaraan_master->getById($id);
 
-		
+
 
 		$data = [
 			'title' => "admin",
@@ -139,14 +139,17 @@ class Admin extends CI_Controller
 
 
 		$this->template->index('admin/edit_stnk', $data);
-		$this->load->view('_components/sideNavigation', $data);	
+		$this->load->view('_components/sideNavigation', $data);
 	}
 
-	
+
 	public function tambah_driver()
 	{
 
+		$dataSIM = $this->M_Driver->getSIM();
+
 		$data['title'] = 'admin';
+		$data['Sim'] = $dataSIM;
 		$data['auth'] = $this->db->get_where('master_user', ['username' => $this->session->userdata('username')])->row_array();
 
 		$this->template->index('admin/add_driver', $data);
