@@ -31,6 +31,8 @@
                         <label class="mb-3">Upload Foto Kendaraan</label>
                         <div>
                             <input type="file" name="foto[]" accept=".jpg,.png,.jpeg" multiple>
+                            <input type="hidden" name="fotolama" value='<?= $kendaraan->kendaraan_foto ?>'>
+
                         </div>
                         <div id="boxImg" class="text-center mb-3 p-3" style="border: 1px solid #ddd;border-radius: 10px;cursor: pointer;">
                             <?php
