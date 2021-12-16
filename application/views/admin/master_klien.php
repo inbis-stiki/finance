@@ -145,6 +145,14 @@
                                 <label class="my-2 color-secondary">No. Rekening Klien</label>
                                 <input type="text" class="login-input regular" onkeypress="return Angka(event)" name="norek" placeholder="" required>
                             </div>
+                            <div class="d-flex flex-column my-2 w-100">
+                                <label class="my-2 color-secondary">Wilayah Klien</label>
+                                <select class="login-input regular" name="group" id="wilayahKlien">
+                                    <?php foreach ($Wilayah as $row) { ?>
+                                        <option value="<?= $row->region_id ?>"><?= $row->region_kota ?></option>
+                                    <?php } ?>
+                                </select>
+                            </div>
                             <div class="row m-0 p-0 w-full">
                                 <label class="my-2 color-secondary ps-0">Jenis Klien</label>
                                 <div class="col-6 ps-0 d-flex flex-row align-items-center">
@@ -183,7 +191,7 @@
                         <div class="pb-4">
                             <div class="d-flex flex-column my-2 w-100">
                                 <p class="font-w-700 color-darker mb-0">Apakah anda yakin menghapus data ini ?</p>
-                                <input type="hidden" id="instansi_id" name="instansi_id" value="">
+                                <input type="hidden" id="nama" name="nama" value="">
                             </div>
                         </div>
                         <div class="d-flex flex-row">
