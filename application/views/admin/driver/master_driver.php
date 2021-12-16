@@ -15,7 +15,7 @@
                             <?php
                             $template = array('table_open' => '<table id="tableDriver" class="table-custom">');
                             $this->table->set_template($template);
-                            $this->table->set_heading('No', 'Nama Driver', 'Foto Driver', 'KTP Driver', 'Alamat Driver', 'Nomor Telepon Driver', 'Aksi');
+                            $this->table->set_heading('No', 'Nama Driver', 'Foto Driver', 'KTP Driver', 'Alamat Driver', 'Nomor Telepon Driver', 'SIM Driver', 'Aksi');
                             ?>
                         </tr>
                     </thead>
@@ -31,6 +31,7 @@
                                     '<img src="' . $row->driver_foto_ktp . '" style="width:100px">',
                                     $row->driver_alamat,
                                     $row->driver_telepon,
+                                    $row->dropdown_list,
 
                                     '
                                     <a href="' .  base_url("admin/ubah_driver/" . $row->driver_nik) . '" >
