@@ -32,13 +32,14 @@ class Driver extends CI_Controller
             redirect('admin/tambah_driver');
         }
 
-        $formData['driver_nik']         = $_POST['nik'];
-        $formData['driver_nama']        = $_POST['nama'];
-        $formData['driver_foto']        = $uploadFoto['link'];
-        $formData['driver_foto_ktp']    = $uploadKTP['link'];
-        $formData['driver_alamat']      = $_POST['alamat'];
-        $formData['driver_telepon']     = $_POST['telp'];
-        $formData['dropdown_id']        = implode(";", $_POST['sim']);
+        $formData['driver_nik']          = $_POST['nik'];
+        $formData['driver_nama']         = $_POST['nama'];
+        $formData['driver_foto']         = $uploadFoto['link'];
+        $formData['driver_foto_ktp']     = $uploadKTP['link'];
+        $formData['driver_alamat']       = $_POST['alamat'];
+        $formData['driver_telepon']      = $_POST['telp'];
+        $formData['dropdown_id']         = implode(";", $_POST['sim']);
+        $formData['driver_tanggalmasuk'] = $_POST['tanggal'];
 
         print_r($formData['dropdown_id']);
         $this->M_Driver->insert($formData);
