@@ -31,11 +31,13 @@
                         <label class="my-3">Telefon</label>
                         <input type="telp" class="login-input regular" onkeypress="return isNumberKey(event)" name="telp" placeholder="Telefon" required>
                         <label class="my-3">SIM Driver</label>
-                        <select class="js-example-basic-multiple" name="sim[]" multiple="multiple">
+                        <select class="js-example-basic-multiple" name="sim[]" multiple="multiple" required>
                             <?php foreach ($Sim as $row) : ?>
                                 <option value="<?= $row->dropdown_id ?>"><?= $row->dropdown_list ?></option>
                             <?php endforeach ?>
                         </select>
+                        <label class="my-3">Tanggal Driver Masuk</label>
+                        <input type="date" class="login-input regular fs-16px" name="tanggal" id="datepicker" value="" required>
                     </div>
                 </div>
 

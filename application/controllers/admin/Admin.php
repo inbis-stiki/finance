@@ -158,7 +158,10 @@ class Admin extends CI_Controller
 
 	public function ubah_driver($id)
 	{
+		$dataSIM = $this->M_Driver->getSIM();
+
 		$data['title'] = 'admin';
+		$data['Sim'] = $dataSIM;
 		$data['auth'] = $this->db->get_where('master_user', ['username' => $this->session->userdata('username')])->row_array();
 		$data['driver'] = $this->M_Driver->getById($id);
 
