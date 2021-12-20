@@ -23,10 +23,11 @@
                             foreach ($GlobalCost as $row) {
                                 $this->table->add_row(
                                     $no++,
-                                    $row->stnk_kendaraan,
+                                    $row->kendaraan_stnk,
                                     $row->kendaraan_merk,
                                     $row->umur_kendaraan,
-                                    $row->region_kota,
+                                    $row->pengeluaran_jenis,
+                                    // $row->region_kota,
                                     $row->jumlah_transaksi,
                                     $row->total_transaksi
 
@@ -65,10 +66,11 @@
                                 // $tgl = date_format(date_create($row->kendaraan_tanggal_beli), 'j M Y');
                                 $this->table->add_row(
                                     $no++,
-                                    $row->stnk_kendaraan,
+                                    $row->kendaraan_stnk,
                                     $row->kendaraan_merk,
                                     $row->umur_kendaraan,
-                                    $row->region_kota,
+                                    $row->pengeluaran_jenis,
+                                    // $row->region_kota,
                                     $row->jumlah_transaksi,
                                     $row->total_transaksi
 
