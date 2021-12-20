@@ -61,6 +61,7 @@ $route['admin/master_region'] = 'admin/Admin/master_region';
 $route['admin/master_klien'] = 'admin/Admin/master_klien';
 $route['admin/master_pengeluaran'] = 'admin/Admin/master_pengeluaran';
 $route['admin/master_kendaraan'] = 'admin/Admin/master_kendaraan';
+$route['admin/master_dropdown'] = 'admin/Admin/master_dropdown';
 $route['admin/master_driver'] = 'admin/Admin/master_driver';
 $route['master_region'] = 'admin/Master_region';
 $route['simpan_region'] = 'admin/Master_region/simpan_region';

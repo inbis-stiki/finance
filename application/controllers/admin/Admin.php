@@ -265,4 +265,20 @@ class Admin extends CI_Controller
 		$this->template->index('admin/driver/master_driver', $data);
 		$this->load->view('_components/sideNavigation', $data);
 	}
+
+	public function master_dropdown()
+	{
+		$this->load->model('M_User');
+		$this->load->model('M_Dropdown');
+		$dataDropdown = $this->M_Dropdown->getDropdown();
+
+		$data = [
+			'title' => "admin",
+			'Dropdown' => $dataDropdown,
+			'auth' => $this->db->get_where('master_user', ['username' => $this->session->userdata('username')])->row_array()
+		];
+
+		$this->template->index('admin/master_dropdown', $data);
+		$this->load->view('_components/sideNavigation', $data);
+	}
 }
