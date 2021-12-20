@@ -24,6 +24,11 @@
                             <?php
                             $no = 1;
                             foreach ($Driver as $row) {
+                                $tanggal = date_format(date_create($row->driver_tanggalmasuk), 'j M Y');
+                                $sim = array(explode(" ", $row->dropdown_list));
+                                for ($i = 0; $i < count($sim); $i++) {
+                                    $sim[$i];
+                                }
                                 $this->table->add_row(
                                     $no++,
                                     $row->driver_nama,
@@ -31,8 +36,13 @@
                                     '<img src="' . $row->driver_foto_ktp . '" style="width:100px">',
                                     $row->driver_alamat,
                                     $row->driver_telepon,
+<<<<<<< Updated upstream
                                     $row->dropdown_list,
                                     $row->driver_tanggalmasuk,
+=======
+                                    print_r($sim),
+                                    $tanggal,
+>>>>>>> Stashed changes
 
                                     '
                                     <a href="' .  base_url("admin/ubah_driver/" . $row->driver_nik) . '" >

@@ -28,6 +28,7 @@
                 <a href="<?= site_url() ?>admin/master_driver">Driver</a>
                 <a href="<?= site_url() ?>admin/master_region">Wilayah</a>
                 <a href="<?= site_url() ?>admin/master_klien">Klien</a>
+                <a href="<?= site_url() ?>admin/master_dropdown">Dropdown</a>
                 <a href="<?= site_url() ?>admin/master_sparepart">Sparepart</a>
                 <a href="<?= site_url() ?>admin/master_kendaraan">Kendaraan</a>
                 <a href="<?= site_url() ?>admin/master_pengeluaran">Jenis Pengeluaran</a>
