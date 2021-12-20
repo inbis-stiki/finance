@@ -58,6 +58,14 @@
                         <input type="date" class="login-input regular fs-16px" name="pajak" id="datepicker" value="<?= !empty($temp['pajak']) ? $temp['pajak'] : "" ?>" required>
                         <label class="my-3">Tanggal Deadline Bayar KIR</label>
                         <input type="date" class="login-input regular fs-16px" name="kir" id="datepicker" value="<?= !empty($temp['kir']) ? $temp['kir'] : "" ?>" required>
+                        <label class="my-3">Jenis Kendaraan</label>
+                        <select name="jenis_kendaraan" id="jenis_kendaraan" class="login-input regular fs-16px">
+                            <option value="" disabled selected>Pilih Jenis Kendaraan</option>
+                            <option value="Kendaraan Pribadi">Kendaraan Pribadi</option>
+                            <option value="Kendaraan PT">Kendaraan PT</option>
+                            <option value="Kendaraan Disewa">Kendaraan Disewa</option>
+                        </select>
+
                     </div>
                 </div>
 

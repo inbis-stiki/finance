@@ -64,6 +64,7 @@ class Master_kendaraan extends CI_Controller
                 'kendaraan_stnk'             => strtoupper($this->input->post('stnk')),
                 'kendaraan_merk'             => $this->input->post('merk'),
                 'kendaraan_tanggal_beli'     => $this->input->post('tanggal'),
+                'kendaraan_jenis'            => $this->input->post('jenis_kendaraan'),
                 'kendaraan_deadlinesim'     => $this->input->post('pajak'),
                 'kendaraan_deadlinekir'     => $this->input->post('kir'),
                 'kendaraan_kapasitas_tangki'     => $this->input->post('tangki'),
