@@ -3,11 +3,32 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class M_Dropdown extends CI_Model
 {
-    public function getDropdown()
+    public function getDropdownWilayah()
     {
         $this->db->select('*');
         $this->db->from('master_dropdown');
         $this->db->where('deleted_date IS NULL', NULL, FALSE);
+        $this->db->where('dropdown_menu', 'Wilayah');
+        $query = $this->db->get();
+        return $query->result();
+    }
+
+    public function getDropdownSIM()
+    {
+        $this->db->select('*');
+        $this->db->from('master_dropdown');
+        $this->db->where('deleted_date IS NULL', NULL, FALSE);
+        $this->db->where('dropdown_menu', 'SIM');
+        $query = $this->db->get();
+        return $query->result();
+    }
+
+    public function getDropdownPT()
+    {
+        $this->db->select('*');
+        $this->db->from('master_dropdown');
+        $this->db->where('deleted_date IS NULL', NULL, FALSE);
+        $this->db->where('dropdown_menu', 'PT');
         $query = $this->db->get();
         return $query->result();
     }

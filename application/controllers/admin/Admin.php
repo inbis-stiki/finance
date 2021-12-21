@@ -146,7 +146,7 @@ class Admin extends CI_Controller
 	public function tambah_driver()
 	{
 
-		$dataSIM = $this->M_Driver->getSIM();
+		$dataSIM = $this->M_Driver->getsims();
 
 		$data['title'] = 'admin';
 		$data['Sim'] = $dataSIM;
@@ -158,7 +158,7 @@ class Admin extends CI_Controller
 
 	public function ubah_driver($id)
 	{
-		$dataSIM = $this->M_Driver->getSIM();
+		$dataSIM = $this->M_Driver->getSIM($id);
 
 		$data['title'] = 'admin';
 		$data['Sim'] = $dataSIM;
@@ -270,11 +270,15 @@ class Admin extends CI_Controller
 	{
 		$this->load->model('M_User');
 		$this->load->model('M_Dropdown');
-		$dataDropdown = $this->M_Dropdown->getDropdown();
+		$dataDropdownWil = $this->M_Dropdown->getDropdownWilayah();
+		$dataDropdownSIM = $this->M_Dropdown->getDropdownSIM();
+		$dataDropdownPT = $this->M_Dropdown->getDropdownPT();
 
 		$data = [
 			'title' => "admin",
-			'Dropdown' => $dataDropdown,
+			'Dropdown' => $dataDropdownWil,
+			'SIM' => $dataDropdownSIM,
+			'PT' => $dataDropdownPT,
 			'auth' => $this->db->get_where('master_user', ['username' => $this->session->userdata('username')])->row_array()
 		];
 
