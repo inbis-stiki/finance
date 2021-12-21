@@ -7,13 +7,25 @@ class M_Driver extends CI_Model
     {
         $this->db->select('*');
         $this->db->from('master_driver');
-        $this->db->join('master_dropdown', 'master_driver.dropdown_id = master_dropdown.dropdown_id');
-        $this->db->where('master_driver.deleted_date IS NULL', NULL, FALSE);
+        // $this->db->join('master_dropdown', 'master_driver.dropdown_id = master_dropdown.dropdown_id');
+        $this->db->where('deleted_date IS NULL', NULL, FALSE);
         $query = $this->db->get();
         return $query->result();
     }
 
-    public function getSIM()
+    public function getSIM($id)
+    {
+        $this->db->select('*');
+        $this->db->from('master_dropdown');
+        $this->db->where('deleted_date IS NULL', NULL, FALSE);
+        $this->db->where('dropdown_id', $id);
+        $query = $this->db->get();
+        return $query->row();
+
+        //$query = $this->db->query("SELECT * FROM master_region WHERE deleted_date IS NULL order by region_kota asc");
+    }
+
+    public function getsims()
     {
         $this->db->select('*');
         $this->db->from('master_dropdown');
