@@ -155,8 +155,8 @@
                                 <label class="my-2 color-secondary">List Dropdown</label>
                                 <input type="text" class="login-input regular" name="list" placeholder="" required>
                             </div>
+                            <button type="submit" class="btn-table submit-modal">Tambah data</button>
                         </div>
-                        <button type="submit" class="btn-table submit-modal">Tambah data</button>
                         <?= form_close() ?>
                     </div>
                 </div>

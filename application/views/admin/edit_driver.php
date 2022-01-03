@@ -13,7 +13,7 @@
                 <div class="row m-0 p-0 w-100">
                     <div class="col-12 col-lg-12 pe-0 d-flex flex-column justify-content-between">
                         <label class="mb-3">NIK</label>
-                        <input type="telp" class="login-input regular" placeholder="STNK" value="<?= $driver->driver_nik ?>" onkeypress="return isNumberKey(event)" required disabled>
+                        <input type="telp" class="login-input regular" placeholder="STNK" value="<?= $driver->driver_nik ?>" onkeypress="return isNumberKey(event)" disabled>
                         <input type="hidden" class="login-input regular" name="nik" placeholder="STNK" value="<?= $driver->driver_nik ?>" onkeypress="return isNumberKey(event)">
                         <label class="my-3">Nama</label>
                         <input type="text" class="login-input regular" name="nama" placeholder="Nama" value="<?= $driver->driver_nama ?>" required>
@@ -32,9 +32,26 @@
                         <label class="my-3">Telefon</label>
                         <input type="telp" class="login-input regular" onkeypress="return isNumberKey(event)" value="<?= $driver->driver_telepon ?>" name="telp" placeholder="Telefon" required>
                         <label class="my-3">SIM Driver</label>
-                        <select class="js-example-basic-multiple" name="sim[]" multiple="multiple" required>
+                        <select class="js-example-basic-multiple" name="sim[]" id="sim" multiple="multiple" required>
+                            <?php
+                                $driverSim = explode(',', $driver->driver_sim);
+                                foreach($Sim as $row){
+                                    foreach ($driverSim as $row2) {
+                                        if($row->dropdown_list == $row2){
+                                            echo '
+                                                <option selected="true" value="'.$row->dropdown_list.'">'.$row->dropdown_list.'</option>        
+                                            ';
+                                            break;
+                                        }else{
+                                            echo '
+                                                <option value="'.$row->dropdown_list.'">'.$row->dropdown_list.'</option>        
+                                            ';
+                                        }
+                                    }
+                                }
+                            ?>
                             <?php foreach ($Sim as $row) : ?>
-                                <option value="<?= $row->dropdown_id ?>"><?= $row->dropdown_list ?></option>
+                                
                             <?php endforeach ?>
                         </select>
                     </div>
@@ -109,4 +126,13 @@
     $(document).ready(function() {
         $('.js-example-basic-multiple').select2();
     });
+    // $(window).load(function(){
+    //     var sim = "<?= $driver->driver_sim?>";
+    //     sim = sim.split(',');
+    //     if(sim){
+    //         for(i of sim){
+    //             $("#sim option[value='" + i + "']").prop("selected", true);
+    //         }   
+    //     }
+    // })
 </script>
