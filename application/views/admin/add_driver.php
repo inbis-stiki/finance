@@ -33,7 +33,7 @@
                         <label class="my-3">SIM Driver</label>
                         <select class="js-example-basic-multiple" name="sim[]" multiple="multiple" required>
                             <?php foreach ($Sim as $row) : ?>
-                                <option value="<?= $row->dropdown_id ?>"><?= $row->dropdown_list ?></option>
+                                <option value="<?= $row->dropdown_list ?>"><?= $row->dropdown_list ?></option>
                             <?php endforeach ?>
                         </select>
                         <label class="my-3">Tanggal Driver Masuk</label>

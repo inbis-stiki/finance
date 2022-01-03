@@ -145,12 +145,12 @@ class Admin extends CI_Controller
 
 	public function tambah_driver()
 	{
+		$this->load->model('MDropdown');
+		$dataSIM = $this->MDropdown->get(['dropdown_menu' => 'SIM', 'deleted_date' => NULL]);
 
-		$dataSIM = $this->M_Driver->getsims();
-
-		$data['title'] = 'admin';
-		$data['Sim'] = $dataSIM;
-		$data['auth'] = $this->db->get_where('master_user', ['username' => $this->session->userdata('username')])->row_array();
+		$data['title'] 	= 'admin';
+		$data['Sim'] 	= $dataSIM;
+		$data['auth'] 	= $this->db->get_where('master_user', ['username' => $this->session->userdata('username')])->row_array();
 
 		$this->template->index('admin/add_driver', $data);
 		$this->load->view('_components/sideNavigation', $data);
@@ -158,12 +158,14 @@ class Admin extends CI_Controller
 
 	public function ubah_driver($id)
 	{
-		$dataSIM = $this->M_Driver->getSIM($id);
+		$this->load->model('MDropdown');
+		$this->load->model('MDriver');
+		$dataSIM = $this->MDropdown->get(['dropdown_menu' => "SIM", 'deleted_date' => NULL]);
 
 		$data['title'] = 'admin';
 		$data['Sim'] = $dataSIM;
 		$data['auth'] = $this->db->get_where('master_user', ['username' => $this->session->userdata('username')])->row_array();
-		$data['driver'] = $this->M_Driver->getById($id);
+		$data['driver'] = $this->MDriver->getById($id);
 
 		$this->template->index('admin/edit_driver', $data);
 		$this->load->view('_components/sideNavigation', $data);
@@ -254,12 +256,15 @@ class Admin extends CI_Controller
 	public function master_driver()
 	{
 		$this->load->model('M_User');
-		$this->load->model('M_Driver');
-		$dataDriver = $this->M_Driver->getDriver();
+		$this->load->model('MDriver');
+		$this->load->model('MKendaraan');
+		$dataDriver 	= $this->MDriver->get(['deleted_date' => NULL]);
+		$dataKendaraan 	= $this->MKendaraan->get(['disabled_date' => NULL, 'is_active' => "1"]);
 
 		$data = [
 			'title' => "admin",
 			'Driver' => $dataDriver,
+			'Kendaraan' => $dataKendaraan,
 			'auth' => $this->db->get_where('master_user', ['username' => $this->session->userdata('username')])->row_array()
 		];
 

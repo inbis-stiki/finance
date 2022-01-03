@@ -14,6 +14,7 @@ class Driver extends CI_Controller
         $this->load->library('form_validation');
         $this->load->library('upload');
         $this->load->model('M_Driver');
+        $this->load->model('MDriver');
     }
 
     public function vAdd()
@@ -38,11 +39,10 @@ class Driver extends CI_Controller
         $formData['driver_foto_ktp']     = $uploadKTP['link'];
         $formData['driver_alamat']       = $_POST['alamat'];
         $formData['driver_telepon']      = $_POST['telp'];
-        $formData['dropdown_id']         = implode(";", $_POST['sim']);
+        $formData['driver_sim']          = implode(",", $_POST['sim']);
         $formData['driver_tanggalmasuk'] = $_POST['tanggal'];
 
-        print_r($formData['dropdown_id']);
-        $this->M_Driver->insert($formData);
+        $this->MDriver->insert($formData);
         redirect('admin/master_driver');
     }
     public function aksiUbahDriver()
@@ -70,8 +70,9 @@ class Driver extends CI_Controller
         $formData['driver_nama']        = $_POST['nama'];
         $formData['driver_alamat']      = $_POST['alamat'];
         $formData['driver_telepon']     = $_POST['telp'];
+        $formData['driver_sim']         = implode(",", $_POST['sim']);
 
-        $this->M_Driver->update($formData);
+        $this->MDriver->update($formData);
         redirect('admin/master_driver');
     }
 
@@ -93,15 +94,28 @@ class Driver extends CI_Controller
         // $this->M_region->editRegion($rangka, $stnk, $merk, $tanggal);
         redirect('admin/master_kendaraan');
     }
+    public function aksiAssign(){
+        $this->load->model("MDriver");
+        $kendaraan = explode('|', $_POST['kendaraan']);
+        $dataStore['kendaraan_no_rangka'] = $kendaraan[0];
+        $dataStore['kendaraan_stnk']      = $kendaraan[1];
+        $dataStore['driver_nik']          = $_POST['driver_nik'];
+        $dataStore['start_date']          = $_POST['awal'];
+        $dataStore['end_date']            = $_POST['akhir'];
+        $this->MDriver->insertTransKendaraan($dataStore);
+        redirect('admin/master_driver');
+    }
 
     public function aksiHapus()
     {
+        $currDate = date('Y-m-d H:i:s');
         $data = [
             "driver_nik"    => $this->input->post('driver_nik'),
-            "deleted_date"  => date('Y-m-d H:i:s')
+            "deleted_date"  => $currDate
         ];
 
         $this->M_Driver->editDriver($data);
+        $this->db->where('driver_nik', $this->input->post('driver_nik'))->update('transaksi_driverkendaraan', ['disabled_date' => $currDate]);
 
         redirect('admin/master_driver');
     }
