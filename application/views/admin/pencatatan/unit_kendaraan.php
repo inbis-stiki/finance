@@ -19,18 +19,10 @@
                             <option value="<?php echo $key->kendaraan_no_rangka ?>|<?php echo $key->kendaraan_stnk ?>"><?php echo $key->kendaraan_stnk ?></option>
                         <?php endforeach ?>
                     </select>
-                    <label class="my-3">Kota</label>
-                    <select name="kota" class="form-control" required>
-
-                        <option value="" disabled selected>Pilih Kota</option>
-                        <?php foreach ($datakota as $key) : ?>
-                            <option value="<?php echo $key->region_id ?>"><?php echo $key->region_kota ?></option>
-                        <?php endforeach ?>
-                    </select>
-                    <label class="my-3">Instansi</label>
+                    <label class="my-3">Klien</label>
                     <select name="instansi" class="form-control" required>
 
-                        <option value="" disabled selected>Pilih Instansi</option>
+                        <option value="" disabled selected>Pilih Klien</option>
                         <?php foreach ($datainstansi as $key) : ?>
                             <option value="<?php echo $key->client_id ?>"><?php echo $key->client_nama ?></option>
                         <?php endforeach ?>

@@ -186,16 +186,14 @@ class Admin extends CI_Controller
 	{
 		$this->load->model('M_User');
 		$this->load->model('M_kendaraan');
-		$this->load->model('Klien');
+		$this->load->model('MKlien');
 
-		$datakota = $this->M_kendaraan->getData();
 		$datakendaraan = $this->M_kendaraan->getKendaraan();
-		$datainstansi = $this->Klien->get(['deleted_date = ' => 'NULL']);
+		$datainstansi = $this->MKlien->get(['deleted_date' => NULL, 'orderBy' => 'client_nama ASC']);
 
 		$data = [
 			'title' => "admin",
 			'auth' => $this->db->get_where('master_user', ['username' => $this->session->userdata('username')])->row_array(),
-			'datakota' => $datakota,
 			'datakendaraan' => $datakendaraan,
 			'datainstansi' => $datainstansi
 		];
