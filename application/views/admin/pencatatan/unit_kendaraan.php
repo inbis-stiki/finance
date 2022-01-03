@@ -32,7 +32,7 @@
 
                         <option value="" disabled selected>Pilih Instansi</option>
                         <?php foreach ($datainstansi as $key) : ?>
-                            <option value="<?php echo $key->instansi_id ?>"><?php echo $key->instansi_nama ?></option>
+                            <option value="<?php echo $key->client_id ?>"><?php echo $key->client_nama ?></option>
                         <?php endforeach ?>
                     </select>
                     <div class="row m-0 p-0 w-100">
