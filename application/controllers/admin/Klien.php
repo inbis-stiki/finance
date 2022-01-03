@@ -12,6 +12,7 @@ class Klien extends CI_Controller
 
         $this->load->library('form_validation');
         $this->load->model('M_Klien');
+        $this->load->model('MKlien');
     }
 
     public function aksiTambahKlien()
@@ -26,7 +27,7 @@ class Klien extends CI_Controller
                 "client_contact"     => $_POST['kontak'],
                 "client_npwp"        => $_POST['npwp'],
                 "client_norek"       => $_POST['norek'],
-                "dropdown_id"          => $_POST['group']
+                "client_region"      => $_POST['group']
             ];
         } else {
             $data = [
@@ -37,30 +38,29 @@ class Klien extends CI_Controller
                 "client_contact"     => $_POST['kontak'],
                 "client_npwp"        => $_POST['npwp'],
                 "client_norek"       => $_POST['norek'],
-                "dropdown_id"          => $_POST['group']
+                "client_region"      => $_POST['group']
             ];
         }
 
-        $this->db->insert('master_client', $data);
+        $this->MKlien->insert($data);
         $this->session->set_flashdata('sukses', "Data Berhasil Disimpan");
-
-        //$this->M_Sparepart->insert($sparepart_nama, $sparepart_km, $sparepart_bulan);
         redirect('admin/master_klien');
     }
 
     function aksiEditKlien()
     {
         $data = [
+            "client_id"         => $this->input->post('id'),
             "client_nama"       => $this->input->post('nama'),
             "client_jenis"      => $this->input->post('jenis'),
             "client_alamat"     => $this->input->post('alamat'),
             "client_contact"    => $this->input->post('kontak'),
             "client_npwp"       => $this->input->post('npwp'),
             "client_norek"      => $this->input->post('norek'),
-            "dropdown_id"         => $this->input->post('group')
+            "client_region"     => $this->input->post('group')
         ];
 
-        $this->M_Klien->editKlien($data);
+        $this->MKlien->update($data);
 
         redirect('admin/master_klien');
     }
@@ -68,12 +68,11 @@ class Klien extends CI_Controller
     public function aksiHapus()
     {
         $data = [
-            "client_nama"   => $this->input->post('nama'),
+            "client_id"     => $this->input->post('id'),
             "deleted_date"  => date('Y-m-d H:i:s')
         ];
 
-        $this->M_Klien->editKlien($data);
-
+        $this->MKlien->update($data);
         redirect('admin/master_klien');
     }
 }

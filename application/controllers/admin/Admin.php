@@ -186,15 +186,14 @@ class Admin extends CI_Controller
 	{
 		$this->load->model('M_User');
 		$this->load->model('M_kendaraan');
+		$this->load->model('MKlien');
 
-		$datakota = $this->M_kendaraan->getData();
 		$datakendaraan = $this->M_kendaraan->getKendaraan();
-		$datainstansi = $this->M_kendaraan->getInstansi();
+		$datainstansi = $this->MKlien->get(['deleted_date' => NULL, 'orderBy' => 'client_nama ASC']);
 
 		$data = [
 			'title' => "admin",
 			'auth' => $this->db->get_where('master_user', ['username' => $this->session->userdata('username')])->row_array(),
-			'datakota' => $datakota,
 			'datakendaraan' => $datakendaraan,
 			'datainstansi' => $datainstansi
 		];
@@ -220,8 +219,10 @@ class Admin extends CI_Controller
 	{
 		$this->load->model('M_User');
 		$this->load->model('M_Klien');
-		$dataKlien = $this->M_Klien->getKlien();
-		$dataWilayah = $this->M_Klien->getWilayah();
+		$this->load->model('MKlien');
+		$this->load->model('MDropdown');
+		$dataKlien = $this->MKlien->get(['deleted_date' => NULL]);
+		$dataWilayah = $this->MDropdown->get(['dropdown_menu' => 'Wilayah', 'deleted_date' => NULL, 'orderBy' => 'dropdown_list ASC']);
 
 		$data = [
 			'title' => "admin",

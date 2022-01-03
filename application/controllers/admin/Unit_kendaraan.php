@@ -24,15 +24,13 @@ class Unit_kendaraan extends CI_Controller{
         $valueRangka = $selectedValue[0];
         $valueStnk = $selectedValue[1];
         $data = [
-            "no_rangka_kendaraan"    => $valueRangka,
-            "stnk_kendaraan"         => $valueStnk,
-            "id_region"              => $_POST['kota'],
-            "id_instansi"            => $_POST['instansi'],
-            "tr_kendaraan_start"     => $_POST['tanggal_start'],
-            "tr_kendaraan_end"       => $_POST['tanggal_end']
+            "kendaraan_no_rangka"       => $valueRangka,
+            "kendaraan_stnk"            => $valueStnk,
+            "client_id"                 => $_POST['instansi'],
+            "transaksi_peminjaman_start"=> $_POST['tanggal_start'],
+            "transaksi_peminjaman_end"  => $_POST['tanggal_end']
         ];
-
-        $this->db->insert('transaksi_kendaraan', $data);
+        $this->db->insert('transaksi_peminjaman', $data);
 
         $this->session->set_flashdata('sukses', "Data Berhasil Disimpan");
         
