@@ -83,7 +83,7 @@ class Master_kendaraan extends CI_Controller
                 'kendaraan_merk'             => $this->input->post('merk'),
                 'kendaraan_tanggal_beli'     => $this->input->post('tanggal'),
                 'kendaraan_jenis'            => $jenis,
-                'kendaraan_pt'              => $jenis == "Perusahaan" ? $this->input->post('pt') : $jenis,
+                'kendaraan_pt'              => $jenis == "Perusahaan" ? $this->input->post('pt') : null,
                 'kendaraan_deadlinesim'     => $this->input->post('pajak'),
                 'kendaraan_deadlinekir'     => $this->input->post('kir'),
                 'kendaraan_kapasitas_tangki'     => $this->input->post('tangki'),
@@ -169,10 +169,13 @@ class Master_kendaraan extends CI_Controller
                     return false;
                 }
             }
-            $data['kendaraan_foto'] = $fotokendaraan;
+            $data['kendaraan_foto'] = str_replace(" ", "_", $fotokendaraan);
         }
+        $jenis = $this->input->post('jenis_kendaraan');
         $data['kendaraan_merk'] = $this->input->post('merk');
         $data['kendaraan_tanggal_beli'] = $this->input->post('tanggal');
+        $data['kendaraan_jenis'] = $jenis;
+        $data['kendaraan_pt'] = $jenis == "Perusahaan" ? $this->input->post('pt') : null;
         $data['is_active'] = $this->input->post('status');
         // $data = array(
         //     'kendaraan_merk'             => $this->input->post('merk'),

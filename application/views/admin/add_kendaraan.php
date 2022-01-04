@@ -51,7 +51,7 @@
                         <label class="my-3">Merk</label>
                         <input type="text" class="login-input regular" name="merk" value="<?= !empty($temp['merk']) ? $temp['merk'] : "" ?>" required>
                         <label class="my-3">Kapasitas Tangki</label>
-                        <input type="number" class="login-input regular" name="tangki" value="<?= !empty($temp['tangki']) ? $temp['tangki'] : "" ?>" required>
+                        <input type="number" class="login-input regular" onkeypress="return isNumberKey(event)" placeholder="Satuan Liter" name="tangki" value="<?= !empty($temp['tangki']) ? $temp['tangki'] : "" ?>" required>
                         <label class="my-3">Tanggal Beli</label>
                         <input type="date" class="login-input regular fs-16px" name="tanggal" id="datepicker" value="<?= !empty($temp['tanggal']) ? $temp['tanggal'] : "" ?>" required>
                         <label class="my-3">Tanggal Deadline Bayar Pajak</label>
@@ -113,4 +113,10 @@
             $('#pt').attr('disabled', false)
         }
     })
+    function isNumberKey(evt) {
+        var charCode = (evt.which) ? evt.which : evt.keyCode
+        if (charCode > 31 && (charCode < 48 || charCode > 57))
+            return false;
+        return true;
+    }
 </script>

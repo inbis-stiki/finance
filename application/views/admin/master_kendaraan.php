@@ -17,7 +17,7 @@
                             <?php
                             $template = array('table_open' => '<table class="table-custom">');
                             $this->table->set_template($template);
-                            $this->table->set_heading('No', 'No. Rangka', 'No. STNK', 'Merk', 'Tanggal Beli', 'Umur', 'Aksi');
+                            $this->table->set_heading('No', 'Foto', 'No. Rangka', 'No. STNK', 'Merk', 'Tanggal Beli', 'Umur', 'Aksi');
                             ?>
                         </tr>
                     </thead>
@@ -31,25 +31,28 @@
                                 $umur = date_diff(date_create($row->kendaraan_tanggal_beli), date_create($currentDate));
                                 $this->table->add_row(
                                     $no++,
+                                    '
+                                        <button type="button" class="btn-table orange view_masterKendaraan" data-bs-toggle="modal" data-bs-target="#view_masterKendaraan' . $row->kendaraan_no_rangka . '" title="Foto">
+                                            <span class="iconify-inline" data-icon="ic:baseline-insert-photo" data-width="20" data-height="21"></span>
+                                        </button>
+                                    ',
                                     $row->kendaraan_no_rangka,
                                     $row->kendaraan_stnk,
                                     $row->kendaraan_merk,
                                     $tgl,
                                     $umur->format("%y") . " Tahun",
                                     '
-                                    <button type="button" class="btn-table orange view_masterKendaraan" data-bs-toggle="modal" data-bs-target="#view_masterKendaraan' . $row->kendaraan_no_rangka . '" title="Foto">
-                                        <span class="iconify-inline" data-icon="ic:baseline-insert-photo" data-width="20" data-height="21"></span>
-                                    </button>
-                                    <a href="' .  base_url("admin/ubah_kendaraan/" . $row->kendaraan_no_rangka) . '" >
+                                    <a href="' .  base_url("admin/ubah_stnk/" . $row->kendaraan_no_rangka) . '" >
+                                        <button type="button" class="btn-table green edit_masterKendaraan btnEdit" title="Ubah STNK">
+                                            <span class="iconify-inline" data-icon="bx:bx-card" data-width="20" data-height="20"></span>
+                                        </button>
+                                    </a>
+                                    <a href="' .  base_url("admin/ubah_kendaraan/" . str_replace(" ", "_", $row->kendaraan_no_rangka)) . '" >
                                         <button type="button" class="btn-table edit_masterKendaraan btnEdit" title="Ubah">
                                             <span class="iconify-inline" data-icon="bx:bx-edit" data-width="20" data-height="20"></span>
                                         </button>
                                     </a>
-                                    <a href="' .  base_url("admin/ubah_stnk/" . $row->kendaraan_no_rangka) . '" >
-                                        <button type="button" class="btn-table edit_masterKendaraan btnEdit" title="Ubah STNK">
-                                            <span class="iconify-inline" data-icon="bx:bx-edit" data-width="20" data-height="20"></span>
-                                        </button>
-                                    </a>'
+                                    '
 
                                 );
 

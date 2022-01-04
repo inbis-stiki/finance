@@ -103,8 +103,12 @@ class Admin extends CI_Controller
 
 	public function ubah_kendaraan($id)
 	{
+		$id = str_replace('_', ' ', $id);
 		$this->load->model('M_User');
-		$this->load->model('M_kendaraan_master');
+		$this->load->model('M_kendaraan_master');$this->load->model('MDropdown');
+
+		$datajenis	= $this->MDropdown->get(['dropdown_menu' => 'Jenis Kendaraan', 'deleted_date' => NULL]);
+		$datapt		= $this->MDropdown->get(['dropdown_menu' => 'PT', 'deleted_date' => NULL]);
 		$dataEdit = $this->M_kendaraan_master->getById($id);
 
 
@@ -112,7 +116,9 @@ class Admin extends CI_Controller
 		$data = [
 			'title' => "admin",
 			'auth' => $this->db->get_where('master_user', ['username' => $this->session->userdata('username')])->row_array(),
-			'kendaraan' => $dataEdit
+			'kendaraan' => $dataEdit,
+			'datajenis' => $datajenis,
+			'datapt' 	=> $datapt
 		];
 
 
