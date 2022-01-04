@@ -56,15 +56,34 @@ class Master_kendaraan extends CI_Controller
                     $tmpdata = $this->upload->data();
                     // $fotokendaraan .= $tmpdata['file_name'] . ", ";
                 } else {
+                    $this->load->model('M_User');
+                    $this->load->model('MDropdown');
+        
+                    $datajenis	= $this->MDropdown->get(['dropdown_menu' => 'Jenis Kendaraan', 'deleted_date' => NULL]);
+                    $datapt		= $this->MDropdown->get(['dropdown_menu' => 'PT', 'deleted_date' => NULL]);
+        
+                    $data = [
+                        'title' => "admin",
+                        'auth' => $this->db->get_where('master_user', ['username' => $this->session->userdata('username')])->row_array(),
+                        'temp' => $_POST,
+                        'datajenis' => $datajenis,
+                        'datapt' 	=> $datapt
+                    ];
+        
+                    $this->session->set_flashdata('err_msg', $this->upload->display_errors());
+                    $this->template->index('admin/add_kendaraan', $data);
+                    $this->load->view('_components/sideNavigation', $data);
                     return false;
                 }
             }
+            $jenis = $this->input->post('jenis_kendaraan');
             $data = array(
                 'kendaraan_no_rangka'         => strtoupper($this->input->post('rangka')),
                 'kendaraan_stnk'             => strtoupper($this->input->post('stnk')),
                 'kendaraan_merk'             => $this->input->post('merk'),
                 'kendaraan_tanggal_beli'     => $this->input->post('tanggal'),
-                'kendaraan_jenis'            => $this->input->post('jenis_kendaraan'),
+                'kendaraan_jenis'            => $jenis,
+                'kendaraan_pt'              => $jenis == "Perusahaan" ? $this->input->post('pt') : $jenis,
                 'kendaraan_deadlinesim'     => $this->input->post('pajak'),
                 'kendaraan_deadlinekir'     => $this->input->post('kir'),
                 'kendaraan_kapasitas_tangki'     => $this->input->post('tangki'),
@@ -85,16 +104,17 @@ class Master_kendaraan extends CI_Controller
         } else {
 
             $this->load->model('M_User');
-            $this->load->model('M_add_kendaraan');
+            $this->load->model('MDropdown');
 
-            $datakota = $this->M_add_kendaraan->getData();
-            $datakendaraan = $this->M_add_kendaraan->getKendaraan();
-            $datainstansi = $this->M_add_kendaraan->getInstansi();
+            $datajenis	= $this->MDropdown->get(['dropdown_menu' => 'Jenis Kendaraan', 'deleted_date' => NULL]);
+            $datapt		= $this->MDropdown->get(['dropdown_menu' => 'PT', 'deleted_date' => NULL]);
 
             $data = [
                 'title' => "admin",
                 'auth' => $this->db->get_where('master_user', ['username' => $this->session->userdata('username')])->row_array(),
-                'temp' => $_POST
+                'temp' => $_POST,
+                'datajenis' => $datajenis,
+                'datapt' 	=> $datapt
             ];
 
             $this->session->set_flashdata('err_msg', 'Data No Rangka & STNK telah tersimpan!');

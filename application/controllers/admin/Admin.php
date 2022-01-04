@@ -85,18 +85,16 @@ class Admin extends CI_Controller
 	public function tambah_kendaraan()
 	{
 		$this->load->model('M_User');
-		$this->load->model('M_add_kendaraan');
+		$this->load->model('MDropdown');
 
-		$datakota = $this->M_add_kendaraan->getData();
-		$datakendaraan = $this->M_add_kendaraan->getKendaraan();
-		$datainstansi = $this->M_add_kendaraan->getInstansi();
+		$datajenis	= $this->MDropdown->get(['dropdown_menu' => 'Jenis Kendaraan', 'deleted_date' => NULL]);
+		$datapt		= $this->MDropdown->get(['dropdown_menu' => 'PT', 'deleted_date' => NULL]);
 
 		$data = [
-			'title' => "admin",
-			'auth' => $this->db->get_where('master_user', ['username' => $this->session->userdata('username')])->row_array(),
-			'datakota' => $datakota,
-			'datakendaraan' => $datakendaraan,
-			'datainstansi' => $datainstansi
+			'title' 	=> "admin",
+			'auth' 		=> $this->db->get_where('master_user', ['username' => $this->session->userdata('username')])->row_array(),
+			'datajenis' => $datajenis,
+			'datapt' 	=> $datapt
 		];
 
 		$this->template->index('admin/add_kendaraan', $data);
