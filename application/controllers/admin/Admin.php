@@ -275,16 +275,19 @@ class Admin extends CI_Controller
 	public function master_dropdown()
 	{
 		$this->load->model('M_User');
-		$this->load->model('M_Dropdown');
-		$dataDropdownWil = $this->M_Dropdown->getDropdownWilayah();
-		$dataDropdownSIM = $this->M_Dropdown->getDropdownSIM();
-		$dataDropdownPT = $this->M_Dropdown->getDropdownPT();
+		$this->load->model('MDropdown');
+
+		$dataDropdownWil 	= $this->MDropdown->get(['dropdown_menu' => 'Wilayah', 'deleted_date' => NULL]);
+		$dataDropdownSIM 	= $this->MDropdown->get(['dropdown_menu' => 'SIM', 'deleted_date' => NULL]);
+		$dataDropdownPT 	= $this->MDropdown->get(['dropdown_menu' => 'PT', 'deleted_date' => NULL]);
+		$dataDropdownJenKen = $this->MDropdown->get(['dropdown_menu' => 'Jenis Kendaraan', 'deleted_date' => NULL]);
 
 		$data = [
 			'title' => "admin",
 			'Dropdown' => $dataDropdownWil,
 			'SIM' => $dataDropdownSIM,
 			'PT' => $dataDropdownPT,
+			'JenKen' => $dataDropdownJenKen,
 			'auth' => $this->db->get_where('master_user', ['username' => $this->session->userdata('username')])->row_array()
 		];
 
