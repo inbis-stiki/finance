@@ -87,3 +87,7 @@ $route['admin/form_pengajuan/jenis_biaya'] = 'admin/Admin/jenis_biaya';
 
 // Klien
 $route['admin/ajxGetKlien']      = 'admin/Klien/ajxGetKlien';
+
+// Jenis Biaya
+$route['admin/jenis-biaya']                         = 'admin/JenisBiaya';
+$route['admin/jenis-biaya/store-administrasi']      = 'admin/JenisBiaya/storeAdministrasi';

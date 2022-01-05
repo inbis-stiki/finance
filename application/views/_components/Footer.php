@@ -10,6 +10,12 @@
     
     <script src="<?= site_url() ?>/assets/src/js/style.js"></script>
     <script>
+        function isNumberKey(evt) {
+            var charCode = (evt.which) ? evt.which : evt.keyCode
+            if (charCode > 31 && (charCode < 48 || charCode > 57))
+                return false;
+            return true;
+        }
         const getFullMonth = month => {
             switch (month) {
                 case 0:

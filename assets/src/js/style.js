@@ -26,10 +26,21 @@ $(document).ready(function () {
 
 $(document).ready(function () {
     $("#input-administrasi").click(function () {
-        $(".administrasi-extend").addClass('active');
-        $(".submit-administrasi").prop('disabled', false);
-        $(".input-administrasi").hide();
-        $(".input-administrasi-input").prop('disabled', true);
+        const kendaraan = $('#adm_slct_kendaraan').val()
+        const tglTrans = $('#adm_inpt_tglBeli').val()
+        
+        if(kendaraan && tglTrans){
+            $('#adm_alert').attr('hidden', true);
+            $('#adm_boxInput').html(admRenderHtml())
+            $(".administrasi-extend").addClass('active');
+            $(".submit-administrasi").prop('disabled', false);
+            $(".input-administrasi").hide();
+            $(".input-administrasi-input").prop('disabled', true);    
+            $('#adm_inptKendaraan').val(kendaraan)
+            $('#adm_inptTglTrans').val(tglTrans)
+        }else{
+            $('#adm_alert').attr('hidden', false);
+        }
     });
     $("#input-maintenance").click(function () {
         $(".maintenance-extend").addClass('active');

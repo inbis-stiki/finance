@@ -26,3 +26,12 @@
         </div>
     </div>
 </div>
+<script>
+    $(document).ready(function(){
+        <?php
+            if($this->session->flashdata('succ_modal')){
+                echo '$("#success").modal("show")';
+            }    
+        ?>
+    })
+</script>
