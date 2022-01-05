@@ -34,7 +34,7 @@
                                 }else{
                                     $aksiAssign = '
                                         <button type="button" data-id="' . $row->driver_nik . '" class="btn-table green assign_masterDriver btnAssign" data-bs-toggle="modal" data-bs-target="#assign_masterDriver">
-                                            <span class="iconify-inline" data-icon="fa-solid:car-alt" data-width="20" data-height="20"></span>
+                                            <span class="iconify-inline" data-icon="ps:car" data-width="20" data-height="20"></span>
                                         </button>
                                     ';
                                 }

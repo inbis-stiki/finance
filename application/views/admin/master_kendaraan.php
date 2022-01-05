@@ -59,7 +59,7 @@
                                     $umur->format("%y") . " Tahun",
                                     '
                                     <button type="button" data-id="' . $row->kendaraan_no_rangka . '" data-stnk="' . $row->kendaraan_stnk . '" class="btn-table green stnk_masterKendaraan btnStnk" data-bs-toggle="modal" data-bs-target="#stnk_masterKendaraan">
-                                        <span class="iconify-inline" data-icon="bx:bx-card" data-width="20" data-height="20"></span>
+                                        <span class="iconify-inline" data-icon="bi:credit-card" data-width="20" data-height="20"></span>
                                     </button>
                                     <a href="' .  base_url("admin/ubah_kendaraan/" . str_replace(" ", "_", $row->kendaraan_no_rangka)) . '" >
                                         <button type="button" class="btn-table edit_masterKendaraan btnEdit" title="Ubah">

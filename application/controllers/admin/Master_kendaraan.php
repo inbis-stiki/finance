@@ -14,6 +14,12 @@ class Master_kendaraan extends CI_Controller
         $this->load->library('form_validation');
         $this->load->model('M_kendaraan_master');
     }
+    public function ajxGetKendaraan(){
+        $this->load->model('MKendaraan');
+        $id = explode('|', $_POST['id']);
+        $kendaraan = $this->MKendaraan->getById($id[0], $id[1]);
+        echo json_encode($kendaraan);
+    }
 
     public function aksiTambahKendaraan()
     {
@@ -307,6 +313,7 @@ class Master_kendaraan extends CI_Controller
             $test = $this->db->last_query();
             echo $test;
         }
+        
 
         // $rangka = $this->input->post('kendaraan_no_rangka');
         // $config['upload_path'] = './assets/images/fotokendaraan';

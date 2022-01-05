@@ -47,6 +47,13 @@ class Klien extends CI_Controller
         redirect('admin/master_klien');
     }
 
+
+    public function ajxGetKlien(){
+        // $id = explode('|', $_POST['id']);
+        $kendaraan = $this->MKlien->getById($_POST['id']);
+        echo json_encode($kendaraan);
+    }
+
     function aksiEditKlien()
     {
         $data = [

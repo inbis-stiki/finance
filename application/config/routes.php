@@ -79,7 +79,11 @@ $route['admin/aksiTambahKendaraan']      = 'admin/Master_kendaraan/aksiTambahKen
 $route['admin/ubah_kendaraan/(:any)']  = 'admin/Admin/ubah_kendaraan/$1';
 $route['admin/aksiUbahKendaraan']      = 'admin/Master_kendaraan/aksiUbahKendaraan';
 $route['admin/aksiUbahSTNK']      = 'admin/Master_kendaraan/aksiUbahSTNK';
+$route['admin/ajxGetKendaraan']      = 'admin/Master_kendaraan/ajxGetKendaraan';
 
 // Pencatatan
 $route['admin/form_pengajuan/unit_kendaraan'] = 'admin/Admin/unit_kendaraan';
 $route['admin/form_pengajuan/jenis_biaya'] = 'admin/Admin/jenis_biaya';
+
+// Klien
+$route['admin/ajxGetKlien']      = 'admin/Klien/ajxGetKlien';
