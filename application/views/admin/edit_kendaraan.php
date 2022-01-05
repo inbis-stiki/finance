@@ -65,6 +65,32 @@
                         <label class="my-3">Tanggal Beli</label>
                         <input type="date" class="login-input regular fs-16px" name="tanggal" id="datepicker" value="<?= $kendaraan->kendaraan_tanggal_beli ?>" required>
                         <label class="my-3">Status Kendaraan</label>
+                        <select name="jenis_kendaraan" id="jenis_kendaraan" class="login-input regular fs-16px" required>
+                            <option value="" disabled>Pilih Jenis Kendaraan</option>
+                            <?php
+                                foreach ($datajenis as $item) {
+                                    $status = '';
+                                    if($kendaraan->kendaraan_jenis == $item->dropdown_list){
+                                        $status = 'selected';
+                                    }
+                                    echo '
+                                        <option value="'.$item->dropdown_list.'" '.$status.' >'.$item->dropdown_list.'</option>
+                                    ';
+                                }
+                            ?>
+                        </select>
+                        <label class="my-3 groupPT" hidden="true">Nama Perusahaan</label>
+                        <select name="pt" id="pt" class="login-input regular fs-16px groupPT" hidden="true">
+                            <option value="" disabled selected>Pilih Perusahaan</option>
+                            <?php
+                                foreach ($datapt as $item) {
+                                    echo '
+                                        <option value="'.$item->dropdown_list.'">'.$item->dropdown_list.'</option>
+                                    ';
+                                }
+                            ?>
+                        </select>
+                        <label class="my-3">Status</label>
                         <select class="login-input regular" name="status" id="" required>
                             <option value="">Pilih Status</option>
                             <option value="1" selected>Aktif</option>
@@ -91,3 +117,23 @@
     </script>
 
 <?php } ?>
+<script>
+    $(document).ready(function(){
+        const jenKend = "<?= $kendaraan->kendaraan_jenis ?>"
+        if(jenKend == "Perusahaan"){
+            $('.groupPT').attr('hidden', false)
+            $('#pt').attr('disabled', false)
+            $('#pt').val("<?= $kendaraan->kendaraan_pt?>").change()
+        }
+    })
+    $('#jenis_kendaraan').change(function(){
+        const val = $(this).val()
+        if(val == 'Pribadi'){
+            $('.groupPT').attr('hidden', true)
+            $('#pt').attr('disabled', true)
+        }else{
+            $('.groupPT').attr('hidden', false)
+            $('#pt').attr('disabled', false)
+        }
+    })
+</script>

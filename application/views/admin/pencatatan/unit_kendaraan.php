@@ -12,21 +12,32 @@
             <div class="body form">
                 <div class="col-12 col-lg-12 pe-0 d-flex flex-column justify-content-between">
                     <label class="mb-3">Kendaraan</label>
-                    <select name="kendaraan" class="form-control" required>
-
+                    <select name="kendaraan" class="form-control" id="slct_kendaraan" required>
                         <option value="" disabled selected>Pilih Kendaraan</option>
                         <?php foreach ($datakendaraan as $key) : ?>
                             <option value="<?php echo $key->kendaraan_no_rangka ?>|<?php echo $key->kendaraan_stnk ?>"><?php echo $key->kendaraan_stnk ?></option>
                         <?php endforeach ?>
                     </select>
+                    <div class="mt-3" id="boxInfoKendaraan" hidden>
+                        <button type="button" class="btn-table" data-bs-toggle="modal" data-bs-target="#info_kendaraan">
+                            <span class="iconify-inline" data-icon="ps:car" data-width="15" data-height="15"></span>
+                            <span>Info Kendaraan</span>
+                        </button>
+                    </div>
                     <label class="my-3">Klien</label>
-                    <select name="instansi" class="form-control" required>
+                    <select name="instansi" class="form-control" id="slct_klien" required>
 
                         <option value="" disabled selected>Pilih Klien</option>
                         <?php foreach ($datainstansi as $key) : ?>
                             <option value="<?php echo $key->client_id ?>"><?php echo $key->client_nama ?></option>
                         <?php endforeach ?>
                     </select>
+                    <div class="mt-3" id="boxInfoKlien" hidden>
+                        <button type="button" class="btn-table" data-bs-toggle="modal" data-bs-target="#info_klien">
+                            <span class="iconify-inline" data-icon="akar-icons:people-group" data-width="15" data-height="15"></span>
+                            <span>Info Klien</span>
+                        </button>
+                    </div>
                     <div class="row m-0 p-0 w-100">
                         <div class="col-12 col-lg-6 ps-0">
                             <label class="my-3">Tanggal Awal Transaksi</label>
@@ -48,6 +59,160 @@
         <?= form_close(); ?>
     </div>
 </div>
+<!-- Modal Info Kendaraan -->
+<div class="modal fade" id="info_kendaraan" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl">
+        <div class="modal-content p-2">
+            <div class="modal-header">
+                <p class="font-w-700 color-darker mb-0">Info Kendaraan</p>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body fs-14px pt-0 d-flex flex-column">
+                <div class="pb-4">
+                    <div class="d-flex flex-column my-2 w-100">
+                        <label class="my-2 color-secondary">Foto Kendaraan</label>
+                        <input type="date" class="login-input regular fs-16px" name="awal" id="datepicker" value="">
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="d-flex flex-column my-2 w-100 col-md-6">
+                                <label class="my-2 color-secondary">Nomor Rangka</label>
+                                <input type="text" class="login-input regular fs-16px" name="" id="kendaraan_rangka" value="" disabled>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="d-flex flex-column my-2 w-100 col-md-6">
+                                <label class="my-2 color-secondary">Nomor STNK</label>
+                                <input type="text" class="login-input regular fs-16px" name="" id="kendaraan_stnk" value="" disabled>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="d-flex flex-column my-2 w-100 col-md-6">
+                                <label class="my-2 color-secondary">Merk</label>
+                                <input type="text" class="login-input regular fs-16px" name="" id="kendaraan_merk" value="" disabled>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="d-flex flex-column my-2 w-100 col-md-6">
+                                <label class="my-2 color-secondary">Pemilik</label>
+                                <input type="text" class="login-input regular fs-16px" name="" id="kendaraan_pemilik" value="" disabled>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="d-flex flex-column my-2 w-100 col-md-6">
+                                <label class="my-2 color-secondary">Tanggal Jatuh SIM</label>
+                                <input type="text" class="login-input regular fs-16px" name="" id="kendaraan_tgljatuhsim" value="" disabled>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="d-flex flex-column my-2 w-100 col-md-6">
+                                <label class="my-2 color-secondary">Tanggal Jatuh KIR</label>
+                                <input type="text" class="login-input regular fs-16px" name="" id="kendaraan_tgljatuhkir" value="" disabled>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="d-flex flex-column my-2 w-100 col-md-6">
+                                <label class="my-2 color-secondary">Kapasitas Tangki</label>
+                                <input type="text" class="login-input regular fs-16px" name="" id="kendaraan_kapasitas" value="" disabled>
+                            </div>
+                        </div>
+                        <div class="col">
+                            
+                            <div class="d-flex flex-column my-2 w-100 col-md-6">
+                                <label class="my-2 color-secondary">Umur</label>
+                                <input type="text" class="login-input regular fs-16px" name="" id="kendaraan_umur" value="" disabled>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <input type="hidden" class="login-input regular fs-16px" name="driver_nik">
+                    <button class="btn-table submit-modal mt-5" data-bs-dismiss="modal">Tutup</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal Info Klien -->
+<div class="modal fade" id="info_klien" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl">
+        <div class="modal-content p-2">
+            <div class="modal-header">
+                <p class="font-w-700 color-darker mb-0">Info Klien</p>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body fs-14px pt-0 d-flex flex-column">
+                <div class="pb-4">
+                    <div class="row">
+                        <div class="col">
+                            <div class="d-flex flex-column my-2 w-100 col-md-6">
+                                <label class="my-2 color-secondary">Nama</label>
+                                <input type="text" class="login-input regular fs-16px" name="" id="klien_nama" value="" disabled>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="d-flex flex-column my-2 w-100 col-md-6">
+                                <label class="my-2 color-secondary">Jenis</label>
+                                <input type="text" class="login-input regular fs-16px" name="" id="klien_jenis" value="" disabled>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="d-flex flex-column my-2 w-100 col-md-6">
+                                <label class="my-2 color-secondary">Alamat</label>
+                                <input type="text" class="login-input regular fs-16px" name="" id="klien_alamat" value="" disabled>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="d-flex flex-column my-2 w-100 col-md-6">
+                                <label class="my-2 color-secondary">Kontak</label>
+                                <input type="text" class="login-input regular fs-16px" name="" id="klien_kontak" value="" disabled>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="d-flex flex-column my-2 w-100 col-md-6">
+                                <label class="my-2 color-secondary">NPWP</label>
+                                <input type="text" class="login-input regular fs-16px" name="" id="klien_npwp" value="" disabled>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="d-flex flex-column my-2 w-100 col-md-6">
+                                <label class="my-2 color-secondary">Nomor Rekening</label>
+                                <input type="text" class="login-input regular fs-16px" name="" id="klien_norek" value="" disabled>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="d-flex flex-column my-2 w-100">
+                                <label class="my-2 color-secondary">Wilayah</label>
+                                <input type="text" class="login-input regular fs-16px" name="" id="klien_wilayah" value="" disabled>
+                            </div>
+                        </div>
+                        <!-- <div class="col">
+                            
+                            <div class="d-flex flex-column my-2 w-100 col-md-6">
+                                <label class="my-2 color-secondary">Umur</label>
+                                <input type="text" class="login-input regular fs-16px" name="" id="kendaraan_umur" value="" disabled>
+                            </div>
+                        </div> -->
+                    </div>
+                    
+                    <input type="hidden" class="login-input regular fs-16px" name="driver_nik">
+                    <button class="btn-table submit-modal mt-5" data-bs-dismiss="modal">Tutup</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <?php if ((($this->session->flashdata('sukses'))) && $this->session->flashdata('sukses') != "") { ?>
 
@@ -58,3 +223,61 @@
     </script>
 
 <?php } ?>
+<script>
+    $('#slct_kendaraan').change(function(){
+        const id = $(this).val()
+        if(id){
+            $.ajax({
+                url: '<?= site_url('admin/ajxGetKendaraan')?>',
+                method: 'post',
+                data: {id},
+                success: function(res){
+                    res = JSON.parse(res)
+                    res['kendaraan_jenis'] = res['kendaraan_jenis'] == "Perusahaan" ? `${res['kendaraan_jenis']} | ${res['kendaraan_pt']}` : res['kendaraan_jenis'];
+
+                    tglJatuhSim = new Date(res['kendaraan_deadlinesim']);
+                    tglJatuhSim = `${tglJatuhSim.getDay()} ${getFullMonth(tglJatuhSim.getMonth())} ${tglJatuhSim.getFullYear()}`;
+                    
+                    tglJatuhKIR = new Date(res['kendaraan_deadlinekir']);
+                    tglJatuhKIR = `${tglJatuhKIR.getDay()} ${getFullMonth(tglJatuhKIR.getMonth())} ${tglJatuhKIR.getFullYear()}`;
+
+                    $('#kendaraan_rangka').val(res['kendaraan_no_rangka']);
+                    $('#kendaraan_stnk').val(res['kendaraan_stnk']);
+                    $('#kendaraan_merk').val(res['kendaraan_merk']);
+                    $('#kendaraan_pemilik').val(res['kendaraan_jenis']);
+                    $('#kendaraan_tgljatuhsim').val(tglJatuhSim);
+                    $('#kendaraan_tgljatuhkir').val(tglJatuhKIR);
+                    $('#kendaraan_kapasitas').val(res['kendaraan_kapasitas_tangki']+" Liter");
+                    // $('#kendaraan_rangka').val(res['kendaraan_tanggal_beli']);
+                    $('#boxInfoKendaraan').attr('hidden', false);
+                }
+            })
+        }else{
+            $('#boxInfoKendaraan').attr('hidden', true);
+        }
+    })
+    $('#slct_klien').change(function(){
+        const id = $(this).val()
+        if(id){
+            $.ajax({
+                url: '<?= site_url('admin/ajxGetKlien')?>',
+                method: 'post',
+                data: {id},
+                success: function(res){
+                    res = JSON.parse(res)
+                    $('#klien_nama').val(res['client_nama']);
+                    $('#klien_jenis').val(res['client_jenis']);
+                    $('#klien_alamat').val(res['client_alamat']);
+                    $('#klien_kontak').val(res['client_contact']);
+                    $('#klien_npwp').val(res['client_npwp']);
+                    $('#klien_norek').val(res['client_norek']);
+                    $('#klien_wilayah').val(res['client_region']);
+
+                    $('#boxInfoKlien').attr('hidden', false);
+                }
+            })
+        }else{
+            $('#boxInfoKlien').attr('hidden', true);
+        }
+    })
+</script>

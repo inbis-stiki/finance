@@ -34,7 +34,7 @@
                                 }else{
                                     $aksiAssign = '
                                         <button type="button" data-id="' . $row->driver_nik . '" class="btn-table green assign_masterDriver btnAssign" data-bs-toggle="modal" data-bs-target="#assign_masterDriver">
-                                            <span class="iconify-inline" data-icon="fa-solid:car-alt" data-width="20" data-height="20"></span>
+                                            <span class="iconify-inline" data-icon="ps:car" data-width="20" data-height="20"></span>
                                         </button>
                                     ';
                                 }
@@ -50,12 +50,12 @@
                                     $tanggal,
 
                                     '
+                                    '.$aksiAssign.'
                                     <a href="' .  base_url("admin/ubah_driver/" . $row->driver_nik) . '" >
                                         <button type="button" class="btn-table edit_masterDriver btnEdit">
                                             <span class="iconify-inline" data-icon="bx:bx-edit" data-width="20" data-height="20"></span>
                                         </button>
                                     </a>
-                                    '.$aksiAssign.'
                                     <button type="button" data-id="' . $row->driver_nik . '" class="btn-table red hapus_masterDriver btnHapus" data-bs-toggle="modal" data-bs-target="#hapus_masterDriver">
                                         <span class="iconify-inline" data-icon="carbon:trash-can" data-width="20" data-height="20"></span>
                                     </button>

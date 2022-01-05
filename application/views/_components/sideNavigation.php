@@ -42,7 +42,7 @@
 
             <div class="sub-nav">
                 <a href="<?= site_url() ?>admin/form_pengajuan/unit_kendaraan">Peminjaman</a>
-                <a href="<?= site_url() ?>admin/form_pengajuan/jenis_biaya">Sparepart</a>
+                <a href="<?= site_url() ?>admin/jenis-biaya">Sparepart</a>
             </div>
         </div>
 

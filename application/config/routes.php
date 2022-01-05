@@ -78,9 +78,16 @@ $route['admin/aksiUbahDriver']      = 'admin/Driver/aksiUbahDriver';
 $route['admin/aksiTambahKendaraan']      = 'admin/Master_kendaraan/aksiTambahKendaraan';
 $route['admin/ubah_kendaraan/(:any)']  = 'admin/Admin/ubah_kendaraan/$1';
 $route['admin/aksiUbahKendaraan']      = 'admin/Master_kendaraan/aksiUbahKendaraan';
-$route['admin/ubah_stnk/(:any)']  = 'admin/Admin/ubah_stnk/$1';
-$route['admin/aksiUbahStnk']      = 'admin/Master_kendaraan/aksiUbahStnk';
+$route['admin/aksiUbahSTNK']      = 'admin/Master_kendaraan/aksiUbahSTNK';
+$route['admin/ajxGetKendaraan']      = 'admin/Master_kendaraan/ajxGetKendaraan';
 
 // Pencatatan
 $route['admin/form_pengajuan/unit_kendaraan'] = 'admin/Admin/unit_kendaraan';
 $route['admin/form_pengajuan/jenis_biaya'] = 'admin/Admin/jenis_biaya';
+
+// Klien
+$route['admin/ajxGetKlien']      = 'admin/Klien/ajxGetKlien';
+
+// Jenis Biaya
+$route['admin/jenis-biaya']                         = 'admin/JenisBiaya';
+$route['admin/jenis-biaya/store-administrasi']      = 'admin/JenisBiaya/storeAdministrasi';
