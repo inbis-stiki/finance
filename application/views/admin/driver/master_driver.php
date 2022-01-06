@@ -30,7 +30,7 @@
                                 $aksiAssign = "";
                                 $kendaraan  = '-';
                                 if($transaksiKendaraan != null){
-                                    $kendaraan = $transaksiKendaraan[0]->kendaraan_stnk;
+                                    $kendaraan = '<a class="btnInfoKendaraan" data-bs-toggle="modal" data-id="'.$transaksiKendaraan[0]->kendaraan_no_rangka.'|'.$transaksiKendaraan[0]->kendaraan_stnk.'" data-bs-target="#info_kendaraan" style="color: blue;text-decoration: underline;cursor: pointer;">'.$transaksiKendaraan[0]->kendaraan_stnk.'</a>';
                                 }else{
                                     $aksiAssign = '
                                         <button type="button" data-id="' . $row->driver_nik . '" class="btn-table green assign_masterDriver btnAssign" data-bs-toggle="modal" data-bs-target="#assign_masterDriver">
@@ -137,6 +137,103 @@
                 </div>
             </div>
         </div>
+        <!-- Modal Info Kendaraan -->
+        <div class="modal fade" id="info_kendaraan" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-xl">
+                <div class="modal-content p-2">
+                    <div class="modal-header">
+                        <p class="font-w-700 color-darker mb-0">Info Kendaraan</p>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body fs-14px pt-0 d-flex flex-column">
+                        <div class="pb-4">
+                            
+                            <div class="row">
+                                <div class="col">
+                                    <div class="d-flex flex-column my-2 w-100 col-md-6">
+                                        <label class="my-2 color-secondary">Foto Kendaraan</label>
+                                        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+                                            <ol class="carousel-indicators">
+                                            </ol>
+                                            <div class="carousel-inner">
+                                            </div>
+                                            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-bs-slide="prev">
+                                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                                <span class="sr-only"></span>
+                                            </a>
+                                            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-bs-slide="next">
+                                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                                <span class="sr-only"></span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="d-flex flex-column my-2 w-100 col-md-6">
+                                                <label class="my-2 color-secondary">Nomor Rangka</label>
+                                                <input type="text" class="login-input regular fs-16px" name="" id="kendaraan_rangka" value="" disabled>
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="d-flex flex-column my-2 w-100 col-md-6">
+                                                <label class="my-2 color-secondary">Nomor STNK</label>
+                                                <input type="text" class="login-input regular fs-16px" name="" id="kendaraan_stnk" value="" disabled>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="d-flex flex-column my-2 w-100 col-md-6">
+                                                <label class="my-2 color-secondary">Merk</label>
+                                                <input type="text" class="login-input regular fs-16px" name="" id="kendaraan_merk" value="" disabled>
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="d-flex flex-column my-2 w-100 col-md-6">
+                                                <label class="my-2 color-secondary">Kapasitas Tangki</label>
+                                                <input type="text" class="login-input regular fs-16px" name="" id="kendaraan_kapasitas" value="" disabled>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="d-flex flex-column my-2 w-100 col-md-6">
+                                                <label class="my-2 color-secondary">Tanggal Jatuh SIM</label>
+                                                <input type="text" class="login-input regular fs-16px" name="" id="kendaraan_tgljatuhsim" value="" disabled>
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="d-flex flex-column my-2 w-100 col-md-6">
+                                                <label class="my-2 color-secondary">Tanggal Jatuh KIR</label>
+                                                <input type="text" class="login-input regular fs-16px" name="" id="kendaraan_tgljatuhkir" value="" disabled>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="d-flex flex-column my-2 w-100 col-md-6">
+                                                <label class="my-2 color-secondary">Pemilik</label>
+                                                <input type="text" class="login-input regular fs-16px" name="" id="kendaraan_pemilik" value="" disabled>
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                        <div class="d-flex flex-column my-2 w-100 col-md-6">
+                                            <label class="my-2 color-secondary">Umur</label>
+                                            <input type="text" class="login-input regular fs-16px" name="" id="kendaraan_umur" value="" disabled>
+                                        </div>
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <input type="hidden" class="login-input regular fs-16px" name="driver_nik">
+                            <button class="btn-table submit-modal mt-5" data-bs-dismiss="modal">Tutup</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <script>
             $('#tableDriver tbody').on('click', '.btnHapus', function() {
                 const id = $(this).data('id')
@@ -146,6 +243,61 @@
             $('#tableDriver tbody').on('click', '.btnAssign', function() {
                 const id = $(this).data('id')
                 $('input[name=driver_nik]').val(id);
+            })
+            $('#tableDriver tbody').on('click', '.btnInfoKendaraan', function() {
+                const id = $(this).data('id')
+                $.ajax({
+                    url: '<?= site_url('admin/ajxGetKendaraan')?>',
+                    method: 'post',
+                    data: {id},
+                    success: function(res){
+                        res = JSON.parse(res)
+                        res['kendaraan_jenis'] = res['kendaraan_jenis'] == "Perusahaan" ? `${res['kendaraan_pt']}` : res['kendaraan_jenis'];
+
+                        tglJatuhSim = new Date(res['kendaraan_deadlinesim']);
+                        tglJatuhSim = `${tglJatuhSim.getDay()} ${getFullMonth(tglJatuhSim.getMonth())} ${tglJatuhSim.getFullYear()}`;
+                        
+                        tglJatuhKIR = new Date(res['kendaraan_deadlinekir']);
+                        tglJatuhKIR = `${tglJatuhKIR.getDay()} ${getFullMonth(tglJatuhKIR.getMonth())} ${tglJatuhKIR.getFullYear()}`;
+
+                        $('#kendaraan_rangka').val(res['kendaraan_no_rangka']);
+                        $('#kendaraan_stnk').val(res['kendaraan_stnk']);
+                        $('#kendaraan_merk').val(res['kendaraan_merk']);
+                        $('#kendaraan_pemilik').val(res['kendaraan_jenis']);
+                        $('#kendaraan_tgljatuhsim').val(tglJatuhSim);
+                        $('#kendaraan_tgljatuhkir').val(tglJatuhKIR);
+                        $('#kendaraan_kapasitas').val(res['kendaraan_kapasitas_tangki']+" Liter");
+
+                        let index = 0;
+                        let indicators = '';
+                        let carouselInner = '';
+                        let status = 'active';
+
+                        for(let i of res['kendaraan_foto']){
+                            if(index != 0){
+                                status = '';
+                            }
+                            
+                            indicators += `
+                                <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="${index}" class="${status}"></li>
+                            `;
+
+                            carouselInner += `
+                                <div class="carousel-item ${status}">
+                                    <img class="d-block imgItem" style="height: 312px;width: 600px;background-size: cover;" src="<?= site_url('')?>assets/images/fotokendaraan/${i}" alt="Second slide" alt="">
+                                </div>
+                            `;
+                            index++
+                        }
+                        $('.carousel-indicators').html(indicators)
+                        $('.carousel-inner').html(carouselInner)
+                        $('.carousel-item').zoom({
+                            on: 'grab'
+                        })
+
+                        $('#boxInfoKendaraan').attr('hidden', false);
+                    }
+                })
             })
         </script>
         <div class="foot">

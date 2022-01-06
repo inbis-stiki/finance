@@ -18,6 +18,7 @@ class Master_kendaraan extends CI_Controller
         $this->load->model('MKendaraan');
         $id = explode('|', $_POST['id']);
         $kendaraan = $this->MKendaraan->getById($id[0], $id[1]);
+        $kendaraan->kendaraan_foto = json_decode($kendaraan->kendaraan_foto);
         echo json_encode($kendaraan);
     }
 

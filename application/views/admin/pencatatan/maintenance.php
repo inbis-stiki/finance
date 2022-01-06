@@ -50,7 +50,7 @@
         <div id="main_boxInput">
 
         </div>
-        <button type="button" class="btn-table add-entry mt-3" id="main_tambahInput">
+        <button style="color: gray !important;" type="button" class="btn-table add-entry mt-3" id="main_tambahInput">
             Tambah Data
         </button>
     </div>
@@ -84,66 +84,69 @@
 
     $('#main_tambahInput').click(function(){
         $('#main_boxInput').append(mainRenderHtml())
+        generateNoMaintenance();
     })
     const mainRenderHtml = () => {
         main_inptCount++;
         return `
-            <p class="font-w-700 fs-16px my-2">
-                <button type="button" class="btn-table red">
-                    <span class="iconify-inline" data-icon="carbon:trash-can"data-width="15" data-height="15"></span>
-                </button>
-                &nbsp;
-                Pengeluaran ${main_inptCount}
-            </p>
-            <div class="row m-0 p-0 w-100">
-                <div class="col-12 col-lg-6 ps-0">
-                    <label class="mb-3">Jenis Pengeluaran</label>
-                    <select name="jenPeng[]" id="" class="login-input regular fs-16px" required>
-                        <option value="" disabled selected>Pilih Jenis Pengeluaran</option>
-                        ${jenPengMain}
-                    </select>
-                </div>
-                <div class="col-12 col-lg-6 pe-0">
-                    <div class="row m-0 p-0 w-100">
-                        <div class="col-6 ps-0">
-                            <label class="mb-3">Jenis Sparepart</label>
-                            <select name="sparepart[]" class="login-input regular fs-16px" required>
-                                <option value="" disabled selected>Pilih Jenis Sparepart</option>
-                                ${sparepart}
-                            </select>
-                        </div>
-                        <div class="col-6 pe-0">
-                            <label class="mb-3">Nomor Seri</label>
-                            <input type="text" name="noSeri[]" class="login-input regular fs-16px" required>
-                        </div>
+            <div id="main_boxInputItem_${main_inptCount}">
+                <p class="font-w-700 fs-16px my-2">
+                    <button type="button" class="btn-table red" onclick="deleteItemMaintenance(${main_inptCount})">
+                        <span class="iconify-inline" data-icon="carbon:trash-can"data-width="15" data-height="15"></span>
+                    </button>
+                    &nbsp;
+                    Pengeluaran <span class="main_no" data-id="${main_inptCount}" id="main_no_${main_inptCount}"></span>
+                </p>
+                <div class="row m-0 p-0 w-100">
+                    <div class="col-12 col-lg-6 ps-0">
+                        <label class="mb-3">Jenis Pengeluaran</label>
+                        <select name="jenPeng[]" id="" class="login-input regular fs-16px" required>
+                            <option value="" disabled selected>Pilih Jenis Pengeluaran</option>
+                            ${jenPengMain}
+                        </select>
                     </div>
-                </div>
-                <div class="col-12 col-lg-6 ps-0">
-                    <div class="row m-0 p-0 w-100">
-                        <div class="col-6 ps-0">
-                            <label class="my-3">Qty</label>
-                            <div class="input-group mb-3">
-                                <input type="number" id="main_inptKuan_${main_inptCount}" name="kuantitas[]" onkeypress="return isNumberKey(event)" onkeyup="calculateBiayaMaintenance(${main_inptCount})" class="form-control" aria-describedby="basic-addon2" required>
-                                <span class="input-group-text" id="basic-addon2">pcs</span>
+                    <div class="col-12 col-lg-6 pe-0">
+                        <div class="row m-0 p-0 w-100">
+                            <div class="col-6 ps-0">
+                                <label class="mb-3">Jenis Sparepart</label>
+                                <select name="sparepart[]" class="login-input regular fs-16px" required>
+                                    <option value="" disabled selected>Pilih Jenis Sparepart</option>
+                                    ${sparepart}
+                                </select>
                             </div>
-                        </div>
-                        <div class="col-6 pe-0">
-                            <label class="my-3">Harga</label>
-                            <div class="input-group mb-3">
-                                <span class="input-group-text" id="basic-addon1">Rp</span>
-                                <input type="number" id="main_inptHarga_${main_inptCount}" name="" onkeypress="return isNumberKey(event)" onkeyup="calculateBiayaMaintenance(${main_inptCount})" class="form-control" aria-describedby="basic-addon1" required>
+                            <div class="col-6 pe-0">
+                                <label class="mb-3">Nomor Seri</label>
+                                <input type="text" name="noSeri[]" class="login-input regular fs-16px" required>
                             </div>
                         </div>
                     </div>
+                    <div class="col-12 col-lg-6 ps-0">
+                        <div class="row m-0 p-0 w-100">
+                            <div class="col-6 ps-0">
+                                <label class="my-3">Qty</label>
+                                <div class="input-group mb-3">
+                                    <input type="number" id="main_inptKuan_${main_inptCount}" name="kuantitas[]" onkeypress="return isNumberKey(event)" onkeyup="calculateBiayaMaintenance(${main_inptCount})" class="form-control" aria-describedby="basic-addon2" required>
+                                    <span class="input-group-text" id="basic-addon2">pcs</span>
+                                </div>
+                            </div>
+                            <div class="col-6 pe-0">
+                                <label class="my-3">Harga</label>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text" id="basic-addon1">Rp</span>
+                                    <input type="number" id="main_inptHarga_${main_inptCount}" name="" onkeypress="return isNumberKey(event)" onkeyup="calculateBiayaMaintenance(${main_inptCount})" class="form-control" aria-describedby="basic-addon1" required>
+                                </div>
+                            </div>
+                        </div>
 
-                </div>
-                <div class="col-12 col-lg-6 pe-0">
-                    <div class="row m-0 p-0 w-100">
-                        <div class="col-6 ps-0">
-                            <label class="my-3">Total Biaya</label>
-                            <div class="input-group mb-3">
-                                <span class="input-group-text" id="basic-addon1">Rp</span>
-                                <input type="number" name="total[]" id="main_inptBiaya_${main_inptCount}" class="form-control" aria-describedby="basic-addon1" readonly required>
+                    </div>
+                    <div class="col-12 col-lg-6 pe-0">
+                        <div class="row m-0 p-0 w-100">
+                            <div class="col-6 ps-0">
+                                <label class="my-3">Total Biaya</label>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text" id="basic-addon1">Rp</span>
+                                    <input type="number" name="total[]" id="main_inptBiaya_${main_inptCount}" class="form-control" aria-describedby="basic-addon1" readonly required>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -158,5 +161,23 @@
             $('#main_inptBiaya_'+id).val(kuantitas*harga);
         }
         
+    }
+    const deleteItemMaintenance = id => {
+        $('#main_boxInputItem_'+id).remove();
+        generateNoMaintenance();
+    }
+    const generateNoMaintenance = () => {
+        let no = 1;
+        if($('.main_no').length){
+            $('.main_no').each(function(i, obj) {
+                $(this).html(no)
+                no++
+            });
+        }else{
+            $(".maintenance-extend").removeClass('active');
+            $(".submit-maintenance").prop('disabled', true);
+            $(".input-maintenance").show();
+            $(".input-maintenance-input").prop('disabled', false); 
+        }
     }
 </script>

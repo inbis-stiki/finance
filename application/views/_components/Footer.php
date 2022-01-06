@@ -9,6 +9,7 @@
     <!-- Bootstrap 5.0.2 JS -->
     
     <script src="<?= site_url() ?>/assets/src/js/style.js"></script>
+        <script src="<?= site_url() ?>/assets/plugin/image-zoom/jquery.zoom.js"></script>
     <script>
         function isNumberKey(evt) {
             var charCode = (evt.which) ? evt.which : evt.keyCode
