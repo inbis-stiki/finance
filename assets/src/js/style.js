@@ -31,6 +31,7 @@ $(document).ready(function () {
         if(kendaraan && tglTrans){
             $('#adm_alert').attr('hidden', true);
             $('#adm_boxInput').html(admRenderHtml())
+            generateNoAdministrasi();
             $(".administrasi-extend").addClass('active');
             $(".submit-administrasi").prop('disabled', false);
             $(".input-administrasi").hide();
@@ -50,6 +51,7 @@ $(document).ready(function () {
         if(kendaraan && tglService && toko && jarak){
             $('#main_alert').attr('hidden', true)
             $('#main_boxInput').html(mainRenderHtml())
+            generateNoMaintenance();
             $(".maintenance-extend").addClass('active');
             $(".submit-maintenance").prop('disabled', false);
             $(".input-maintenance").hide();
@@ -71,7 +73,6 @@ $(document).ready(function () {
         if(kendaraan && tglService){
             $('#exp_alert').attr('hidden', true);
             $(".expense-extend").addClass('active');
-            $(".submit-expense").prop('disabled', false);
             $(".input-expense").hide();
             $(".input-expense-input").prop('disabled', true);    
             $('#exp_inptKendaraan').val(kendaraan)
