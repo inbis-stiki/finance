@@ -80,7 +80,7 @@
                             </div>
                             <div class="d-flex flex-column my-2 w-100">
                                 <label class="my-2 color-secondary">No. Rekening Klien</label>
-                                <input type="text" class="login-input regular" onkeypress="return Angka(event)" name="norek" placeholder="" required>
+                                <input type="text" class="login-input regular" name="norek" placeholder="" required>
                             </div>
                             <div class="d-flex flex-column my-2 w-100">
                                 <label class="my-2 color-secondary">Wilayah Klien</label>
@@ -145,7 +145,7 @@
                             </div>
                             <div class="d-flex flex-column my-2 w-100">
                                 <label class="my-2 color-secondary">No. Rekening Klien</label>
-                                <input type="text" class="login-input regular" onkeypress="return Angka(event)" name="norek" placeholder="" required>
+                                <input type="text" class="login-input regular" name="norek" placeholder="" required>
                             </div>
                             <div class="d-flex flex-column my-2 w-100">
                                 <label class="my-2 color-secondary">Wilayah Klien</label>

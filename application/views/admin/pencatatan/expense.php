@@ -13,6 +13,13 @@
                         }
                     ?>
                 </select>
+                <div class="mt-3" id="boxInfoKendaraan">
+                    <button type="button" data-slct="exp" class="btn-table infoKendaraan">
+                        <span class="iconify-inline" data-icon="ps:car" data-width="15" data-height="15"></span>
+                        <span>Info Kendaraan</span>
+                    </button>
+                </div>
+                <div id="exp_alert" style="color: red;" hidden>Harap memilih kendaraan terlebih dahulu!</div>
             </div>
             <div class="col-12 col-lg-6 pe-0">
                 <label class="mb-3">Tanggal Service</label>
