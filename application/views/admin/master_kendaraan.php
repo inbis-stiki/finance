@@ -48,7 +48,7 @@
                                 $this->table->add_row(
                                     $no++,
                                     '
-                                        <button type="button" class="btn-table orange view_masterKendaraan" data-bs-toggle="modal" data-bs-target="#view_masterKendaraan' . str_replace(" ", "_", $row->kendaraan_no_rangka) . '" title="Foto">
+                                        <button type="button" data-id="'.$row->kendaraan_no_rangka.'|'.$row->kendaraan_stnk.'" class="btn-table orange view_masterKendaraan" title="Foto">
                                             <span class="iconify-inline" data-icon="ic:baseline-insert-photo" data-width="20" data-height="21"></span>
                                         </button>
                                     ',
@@ -78,57 +78,32 @@
                 </table>
             </div>
         </div>
-        <?php
-        foreach ($Kendaraan as $i) :
-            $kendaraan_no_rangka = $i->kendaraan_no_rangka;
-
-            // $i = 0;
-            $kendaraan_foto = $i->kendaraan_foto;
-            $kendaraan_foto = json_decode($kendaraan_foto);
-            // var_dump($kendaraan_foto);
-
-            // if ($i++ > count($kendaraan_foto)) break;
-
-        ?>
-            <div class="modal fade" id="view_masterKendaraan<?php echo str_replace(' ', '_', $kendaraan_no_rangka) ?>" nama="view_masterKendaraan" method="POST" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered modal-xl">
-                    <div class="modal-content p-2">
-                        <div class="modal-header">
-                            <p class="font-w-700 color-darker mb-0">Foto Kendaraan</p>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body row m-0 p-0 w-100">
-                            <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-                                <div class="carousel-inner">
-                                    <?php $i = 0;
-                                    foreach ($kendaraan_foto as $fotok) : ?>
-                                        <?php if ($i == 0) : ?>
-                                            <div class="carousel-item active" id="carousel1">
-                                                <img class="d-block mx-auto" src="<?php echo base_url() . '/assets/images/fotokendaraan/' . $fotok ?>" width="500px" height="300px">
-                                            </div>
-                                        <?php else : ?>
-                                            <div class="carousel-item" id="carousel2">
-                                                <img class="d-block mx-auto" src="<?php echo base_url() . '/assets/images/fotokendaraan/' . $fotok ?>" width="500px" height="300px">
-                                            </div>
-                                    <?php endif;
-                                        $i++;
-                                    endforeach; ?>
-                                </div>
-                                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                    <span class="visually-hidden">Previous</span>
-                                </button>
-                                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                    <span class="visually-hidden">Next</span>
-                                </button>
-
+        <div class="modal fade" id="view_masterKendaraan" nama="view_masterKendaraan" method="POST" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content p-2">
+                    <div class="modal-header">
+                        <p class="font-w-700 color-darker mb-0">Foto Kendaraan</p>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body p-0">
+                        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+                            <ol class="carousel-indicators">
+                            </ol>
+                            <div class="carousel-inner">
                             </div>
+                            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="sr-only"></span>
+                            </a>
+                            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="sr-only"></span>
+                            </a>
                         </div>
                     </div>
                 </div>
             </div>
-        <?php endforeach; ?>
+        </div>
         <!-- Modal Assign Kendaraan -->
         <div class="modal fade" id="stnk_masterKendaraan" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
@@ -169,18 +144,59 @@
         </script>
         
         <!-- Image Zoom -->
-        <script src="<?= site_url() ?>/assets/plugin/image-zoom/jquery.zoom.js"></script>
         <script>
-            if ($ && $.fn.zoom) {
-                $('#carousel1').zoom();
-                $('#carousel2').zoom();
-            }
+            $(document).ready(function(){
+                $('.carousel').carousel({
+                    interval: 5000
+                })
+                
+            })
             $('#tableKendaraan tbody').on('click', '.btnStnk', function() {
                 const id = $(this).data('id')
                 const stnk = $(this).data('stnk')
                 $('.inptNoRangka').val(id);
                 $('#inptNoSTNKLama').val(stnk);
             })
+            $('#tableKendaraan tbody').on('click', '.view_masterKendaraan', function() {
+                const id = $(this).data('id')
+                
+                $.ajax({
+                    url: '<?= site_url('admin/ajxGetKendaraan')?>',
+                    method: 'post',
+                    data: {id},
+                    success: function(res){
+                        res = JSON.parse(res)
+                        let index = 0;
+                        let indicators = '';
+                        let carouselInner = '';
+                        let status = 'active';
+
+                        for(let i of res['kendaraan_foto']){
+                            if(index != 0){
+                                status = '';
+                            }
+                            
+                            indicators += `
+                                <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="${index}" class="${status}"></li>
+                            `;
+
+                            carouselInner += `
+                                <div class="carousel-item ${status}">
+                                    <img class="d-block w-100 imgItem" style="height: 450px;width: 500px;background-size: cover;" src="<?= site_url('')?>assets/images/fotokendaraan/${i}" alt="Second slide" alt="">
+                                </div>
+                            `;
+                            index++
+                        }
+                        $('.carousel-indicators').html(indicators)
+                        $('.carousel-inner').html(carouselInner)
+                        $('.carousel-item').zoom({
+                            on: 'grab'
+                        })
+                        $('#view_masterKendaraan').modal('show')
+                    }
+                })
+            })
+            
         </script>
 
         <div class="foot">
