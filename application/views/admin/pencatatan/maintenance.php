@@ -1,111 +1,162 @@
-<div class="body form">
-    <div class="row m-0 p-0 w-100">
-        <div class="col-12 col-lg-6 ps-0">
-            <label class="mb-3">Nomor STNK Kendaraan</label>
-            <select name="provinsi" id="provinsi" class="login-input regular fs-16px input-maintenance-input">
-                <option value="" disabled selected>Pilih STNK</option>
-                <option value="">N 1670 AY</option>
-                <option value="">AG 2201 B</option>
-                <option value="">N 199 A</option>
-            </select>
-        </div>
-        <div class="col-12 col-lg-6 pe-0">
-            <label class="mb-3">Tanggal Service</label>
-            <input type="date" class="login-input regular fs-16px input-maintenance-input">
-        </div>
-        <div class="col-12 col-lg-6 mt-3 ps-0">
-            <div class="row m-0 p-0 w-100">
-                <div class="col-6 ps-0">
-                    <label class="mb-3">Nama Toko</label>
-                    <input type="text" class="login-input regular fs-16px input-maintenance-input">
-                </div>
-                <div class="col-6">
-                    <label class="mb-3">Jarak Tempuh</label>
-                    <div class="input-group mb-3">
-                        <input type="number" class="form-control input-maintenance-input" aria-describedby="basic-addon2">
-                        <span class="input-group-text" id="basic-addon2">km</span>
+<form action="<?= site_url('admin/jenis-biaya/store-maintenance')?>" method="post">
+    <div class="body form">
+        <div class="row m-0 p-0 w-100">
+            <div class="col-12 col-lg-6 ps-0">
+                <label class="mb-3">Nomor STNK Kendaraan</label>
+                <select id="main_slct_kendaraan" class="login-input regular fs-16px input-maintenance-input">
+                    <option value="" disabled selected>Pilih STNK</option>
+                    <?php
+                        foreach ($kendaraans as $item) {
+                            echo '
+                                <option value="'.$item->kendaraan_no_rangka.'|'.$item->kendaraan_stnk.'">'.$item->kendaraan_stnk.'</option>
+                            ';
+                        }
+                    ?>
+                </select>
+            </div>
+            <div class="col-12 col-lg-6 pe-0">
+                <label class="mb-3">Tanggal Service</label>
+                <input type="date" id="main_inpt_tglService" class="login-input regular fs-16px input-maintenance-input">
+            </div>
+            <div class="col-12 col-lg-6 mt-3 ps-0">
+                <div class="row m-0 p-0 w-100">
+                    <div class="col-6 ps-0">
+                        <label class="mb-3">Nama Toko</label>
+                        <input type="text" id="main_inpt_toko" class="login-input regular fs-16px input-maintenance-input">
+                    </div>
+                    <div class="col-6">
+                        <label class="mb-3">Jarak Tempuh</label>
+                        <div class="input-group mb-3">
+                            <input type="number" id="main_inpt_jarak" onkeypress="return isNumberKey(event)" class="form-control input-maintenance-input" aria-describedby="basic-addon2">
+                            <span class="input-group-text" id="basic-addon2">km</span>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="col-12 col-lg-6 mt-auto mb-3 pe-0 input-maintenance">
-            <button class="btn-table submit-modal" id="input-maintenance">
-                Masukkan Data
-            </button>
+            <div class="col-12 col-lg-6 mt-auto mb-3 pe-0 input-maintenance">
+                <div class="alert alert-danger mt-3" id="main_alert" role="alert" hidden>
+                    Harap masukkan data dengan benar!
+                </div>
+                <button type="button" class="btn-table submit-modal" id="input-maintenance">
+                    Masukkan Data
+                </button>
+            </div>
         </div>
     </div>
-</div>
-<div class="head mid maintenance-extend">
-    <p>CATATAN PENGELUARAN MAINTENANCE</p>
-</div>
-<div class="body form maintenance-extend">
-    <!-- LOOP -->
-    <p class="font-w-700 fs-16px my-2">Pengeluaran 1</p>
-    <div class="row m-0 p-0 w-100">
-        <div class="col-12 col-lg-6 ps-0">
-            <label class="mb-3">Jenis Pengeluaran</label>
-            <select name="provinsi" id="provinsi" class="login-input regular fs-16px">
-                <option value="" disabled selected></option>
-                <option value="">N 1670 AY</option>
-                <option value="">AG 2201 B</option>
-                <option value="">N 199 A</option>
-            </select>
+    <div class="head mid maintenance-extend">
+        <p>CATATAN PENGELUARAN MAINTENANCE</p>
+    </div>
+    <div class="body form maintenance-extend">
+        <div id="main_boxInput">
+
         </div>
-        <div class="col-12 col-lg-6 pe-0">
+        <button type="button" class="btn-table add-entry mt-3" id="main_tambahInput">
+            Tambah Data
+        </button>
+    </div>
+    <input type="hidden" name="kendaraan" id="main_inptKendaraan">
+    <input type="hidden" name="tglService" id="main_inptTglService">
+    <input type="hidden" name="toko" id="main_inptToko">
+    <input type="hidden" name="jarak" id="main_inptJarak">
+    <button type="submit" class="btn-table submit-modal submit-maintenance absolute disabled" disabled>
+        Simpan Data
+    </button>
+</form>
+<script>
+    let main_inptCount = 0;
+    let jenPengMain = ""
+    <?php
+        foreach ($pengMaint as $item) {
+            echo '
+                jenPengMain += \'<option value="'.$item->pengeluaran_id.'">'.$item->pengeluaran_jenis.'</option>\'
+            ';
+        }    
+    ?>
+
+    let sparepart = "";
+    <?php
+        foreach ($sparepart as $item) {
+            echo '
+                sparepart += \'<option value="'.$item->sparepart_id.'">'.$item->sparepart_nama.'</option>\'
+            ';
+        }    
+    ?>
+
+    $('#main_tambahInput').click(function(){
+        $('#main_boxInput').append(mainRenderHtml())
+    })
+    const mainRenderHtml = () => {
+        main_inptCount++;
+        return `
+            <p class="font-w-700 fs-16px my-2">
+                <button type="button" class="btn-table red">
+                    <span class="iconify-inline" data-icon="carbon:trash-can"data-width="15" data-height="15"></span>
+                </button>
+                &nbsp;
+                Pengeluaran ${main_inptCount}
+            </p>
             <div class="row m-0 p-0 w-100">
-                <div class="col-6 ps-0">
-                    <label class="mb-3">Jenis Sparepart</label>
-                    <select name="provinsi" id="provinsi" class="login-input regular fs-16px">
-                        <option value="" disabled selected></option>
-                        <option value="">N 1670 AY</option>
-                        <option value="">AG 2201 B</option>
-                        <option value="">N 199 A</option>
+                <div class="col-12 col-lg-6 ps-0">
+                    <label class="mb-3">Jenis Pengeluaran</label>
+                    <select name="jenPeng[]" id="" class="login-input regular fs-16px" required>
+                        <option value="" disabled selected>Pilih Jenis Pengeluaran</option>
+                        ${jenPengMain}
                     </select>
                 </div>
-                <div class="col-6 pe-0">
-                    <label class="mb-3">Nomor Seri</label>
-                    <input type="text" class="login-input regular fs-16px">
-                </div>
-            </div>
-        </div>
-        <div class="col-12 col-lg-6 ps-0">
-            <div class="row m-0 p-0 w-100">
-                <div class="col-6 ps-0">
-                    <label class="my-3">Qty</label>
-                    <div class="input-group mb-3">
-                        <input type="number" class="form-control" aria-describedby="basic-addon2">
-                        <span class="input-group-text" id="basic-addon2">km</span>
+                <div class="col-12 col-lg-6 pe-0">
+                    <div class="row m-0 p-0 w-100">
+                        <div class="col-6 ps-0">
+                            <label class="mb-3">Jenis Sparepart</label>
+                            <select name="sparepart[]" class="login-input regular fs-16px" required>
+                                <option value="" disabled selected>Pilih Jenis Sparepart</option>
+                                ${sparepart}
+                            </select>
+                        </div>
+                        <div class="col-6 pe-0">
+                            <label class="mb-3">Nomor Seri</label>
+                            <input type="text" name="noSeri[]" class="login-input regular fs-16px" required>
+                        </div>
                     </div>
                 </div>
-                <div class="col-6 pe-0">
-                    <label class="my-3">Harga</label>
-                    <div class="input-group mb-3">
-                        <span class="input-group-text" id="basic-addon1">Rp</span>
-                        <input type="number" class="form-control" aria-describedby="basic-addon1">
+                <div class="col-12 col-lg-6 ps-0">
+                    <div class="row m-0 p-0 w-100">
+                        <div class="col-6 ps-0">
+                            <label class="my-3">Qty</label>
+                            <div class="input-group mb-3">
+                                <input type="number" id="inptKuan_${main_inptCount}" name="kuantitas[]" onkeypress="return isNumberKey(event)" onkeyup="calculateBiaya(${main_inptCount})" class="form-control" aria-describedby="basic-addon2" required>
+                                <span class="input-group-text" id="basic-addon2">pcs</span>
+                            </div>
+                        </div>
+                        <div class="col-6 pe-0">
+                            <label class="my-3">Harga</label>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="basic-addon1">Rp</span>
+                                <input type="number" id="inptHarga_${main_inptCount}" name="" onkeypress="return isNumberKey(event)" onkeyup="calculateBiaya(${main_inptCount})" class="form-control" aria-describedby="basic-addon1" required>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-12 col-lg-6 pe-0">
+                    <div class="row m-0 p-0 w-100">
+                        <div class="col-6 ps-0">
+                            <label class="my-3">Total Biaya</label>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="basic-addon1">Rp</span>
+                                <input type="number" name="total[]" id="inptBiaya_${main_inptCount}" class="form-control" aria-describedby="basic-addon1" readonly required>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-
-        </div>
-        <div class="col-12 col-lg-6 pe-0">
-            <div class="row m-0 p-0 w-100">
-                <div class="col-6 ps-0">
-                    <label class="my-3">Harga</label>
-                    <div class="input-group mb-3">
-                        <span class="input-group-text" id="basic-addon1">Rp</span>
-                        <input type="number" class="form-control" aria-describedby="basic-addon1">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- END OF LOOP -->
-
-    <button class="btn-table add-entry mt-3" data-bs-toggle="modal" data-bs-target="#success">
-        Tambah Data
-    </button>
-</div>
-
-<button class="btn-table submit-modal submit-maintenance absolute disabled" data-bs-toggle="modal" data-bs-target="#success" disabled>
-    Simpan Data
-</button>
+        `;
+    }
+    const calculateBiaya = id => {
+        const kuantitas = $('#inptKuan_'+id).val()
+        const harga = $('#inptHarga_'+id).val()
+        if(kuantitas && harga){
+            $('#inptBiaya_'+id).val(kuantitas*harga);
+        }
+        
+    }
+</script>

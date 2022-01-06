@@ -20,7 +20,7 @@
             </div>
             <div class="ms-auto col-12 col-lg-6 mt-3 pe-0 input-administrasi">
                 <div class="alert alert-danger" id="adm_alert" role="alert" hidden>
-                    Harap masukkan nomor stnk kendaraan dan tanggal transaksi!
+                    Harap masukkan data dengan benar!
                 </div>
                 <button type="button" class="btn-table submit-modal" id="input-administrasi">
                     Masukkan Data
