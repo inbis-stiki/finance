@@ -55,4 +55,42 @@ class JenisBiaya extends CI_Controller{
         $this->session->set_flashdata('succ_modal', true);
         redirect('admin/jenis-biaya');
     }
+    public function storeExpense(){
+        $dataStore['transaksi_tanggal']         = $_POST['tglService'];
+        $dataStore['no_rangka']                 = explode('|', $_POST['kendaraan'])[0];
+        $dataStore['kendaraan_stnk']            = explode('|', $_POST['kendaraan'])[1];
+
+        $index = 0;
+        foreach ($_POST['bbm']['jenPeng'] as $item) {
+            $temp = $dataStore;
+            $temp['id_pengeluaran']            = $item;
+            $temp['transaksi_total']           = $_POST['bbm']['total'][$index];
+            $temp['transaksi_keterangan']      = $_POST['bbm']['keterangan'][$index];
+            $this->MJenisBiaya->insert($temp);
+            $index++;
+        }
+
+        $index = 0;
+        foreach ($_POST['driver']['jenPeng'] as $item) {
+            $temp = $dataStore;
+            $temp['id_pengeluaran']         = $item;
+            $temp['transaksi_jumlah']       = $_POST['driver']['kuantitas'][$index];
+            $temp['transaksi_total']        = $_POST['driver']['total'][$index];
+            $this->MJenisBiaya->insert($temp);
+            $index++;
+        }
+        
+        $index = 0;
+        foreach ($_POST['lain']['jenPeng'] as $item) {
+            $temp = $dataStore;
+            $temp['id_pengeluaran']         = $item;
+            $temp['transaksi_jumlah']       = $_POST['lain']['kuantitas'][$index];
+            $temp['transaksi_total']        = $_POST['lain']['total'][$index];
+            $temp['transaksi_detail']       = $_POST['lain']['detail'][$index];
+            $this->MJenisBiaya->insert($temp);
+            $index++;
+        }
+        $this->session->set_flashdata('succ_modal', true);
+        redirect('admin/jenis-biaya');
+    }
 }

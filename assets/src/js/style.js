@@ -65,10 +65,20 @@ $(document).ready(function () {
         
     });
     $("#input-expense").click(function () {
-        $(".expense-extend").addClass('active');
-        $(".submit-expense").prop('disabled', false);
-        $(".input-expense").hide();
-        $(".input-expense-input").prop('disabled', true);
+        const kendaraan = $('#exp_slct_kendaraan').val()
+        const tglService = $('#exp_inpt_tglService').val()
+
+        if(kendaraan && tglService){
+            $('#exp_alert').attr('hidden', true);
+            $(".expense-extend").addClass('active');
+            $(".submit-expense").prop('disabled', false);
+            $(".input-expense").hide();
+            $(".input-expense-input").prop('disabled', true);    
+            $('#exp_inptKendaraan').val(kendaraan)
+            $('#exp_inptTglService').val(tglService)
+        }else{
+            $('#exp_alert').attr('hidden', false);
+        }
     });
 });
 

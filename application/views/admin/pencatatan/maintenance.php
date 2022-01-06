@@ -123,7 +123,7 @@
                         <div class="col-6 ps-0">
                             <label class="my-3">Qty</label>
                             <div class="input-group mb-3">
-                                <input type="number" id="inptKuan_${main_inptCount}" name="kuantitas[]" onkeypress="return isNumberKey(event)" onkeyup="calculateBiaya(${main_inptCount})" class="form-control" aria-describedby="basic-addon2" required>
+                                <input type="number" id="main_inptKuan_${main_inptCount}" name="kuantitas[]" onkeypress="return isNumberKey(event)" onkeyup="calculateBiayaMaintenance(${main_inptCount})" class="form-control" aria-describedby="basic-addon2" required>
                                 <span class="input-group-text" id="basic-addon2">pcs</span>
                             </div>
                         </div>
@@ -131,7 +131,7 @@
                             <label class="my-3">Harga</label>
                             <div class="input-group mb-3">
                                 <span class="input-group-text" id="basic-addon1">Rp</span>
-                                <input type="number" id="inptHarga_${main_inptCount}" name="" onkeypress="return isNumberKey(event)" onkeyup="calculateBiaya(${main_inptCount})" class="form-control" aria-describedby="basic-addon1" required>
+                                <input type="number" id="main_inptHarga_${main_inptCount}" name="" onkeypress="return isNumberKey(event)" onkeyup="calculateBiayaMaintenance(${main_inptCount})" class="form-control" aria-describedby="basic-addon1" required>
                             </div>
                         </div>
                     </div>
@@ -143,7 +143,7 @@
                             <label class="my-3">Total Biaya</label>
                             <div class="input-group mb-3">
                                 <span class="input-group-text" id="basic-addon1">Rp</span>
-                                <input type="number" name="total[]" id="inptBiaya_${main_inptCount}" class="form-control" aria-describedby="basic-addon1" readonly required>
+                                <input type="number" name="total[]" id="main_inptBiaya_${main_inptCount}" class="form-control" aria-describedby="basic-addon1" readonly required>
                             </div>
                         </div>
                     </div>
@@ -151,11 +151,11 @@
             </div>
         `;
     }
-    const calculateBiaya = id => {
-        const kuantitas = $('#inptKuan_'+id).val()
-        const harga = $('#inptHarga_'+id).val()
+    const calculateBiayaMaintenance = id => {
+        const kuantitas = $('#main_inptKuan_'+id).val()
+        const harga = $('#main_inptHarga_'+id).val()
         if(kuantitas && harga){
-            $('#inptBiaya_'+id).val(kuantitas*harga);
+            $('#main_inptBiaya_'+id).val(kuantitas*harga);
         }
         
     }
