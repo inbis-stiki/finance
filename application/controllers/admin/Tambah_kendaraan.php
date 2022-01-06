@@ -29,8 +29,8 @@ class Tambah_kendaraan extends CI_Controller
             $config['upload_path'] = './assets/images/fotokendaraan';
             $config['allowed_types'] = 'jpg|png|jpeg';
             $config['max_size'] = '2048';  //2MB max
-            $config['max_width'] = '4480'; // pixel
-            $config['max_height'] = '4480'; // pixel
+            // $config['max_width'] = '4480'; // pixel
+            // $config['max_height'] = '4480'; // pixel
             // $config['file_name'] = $_FILES['foto']['name'];
 
             // var_dump($_FILES['foto']);
