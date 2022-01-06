@@ -191,10 +191,10 @@ class Admin extends CI_Controller
 	public function unit_kendaraan()
 	{
 		$this->load->model('M_User');
-		$this->load->model('M_kendaraan');
+		$this->load->model('MKendaraan');
 		$this->load->model('MKlien');
 
-		$datakendaraan = $this->M_kendaraan->getKendaraan();
+		$datakendaraan = $this->MKendaraan->get(['disabled_date' => NULL, 'is_active' => '1']);
 		$datainstansi = $this->MKlien->get(['deleted_date' => NULL, 'orderBy' => 'client_nama ASC']);
 
 		$data = [
