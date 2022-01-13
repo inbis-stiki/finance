@@ -121,10 +121,7 @@
                                     ${sparepart}
                                 </select>
                             </div>
-                            <div class="col-6 pe-0">
-                                <label class="mb-3">Nomor Seri</label>
-                                <input type="text" name="noSeri[]" class="login-input regular fs-16px" required>
-                            </div>
+                            
                         </div>
                     </div>
                     <div class="col-12 col-lg-6 ps-0">
@@ -154,6 +151,10 @@
                                     <span class="input-group-text" id="basic-addon1">Rp</span>
                                     <input type="number" name="total[]" id="main_inptBiaya_${main_inptCount}" class="form-control" aria-describedby="basic-addon1" readonly required>
                                 </div>
+                            </div>
+                            <div class="col-6 ps-0">
+                                <label class="mb-3">Nomor Seri</label>
+                                <input type="text" name="noSeri[]" class="login-input regular fs-16px" required>
                             </div>
                         </div>
                     </div>

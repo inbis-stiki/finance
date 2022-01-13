@@ -39,6 +39,7 @@ class Driver extends CI_Controller
         $formData['driver_foto_ktp']     = $uploadKTP['link'];
         $formData['driver_alamat']       = $_POST['alamat'];
         $formData['driver_telepon']      = $_POST['telp'];
+        $formData['driver_gaji']         = $_POST['gaji'];
         $formData['driver_sim']          = implode(",", $_POST['sim']);
         $formData['driver_tanggalmasuk'] = $_POST['tanggal'];
 
@@ -70,6 +71,7 @@ class Driver extends CI_Controller
         $formData['driver_nama']        = $_POST['nama'];
         $formData['driver_alamat']      = $_POST['alamat'];
         $formData['driver_telepon']     = $_POST['telp'];
+        $formData['driver_gaji']         = $_POST['gaji'];
         $formData['driver_sim']         = implode(",", $_POST['sim']);
 
         $this->MDriver->update($formData);

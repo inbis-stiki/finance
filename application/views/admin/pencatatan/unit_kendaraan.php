@@ -11,6 +11,16 @@
             </div>
             <div class="body form">
                 <div class="col-12 col-lg-12 pe-0 d-flex flex-column justify-content-between">
+                    <div class="row m-0 p-0 w-100">
+                        <div class="col-12 col-lg-6 ps-0">
+                            <label class="my-3">Tanggal Awal Transaksi</label>
+                            <input type="date" class="login-input regular col-xl-6" name="tanggal_start" id="datepicker" required>
+                        </div>
+                        <div class="col-12 col-lg-6 pe-0">
+                            <label class="my-3">Tanggal Akhir Transaksi</label>
+                            <input type="date" class="login-input regular col-xl-6" name="tanggal_end" id="datepicker" required>
+                        </div>
+                    </div>
                     <label class="mb-3">Kendaraan</label>
                     <select name="kendaraan" class="form-control" id="slct_kendaraan" required>
                         <option value="" disabled selected>Pilih Kendaraan</option>
@@ -160,16 +170,6 @@
                                     <input type="text" class="login-input regular fs-16px" name="" id="klien_wilayah" value="" disabled>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="row m-0 p-0 w-100">
-                        <div class="col-12 col-lg-6 ps-0">
-                            <label class="my-3">Tanggal Awal Transaksi</label>
-                            <input type="date" class="login-input regular col-xl-6" name="tanggal_start" id="datepicker" required>
-                        </div>
-                        <div class="col-12 col-lg-6 pe-0">
-                            <label class="my-3">Tanggal Akhir Transaksi</label>
-                            <input type="date" class="login-input regular col-xl-6" name="tanggal_end" id="datepicker" required>
                         </div>
                     </div>
 
