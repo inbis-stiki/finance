@@ -169,6 +169,7 @@
                 $('#kendaraan_pemilik').val(res['kendaraan_jenis']);
                 $('#kendaraan_tgljatuhsim').val(tglJatuhSim);
                 $('#kendaraan_tgljatuhkir').val(tglJatuhKIR);
+                $('#kendaraan_umur').val(res['umur']);
                 $('#kendaraan_kapasitas').val(res['kendaraan_kapasitas_tangki']+" Liter");
 
                 let index = 0;

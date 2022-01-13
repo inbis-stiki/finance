@@ -19,6 +19,9 @@ class Master_kendaraan extends CI_Controller
         $id = explode('|', $_POST['id']);
         $kendaraan = $this->MKendaraan->getById($id[0], $id[1]);
         $kendaraan->kendaraan_foto = json_decode($kendaraan->kendaraan_foto);
+
+        $umur = date_diff(date_create($kendaraan->kendaraan_tanggal_beli), date_create(date('Y-m-d')));
+        $kendaraan->umur = $umur->format("%m") . " Bulan " . $umur->format('%y') . "Tahun";
         echo json_encode($kendaraan);
     }
 

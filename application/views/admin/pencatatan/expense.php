@@ -23,7 +23,7 @@
             </div>
             <div class="col-12 col-lg-6 pe-0">
                 <label class="mb-3">Tanggal Service</label>
-                <input type="date" id="exp_inpt_tglService" class="login-input regular fs-16px input-expense-input">
+                <input type="date" id="exp_inpt_tglService" max="<?= date('Y-m-d')?>" class="login-input regular fs-16px input-expense-input">
             </div>
             <div class="ms-auto col-12 col-lg-6 mt-3 pe-0 input-expense">
                 <div class="alert alert-danger" id="exp_alert" role="alert" hidden>
@@ -196,7 +196,7 @@
                         </div>
                     </div>
                     <div class="col-12 col-lg-6 ps-0">
-                        <label class="mb-3">Nama Barang</label>
+                        <label class="mb-3">Keterangan</label>
                             <input type="text" name="lain[detail][]" class="form-control" aria-describedby="basic-addon1" required>
                         <label class="my-3">Total Harga</label>
                         <div class="input-group mb-3">
