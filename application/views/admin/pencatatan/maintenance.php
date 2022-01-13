@@ -23,7 +23,7 @@
             </div>
             <div class="col-12 col-lg-6 pe-0">
                 <label class="mb-3">Tanggal Service</label>
-                <input type="date" id="main_inpt_tglService" class="login-input regular fs-16px input-maintenance-input">
+                <input type="date" id="main_inpt_tglService" max="<?= date('Y-m-d')?>" class="login-input regular fs-16px input-maintenance-input">
             </div>
             <div class="col-12 col-lg-6 mt-3 ps-0">
                 <div class="row m-0 p-0 w-100">
@@ -121,10 +121,7 @@
                                     ${sparepart}
                                 </select>
                             </div>
-                            <div class="col-6 pe-0">
-                                <label class="mb-3">Nomor Seri</label>
-                                <input type="text" name="noSeri[]" class="login-input regular fs-16px" required>
-                            </div>
+                            
                         </div>
                     </div>
                     <div class="col-12 col-lg-6 ps-0">
@@ -154,6 +151,10 @@
                                     <span class="input-group-text" id="basic-addon1">Rp</span>
                                     <input type="number" name="total[]" id="main_inptBiaya_${main_inptCount}" class="form-control" aria-describedby="basic-addon1" readonly required>
                                 </div>
+                            </div>
+                            <div class="col-6 ps-0">
+                                <label class="mb-3">Nomor Seri</label>
+                                <input type="text" name="noSeri[]" class="login-input regular fs-16px" required>
                             </div>
                         </div>
                     </div>

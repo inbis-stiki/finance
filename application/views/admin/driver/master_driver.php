@@ -106,6 +106,14 @@
                         <?= form_open_multipart('admin/Driver/aksiAssign'); ?>
                         <div class="pb-4">
                             <div class="d-flex flex-column my-2 w-100">
+                                <label class="my-2 color-secondary">Awal Pemakaian</label>
+                                <input type="date" class="login-input regular fs-16px" name="awal" id="datepicker" value="" required>
+                            </div>
+                            <div class="d-flex flex-column my-2 w-100">
+                                <label class="my-2 color-secondary">Selesai Pemakaian</label>
+                                <input type="date" class="login-input regular fs-16px" name="akhir" id="datepicker" value="" required>
+                            </div>
+                            <div class="d-flex flex-column my-2 w-100">
                                 <label class="my-2 color-secondary">Kendaraan</label>
                                 <select name="kendaraan" class="login-input regular" required>
                                     <?php
@@ -121,14 +129,7 @@
                                 </select>
                                 <!-- <input type="" class="login-input regular" name="menu" value="Wilayah" disabled> -->
                             </div>
-                            <div class="d-flex flex-column my-2 w-100">
-                                <label class="my-2 color-secondary">Awal Pemakaian</label>
-                                <input type="date" class="login-input regular fs-16px" name="awal" id="datepicker" value="" required>
-                            </div>
-                            <div class="d-flex flex-column my-2 w-100">
-                                <label class="my-2 color-secondary">Selesai Pemakaian</label>
-                                <input type="date" class="login-input regular fs-16px" name="akhir" id="datepicker" value="" required>
-                            </div>
+                            
                             <input type="hidden" class="login-input regular fs-16px" name="driver_nik">
                             <button type="submit" class="btn-table submit-modal">Simpan Data</button>
                         </div>
@@ -266,6 +267,7 @@
                         $('#kendaraan_pemilik').val(res['kendaraan_jenis']);
                         $('#kendaraan_tgljatuhsim').val(tglJatuhSim);
                         $('#kendaraan_tgljatuhkir').val(tglJatuhKIR);
+                        $('#kendaraan_umur').val(res['umur']);
                         $('#kendaraan_kapasitas').val(res['kendaraan_kapasitas_tangki']+" Liter");
 
                         let index = 0;

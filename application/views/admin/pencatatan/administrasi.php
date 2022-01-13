@@ -23,7 +23,7 @@
             </div>
             <div class="col-12 col-lg-6 pe-0">
                 <label class="mb-3">Tanggal Transaksi</label>
-                <input type="date" id="adm_inpt_tglBeli" class="login-input regular fs-16px input-administrasi-input">
+                <input type="date" id="adm_inpt_tglBeli" max="<?= date('Y-m-d')?>" class="login-input regular fs-16px input-administrasi-input">
             </div>
             <div class="ms-auto col-12 col-lg-6 mt-3 pe-0 input-administrasi">
                 <div class="alert alert-danger" id="adm_alert" role="alert" hidden>

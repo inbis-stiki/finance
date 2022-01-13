@@ -11,6 +11,16 @@
             </div>
             <div class="body form">
                 <div class="col-12 col-lg-12 pe-0 d-flex flex-column justify-content-between">
+                    <div class="row m-0 p-0 w-100">
+                        <div class="col-12 col-lg-6 ps-0">
+                            <label class="my-3">Tanggal Awal Transaksi</label>
+                            <input type="date" class="login-input regular col-xl-6" name="tanggal_start" id="datepicker" required>
+                        </div>
+                        <div class="col-12 col-lg-6 pe-0">
+                            <label class="my-3">Tanggal Akhir Transaksi</label>
+                            <input type="date" class="login-input regular col-xl-6" name="tanggal_end" id="datepicker" required>
+                        </div>
+                    </div>
                     <label class="mb-3">Kendaraan</label>
                     <select name="kendaraan" class="form-control" id="slct_kendaraan" required>
                         <option value="" disabled selected>Pilih Kendaraan</option>
@@ -19,10 +29,86 @@
                         <?php endforeach ?>
                     </select>
                     <div class="mt-3" id="boxInfoKendaraan">
-                        <button type="button" id="infoKendaraan" class="btn-table">
-                            <span class="iconify-inline" data-icon="ps:car" data-width="15" data-height="15"></span>
-                            <span>Info Kendaraan</span>
-                        </button>
+                        <p style="text-align: center;font-weight: bold;font-size: 18px;">Detail Kendaraan</p>
+                        <div class="row">
+                            <div class="col">
+                                <div class="d-flex flex-column my-2 w-100 col-md-6">
+                                    <label class="my-2 color-secondary">Foto Kendaraan</label>
+                                    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+                                        <ol class="carousel-indicators">
+                                        </ol>
+                                        <div class="carousel-inner">
+                                        </div>
+                                        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-bs-slide="prev">
+                                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                            <span class="sr-only"></span>
+                                        </a>
+                                        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-bs-slide="next">
+                                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                            <span class="sr-only"></span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="d-flex flex-column my-2 w-100 col-md-6">
+                                            <label class="my-2 color-secondary">Nomor Rangka</label>
+                                            <input type="text" class="login-input regular fs-16px" name="" id="kendaraan_rangka" value="" disabled>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="d-flex flex-column my-2 w-100 col-md-6">
+                                            <label class="my-2 color-secondary">Nomor STNK</label>
+                                            <input type="text" class="login-input regular fs-16px" name="" id="kendaraan_stnk" value="" disabled>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="d-flex flex-column my-2 w-100 col-md-6">
+                                            <label class="my-2 color-secondary">Merk</label>
+                                            <input type="text" class="login-input regular fs-16px" name="" id="kendaraan_merk" value="" disabled>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="d-flex flex-column my-2 w-100 col-md-6">
+                                            <label class="my-2 color-secondary">Kapasitas Tangki</label>
+                                            <input type="text" class="login-input regular fs-16px" name="" id="kendaraan_kapasitas" value="" disabled>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="d-flex flex-column my-2 w-100 col-md-6">
+                                            <label class="my-2 color-secondary">Tanggal Jatuh SIM</label>
+                                            <input type="text" class="login-input regular fs-16px" name="" id="kendaraan_tgljatuhsim" value="" disabled>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="d-flex flex-column my-2 w-100 col-md-6">
+                                            <label class="my-2 color-secondary">Tanggal Jatuh KIR</label>
+                                            <input type="text" class="login-input regular fs-16px" name="" id="kendaraan_tgljatuhkir" value="" disabled>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="d-flex flex-column my-2 w-100 col-md-6">
+                                            <label class="my-2 color-secondary">Pemilik</label>
+                                            <input type="text" class="login-input regular fs-16px" name="" id="kendaraan_pemilik" value="" disabled>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                    <div class="d-flex flex-column my-2 w-100 col-md-6">
+                                        <label class="my-2 color-secondary">Umur</label>
+                                        <input type="text" class="login-input regular fs-16px" name="" id="kendaraan_umur" value="" disabled>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div id="kendaraan_alert" style="color: red;" hidden>Harap memilih kendaraan terlebih dahulu!</div>
                     <label class="my-3">Klien</label>
@@ -34,20 +120,56 @@
                         <?php endforeach ?>
                     </select>
                     <div class="mt-3" id="boxInfoKlien">
-                        <button type="button" id="infoKlien" class="btn-table">
-                            <span class="iconify-inline" data-icon="akar-icons:people-group" data-width="15" data-height="15"></span>
-                            <span>Info Klien</span>
-                        </button>
-                        <div id="klien_alert" style="color: red;" hidden>Harap memilih klien terlebih dahulu!</div>
-                    </div>
-                    <div class="row m-0 p-0 w-100">
-                        <div class="col-12 col-lg-6 ps-0">
-                            <label class="my-3">Tanggal Awal Transaksi</label>
-                            <input type="date" class="login-input regular col-xl-6" name="tanggal_start" id="datepicker" required>
+                        <p style="text-align: center;font-weight: bold;font-size: 18px;">Detail Klien</p>
+                        <div class="row">
+                            <div class="col">
+                                <div class="d-flex flex-column my-2 w-100 col-md-6">
+                                    <label class="my-2 color-secondary">Nama</label>
+                                    <input type="text" class="login-input regular fs-16px" name="" id="klien_nama" value="" disabled>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="d-flex flex-column my-2 w-100 col-md-6">
+                                    <label class="my-2 color-secondary">Jenis</label>
+                                    <input type="text" class="login-input regular fs-16px" name="" id="klien_jenis" value="" disabled>
+                                </div>
+                            </div>
                         </div>
-                        <div class="col-12 col-lg-6 pe-0">
-                            <label class="my-3">Tanggal Akhir Transaksi</label>
-                            <input type="date" class="login-input regular col-xl-6" name="tanggal_end" id="datepicker" required>
+                        <div class="row">
+                            <div class="col">
+                                <div class="d-flex flex-column my-2 w-100 col-md-6">
+                                    <label class="my-2 color-secondary">Alamat</label>
+                                    <input type="text" class="login-input regular fs-16px" name="" id="klien_alamat" value="" disabled>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="d-flex flex-column my-2 w-100 col-md-6">
+                                    <label class="my-2 color-secondary">Kontak</label>
+                                    <input type="text" class="login-input regular fs-16px" name="" id="klien_kontak" value="" disabled>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="d-flex flex-column my-2 w-100 col-md-6">
+                                    <label class="my-2 color-secondary">NPWP</label>
+                                    <input type="text" class="login-input regular fs-16px" name="" id="klien_npwp" value="" disabled>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="d-flex flex-column my-2 w-100 col-md-6">
+                                    <label class="my-2 color-secondary">Nomor Rekening</label>
+                                    <input type="text" class="login-input regular fs-16px" name="" id="klien_norek" value="" disabled>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="d-flex flex-column my-2 w-100">
+                                    <label class="my-2 color-secondary">Wilayah</label>
+                                    <input type="text" class="login-input regular fs-16px" name="" id="klien_wilayah" value="" disabled>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -62,7 +184,7 @@
     </div>
 </div>
 <!-- Modal Info Kendaraan -->
-<div class="modal fade" id="info_kendaraan" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<!-- <div class="modal fade" id="info_kendaraan" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-xl">
         <div class="modal-content p-2">
             <div class="modal-header">
@@ -157,7 +279,7 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
 <!-- Modal Info Klien -->
 <div class="modal fade" id="info_klien" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-xl">
@@ -267,6 +389,7 @@
                     $('#kendaraan_pemilik').val(res['kendaraan_jenis']);
                     $('#kendaraan_tgljatuhsim').val(tglJatuhSim);
                     $('#kendaraan_tgljatuhkir').val(tglJatuhKIR);
+                    $('#kendaraan_umur').val(res['umur']);
                     $('#kendaraan_kapasitas').val(res['kendaraan_kapasitas_tangki']+" Liter");
 
                     let index = 0;

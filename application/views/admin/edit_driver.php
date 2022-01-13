@@ -31,6 +31,8 @@
                         <input type="text" class="login-input regular" name="alamat" placeholder="Alamat" value="<?= $driver->driver_alamat ?>" required>
                         <label class="my-3">Telefon</label>
                         <input type="telp" class="login-input regular" onkeypress="return isNumberKey(event)" value="<?= $driver->driver_telepon ?>" name="telp" placeholder="Telefon" required>
+                        <label class="my-3">Gaji</label>
+                        <input type="telp" class="login-input regular" onkeypress="return isNumberKey(event)" value="<?= $driver->driver_gaji ?>" name="gaji" placeholder="Gaji" required>
                         <label class="my-3">SIM Driver</label>
                         <select class="js-example-basic-multiple" name="sim[]" id="sim" multiple="multiple" required>
                             <?php

@@ -14,7 +14,7 @@
                             <?php
                             $template = array('table_open' => '<table id="tableSparepart" class="table-custom">');
                             $this->table->set_template($template);
-                            $this->table->set_heading('No', 'Jenis Sparepart', 'Ideal Pemakaian', 'Aksi');
+                            $this->table->set_heading('No', 'Jenis Sparepart', 'Ukuran', 'Ideal Pemakaian', 'Keterangan', 'Aksi');
                             ?>
                         </tr>
                     </thead>
@@ -27,9 +27,11 @@
                                     $this->table->add_row(
                                         $no++,
                                         $row->sparepart_nama,
+                                        $row->sparepart_ukuran,
                                         $row->sparepart_bulan . ' Bulan',
+                                        $row->sparepart_detail,
 
-                                        '<button type="button" data-id="' . $row->sparepart_id . '" data-nama="' . $row->sparepart_nama . '" data-km="' . $row->sparepart_km . '" data-bulan="' . $row->sparepart_bulan . '" class="btn-table edit_masterSparepart btnEdit" data-bs-toggle="modal" data-bs-target="#edit_masterSparepart">
+                                        '<button type="button" data-id="' . $row->sparepart_id . '" data-nama="' . $row->sparepart_nama . '" data-km="' . $row->sparepart_km . '" data-bulan="' . $row->sparepart_bulan . '" data-ukuran="'.$row->sparepart_ukuran.'" data-detail="'.$row->sparepart_detail.'" class="btn-table edit_masterSparepart btnEdit" data-bs-toggle="modal" data-bs-target="#edit_masterSparepart">
                                             <span class="iconify-inline" data-icon="bx:bx-edit" data-width="20" data-height="20"></span>
                                         </button>
                                         <button type="button" data-id="' . $row->sparepart_id . '" data-nama="' . $row->sparepart_nama . '" data-km="' . $row->sparepart_km . '" data-bulan="' . $row->sparepart_bulan . '" class="btn-table red hapus_masterSparepart btnEdit" data-bs-toggle="modal" data-bs-target="#hapus_masterSparepart">
@@ -40,8 +42,10 @@
                                     $this->table->add_row(
                                         $no++,
                                         $row->sparepart_nama,
+                                        $row->sparepart_ukuran,
                                         $row->sparepart_km . ' Km',
-                                        '<button type="button" data-id="' . $row->sparepart_id . '" data-nama="' . $row->sparepart_nama . '" data-km="' . $row->sparepart_km . '" data-bulan="' . $row->sparepart_bulan . '" class="btn-table edit_masterSparepart btnEdit" data-bs-toggle="modal" data-bs-target="#edit_masterSparepart">
+                                        $row->sparepart_detail,
+                                        '<button type="button" data-id="' . $row->sparepart_id . '" data-nama="' . $row->sparepart_nama . '" data-km="' . $row->sparepart_km . '" data-bulan="' . $row->sparepart_bulan . '" data-ukuran="'.$row->sparepart_ukuran.'" data-detail="'.$row->sparepart_detail.'" class="btn-table edit_masterSparepart btnEdit" data-bs-toggle="modal" data-bs-target="#edit_masterSparepart">
                                             <span class="iconify-inline" data-icon="bx:bx-edit" data-width="20" data-height="20"></span>
                                         </button>
                                         <button type="button" data-id="' . $row->sparepart_id . '" data-nama="' . $row->sparepart_nama . '" data-km="' . $row->sparepart_km . '" data-bulan="' . $row->sparepart_bulan . '" class="btn-table red hapus_masterSparepart btnEdit" data-bs-toggle="modal" data-bs-target="#hapus_masterSparepart">
@@ -75,6 +79,10 @@
                                 <input type="text" class="login-input regular" name="jenis2" value="" required>
                                 <input type="hidden" id="sparepart_id" name="sparepart_id" value="">
                             </div>
+                            <div class="d-flex flex-column my-2 w-100">
+                                <label class="my-2 color-secondary">Ukuran</label>
+                                <input type="text" class="login-input regular" name="ukuran2" placeholder="" required>
+                            </div>
                             <div class="row m-0 p-0 w-full">
                                 <label class="font-w-400 my-2 color-secondary ps-0">Ideal Penggantian</label>
                                 <div class="col-6 ps-0 d-flex flex-row align-items-center">
@@ -91,6 +99,10 @@
                                     </div>
                                     <input type="number" onkeypress="return isNumberKey(event)" name="bulan-txt2" id="pilihbln" class="login-input regular" min="0" value="" disabled required>
                                 </div>
+                            </div>
+                            <div class="d-flex flex-column my-2 w-100">
+                                <label class="my-2 color-secondary">Keterangan</label>
+                                <textarea name="detail2" id="" cols="30" class="login-input" rows="3"></textarea>
                             </div>
                         </div>
                         <div class="d-flex flex-row">
@@ -132,9 +144,13 @@
                 const nama = $(this).data('nama')
                 const km = $(this).data('km')
                 const bulan = $(this).data('bulan')
+                const ukuran = $(this).data('ukuran')
+                const detail = $(this).data('detail')
 
                 $('input[name=jenis2]').val(nama);
                 $('input[name=sparepart_id]').val(id);
+                $('input[name=ukuran2]').val(ukuran);
+                $('textarea[name=detail2]').html(detail);
 
                 if (km != "") {
                     $('#km2').prop('checked', true)
