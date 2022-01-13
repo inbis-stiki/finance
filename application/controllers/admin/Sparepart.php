@@ -20,7 +20,9 @@ class Sparepart extends CI_Controller
 
             "sparepart_nama"     => $_POST['jenis'],
             "sparepart_km"       => $_POST['km-txt'],
-            "sparepart_bulan"    => $_POST['bulan-txt']
+            "sparepart_bulan"    => $_POST['bulan-txt'],
+            "sparepart_ukuran"    => $_POST['ukuran'],
+            "sparepart_detail"    => $_POST['detail']
         ];
 
         $this->db->insert('master_sparepart', $data);
@@ -36,7 +38,9 @@ class Sparepart extends CI_Controller
             "sparepart_id"       => $this->input->post('sparepart_id'),
             "sparepart_nama"     => $this->input->post('jenis2'),
             "sparepart_km"       => $this->input->post('km-txt2'),
-            "sparepart_bulan"    => $this->input->post('bulan-txt2')
+            "sparepart_bulan"    => $this->input->post('bulan-txt2'),
+            "sparepart_ukuran"    => $this->input->post('ukuran2'),
+            "sparepart_detail"    => $this->input->post('detail2')
         ];
 
         $this->M_Sparepart->editPart($data);
