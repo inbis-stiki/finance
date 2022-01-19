@@ -9,6 +9,7 @@
     <!-- Bootstrap 5.0.2 JS -->
     
     <script src="<?= site_url() ?>/assets/src/js/style.js"></script>
+    <script src="<?= site_url() ?>/assets/src/js/autonumeric.js"></script>
         <script src="<?= site_url() ?>/assets/plugin/image-zoom/jquery.zoom.js"></script>
     <script>
         function isNumberKey(evt) {
@@ -17,6 +18,17 @@
                 return false;
             return true;
         }
+        function numberWithCommas(x) {
+            return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
+        $(".inpt-number").autoNumeric('init', {
+            aSep: '.', 
+            aDec: ',',
+            aForm: true,
+            vMax: '999999999',
+            vMin: '-999999999'
+        });
+
         const getFullMonth = month => {
             switch (month) {
                 case 0:

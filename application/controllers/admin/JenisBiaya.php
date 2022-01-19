@@ -40,15 +40,16 @@ class JenisBiaya extends CI_Controller{
         $dataStore['no_rangka']                 = explode('|', $_POST['kendaraan'])[0];
         $dataStore['kendaraan_stnk']            = explode('|', $_POST['kendaraan'])[1];
         $dataStore['transaksi_detail']          = $_POST['toko'];
-        $dataStore['transaksi_jarak_tempuh']    = $_POST['jarak'];
-
+        
         $index = 0;
         foreach ($_POST['jenPeng'] as $item) {
-            $dataStore['id_pengeluaran']        = $item;
-            $dataStore['transaksi_no_seri']     = $_POST['noSeri'][$index];
-            $dataStore['id_sparepart']          = $_POST['sparepart'][$index];
-            $dataStore['transaksi_jumlah']      = $_POST['kuantitas'][$index];
-            $dataStore['transaksi_total']       = $_POST['total'][$index];
+            $dataStore['id_pengeluaran']            = $item;
+            $dataStore['transaksi_no_seri']         = $_POST['noSeri'][$index];
+            $dataStore['id_sparepart']              = explode('|', $_POST['sparepart'][$index])[0];
+            $dataStore['transaksi_jarak_tempuh']    = $_POST['jarak'][$index];
+            $dataStore['transaksi_jumlah']          = $_POST['kuantitas'][$index];
+            $dataStore['transaksi_total']           = str_replace(',', '', $_POST['total'][$index]);
+            $dataStore['transaksi_keterangan']      = $_POST['merek'][$index];
             $this->MJenisBiaya->insert($dataStore);
             $index++;
         }

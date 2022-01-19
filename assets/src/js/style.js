@@ -46,9 +46,9 @@ $(document).ready(function () {
         const kendaraan     = $('#main_slct_kendaraan').val()
         const tglService    = $('#main_inpt_tglService').val()
         const toko          = $('#main_inpt_toko').val()
-        const jarak         = $('#main_inpt_jarak').val()
+        // const jarak         = $('#main_inpt_jarak').val()
 
-        if(kendaraan && tglService && toko && jarak){
+        if(kendaraan && tglService && toko){
             $('#main_alert').attr('hidden', true)
             $('#main_boxInput').html(mainRenderHtml())
             generateNoMaintenance();
@@ -59,7 +59,7 @@ $(document).ready(function () {
             $('#main_inptKendaraan').val(kendaraan)
             $('#main_inptTglService').val(tglService)
             $('#main_inptToko').val(toko)
-            $('#main_inptJarak').val(jarak)
+            // $('#main_inptJarak').val(jarak)
         }else{
             $('#main_alert').attr('hidden', false)
         }

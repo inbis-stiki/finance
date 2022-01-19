@@ -27,17 +27,17 @@
             </div>
             <div class="col-12 col-lg-6 mt-3 ps-0">
                 <div class="row m-0 p-0 w-100">
-                    <div class="col-6 ps-0">
+                    <div class="col-12 ps-0">
                         <label class="mb-3">Nama Toko</label>
                         <input type="text" id="main_inpt_toko" class="login-input regular fs-16px input-maintenance-input">
                     </div>
-                    <div class="col-6">
+                    <!-- <div class="col-6">
                         <label class="mb-3">Jarak Tempuh</label>
                         <div class="input-group mb-3">
                             <input type="number" id="main_inpt_jarak" onkeypress="return isNumberKey(event)" class="form-control input-maintenance-input" aria-describedby="basic-addon2">
                             <span class="input-group-text" id="basic-addon2">km</span>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
             <div class="col-12 col-lg-6 mt-auto mb-3 pe-0 input-maintenance">
@@ -64,7 +64,7 @@
     <input type="hidden" name="kendaraan" id="main_inptKendaraan">
     <input type="hidden" name="tglService" id="main_inptTglService">
     <input type="hidden" name="toko" id="main_inptToko">
-    <input type="hidden" name="jarak" id="main_inptJarak">
+    <!-- <input type="hidden" name="jarak" id="main_inptJarak"> -->
     <button type="submit" class="btn-table submit-modal submit-maintenance absolute disabled" disabled>
         Simpan Data
     </button>
@@ -84,7 +84,7 @@
     <?php
         foreach ($sparepart as $item) {
             echo '
-                sparepart += \'<option value="'.$item->sparepart_id.'">'.$item->sparepart_nama.'</option>\'
+                sparepart += \'<option value="'.$item->sparepart_id.'|'.$item->sparepart_km.'|'.$item->sparepart_bulan.'">'.$item->sparepart_nama.'</option>\'
             ';
         }    
     ?>
@@ -106,22 +106,38 @@
                 </p>
                 <div class="row m-0 p-0 w-100">
                     <div class="col-12 col-lg-6 ps-0">
-                        <label class="mb-3">Jenis Pengeluaran</label>
-                        <select name="jenPeng[]" id="" class="login-input regular fs-16px" required>
-                            <option value="" disabled selected>Pilih Jenis Pengeluaran</option>
-                            ${jenPengMain}
-                        </select>
-                    </div>
-                    <div class="col-12 col-lg-6 pe-0">
                         <div class="row m-0 p-0 w-100">
-                            <div class="col-6 ps-0">
+                            <div class="col-6 col-lg-6 ps-0">
+                                <label class="mb-3">Jenis Pengeluaran</label>
+                                <select name="jenPeng[]" id="" class="login-input regular fs-16px" required>
+                                    <option value="" disabled selected>Pilih Jenis Pengeluaran</option>
+                                    ${jenPengMain}
+                                </select>
+                            </div>
+                            <div class="col-6 pe-0">
                                 <label class="mb-3">Jenis Sparepart</label>
-                                <select name="sparepart[]" class="login-input regular fs-16px" required>
+                                <select name="sparepart[]" id="main_slctSparepart_${main_inptCount}" onchange="showLoadSparepart(${main_inptCount})" class="login-input regular fs-16px" required>
                                     <option value="" disabled selected>Pilih Jenis Sparepart</option>
                                     ${sparepart}
                                 </select>
                             </div>
-                            
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-6 pe-0">
+                        <div class="row m-0 p-0 w-100">
+                            <div class="col-6 ps-0">
+                                <label class="mb-3">Merek</label>
+                                <div class="input-group mb-3">
+                                    <input type="text" id="" name="merek[]" class="form-control" aria-describedby="basic-addon1" required>
+                                </div>
+                            </div>
+                            <div class="col-6 ps-0">
+                                <label class="mb-3" id="main_boxLoadName_${main_inptCount}">Pemakaian</label>
+                                <div class="input-group mb-3">
+                                    <input type="number" name="jarak[]" id="main_inptLoad_${main_inptCount}" class="form-control" onkeypress="return isNumberKey(event)" aria-describedby="basic-addon1" disabled required>
+                                    <span class="input-group-text" id="main_boxLoadUnit_${main_inptCount}">Km</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="col-12 col-lg-6 ps-0">
@@ -129,7 +145,7 @@
                             <div class="col-6 ps-0">
                                 <label class="my-3">Qty</label>
                                 <div class="input-group mb-3">
-                                    <input type="number" id="main_inptKuan_${main_inptCount}" name="kuantitas[]" onkeypress="return isNumberKey(event)" onkeyup="calculateBiayaMaintenance(${main_inptCount})" class="form-control" aria-describedby="basic-addon2" required>
+                                    <input id="main_inptKuan_${main_inptCount}" name="kuantitas[]" onkeypress="return isNumberKey(event)" onkeyup="calculateBiayaMaintenance(${main_inptCount}, 'main_inptKuan_')" class="form-control" aria-describedby="basic-addon2" required>
                                     <span class="input-group-text" id="basic-addon2">pcs</span>
                                 </div>
                             </div>
@@ -137,7 +153,7 @@
                                 <label class="my-3">Harga</label>
                                 <div class="input-group mb-3">
                                     <span class="input-group-text" id="basic-addon1">Rp</span>
-                                    <input type="number" id="main_inptHarga_${main_inptCount}" name="" onkeypress="return isNumberKey(event)" onkeyup="calculateBiayaMaintenance(${main_inptCount})" class="form-control" aria-describedby="basic-addon1" required>
+                                    <input id="main_inptHarga_${main_inptCount}" name="" onkeypress="return isNumberKey(event)" onkeyup="calculateBiayaMaintenance(${main_inptCount}, 'main_inptHarga_')" class="form-control" aria-describedby="basic-addon1" required>
                                 </div>
                             </div>
                         </div>
@@ -149,11 +165,11 @@
                                 <label class="my-3">Total Biaya</label>
                                 <div class="input-group mb-3">
                                     <span class="input-group-text" id="basic-addon1">Rp</span>
-                                    <input type="number" name="total[]" id="main_inptBiaya_${main_inptCount}" class="form-control" aria-describedby="basic-addon1" readonly required>
+                                    <input type="text" name="total[]" id="main_inptBiaya_${main_inptCount}" class="form-control" aria-describedby="basic-addon1" readonly required>
                                 </div>
                             </div>
                             <div class="col-6 ps-0">
-                                <label class="mb-3">Nomor Seri</label>
+                                <label class="my-3">Nomor Seri</label>
                                 <input type="text" name="noSeri[]" class="login-input regular fs-16px" required>
                             </div>
                         </div>
@@ -162,13 +178,22 @@
             </div>
         `;
     }
-    const calculateBiayaMaintenance = id => {
-        const kuantitas = $('#main_inptKuan_'+id).val()
-        const harga = $('#main_inptHarga_'+id).val()
-        if(kuantitas && harga){
-            $('#main_inptBiaya_'+id).val(kuantitas*harga);
-        }
+    const calculateBiayaMaintenance = (id, inpt) => {
+        let kuantitas = $('#main_inptKuan_'+id).val()
+        let harga = $('#main_inptHarga_'+id).val()
+
+        kuantitas.replace(',', '');
+        harga.replace(',', '');
         
+        // if(inpt == "main_inptKuan_"){
+        //     $(`#${inpt}${id}`).val(numberWithCommas(kuantitas))
+        // }else{
+        //     $(`#${inpt}${id}`).val(numberWithCommas(harga))
+        // }
+
+        if(kuantitas && harga){
+            $('#main_inptBiaya_'+id).val(numberWithCommas(kuantitas*harga));
+        }
     }
     const deleteItemMaintenance = id => {
         $('#main_boxInputItem_'+id).remove();
@@ -187,5 +212,17 @@
             $(".input-maintenance").show();
             $(".input-maintenance-input").prop('disabled', false); 
         }
+    }
+    const showLoadSparepart = id => {
+        const value = $('#main_slctSparepart_'+id).val()
+        const itemSparepart = value.split('|');
+        if(itemSparepart[1]){
+            $('#main_boxLoadName_'+id).html('Pemakaian (Jarak)');
+            $('#main_boxLoadUnit_'+id).html('Km');
+        }else{
+            $('#main_boxLoadName_'+id).html('Pemakaian (Durasi)');
+            $('#main_boxLoadUnit_'+id).html('Bulan');
+        }
+        $('#main_inptLoad_'+id).attr('disabled', false);
     }
 </script>
