@@ -93,3 +93,4 @@ $route['admin/jenis-biaya']                         = 'admin/JenisBiaya';
 $route['admin/jenis-biaya/store-administrasi']      = 'admin/JenisBiaya/storeAdministrasi';
 $route['admin/jenis-biaya/store-maintenance']       = 'admin/JenisBiaya/storeMaintenance';
 $route['admin/jenis-biaya/store-expense']           = 'admin/JenisBiaya/storeExpense';
+$route['admin/jenis-biaya/ajxGetNoSeri']            = 'admin/JenisBiaya/ajxGetNoSeri';

@@ -18,6 +18,12 @@
                 return false;
             return true;
         }
+
+        function addCommaNumeric(evt) {
+            $(evt.target).val(function(index, value) {
+                return value.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            });
+        }
         function numberWithCommas(x) {
             return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         }

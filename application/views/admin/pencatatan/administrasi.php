@@ -89,7 +89,7 @@
                         <label class="mb-3">Total Biaya</label>
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="basic-addon1">Rp.</span>
-                            <input type="number" name="total[]" onkeypress="return isNumberKey(event)" class="form-control" aria-describedby="basic-addon1" required>
+                            <input type="text" name="total[]" onkeypress="return isNumberKey(event)" onkeyup="addCommaNumeric(event)" class="form-control" aria-describedby="basic-addon1" required>
                         </div>
                     </div>
                 </div>

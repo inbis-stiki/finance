@@ -129,14 +129,16 @@
                                 <label class="mb-3">Merek</label>
                                 <div class="input-group mb-3">
                                     <input type="text" id="" name="merek[]" class="form-control" aria-describedby="basic-addon1" required>
+                                    
                                 </div>
                             </div>
                             <div class="col-6 ps-0">
                                 <label class="mb-3" id="main_boxLoadName_${main_inptCount}">Pemakaian</label>
-                                <div class="input-group mb-3">
-                                    <input type="number" name="jarak[]" id="main_inptLoad_${main_inptCount}" class="form-control" onkeypress="return isNumberKey(event)" aria-describedby="basic-addon1" disabled required>
+                                <div class="input-group">
+                                    <input name="jarak[]" id="main_inptLoad_${main_inptCount}" class="form-control" onkeypress="return isNumberKey(event)" onkeyup="addCommaNumeric(event)" aria-describedby="basic-addon1" disabled required>
                                     <span class="input-group-text" id="main_boxLoadUnit_${main_inptCount}">Km</span>
                                 </div>
+                                <label class="mt-1 ms-1" id="main_boxLoadIdeal_${main_inptCount}" hidden>Ideal Pemakaian</label>
                             </div>
                         </div>
                     </div>
@@ -170,7 +172,10 @@
                             </div>
                             <div class="col-6 ps-0">
                                 <label class="my-3">Nomor Seri</label>
-                                <input type="text" name="noSeri[]" class="login-input regular fs-16px" required>
+                                <div class="input-group">
+                                    <input type="text" id="main_inptSeri_${main_inptCount}" name="noSeri[]" class="form-control regular fs-16px" required>
+                                    <button type="button" onclick="checkSeri(${main_inptCount})" class="input-group-text btn-primary"><span class="iconify-inline text-white" data-icon="fluent:search-info-24-regular" data-width="20" data-height="20"></span></button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -179,18 +184,15 @@
         `;
     }
     const calculateBiayaMaintenance = (id, inpt) => {
+        $(`#${inpt}${id}`).val(function(index, value) {
+            return value.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        });
         let kuantitas = $('#main_inptKuan_'+id).val()
         let harga = $('#main_inptHarga_'+id).val()
 
-        kuantitas.replace(',', '');
-        harga.replace(',', '');
+        kuantitas = kuantitas.replace(/,/g, '');
+        harga = harga.replace(/,/g, '');
         
-        // if(inpt == "main_inptKuan_"){
-        //     $(`#${inpt}${id}`).val(numberWithCommas(kuantitas))
-        // }else{
-        //     $(`#${inpt}${id}`).val(numberWithCommas(harga))
-        // }
-
         if(kuantitas && harga){
             $('#main_inptBiaya_'+id).val(numberWithCommas(kuantitas*harga));
         }
@@ -219,10 +221,24 @@
         if(itemSparepart[1]){
             $('#main_boxLoadName_'+id).html('Pemakaian (Jarak)');
             $('#main_boxLoadUnit_'+id).html('Km');
+            $('#main_boxLoadIdeal_'+id).html(`Ideal: ${itemSparepart[1]} Km`);
         }else{
             $('#main_boxLoadName_'+id).html('Pemakaian (Durasi)');
             $('#main_boxLoadUnit_'+id).html('Bulan');
+            $('#main_boxLoadIdeal_'+id).html(`Ideal: ${itemSparepart[2]} bulan`);
         }
+        $('#main_boxLoadIdeal_'+id).attr('hidden', false);
         $('#main_inptLoad_'+id).attr('disabled', false);
+    }
+    const checkSeri = idElementSeri => {
+        noSeri = $('#main_inptSeri_'+idElementSeri).val()
+        $.ajax({
+            url: '<?= site_url('admin/jenis-biaya/ajxGetNoSeri')?>',
+            method: 'post',
+            data: {noSeri},
+            success: function(res){
+                // alert(res)
+            }
+        })
     }
 </script>

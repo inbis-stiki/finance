@@ -116,7 +116,7 @@
                         <label class="my-3">Total Biaya</label>
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="basic-addon1">Rp.</span>
-                            <input type="number" name="bbm[total][]" onkeypress="return isNumberKey(event)" class="form-control" aria-describedby="basic-addon1" required>
+                            <input type="text" name="bbm[total][]" onkeypress="return isNumberKey(event)" onkeyup="addCommaNumeric(event)" class="form-control" aria-describedby="basic-addon1" required>
                         </div>
                     </div>
                     <div class="col-12 col-lg-6 pe-0">
@@ -146,16 +146,16 @@
                         <label class="my-3">Fee per Hari</label>
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="basic-addon1">Rp.</span>
-                            <input id="exp_inptHarga_${exp_inptCount}" type="number" name="" onkeypress="return isNumberKey(event)" onkeyup="calculateBiayaExpense(${exp_inptCount})" class="form-control" aria-describedby="basic-addon1" required>
+                            <input id="exp_inptHarga_${exp_inptCount}" type="text" name="" onkeypress="return isNumberKey(event)" onkeyup="calculateBiayaExpense(${exp_inptCount}, 'exp_inptHarga_')" class="form-control" aria-describedby="basic-addon1" required>
                         </div>
                     </div>
                     <div class="col-12 col-lg-6 ps-0">
                         <label class="mb-3">Total Hari Masuk</label>
-                            <input id="exp_inptKuan_${exp_inptCount}" type="number" name="driver[kuantitas][]" onkeypress="return isNumberKey(event)" onkeyup="calculateBiayaExpense(${exp_inptCount})" class="form-control" aria-describedby="basic-addon1" required>
+                            <input id="exp_inptKuan_${exp_inptCount}" type="text" name="driver[kuantitas][]" onkeypress="return isNumberKey(event)" onkeyup="calculateBiayaExpense(${exp_inptCount}, 'exp_inptKuan_')" class="form-control" aria-describedby="basic-addon1" required>
                         <label class="my-3">Total Fee</label>
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="basic-addon1">Rp.</span>
-                            <input id="exp_inptBiaya_${exp_inptCount}" type="number" onkeypress="return isNumberKey(event)" name="driver[total][]" class="form-control" aria-describedby="basic-addon1" readonly required>
+                            <input id="exp_inptBiaya_${exp_inptCount}" type="text" onkeypress="return isNumberKey(event)" name="driver[total][]" class="form-control" aria-describedby="basic-addon1" readonly required>
                         </div>
                     </div>
                 </div>
@@ -182,7 +182,7 @@
                             <div class="col-6 ps-0">
                                 <label class="my-3">Qty</label>
                                 <div class="input-group mb-3">
-                                    <input type="number" id="exp_inptKuan_${exp_inptCount}" name="lain[kuantitas][]" onkeypress="return isNumberKey(event)" onkeyup="calculateBiayaExpense(${exp_inptCount})" class="form-control" aria-describedby="basic-addon2" required>
+                                    <input type="text" id="exp_inptKuan_${exp_inptCount}" name="lain[kuantitas][]" onkeypress="return isNumberKey(event)" onkeyup="calculateBiayaExpense(${exp_inptCount}, 'exp_inptKuan_')" class="form-control" aria-describedby="basic-addon2" required>
                                     <span class="input-group-text" id="basic-addon2">pcs</span>
                                 </div>
                             </div>
@@ -190,7 +190,7 @@
                                 <label class="my-3">Harga</label>
                                 <div class="input-group mb-3">
                                     <span class="input-group-text" id="basic-addon1">Rp</span>
-                                    <input type="number" id="exp_inptHarga_${exp_inptCount}" name="" onkeypress="return isNumberKey(event)" onkeyup="calculateBiayaExpense(${exp_inptCount})" class="form-control" aria-describedby="basic-addon1" required>
+                                    <input type="text" id="exp_inptHarga_${exp_inptCount}" name="" onkeypress="return isNumberKey(event)" onkeyup="calculateBiayaExpense(${exp_inptCount}, 'exp_inptHarga_')" class="form-control" aria-describedby="basic-addon1" required>
                                 </div>
                             </div>
                         </div>
@@ -201,18 +201,27 @@
                         <label class="my-3">Total Harga</label>
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="basic-addon1">Rp.</span>
-                            <input id="exp_inptBiaya_${exp_inptCount}" type="number" onkeypress="return isNumberKey(event)" name="lain[total][]" class="form-control" aria-describedby="basic-addon1" readonly required>
+                            <input id="exp_inptBiaya_${exp_inptCount}" type="text" onkeypress="return isNumberKey(event)" name="lain[total][]" class="form-control" aria-describedby="basic-addon1" readonly required>
                         </div>
                     </div>
                 </div>
             </div>
         `;
     }
-    const calculateBiayaExpense = id => {
-        const kuantitas = $('#exp_inptKuan_'+id).val()
-        const harga = $('#exp_inptHarga_'+id).val()
+    const calculateBiayaExpense = (id, inpt) => {
+        $(`#${inpt}${id}`).val(function(index, value) {
+            return value.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        });
+
+        let kuantitas = $('#exp_inptKuan_'+id).val()
+        let harga = $('#exp_inptHarga_'+id).val()
+
+        kuantitas = kuantitas.replace(/,/g, '');
+        harga = harga.replace(/,/g, '');
+
         if(kuantitas && harga){
-            $('#exp_inptBiaya_'+id).val(kuantitas*harga);
+            console.log(`Kuantitas : ${kuantitas} || harga: ${harga}`)
+            $('#exp_inptBiaya_'+id).val(numberWithCommas(kuantitas*harga));
         }
         
     }
