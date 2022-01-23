@@ -24,12 +24,10 @@
             <div class="col-12 col-lg-6 pe-0">
                 <label class="mb-3">Tanggal Service</label>
                 <input type="date" id="exp_inpt_tglService" max="<?= date('Y-m-d')?>" class="login-input regular fs-16px input-expense-input">
-            </div>
-            <div class="ms-auto col-12 col-lg-6 mt-3 pe-0 input-expense">
-                <div class="alert alert-danger" id="exp_alert" role="alert" hidden>
+                <div class="alert alert-danger mt-3" style="margin-bottom: -0.5rem;" id="exp_alert2" role="alert" hidden>
                         Harap masukkan data dengan benar!
                 </div>
-                <button type="button" class="btn-table submit-modal" id="input-expense">
+                <button type="button" class="btn-table submit-modal mt-3" id="input-expense">
                     Masukkan Data
                 </button>
             </div>

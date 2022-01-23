@@ -30,6 +30,7 @@ $(document).ready(function () {
         const tglTrans = $('#adm_inpt_tglBeli').val()
         if(kendaraan && tglTrans){
             $('#adm_alert').attr('hidden', true);
+            $('#adm_alert2').attr('hidden', true);
             $('#adm_boxInput').html(admRenderHtml())
             generateNoAdministrasi();
             $(".administrasi-extend").addClass('active');
@@ -39,7 +40,7 @@ $(document).ready(function () {
             $('#adm_inptKendaraan').val(kendaraan)
             $('#adm_inptTglTrans').val(tglTrans)
         }else{
-            $('#adm_alert').attr('hidden', false);
+            $('#adm_alert2').attr('hidden', false);
         }
     });
     $("#input-maintenance").click(function () {
@@ -50,6 +51,7 @@ $(document).ready(function () {
 
         if(kendaraan && tglService && toko){
             $('#main_alert').attr('hidden', true)
+            $('#main_alert2').attr('hidden', true)
             $('#main_boxInput').html(mainRenderHtml())
             generateNoMaintenance();
             $(".maintenance-extend").addClass('active');
@@ -61,7 +63,7 @@ $(document).ready(function () {
             $('#main_inptToko').val(toko)
             // $('#main_inptJarak').val(jarak)
         }else{
-            $('#main_alert').attr('hidden', false)
+            $('#main_alert2').attr('hidden', false)
         }
         
         
@@ -72,13 +74,14 @@ $(document).ready(function () {
 
         if(kendaraan && tglService){
             $('#exp_alert').attr('hidden', true);
+            $('#exp_alert2').attr('hidden', true);
             $(".expense-extend").addClass('active');
             $(".input-expense").hide();
             $(".input-expense-input").prop('disabled', true);    
             $('#exp_inptKendaraan').val(kendaraan)
             $('#exp_inptTglService').val(tglService)
         }else{
-            $('#exp_alert').attr('hidden', false);
+            $('#exp_alert2').attr('hidden', false);
         }
     });
 });

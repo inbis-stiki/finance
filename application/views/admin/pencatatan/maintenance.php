@@ -22,31 +22,24 @@
                 <div id="main_alert" style="color: red;" hidden>Harap memilih kendaraan terlebih dahulu!</div>
             </div>
             <div class="col-12 col-lg-6 pe-0">
-                <label class="mb-3">Tanggal Service</label>
-                <input type="date" id="main_inpt_tglService" max="<?= date('Y-m-d')?>" class="login-input regular fs-16px input-maintenance-input">
-            </div>
-            <div class="col-12 col-lg-6 mt-3 ps-0">
-                <div class="row m-0 p-0 w-100">
-                    <div class="col-12 ps-0">
+                <div class="row w-100">
+                    <div class="col-6 col-lg-6 ps-0">
+                        <label class="mb-3">Tanggal Service</label>
+                        <input type="date" id="main_inpt_tglService" max="<?= date('Y-m-d')?>" class="login-input regular fs-16px input-maintenance-input">
+                    </div>
+                    <div class="col-6 col-lg-6 pe-0">
                         <label class="mb-3">Nama Toko</label>
                         <input type="text" id="main_inpt_toko" class="login-input regular fs-16px input-maintenance-input">
                     </div>
-                    <!-- <div class="col-6">
-                        <label class="mb-3">Jarak Tempuh</label>
-                        <div class="input-group mb-3">
-                            <input type="number" id="main_inpt_jarak" onkeypress="return isNumberKey(event)" class="form-control input-maintenance-input" aria-describedby="basic-addon2">
-                            <span class="input-group-text" id="basic-addon2">km</span>
-                        </div>
-                    </div> -->
                 </div>
-            </div>
-            <div class="col-12 col-lg-6 mt-auto mb-3 pe-0 input-maintenance">
-                <div class="alert alert-danger mt-3" id="main_alert" role="alert" hidden>
-                    Harap masukkan data dengan benar!
+                <div class="row w-100">
+                    <div class="alert alert-danger mt-3" style="margin-bottom: -0.5rem;" id="main_alert2" role="alert" hidden>
+                        Harap masukkan data dengan benar!
+                    </div>
+                    <button type="button" class="btn-table submit-modal mt-3" id="input-maintenance">
+                        Masukkan Data
+                    </button>
                 </div>
-                <button type="button" class="btn-table submit-modal" id="input-maintenance">
-                    Masukkan Data
-                </button>
             </div>
         </div>
     </div>

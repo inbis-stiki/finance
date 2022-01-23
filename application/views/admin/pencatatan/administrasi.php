@@ -24,15 +24,21 @@
             <div class="col-12 col-lg-6 pe-0">
                 <label class="mb-3">Tanggal Transaksi</label>
                 <input type="date" id="adm_inpt_tglBeli" max="<?= date('Y-m-d')?>" class="login-input regular fs-16px input-administrasi-input">
+                <div class="alert alert-danger mt-3" style="margin-bottom: -0.5rem;" id="adm_alert2" role="alert" hidden>
+                    Harap masukkan data dengan benar!
+                </div>
+                <button type="button" class="btn-table submit-modal mt-3" id="input-administrasi">
+                    Masukkan Data
+                </button>
             </div>
-            <div class="ms-auto col-12 col-lg-6 mt-3 pe-0 input-administrasi">
-                <div class="alert alert-danger" id="adm_alert" role="alert" hidden>
+            <!-- <div class="ms-auto col-12 col-lg-6 mt-3 pe-0 input-administrasi">
+                <div class="alert alert-danger" id="adm_alert2" role="alert" hidden>
                     Harap masukkan data dengan benar!
                 </div>
                 <button type="button" class="btn-table submit-modal" id="input-administrasi">
                     Masukkan Data
                 </button>
-            </div>
+            </div> -->
         </div>
     </div>
     <div class="head mid administrasi-extend">
