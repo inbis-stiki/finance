@@ -169,6 +169,7 @@
                                     <input type="text" id="main_inptSeri_${main_inptCount}" name="noSeri[]" class="form-control regular fs-16px" required>
                                     <button type="button" onclick="checkSeri(${main_inptCount})" class="input-group-text btn-primary"><span class="iconify-inline text-white" data-icon="fluent:search-info-24-regular" data-width="20" data-height="20"></span></button>
                                 </div>
+                                <label id="main_inptSeriAlert_${main_inptCount}"></label>
                             </div>
                         </div>
                     </div>
@@ -230,7 +231,11 @@
             method: 'post',
             data: {noSeri},
             success: function(res){
-                // alert(res)
+                if(res == "true")
+                    $('#main_inptSeriAlert_'+idElementSeri).html('<span style="color: red;">Nomor seri sudah digunakan</span>');
+                else
+                    $('#main_inptSeriAlert_'+idElementSeri).html('<span style="color: green;">Nomor seri belum digunakan</span>');
+
             }
         })
     }
