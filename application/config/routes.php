@@ -53,6 +53,14 @@ $route['default_controller'] = 'welcome';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
+
+// AUTH
+$route['login'] = 'Auth/login';
+$route['logout'] = 'Auth/logout';
+
+// ========== ADMIN ==========
+$route['admin'] = 'admin/Dashboard';
+
 $route['adm_login'] = 'admin/Auth';
 $route['admin/dashboard'] = 'admin/Admin';
 $route['admin/form_pengajuan'] = 'admin/Admin/form_pengajuan';

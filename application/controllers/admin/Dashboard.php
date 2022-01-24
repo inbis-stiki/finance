@@ -3,16 +3,23 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Dashboard extends CI_Controller
 {
-    public function __construct()
-    {
+    public function __construct(){
         parent::__construct();
-        if (empty($this->session->userdata('user_role'))) {
-            redirect('/');
-        }
-
-        $this->load->helper(array('form', 'url', 'date'));
-        $this->load->library('form_validation');
+		$this->load->library('table');
         $this->load->model('M_dashboard');
     }
 
+    public function index(){
+		$dataDaftarKendaraan = $this->M_dashboard->getDaftarKendaraan();
+		$dataGlobalCost = $this->M_dashboard->getGlobalCost();
+
+		$data = [
+			'title' => "admin",
+			'GlobalCost' => $dataGlobalCost,
+			'DaftarKendaraan' => $dataDaftarKendaraan
+		];
+
+		$this->template->index('admin/dashboard', $data);
+		$this->load->view('_components/sideNavigation', $data);
     }
+}

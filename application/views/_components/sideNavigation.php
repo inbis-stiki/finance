@@ -2,7 +2,7 @@
     <div class="top-space"></div>
     <div class="profile-section">
         <img src="<?= site_url() ?>assets/src/img/admin.png" alt="">
-        <p class="mb-0"><?= $auth['username']; ?></p>
+        <p class="mb-0"><?= $this->session->userdata['name']; ?></p>
     </div>
     <div class="nav-section">
 
