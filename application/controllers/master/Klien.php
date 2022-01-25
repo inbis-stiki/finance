@@ -6,16 +6,28 @@ class Klien extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        if (empty($this->session->userdata('user_role'))) {
-            redirect('/');
-        }
 
         $this->load->library('form_validation');
-        $this->load->model('M_Klien');
+        $this->load->library('table');
         $this->load->model('MKlien');
+        $this->load->model('MDropdown');
     }
 
-    public function aksiTambahKlien()
+    public function index(){
+		$dataKlien = $this->MKlien->get(['deleted_date' => NULL]);
+		$dataWilayah = $this->MDropdown->get(['dropdown_menu' => 'Wilayah', 'deleted_date' => NULL, 'orderBy' => 'dropdown_list ASC']);
+
+		$data = [
+			'title' => "admin",
+			'Klien' => $dataKlien,
+			'Wilayah' => $dataWilayah,
+		];
+
+		$this->template->index('admin/master_klien', $data);
+		$this->load->view('_components/sideNavigation', $data);
+    }
+
+    public function store()
     {
         $jenis = $this->input->post('jenis');
 
@@ -44,7 +56,7 @@ class Klien extends CI_Controller
 
         $this->MKlien->insert($data);
         $this->session->set_flashdata('sukses', "Data Berhasil Disimpan");
-        redirect('admin/master_klien');
+        redirect('master/klien');
     }
 
 
@@ -54,7 +66,7 @@ class Klien extends CI_Controller
         echo json_encode($kendaraan);
     }
 
-    function aksiEditKlien()
+    function update()
     {
         $data = [
             "client_id"         => $this->input->post('id'),
@@ -68,11 +80,10 @@ class Klien extends CI_Controller
         ];
 
         $this->MKlien->update($data);
-
-        redirect('admin/master_klien');
+        redirect('master/klien');
     }
 
-    public function aksiHapus()
+    public function destroy()
     {
         $data = [
             "client_id"     => $this->input->post('id'),
@@ -80,6 +91,6 @@ class Klien extends CI_Controller
         ];
 
         $this->MKlien->update($data);
-        redirect('admin/master_klien');
+        redirect('master/klien');
     }
 }

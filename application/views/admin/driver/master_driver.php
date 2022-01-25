@@ -4,7 +4,7 @@
             <p class="mb-0 fs-5 font-w-500 color-darker">
                 Master Driver
             </p>
-            <a href="<?= base_url('admin/tambah_driver'); ?>" class="btn-table green" type="button">Tambah</a>
+            <a href="<?= base_url('master/driver/add'); ?>" class="btn-table green" type="button">Tambah</a>
             <!-- <button type="button" class="btn-table" data-bs-toggle="modal">Add</button> -->
         </div>
         <div class="card-section">
@@ -51,7 +51,7 @@
 
                                     '
                                     '.$aksiAssign.'
-                                    <a href="' .  base_url("admin/ubah_driver/" . $row->driver_nik) . '" >
+                                    <a href="' .  base_url("master/driver/edit/" . $row->driver_nik) . '" >
                                         <button type="button" class="btn-table edit_masterDriver btnEdit">
                                             <span class="iconify-inline" data-icon="bx:bx-edit" data-width="20" data-height="20"></span>
                                         </button>
@@ -79,7 +79,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body fs-14px pt-0 d-flex flex-column">
-                        <?= form_open_multipart('admin/Driver/aksiHapus'); ?>
+                        <?= form_open_multipart('master/driver/destroy'); ?>
                         <div class="pb-4">
                             <div class="d-flex flex-column my-2 w-100">
                                 <p class="font-w-700 color-darker mb-0">Apakah anda yakin menghapus data ini ?</p>
@@ -103,7 +103,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body fs-14px pt-0 d-flex flex-column">
-                        <?= form_open_multipart('admin/Driver/aksiAssign'); ?>
+                        <?= form_open_multipart('master/driver/assign'); ?>
                         <div class="pb-4">
                             <div class="d-flex flex-column my-2 w-100">
                                 <label class="my-2 color-secondary">Awal Pemakaian</label>
@@ -248,7 +248,7 @@
             $('#tableDriver tbody').on('click', '.btnInfoKendaraan', function() {
                 const id = $(this).data('id')
                 $.ajax({
-                    url: '<?= site_url('admin/ajxGetKendaraan')?>',
+                    url: '<?= site_url('master/kendaraan/ajxGet')?>',
                     method: 'post',
                     data: {id},
                     success: function(res){

@@ -9,14 +9,41 @@
     <!-- Bootstrap 5.0.2 JS -->
     
     <script src="<?= site_url() ?>/assets/src/js/style.js"></script>
+    <script src="<?= site_url() ?>/assets/src/js/autonumeric.js"></script>
         <script src="<?= site_url() ?>/assets/plugin/image-zoom/jquery.zoom.js"></script>
     <script>
+        $(document).ready(function(){
+            <?php
+                if($this->session->flashdata('succ_modal')){
+                    echo '
+                        $("#success").modal("show");
+                    ';
+                }
+            ?>
+        })
         function isNumberKey(evt) {
             var charCode = (evt.which) ? evt.which : evt.keyCode
             if (charCode > 31 && (charCode < 48 || charCode > 57))
                 return false;
             return true;
         }
+
+        function addCommaNumeric(evt) {
+            $(evt.target).val(function(index, value) {
+                return value.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            });
+        }
+        function numberWithCommas(x) {
+            return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
+        $(".inpt-number").autoNumeric('init', {
+            aSep: '.', 
+            aDec: ',',
+            aForm: true,
+            vMax: '999999999',
+            vMin: '-999999999'
+        });
+
         const getFullMonth = month => {
             switch (month) {
                 case 0:

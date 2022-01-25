@@ -60,7 +60,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body fs-14px pt-0 d-flex flex-column">
-                        <?= form_open_multipart('admin/Klien/aksiTambahKlien'); ?>
+                        <?= form_open_multipart('master/klien/store'); ?>
                         <div class="pb-4">
                             <div class="d-flex flex-column my-2 w-100">
                                 <label class="my-2 color-secondary">Nama Klien</label>
@@ -123,33 +123,33 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body fs-14px pt-0 d-flex flex-column">
-                        <?= form_open_multipart('admin/Klien/aksiEditKlien'); ?>
+                        <?= form_open_multipart('master/klien/update'); ?>
                         <div class="pb-4">
 
                             <div class="d-flex flex-column my-2 w-100">
                                 <label class="font-w-400 my-2 color-secondary">Nama Klien</label>
-                                <input type="text" class="login-input regular" name="nama" value="" required>
+                                <input type="text" id="edt_nama" class="login-input regular" name="nama" value="" required>
                                 <input type="hidden" id="instansi_id" name="instansi_id" value="">
                             </div>
                             <div class="d-flex flex-column my-2 w-100">
                                 <label class="my-2 color-secondary">Alamat Klien</label>
-                                <input type="text" class="login-input regular" name="alamat" placeholder="" required>
+                                <input type="text" id="edt_alamat" class="login-input regular" name="alamat" placeholder="" required>
                             </div>
                             <div class="d-flex flex-column my-2 w-100">
                                 <label class="my-2 color-secondary">Kontak Klien</label>
-                                <input type="text" class="login-input regular" onkeypress="return Angka(event)" name="kontak" placeholder="" required>
+                                <input type="text" id="edt_kontak" class="login-input regular" onkeypress="return Angka(event)" name="kontak" placeholder="" required>
                             </div>
                             <div class="d-flex flex-column my-2 w-100">
                                 <label class="my-2 color-secondary">NPWP Klien</label>
-                                <input type="text" class="login-input regular" onkeypress="return Angka(event)" name="npwp" placeholder="" required>
+                                <input type="text" id="edt_npwp" class="login-input regular" onkeypress="return Angka(event)" name="npwp" placeholder="" required>
                             </div>
                             <div class="d-flex flex-column my-2 w-100">
                                 <label class="my-2 color-secondary">No. Rekening Klien</label>
-                                <input type="text" class="login-input regular" name="norek" placeholder="" required>
+                                <input type="text" id="edt_noRek" class="login-input regular" name="norek" placeholder="" required>
                             </div>
                             <div class="d-flex flex-column my-2 w-100">
                                 <label class="my-2 color-secondary">Wilayah Klien</label>
-                                <select class="login-input regular" name="group" id="wilayahKlien">
+                                <select id="edt_wilayah" class="login-input regular" name="group" id="wilayahKlien">
                                     <?php foreach ($Wilayah as $row) { ?>
                                         <option value="<?= $row->dropdown_list ?>"><?= $row->dropdown_list ?></option>
                                     <?php } ?>
@@ -173,7 +173,7 @@
                         </div>
                         <div class="d-flex flex-row">
                             <button type="submit" class="btn-table submit-modal ms-1">Simpan</button>
-                            <input type="hidden" name="id">
+                            <input type="hidden" id="edt_id" name="id">
                         </div>
                         <?= form_close() ?>
                     </div>
@@ -190,7 +190,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body fs-14px pt-0 d-flex flex-column">
-                        <?= form_open_multipart('admin/Klien/aksiHapus'); ?>
+                        <?= form_open_multipart('master/klien/destroy'); ?>
                         <div class="pb-4">
                             <div class="d-flex flex-column my-2 w-100">
                                 <p class="font-w-700 color-darker mb-0">Apakah anda yakin menghapus data ini ?</p>
@@ -216,13 +216,13 @@
                 const norek = $(this).data('norek')
                 const group = $(this).data('group')
 
-                $('input[name=id]').val(id);
-                $('input[name=nama]').val(nama);
-                $('input[name=alamat]').val(alamat);
-                $('input[name=kontak]').val(kontak);
-                $('input[name=npwp]').val(npwp);
-                $('input[name=norek]').val(norek);
-                $('select[name=group]').val(group).change();
+                $('#edt_id').val(id);
+                $('#edt_nama').val(nama);
+                $('#edt_alamat').val(alamat);
+                $('#edt_kontak').val(kontak);
+                $('#edt_npwp').val(npwp);
+                $('#edt_noRek').val(norek);
+                $('#edt_wilayah').val(group).change();
 
                 if (jenis == "BUMN") {
                     $('#bumn').prop('checked', true)

@@ -6,22 +6,53 @@ class Driver extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        if (empty($this->session->userdata('user_role'))) {
-            redirect('/');
-        }
-
         $this->load->helper(array('form', 'url', 'date'));
         $this->load->library('form_validation');
+		$this->load->library('table');
         $this->load->library('upload');
-        $this->load->model('M_Driver');
-        $this->load->model('MDriver');
+		$this->load->model('MDriver');
+		$this->load->model('MKendaraan');
+		$this->load->model('MDropdown');
+    }
+    public function index(){
+		$dataDriver 	= $this->MDriver->get(['deleted_date' => NULL]);
+		$dataKendaraan 	= $this->MKendaraan->get(['disabled_date' => NULL, 'is_active' => "1"]);
+
+		$data = [
+			'title' => "admin",
+			'Driver' => $dataDriver,
+			'Kendaraan' => $dataKendaraan,
+		];
+
+		$this->template->index('admin/driver/master_driver', $data);
+		$this->load->view('_components/sideNavigation', $data);
+    }
+    public function vAdd(){
+		$dataSIM = $this->MDropdown->get(['dropdown_menu' => 'SIM', 'deleted_date' => NULL]);
+
+		$data['title'] 	= 'admin';
+		$data['Sim'] 	= $dataSIM;
+		$data['auth'] 	= $this->db->get_where('master_user', ['username' => $this->session->userdata('username')])->row_array();
+
+		$this->template->index('admin/add_driver', $data);
+		$this->load->view('_components/sideNavigation', $data);
     }
 
-    public function vAdd()
-    {
-    }
+    public function vEdit($id)
+	{
+		$dataSIM = $this->MDropdown->get(['dropdown_menu' => "SIM", 'deleted_date' => NULL]);
 
-    public function aksiTambahDriver()
+		$data['title'] = 'admin';
+		$data['Sim'] = $dataSIM;
+		$data['auth'] = $this->db->get_where('master_user', ['username' => $this->session->userdata('username')])->row_array();
+		$data['driver'] = $this->MDriver->getById($id);
+
+		$this->template->index('admin/edit_driver', $data);
+		$this->load->view('_components/sideNavigation', $data);
+	}
+
+
+    public function store()
     {
         $uploadFoto = $this->upload_image('foto');
         if ($uploadFoto['status' == false]) {
@@ -44,9 +75,9 @@ class Driver extends CI_Controller
         $formData['driver_tanggalmasuk'] = $_POST['tanggal'];
 
         $this->MDriver->insert($formData);
-        redirect('admin/master_driver');
+        redirect('master/driver');
     }
-    public function aksiUbahDriver()
+    public function update()
     {
         if (!empty($_FILES['foto']['name'])) {
             $uploadFoto = $this->upload_image('foto');
@@ -75,28 +106,10 @@ class Driver extends CI_Controller
         $formData['driver_sim']         = implode(",", $_POST['sim']);
 
         $this->MDriver->update($formData);
-        redirect('admin/master_driver');
+        redirect('master/driver');
     }
 
-    function editKendaraan()
-    {
-        $data = [
-            "kendaraan_no_rangka"        => $this->input->post('kendaraan_no_rangka'),
-            "kendaraan_stnk"             => $this->input->post('kendaraan_stnk'),
-            "kendaraan_merk"             => $this->input->post('kendaraan_merk'),
-            "kendaraan_tanggal_beli"     => $this->input->post('kendaraan_tanggal_beli')
-        ];
-
-        $this->M_kendaraan_master->editKendaraan($data);
-
-        // $rangka = $this->input->post('kendaraan_no_rangka');
-        // $stnk = $this->input->post('kendaraan_stnk');
-        // $merk = $this->input->post('kendaraan_merk');
-        // $tanggal = $this->input->post('kendaraan_tanggal_beli');
-        // $this->M_region->editRegion($rangka, $stnk, $merk, $tanggal);
-        redirect('admin/master_kendaraan');
-    }
-    public function aksiAssign(){
+    public function assign(){
         $this->load->model("MDriver");
         $kendaraan = explode('|', $_POST['kendaraan']);
         $dataStore['kendaraan_no_rangka'] = $kendaraan[0];
@@ -105,10 +118,10 @@ class Driver extends CI_Controller
         $dataStore['start_date']          = $_POST['awal'];
         $dataStore['end_date']            = $_POST['akhir'];
         $this->MDriver->insertTransKendaraan($dataStore);
-        redirect('admin/master_driver');
+        redirect('master/driver');
     }
 
-    public function aksiHapus()
+    public function destroy()
     {
         $currDate = date('Y-m-d H:i:s');
         $data = [
@@ -116,10 +129,10 @@ class Driver extends CI_Controller
             "deleted_date"  => $currDate
         ];
 
-        $this->M_Driver->editDriver($data);
+        $this->MDriver->update($data);
         $this->db->where('driver_nik', $this->input->post('driver_nik'))->update('transaksi_driverkendaraan', ['disabled_date' => $currDate]);
 
-        redirect('admin/master_driver');
+        redirect('master/driver');
     }
 
     public function upload_image($resource)

@@ -1,18 +1,69 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Master_kendaraan extends CI_Controller
+class Kendaraan extends CI_Controller
 {
     public function __construct()
     {
         parent::__construct();
-        if (empty($this->session->userdata('user_role'))) {
-            redirect('/');
-        }
-
         $this->load->helper(array('form', 'url', 'date'));
         $this->load->library('form_validation');
+        $this->load->library('table');
         $this->load->model('M_kendaraan_master');
+    }
+    public function index(){
+        $this->load->model('M_User');
+		$this->load->model('M_kendaraan_master');
+		$dataKendaraan = $this->M_kendaraan_master->getKendaraan();
+
+		$data = [
+			'title' => "admin",
+			'Kendaraan' => $dataKendaraan,
+			'auth' => $this->db->get_where('master_user', ['username' => $this->session->userdata('username')])->row_array()
+		];
+
+		$this->template->index('admin/master_kendaraan', $data);
+		$this->load->view('_components/sideNavigation', $data);
+    }
+    public function vAdd(){
+        $this->load->model('M_User');
+		$this->load->model('MDropdown');
+
+		$datajenis	= $this->MDropdown->get(['dropdown_menu' => 'Jenis Kendaraan', 'deleted_date' => NULL]);
+		$datapt		= $this->MDropdown->get(['dropdown_menu' => 'PT', 'deleted_date' => NULL]);
+
+		$data = [
+			'title' 	=> "admin",
+			'auth' 		=> $this->db->get_where('master_user', ['username' => $this->session->userdata('username')])->row_array(),
+			'datajenis' => $datajenis,
+			'datapt' 	=> $datapt
+		];
+
+		$this->template->index('admin/add_kendaraan', $data);
+		$this->load->view('_components/sideNavigation', $data);
+    }
+    public function vEdit($id){
+        $id = str_replace('_', ' ', $id);
+		$this->load->model('M_User');
+		$this->load->model('M_kendaraan_master');$this->load->model('MDropdown');
+
+		$datajenis	= $this->MDropdown->get(['dropdown_menu' => 'Jenis Kendaraan', 'deleted_date' => NULL]);
+		$datapt		= $this->MDropdown->get(['dropdown_menu' => 'PT', 'deleted_date' => NULL]);
+		$dataEdit = $this->M_kendaraan_master->getById($id);
+
+
+
+		$data = [
+			'title' => "admin",
+			'auth' => $this->db->get_where('master_user', ['username' => $this->session->userdata('username')])->row_array(),
+			'kendaraan' => $dataEdit,
+			'datajenis' => $datajenis,
+			'datapt' 	=> $datapt
+		];
+
+
+		$this->template->index('admin/edit_kendaraan', $data);
+		$this->load->view('_components/sideNavigation', $data);
     }
     public function ajxGetKendaraan(){
         $this->load->model('MKendaraan');
@@ -25,7 +76,7 @@ class Master_kendaraan extends CI_Controller
         echo json_encode($kendaraan);
     }
 
-    public function aksiTambahKendaraan()
+    public function store()
     {
         $dataDuplicate = $this->db->get_where('master_kendaraan', ['kendaraan_no_rangka' => $_POST['rangka'], 'kendaraan_stnk' => $_POST['stnk']])->result();
         if ($dataDuplicate == null) {
@@ -109,7 +160,7 @@ class Master_kendaraan extends CI_Controller
             $query = $this->db->insert('master_kendaraan', $data);
             if ($query = true) {
                 $this->session->set_flashdata('inserted', 'Yess');
-                redirect('admin/master_kendaraan');
+                redirect('master/kendaraan');
             }
         } else {
 
@@ -133,7 +184,39 @@ class Master_kendaraan extends CI_Controller
         }
     }
 
-    function aksiUbahKendaraan()
+    function changeSTNK()
+    {
+        $this->load->model('MKendaraan');
+        $dataDuplicate = $this->db->get_where('master_kendaraan', ['kendaraan_no_rangka' => $_POST['rangka'], 'kendaraan_stnk' => $_POST['stnk']])->result();
+        if ($dataDuplicate == null) {
+            $kendaraan = $this->MKendaraan->getById($_POST['rangka'], $_POST['stnkLama']);
+            $dataStore['kendaraan_no_rangka']              = $kendaraan->kendaraan_no_rangka;
+            $dataStore['kendaraan_stnk']                = $_POST['stnk'];
+            $dataStore['kendaraan_merk']                = $kendaraan->kendaraan_merk;
+            $dataStore['kendaraan_tanggal_beli']        = $kendaraan->kendaraan_tanggal_beli;
+            $dataStore['kendaraan_foto']                = $kendaraan->kendaraan_foto;
+            $dataStore['kendaraan_pemilik']             = $kendaraan->kendaraan_pemilik;
+            $dataStore['kendaraan_deadlinesim']         = $kendaraan->kendaraan_deadlinesim;
+            $dataStore['kendaraan_deadlinekir']         = $kendaraan->kendaraan_deadlinekir;
+            $dataStore['kendaraan_kapasitas_tangki']    = $kendaraan->kendaraan_kapasitas_tangki;
+            $dataStore['kendaraan_jenis']               = $kendaraan->kendaraan_jenis;
+            $dataStore['kendaraan_pt']                  = $kendaraan->kendaraan_pt;
+            $this->MKendaraan->insert($dataStore);
+
+            $dataUpdate['kendaraan_no_rangka'] = $_POST['rangka'];
+            $dataUpdate['kendaraan_stnk']   = $_POST['stnkLama'];
+            $dataUpdate['disabled_date']    = date('Y-m-d H:i:s');
+            $this->MKendaraan->update($dataUpdate);
+
+            $this->session->set_flashdata('succ_msg', 'Berhasil mengubah Nomor STNK!');
+            redirect('master/kendaraan');
+        } else {
+            $this->session->set_flashdata('err_msg', 'Data No Rangka & STNK telah tersimpan!');
+            redirect('master/kendaraan');
+        }
+    }
+
+    public function update()
     {
         // $dataDuplicate = $this->db->get_where('master_kendaraan', ['kendaraan_no_rangka' => $_POST['rangka'], 'kendaraan_stnk' => $_POST['stnk']])->result();
         // if($dataDuplicate == null){
@@ -204,7 +287,7 @@ class Master_kendaraan extends CI_Controller
         //     }
         // }
         // $this->M_kendaraan_master->update($where, $data);
-        // redirect('admin/master_kendaraan');
+        // redirect('master/kendaraan');
         // $rangka = $this->input->post('rangka');
         $this->db->where($where);
         $query = $this->db->update('master_kendaraan', $data);
@@ -214,7 +297,7 @@ class Master_kendaraan extends CI_Controller
         // die;
         if ($query = true) {
             $this->session->set_flashdata('inserted', 'Yess');
-            redirect('admin/master_kendaraan');
+            redirect('master/kendaraan');
         }
         // }else{
 
@@ -236,174 +319,4 @@ class Master_kendaraan extends CI_Controller
         //     $this->load->view('_components/sideNavigation', $data);
         // }
     }
-
-    function aksiUbahSTNK()
-    {
-        $this->load->model('MKendaraan');
-        $dataDuplicate = $this->db->get_where('master_kendaraan', ['kendaraan_no_rangka' => $_POST['rangka'], 'kendaraan_stnk' => $_POST['stnk']])->result();
-        if ($dataDuplicate == null) {
-            $kendaraan = $this->MKendaraan->getById($_POST['rangka'], $_POST['stnkLama']);
-            $dataStore['kendaraan_no_rangka']              = $kendaraan->kendaraan_no_rangka;
-            $dataStore['kendaraan_stnk']                = $_POST['stnk'];
-            $dataStore['kendaraan_merk']                = $kendaraan->kendaraan_merk;
-            $dataStore['kendaraan_tanggal_beli']        = $kendaraan->kendaraan_tanggal_beli;
-            $dataStore['kendaraan_foto']                = $kendaraan->kendaraan_foto;
-            $dataStore['kendaraan_pemilik']             = $kendaraan->kendaraan_pemilik;
-            $dataStore['kendaraan_deadlinesim']         = $kendaraan->kendaraan_deadlinesim;
-            $dataStore['kendaraan_deadlinekir']         = $kendaraan->kendaraan_deadlinekir;
-            $dataStore['kendaraan_kapasitas_tangki']    = $kendaraan->kendaraan_kapasitas_tangki;
-            $dataStore['kendaraan_jenis']               = $kendaraan->kendaraan_jenis;
-            $dataStore['kendaraan_pt']                  = $kendaraan->kendaraan_pt;
-            $this->MKendaraan->insert($dataStore);
-
-            $dataUpdate['kendaraan_no_rangka'] = $_POST['rangka'];
-            $dataUpdate['kendaraan_stnk']   = $_POST['stnkLama'];
-            $dataUpdate['disabled_date']    = date('Y-m-d H:i:s');
-            $this->MKendaraan->update($dataUpdate);
-
-            $this->session->set_flashdata('succ_msg', 'Berhasil mengubah Nomor STNK!');
-            redirect('admin/master_kendaraan');
-        } else {
-            $this->session->set_flashdata('err_msg', 'Data No Rangka & STNK telah tersimpan!');
-            redirect('admin/master_kendaraan');
-        }
-    }
-
-    public function updateKendaraan()
-    {
-        $kendaraan_no_rangka = $this->input->post('kendaraan_no_rangka');
-        $config['upload_path'] = './assets/images/fotokendaraan';
-        $config['allowed_types'] = 'jpg|png|jpeg';
-        $config['max_size'] = '2048';  //2MB max
-        $config['max_width'] = '4480'; // pixel
-        $config['max_height'] = '4480'; // pixel
-
-        $this->load->library('upload', $config);
-        if (!$this->upload->do_upload('kendaraan_foto')) {
-            $kendaraan_stnk = $this->input->post('kendaraan_stnk', TRUE);
-            $kendaraan_merk = $this->input->post('kendaraan_merk', TRUE);
-            $kendaraan_tanggal_beli = $this->input->post('kendaraan_tanggal_beli', TRUE);
-
-            $data = array(
-                'kendaraan_stnk' => $kendaraan_stnk,
-                'kendaraan_merk' => $kendaraan_merk,
-                'kendaraan_tanggal_beli' => $kendaraan_tanggal_beli,
-            );
-
-            $this->db->where('kendaraan_no_rangka', $kendaraan_no_rangka);
-            $this->db->update('master_kendaraan', $data);
-            $this->session->set_flashdata('inserted', 'Yess');
-            // redirect('admin/master_kendaraan');
-            $test = $this->db->last_query();
-            echo $test;
-        } else {
-            $kendaraan_foto = $this->upload->data();
-            $kendaraan_foto = $kendaraan_foto['file_name'];
-            $kendaraan_stnk = $this->input->post('kendaraan_stnk', TRUE);
-            $kendaraan_merk = $this->input->post('kendaraan_merk', TRUE);
-            $kendaraan_tanggal_beli = $this->input->post('kendaraan_tanggal_beli', TRUE);
-
-            $data = array(
-                'kendaraan_stnk' => $kendaraan_stnk,
-                'kendaraan_merk' => $kendaraan_merk,
-                'kendaraan_tanggal_beli' => $kendaraan_tanggal_beli,
-                'kendaraan_foto' => $kendaraan_foto,
-            );
-
-            $this->db->where('kendaraan_no_rangka', $kendaraan_no_rangka);
-            $this->db->update('master_kendaraan', $data);
-            $this->session->set_flashdata('inserted', 'Yess');
-            // redirect('admin/master_kendaraan');
-            $test = $this->db->last_query();
-            echo $test;
-        }
-        
-
-        // $rangka = $this->input->post('kendaraan_no_rangka');
-        // $config['upload_path'] = './assets/images/fotokendaraan';
-        // $config['allowed_types'] = 'jpg|png|jpeg';
-        // $config['max_size'] = '2048';  //2MB max
-        // $config['max_width'] = '4480'; // pixel
-        // $config['max_height'] = '4480'; // pixel
-        // $config['file_name'] = $_FILES['foto']['name'];
-
-        // $this->upload->initialize($config);
-
-        // if (!empty($_FILES['foto']['name'])) {
-        //     if ($this->upload->do_upload('foto')) {
-        //         $fotokendaraan = $this->upload->data();
-        //         $data = array(
-        //             'kendaraan_no_rangka'         => $this->input->post('kendaraan_no_rangka'),
-        //             'kendaraan_stnk'             => $this->input->post('kendaraan_stnk'),
-        //             'kendaraan_merk'             => $this->input->post('kendaraan_merk'),
-        //             'kendaraan_tanggal_beli'     => $this->input->post('kendaraan_tanggal_beli'),
-        //             'kendaraan_foto'            => $fotokendaraan['file_name']
-        //         );
-
-
-        //         $query = $this->db->where('rangka', $rangka)->update('master_kendaraan', $data);
-        //         if ($query = true) {
-        //             $this->session->set_flashdata('inserted', 'Yess');
-        //             redirect('admin/master_kendaraan');
-        //         }
-        //     } else {
-        //         $data = array(
-        //             'kendaraan_no_rangka'         => $this->input->post('kendaraan_no_rangka'),
-        //             'kendaraan_stnk'             => $this->input->post('kendaraan_stnk'),
-        //             'kendaraan_merk'             => $this->input->post('kendaraan_merk'),
-        //             'kendaraan_tanggal_beli'     => $this->input->post('kendaraan_tanggal_beli')
-        //         );
-
-        //         $query = $this->db->where('rangka', $rangka)->update('master_kendaraan', $data);
-        //         if ($query = true) {
-        //             $this->session->set_flashdata('inserted', 'Yess');
-        //             redirect('admin/master_kendaraan');
-        //         }
-        //     }
-        // } else {
-        // }
-    }
-    // $rangka = $this->input->post('kendaraan_no_rangka');
-    // $config['upload_path'] = './assets/images/fotokendaraan';
-    // $config['allowed_types'] = 'jpg|png|jpeg';
-    // $config['max_size'] = '2048';  //2MB max
-    // $config['max_width'] = '4480'; // pixel
-    // $config['max_height'] = '4480'; // pixel
-    // $config['file_name'] = $_FILES['foto']['name'];
-
-    // $this->upload->initialize($config);
-
-    // if (!empty($_FILES['foto']['name'])) {
-    //     if ($this->upload->do_upload('foto')) {
-    //         $fotokendaraan = $this->upload->data();
-    //         $data = array(
-    //             'kendaraan_no_rangka'         => $this->input->post('kendaraan_no_rangka'),
-    //             'kendaraan_stnk'             => $this->input->post('kendaraan_stnk'),
-    //             'kendaraan_merk'             => $this->input->post('kendaraan_merk'),
-    //             'kendaraan_tanggal_beli'     => $this->input->post('kendaraan_tanggal_beli'),
-    //             'kendaraan_foto'            => $fotokendaraan['file_name']
-    //         );
-
-
-    //         $query = $this->db->where('rangka', $rangka)->update('master_kendaraan', $data);
-    //         if ($query = true) {
-    //             $this->session->set_flashdata('inserted', 'Yess');
-    //             redirect('admin/master_kendaraan');
-    //         }
-    //     } else {
-    //         $data = array(
-    //             'kendaraan_no_rangka'         => $this->input->post('kendaraan_no_rangka'),
-    //             'kendaraan_stnk'             => $this->input->post('kendaraan_stnk'),
-    //             'kendaraan_merk'             => $this->input->post('kendaraan_merk'),
-    //             'kendaraan_tanggal_beli'     => $this->input->post('kendaraan_tanggal_beli')
-    //         );
-
-    //         $query = $this->db->where('rangka', $rangka)->update('master_kendaraan', $data);
-    //         if ($query = true) {
-    //             $this->session->set_flashdata('inserted', 'Yess');
-    //             redirect('admin/master_kendaraan');
-    //         }
-    //     }
-    // } else {
-    // }
 }

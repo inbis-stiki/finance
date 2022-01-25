@@ -6,15 +6,25 @@ class Sparepart extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        if (empty($this->session->userdata('user_role'))) {
-            redirect('/');
-        }
-
         $this->load->library('form_validation');
-        $this->load->model('M_Sparepart');
+        $this->load->library('table');
+        $this->load->model('MSparepart');
+
     }
 
-    public function aksiTambahPart()
+    public function index(){
+		$dataPart = $this->MSparepart->get(['deleted_date' => NULL]);
+
+		$data = [
+			'title' => "admin",
+			'Sparepart' => $dataPart,
+		]; // PLACEHOLDER VARIABLE DATA
+
+		$this->template->index('admin/master_sparepart', $data);
+		$this->load->view('_components/sideNavigation', $data);
+    }
+
+    public function store()
     {
         $data = [
 
@@ -25,14 +35,13 @@ class Sparepart extends CI_Controller
             "sparepart_detail"    => $_POST['detail']
         ];
 
-        $this->db->insert('master_sparepart', $data);
+        $this->MSparepart->insert($data);
         $this->session->set_flashdata('sukses', "Data Berhasil Disimpan");
 
-        //$this->M_Sparepart->insert($sparepart_nama, $sparepart_km, $sparepart_bulan);
-        redirect('admin/master_sparepart');
+        redirect('master/sparepart');
     }
 
-    function aksiEditPart()
+    function update()
     {
         $data = [
             "sparepart_id"       => $this->input->post('sparepart_id'),
@@ -43,20 +52,20 @@ class Sparepart extends CI_Controller
             "sparepart_detail"    => $this->input->post('detail2')
         ];
 
-        $this->M_Sparepart->editPart($data);
+        $this->MSparepart->update($data);
 
-        redirect('admin/master_sparepart');
+        redirect('master/sparepart');
     }
 
-    public function aksiHapus()
+    public function destroy()
     {
         $data = [
             "sparepart_id"       => $this->input->post('sparepart_id'),
             "deleted_date"  => date('Y-m-d H:i:s')
         ];
 
-        $this->M_Sparepart->editPart($data);
+        $this->MSparepart->update($data);
 
-        redirect('admin/master_sparepart');
+        redirect('master/sparepart');
     }
 }

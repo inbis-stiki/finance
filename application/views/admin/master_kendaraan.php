@@ -4,7 +4,7 @@
             <p class="mb-0 fs-5 font-w-500 color-darker">
                 Master Kendaraan
             </p>
-            <a href="<?php echo site_url(); ?>admin/Admin/tambah_kendaraan">
+            <a href="<?php echo site_url(); ?>master/kendaraan/add">
                 <button type="button" class="btn-table green">Tambah</button>
             </a>
 
@@ -61,7 +61,7 @@
                                     <button type="button" data-id="' . $row->kendaraan_no_rangka . '" data-stnk="' . $row->kendaraan_stnk . '" class="btn-table green stnk_masterKendaraan btnStnk" data-bs-toggle="modal" data-bs-target="#stnk_masterKendaraan">
                                         <span class="iconify-inline" data-icon="bi:credit-card" data-width="20" data-height="20"></span>
                                     </button>
-                                    <a href="' .  base_url("admin/ubah_kendaraan/" . str_replace(" ", "_", $row->kendaraan_no_rangka)) . '" >
+                                    <a href="' .  base_url("master/kendaraan/edit/" . str_replace(" ", "_", $row->kendaraan_no_rangka)) . '" >
                                         <button type="button" class="btn-table edit_masterKendaraan btnEdit" title="Ubah">
                                             <span class="iconify-inline" data-icon="bx:bx-edit" data-width="20" data-height="20"></span>
                                         </button>
@@ -113,7 +113,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body fs-14px pt-0 d-flex flex-column">
-                        <?= form_open_multipart('admin/aksiUbahSTNK'); ?>
+                        <?= form_open_multipart('master/kendaraan/change-stnk'); ?>
                         <div class="pb-4">
                             <div class="d-flex flex-column my-2 w-100">
                                 <label class="my-2 color-secondary">Nomor Rangka</label>
@@ -161,7 +161,7 @@
                 const id = $(this).data('id')
                 
                 $.ajax({
-                    url: '<?= site_url('admin/ajxGetKendaraan')?>',
+                    url: '<?= site_url('master/kendaraan/ajxGet')?>',
                     method: 'post',
                     data: {id},
                     success: function(res){

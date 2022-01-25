@@ -53,6 +53,69 @@ $route['default_controller'] = 'welcome';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
+
+// AUTH
+$route['login'] = 'Auth/login';
+$route['logout'] = 'Auth/logout';
+
+// ========== MANAGEMENT ==========
+$route['management'] = 'management/Dashboard';
+// ========== END MANAGEMENT ==========
+
+// ========== ADMIN ==========
+$route['admin'] = 'admin/Dashboard';
+// peminjaman
+$route['admin/peminjaman']          = 'admin/Peminjaman';
+$route['admin/peminjaman/store']    = 'admin/Peminjaman/store';
+// transaksi
+$route['admin/transaksi']                         = 'admin/Transaksi';
+$route['admin/transaksi/store-administrasi']      = 'admin/Transaksi/storeAdministrasi';
+$route['admin/transaksi/store-maintenance']       = 'admin/Transaksi/storeMaintenance';
+$route['admin/transaksi/store-expense']           = 'admin/Transaksi/storeExpense';
+$route['admin/transaksi/ajxGetNoSeri']            = 'admin/Transaksi/ajxGetNoSeri';
+// ========== END ADMIN ==========
+
+// ========== MASTER ==========
+// driver
+$route['master/driver']                     = 'master/Driver';
+$route['master/driver/add']                 = 'master/Driver/vAdd';
+$route['master/driver/edit/(:any)']         = 'master/Driver/vEdit/$1';
+$route['master/driver/store']               = 'master/Driver/store';
+$route['master/driver/update']              = 'master/Driver/update';
+$route['master/driver/assign']              = 'master/Driver/assign';
+$route['master/driver/destroy']             = 'master/Driver/destroy';
+// klien
+$route['master/klien']              = 'master/Klien';
+$route['master/klien/store']        = 'master/Klien/store';
+$route['master/klien/update']       = 'master/Klien/update';
+$route['master/klien/destroy']      = 'master/Klien/destroy';
+$route['master/klien/ajxGetKlien']  = 'master/Klien/ajxGetKlien';
+// dropdown
+$route['master/dropdown']           = 'master/Dropdown';
+$route['master/dropdown/store']     = 'master/Dropdown/store';
+$route['master/dropdown/update']    = 'master/Dropdown/update';
+$route['master/dropdown/destroy']   = 'master/Dropdown/destroy';
+// sparepart
+$route['master/sparepart']           = 'master/Sparepart';
+$route['master/sparepart/store']     = 'master/Sparepart/store';
+$route['master/sparepart/update']    = 'master/Sparepart/update';
+$route['master/sparepart/destroy']   = 'master/Sparepart/destroy';
+// kendaraan
+$route['master/kendaraan']              = 'master/Kendaraan';
+$route['master/kendaraan/add']          = 'master/Kendaraan/vAdd';
+$route['master/kendaraan/edit/(:any)']  = 'master/Kendaraan/vEdit/$1';
+$route['master/kendaraan/store']        = 'master/Kendaraan/store';
+$route['master/kendaraan/update']       = 'master/Kendaraan/update';
+$route['master/kendaraan/change-stnk']  = 'master/Kendaraan/changeSTNK';
+$route['master/kendaraan/ajxGet']       = 'master/Kendaraan/ajxGetKendaraan';
+$route['master/kendaraan/destroy']      = 'master/Kendaraan/destroy';
+// jenis pengeluaran
+$route['master/pengeluaran']           = 'master/Pengeluaran';
+$route['master/pengeluaran/store']     = 'master/Pengeluaran/store';
+$route['master/pengeluaran/update']    = 'master/Pengeluaran/update';
+$route['master/pengeluaran/destroy']   = 'master/Pengeluaran/destroy';
+
+
 $route['adm_login'] = 'admin/Auth';
 $route['admin/dashboard'] = 'admin/Admin';
 $route['admin/form_pengajuan'] = 'admin/Admin/form_pengajuan';
@@ -69,10 +132,7 @@ $route['add_region'] = 'admin/Master_region/addRegion';
 $route['admin/master_kendaraan/add_kendaraan'] = 'admin/Admin/tambah_kendaraan';
 
 // Driver
-$route['admin/tambah_driver']       = 'admin/Admin/tambah_driver';
-$route['admin/ubah_driver/(:any)']  = 'admin/Admin/ubah_driver/$1';
-$route['admin/aksiTambahDriver']    = 'admin/Driver/aksiTambahDriver';
-$route['admin/aksiUbahDriver']      = 'admin/Driver/aksiUbahDriver';
+
 
 // Kendaraan
 $route['admin/aksiTambahKendaraan']      = 'admin/Master_kendaraan/aksiTambahKendaraan';
@@ -86,10 +146,5 @@ $route['admin/form_pengajuan/unit_kendaraan'] = 'admin/Admin/unit_kendaraan';
 $route['admin/form_pengajuan/jenis_biaya'] = 'admin/Admin/jenis_biaya';
 
 // Klien
-$route['admin/ajxGetKlien']      = 'admin/Klien/ajxGetKlien';
 
 // Jenis Biaya
-$route['admin/jenis-biaya']                         = 'admin/JenisBiaya';
-$route['admin/jenis-biaya/store-administrasi']      = 'admin/JenisBiaya/storeAdministrasi';
-$route['admin/jenis-biaya/store-maintenance']       = 'admin/JenisBiaya/storeMaintenance';
-$route['admin/jenis-biaya/store-expense']           = 'admin/JenisBiaya/storeExpense';
