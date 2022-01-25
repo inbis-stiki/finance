@@ -71,7 +71,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body fs-14px pt-0 d-flex flex-column">
-                        <?= form_open_multipart('admin/Sparepart/aksiEditPart'); ?>
+                        <?= form_open_multipart('master/sparepart/update'); ?>
                         <div class="pb-4">
 
                             <div class="d-flex flex-column my-2 w-100">
@@ -123,7 +123,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body fs-14px pt-0 d-flex flex-column">
-                        <?= form_open_multipart('admin/Sparepart/aksiHapus'); ?>
+                        <?= form_open_multipart('master/sparepart/destroy'); ?>
                         <div class="pb-4">
                             <div class="d-flex flex-column my-2 w-100">
                                 <p class="font-w-700 color-darker mb-0">Apakah anda yakin menghapus data ini ?</p>

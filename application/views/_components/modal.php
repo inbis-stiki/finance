@@ -7,7 +7,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body fs-14px pt-0 d-flex flex-column">
-                <?= form_open_multipart('admin/Sparepart/aksiTambahPart'); ?>
+                <?= form_open_multipart('master/sparepart/store'); ?>
                 <div class="pb-4">
 
                     <div class="d-flex flex-column my-2 w-100">

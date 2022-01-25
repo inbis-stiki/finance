@@ -183,7 +183,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body fs-14px pt-0 d-flex flex-column">
-                        <?= form_open_multipart('admin/Dropdown/aksiTambahDropdown'); ?>
+                        <?= form_open_multipart('master/dropdown/store'); ?>
                         <div class="pb-4">
                             <div class="d-flex flex-column my-2 w-100">
                                 <label class="my-2 color-secondary">Menu Dropdown</label>
@@ -216,7 +216,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body fs-14px pt-0 d-flex flex-column">
-                        <?= form_open_multipart('admin/Dropdown/aksiEditDropdown'); ?>
+                        <?= form_open_multipart('master/dropdown/update'); ?>
                         <div class="pb-4">
                             <div class="d-flex flex-column my-2 w-100">
                                 <label class="my-2 color-secondary">Menu Dropdown</label>
@@ -229,9 +229,9 @@
                             </div>
                             <div class="d-flex flex-column my-2 w-100">
                                 <label class="my-2 color-secondary">List Dropdown</label>
-                                <input type="text" class="login-input regular" name="list" placeholder="" required>
+                                <input type="text" id="mdlEdit_list" class="login-input regular" name="list" placeholder="" required>
                             </div>
-                            <input type="hidden" id="dropdown_id" name="dropdown_id" value="">
+                            <input type="hidden" id="mdlEdit_id" name="dropdown_id" value="">
                         </div>
                         <div class="d-flex flex-row">
                             <button type="submit" class="btn-table submit-modal ms-1">Simpan</button>
@@ -251,7 +251,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body fs-14px pt-0 d-flex flex-column">
-                        <?= form_open_multipart('admin/Dropdown/aksiHapus'); ?>
+                        <?= form_open_multipart('master/dropdown/destroy'); ?>
                         <div class="pb-4">
                             <div class="d-flex flex-column my-2 w-100">
                                 <p class="font-w-700 color-darker mb-0">Apakah anda yakin menghapus data ini ?</p>
@@ -272,9 +272,10 @@
                 const menu = $(this).data('menu')
                 const list = $(this).data('list')
 
-                $('input[name=dropdown_id]').val(id);
+                $('#mdlEdit_id').val(id);
+                $('#dropdown_id').val(id);
                 $('#mdlEdit_menu').val(menu).change();
-                $('input[name=list]').val(list);
+                $('#mdlEdit_list').val(list);
             })
         </script>
         <div class="foot">

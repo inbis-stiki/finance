@@ -16,12 +16,18 @@
             }
         ?>
         
-        <div class="nav-links <?= uri_string() == 'admin' ? 'active' : '' ?>">
-            <a href="<?= site_url() ?>admin">Dashboard Admin</a>
-        </div>
-        <!-- <div class="nav-links <?= uri_string() == 'admin/form_pengajuan' ? 'active' : '' ?>">
-            <a href="<?= site_url() ?>admin/form_pengajuan">Form Pengajuan</a>
-        </div> -->
+        <?php
+            if($this->session->userdata('isAdmin') == "1"){
+                $statusActive = uri_string() == 'admin' ? 'active' : '';
+                echo '
+                    <div class="nav-links '.$statusActive.'">
+                        <a href="'.site_url().'admin">Dashboard Admin</a>
+                    </div>
+                ';
+            }
+        ?>
+
+
         <?php
         $active = (uri_string() == 'admin/master_driver' || uri_string() == 'admin/master_region' || uri_string() == 'admin/master_instansi' || uri_string() == 'admin/master_sparepart' || uri_string() == 'admin/master_kendaraan' || uri_string() == 'admin/master_pengeluaran' ? "active" : "");
         ?>
@@ -38,31 +44,34 @@
                         </div>
             
                         <div class="sub-nav">
-                            <a href="'.site_url().'admin/master_driver">Driver</a>
-                            <!-- <a href="'.site_url().'admin/master_region">Wilayah</a> -->
-                            <a href="'.site_url().'admin/master_klien">Klien</a>
-                            <a href="'.site_url().'admin/master_dropdown">Dropdown</a>
-                            <a href="'.site_url().'admin/master_sparepart">Sparepart</a>
-                            <a href="'.site_url().'admin/master_kendaraan">Kendaraan</a>
-                            <a href="'.site_url().'admin/master_pengeluaran">Jenis Pengeluaran</a>
+                            <a href="'.site_url().'master/driver">Driver</a>
+                            <a href="'.site_url().'master/klien">Klien</a>
+                            <a href="'.site_url().'master/dropdown">Dropdown</a>
+                            <a href="'.site_url().'master/sparepart">Sparepart</a>
+                            <a href="'.site_url().'master/kendaraan">Kendaraan</a>
+                            <a href="'.site_url().'master/pengeluaran">Jenis Pengeluaran</a>
                         </div>
                     </div>
                 ';
             }
         ?>
-        
-        <div class="nav-links accordion-nav <?= $activeform ?>">
-            <div class="position-relative">
-                <a>Form Pengajuan</a>
-                <span class="iconify chevron" data-icon="akar-icons:chevron-left"></span>
-            </div>
-
-            <div class="sub-nav">
-                <a href="<?= site_url() ?>admin/peminjaman">Peminjaman</a>
-                <a href="<?= site_url() ?>admin/transaksi">Transaksi</a>
-            </div>
-        </div>
-
+        <?php
+            if($this->session->userdata('isAdmin') == "1"){
+                echo '
+                    <div class="nav-links accordion-nav '.$activeform.'">
+                        <div class="position-relative">
+                            <a>Form Pengajuan</a>
+                            <span class="iconify chevron" data-icon="akar-icons:chevron-left"></span>
+                        </div>
+            
+                        <div class="sub-nav">
+                            <a href="'.site_url().'admin/peminjaman">Peminjaman</a>
+                            <a href="'.site_url().'admin/transaksi">Transaksi</a>
+                        </div>
+                    </div>        
+                ';
+            }
+        ?>
     </div>
 </div>
 <div class="top-nav">

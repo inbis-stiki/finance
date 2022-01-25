@@ -1,7 +1,7 @@
 <div class="min-vh-100 general-padding bg-light-purple">
     <div class="p-5">
         <?php echo validation_errors(); ?>
-        <?= form_open_multipart('admin/peminjaman/add-kendaraan'); ?>
+        <?= form_open_multipart('admin/peminjaman/store'); ?>
         <p class="mb-3 fs-5 font-w-500 color-darker">
             Transaksi Peminjaman
         </p>
@@ -360,7 +360,7 @@
         const id = $(this).val()
         if(id){
             $.ajax({
-                url: '<?= site_url('admin/ajxGetKendaraan')?>',
+                url: '<?= site_url('master/kendaraan/ajxGet')?>',
                 method: 'post',
                 data: {id},
                 success: function(res){

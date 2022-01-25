@@ -7,15 +7,15 @@ class Transaksi extends CI_Controller
         parent::__construct();
         $this->load->model('MJenisBiaya');
         $this->load->model('MKendaraan');
-        $this->load->model('MJenisPengeluaran');
+        $this->load->model('MPengeluaran');
         $this->load->model('MSparepart');
     }
     public function index(){
         $data['auth']           = $this->db->get_where('master_user', ['username' => $this->session->userdata('username')])->row_array();
         $data['kendaraans']     = $this->MKendaraan->get(['disabled_date' => NULL, 'is_active' => '1']);
-        $data['pengAdmin']      = $this->MJenisPengeluaran->get(['pengeluaran_group' => 'Administrasi', 'deleted_date' => NULL]);
-        $data['pengMaint']      = $this->MJenisPengeluaran->get(['pengeluaran_group' => 'Maintenance', 'deleted_date' => NULL]);
-        $data['pengExp']        = $this->MJenisPengeluaran->get(['pengeluaran_group' => 'Expense', 'deleted_date' => NULL]);
+        $data['pengAdmin']      = $this->MPengeluaran->get(['pengeluaran_group' => 'Administrasi', 'deleted_date' => NULL]);
+        $data['pengMaint']      = $this->MPengeluaran->get(['pengeluaran_group' => 'Maintenance', 'deleted_date' => NULL]);
+        $data['pengExp']        = $this->MPengeluaran->get(['pengeluaran_group' => 'Expense', 'deleted_date' => NULL]);
         $data['sparepart']      = $this->MSparepart->get(['deleted_date' => NULL]);
 
         $this->template->index('admin/pencatatan/jenis_biaya', $data);

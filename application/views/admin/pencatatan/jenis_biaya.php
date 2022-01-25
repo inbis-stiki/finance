@@ -150,7 +150,7 @@
         }
 
         $.ajax({
-            url: '<?= site_url('admin/ajxGetKendaraan')?>',
+            url: '<?= site_url('master/kendaraan/ajxGet')?>',
             method: 'post',
             data: {id},
             success: function(res){

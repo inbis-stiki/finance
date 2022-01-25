@@ -23,7 +23,7 @@ class Peminjaman extends CI_Controller{
 		$this->template->index('admin/pencatatan/unit_kendaraan', $data);
 		$this->load->view('_components/sideNavigation', $data);
     }
-    public function add_kendaraan(){
+    public function store(){
         $selectedValue = explode('|', $_POST['kendaraan']);
         $valueRangka = $selectedValue[0];
         $valueStnk = $selectedValue[1];

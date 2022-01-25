@@ -6,15 +6,25 @@ class Pengeluaran extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        if (empty($this->session->userdata('user_role'))) {
-            redirect('/');
-        }
-
         $this->load->library('form_validation');
-        $this->load->model('M_Pengeluaran');
+        $this->load->library('table');
+        $this->load->model('MPengeluaran');
     }
 
-    public function aksiTambahPengeluaran()
+    public function index(){
+		$dataPengeluaran = $this->MPengeluaran->get(['deleted_date' => NULL]);
+
+		$data = [
+			'title' => "admin",
+			'Pengeluaran' => $dataPengeluaran,
+		];
+
+		$this->template->index('admin/master_pengeluaran', $data);
+		$this->load->view('_components/sideNavigation', $data);
+    }
+
+
+    public function store()
     {
         $data = [
 
@@ -22,14 +32,12 @@ class Pengeluaran extends CI_Controller
             "pengeluaran_group"     => $_POST['group']
         ];
 
-        $this->db->insert('master_jenis_pengeluaran', $data);
+        $this->MPengeluaran->insert($data);
         $this->session->set_flashdata('sukses', "Data Berhasil Disimpan");
-
-        //$this->M_Sparepart->insert($sparepart_nama, $sparepart_km, $sparepart_bulan);
-        redirect('admin/master_pengeluaran');
+        redirect('master/pengeluaran');
     }
 
-    function aksiEditPengeluaran()
+    function update()
     {
         $data = [
             "pengeluaran_id"       => $this->input->post('pengeluaran_id'),
@@ -37,20 +45,20 @@ class Pengeluaran extends CI_Controller
             "pengeluaran_group"       => $this->input->post('group')
         ];
 
-        $this->M_Pengeluaran->editPengeluaran($data);
+        $this->MPengeluaran->update($data);
 
-        redirect('admin/master_pengeluaran');
+        redirect('master/pengeluaran');
     }
 
-    public function aksiHapus()
+    public function destroy()
     {
         $data = [
             "pengeluaran_id"       => $this->input->post('pengeluaran_id'),
             "deleted_date"  => date('Y-m-d H:i:s')
         ];
 
-        $this->M_Pengeluaran->editPengeluaran($data);
+        $this->MPengeluaran->update($data);
 
-        redirect('admin/master_pengeluaran');
+        redirect('master/pengeluaran');
     }
 }

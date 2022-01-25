@@ -10,7 +10,9 @@ class Auth extends CI_Controller{
         if($user != null){ // check user is found
             if($user[0]->user_password == hash('sha256', md5($_POST['user_password']))){ // check password is correct
                 $this->setSession($user);
-                if($user[0]->user_isadmin == "1"){
+                if($user[0]->user_ismanagement == "1"){
+                    redirect('management');
+                }else if($user[0]->user_isadmin == "1"){
                     redirect('admin');
                 }
             }   

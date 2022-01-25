@@ -1,6 +1,6 @@
 <?php
 
-class MJenisPengeluaran extends CI_Model{
+class MPengeluaran extends CI_Model{
     public function getAll(){
         return $this->db->get('master_jenis_pengeluaran')->result();
     }
