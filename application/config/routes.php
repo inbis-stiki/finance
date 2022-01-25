@@ -58,8 +58,22 @@ $route['translate_uri_dashes'] = FALSE;
 $route['login'] = 'Auth/login';
 $route['logout'] = 'Auth/logout';
 
+// ========== MANAGEMENT ==========
+$route['management'] = 'management/Dashboard';
+// ========== END MANAGEMENT ==========
+
 // ========== ADMIN ==========
 $route['admin'] = 'admin/Dashboard';
+// peminjaman
+$route['admin/peminjaman']                    = 'admin/Peminjaman';
+$route['admin/peminjaman/add-kendaraan']      = 'admin/Peminjaman/add_kendaraan';
+// transaksi
+$route['admin/transaksi']                         = 'admin/Transaksi';
+$route['admin/transaksi/store-administrasi']      = 'admin/Transaksi/storeAdministrasi';
+$route['admin/transaksi/store-maintenance']       = 'admin/Transaksi/storeMaintenance';
+$route['admin/transaksi/store-expense']           = 'admin/Transaksi/storeExpense';
+$route['admin/transaksi/ajxGetNoSeri']            = 'admin/Transaksi/ajxGetNoSeri';
+// ========== END ADMIN ==========
 
 $route['adm_login'] = 'admin/Auth';
 $route['admin/dashboard'] = 'admin/Admin';
@@ -97,8 +111,3 @@ $route['admin/form_pengajuan/jenis_biaya'] = 'admin/Admin/jenis_biaya';
 $route['admin/ajxGetKlien']      = 'admin/Klien/ajxGetKlien';
 
 // Jenis Biaya
-$route['admin/jenis-biaya']                         = 'admin/JenisBiaya';
-$route['admin/jenis-biaya/store-administrasi']      = 'admin/JenisBiaya/storeAdministrasi';
-$route['admin/jenis-biaya/store-maintenance']       = 'admin/JenisBiaya/storeMaintenance';
-$route['admin/jenis-biaya/store-expense']           = 'admin/JenisBiaya/storeExpense';
-$route['admin/jenis-biaya/ajxGetNoSeri']            = 'admin/JenisBiaya/ajxGetNoSeri';

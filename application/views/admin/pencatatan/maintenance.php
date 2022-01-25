@@ -1,4 +1,4 @@
-<form action="<?= site_url('admin/jenis-biaya/store-maintenance')?>" method="post">
+<form action="<?= site_url('admin/transaksi/store-maintenance')?>" method="post">
     <div class="body form">
         <div class="row m-0 p-0 w-100">
             <div class="col-12 col-lg-6 ps-0">
@@ -227,7 +227,7 @@
     const checkSeri = idElementSeri => {
         noSeri = $('#main_inptSeri_'+idElementSeri).val()
         $.ajax({
-            url: '<?= site_url('admin/jenis-biaya/ajxGetNoSeri')?>',
+            url: '<?= site_url('admin/transaksi/ajxGetNoSeri')?>',
             method: 'post',
             data: {noSeri},
             success: function(res){

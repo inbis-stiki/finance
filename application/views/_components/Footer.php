@@ -12,6 +12,15 @@
     <script src="<?= site_url() ?>/assets/src/js/autonumeric.js"></script>
         <script src="<?= site_url() ?>/assets/plugin/image-zoom/jquery.zoom.js"></script>
     <script>
+        $(document).ready(function(){
+            <?php
+                if($this->session->flashdata('succ_modal')){
+                    echo '
+                        $("#success").modal("show");
+                    ';
+                }
+            ?>
+        })
         function isNumberKey(evt) {
             var charCode = (evt.which) ? evt.which : evt.keyCode
             if (charCode > 31 && (charCode < 48 || charCode > 57))

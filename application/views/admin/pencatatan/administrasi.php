@@ -1,4 +1,4 @@
-<form action="<?= site_url('admin/jenis-biaya/store-administrasi')?>" method="post">
+<form action="<?= site_url('admin/transaksi/store-administrasi')?>" method="post">
     <div class="body form">
         <div class="row m-0 p-0 w-100">
             <div class="col-12 col-lg-6 ps-0">

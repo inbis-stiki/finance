@@ -1,7 +1,7 @@
 <div class="min-vh-100 general-padding bg-light-purple">
     <div class="p-5">
         <?php echo validation_errors(); ?>
-        <?= form_open_multipart('admin/Unit_kendaraan/add_kendaraan'); ?>
+        <?= form_open_multipart('admin/peminjaman/add-kendaraan'); ?>
         <p class="mb-3 fs-5 font-w-500 color-darker">
             Transaksi Peminjaman
         </p>
@@ -355,16 +355,6 @@
         </div>
     </div>
 </div>
-
-<?php if ((($this->session->flashdata('sukses'))) && $this->session->flashdata('sukses') != "") { ?>
-
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('#success').modal('show');
-        });
-    </script>
-
-<?php } ?>
 <script>
     $('#slct_kendaraan').change(function(){
         const id = $(this).val()
