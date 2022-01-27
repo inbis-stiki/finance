@@ -72,6 +72,16 @@
                 ';
             }
         ?>
+        <?php
+            if($this->session->userdata('isSuper') == "1"){
+                $statusActive = uri_string() == 'super/pengguna' ? 'active' : '';
+                echo '
+                    <div class="nav-links '.$statusActive.'">
+                        <a href="'.site_url().'super/pengguna">Pengguna</a>
+                    </div>        
+                ';
+            }
+        ?>
     </div>
 </div>
 <div class="top-nav">

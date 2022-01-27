@@ -4,15 +4,26 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class Welcome extends CI_Controller
 {
 
-	public function __construct()
-	{
+	public function __construct(){
 		parent::__construct();
 		$this->load->library('form_validation');
 	}
 
 	public function index(){
-		$data['title'] = "Login";
-		$this->template->login('admin/login', $data);
+		if($this->session->userdata('isLogged') == false){
+			$data['title'] = "Login";
+			$this->template->login('admin/login', $data);
+		}else{
+			if($this->session->userdata('isManagement') == "1"){
+				redirect('management');
+			}else if($this->session->userdata('isAdmin') == "1"){
+				redirect('admin');
+			}else if($this->session->userdata('isMaster') == "1"){
+				redirect('master/driver');
+			}else if($this->session->userdata('isSuper') == "1"){
+				redirect('super/pengguna');
+			}
+		}
 	}
 
 

@@ -10,7 +10,7 @@
     
     <script src="<?= site_url() ?>/assets/src/js/style.js"></script>
     <script src="<?= site_url() ?>/assets/src/js/autonumeric.js"></script>
-        <script src="<?= site_url() ?>/assets/plugin/image-zoom/jquery.zoom.js"></script>
+    <script src="<?= site_url() ?>/assets/plugin/image-zoom/jquery.zoom.js"></script>
     <script>
         $(document).ready(function(){
             <?php

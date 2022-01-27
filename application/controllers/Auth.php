@@ -14,8 +14,12 @@ class Auth extends CI_Controller{
                     redirect('management');
                 }else if($user[0]->user_isadmin == "1"){
                     redirect('admin');
+                }else if($user[0]->user_ismaster == "1"){
+                    redirect('master/driver');
+                }else if($user[0]->user_issuper == "1"){
+                    redirect('super/pengguna');
                 }
-            }   
+            }
         }
         $this->session->set_flashdata('err_msg', 'Username atau password salah!');
         redirect('/');
@@ -27,9 +31,11 @@ class Auth extends CI_Controller{
     public function setSession($param){
         $data['username']       = $param[0]->user_username;
         $data['name']           = $param[0]->user_nama;
+        $data['isLogged']       = true;
         $data['isAdmin']        = $param[0]->user_isadmin;
         $data['isManagement']   = $param[0]->user_ismanagement;
         $data['isMaster']       = $param[0]->user_ismaster;
+        $data['isSuper']        = $param[0]->user_issuper;
         $this->session->set_userdata($data);
     }
 }

@@ -5,7 +5,7 @@ class MUser extends CI_Model{
         return $this->db->get('user')->result();
     }
     public function getById($id){
-        return $this->db->get_where('user', ['username' => $id])->row();
+        return $this->db->get_where('user', ['user_username' => $id])->row();
     }
     public function get($param){
         if(!empty($param['orderBy'])){ // order by
@@ -23,7 +23,7 @@ class MUser extends CI_Model{
         $this->db->insert('user', $param);
     }
     public function update($param){
-        $this->db->where('username', $param['username'])->update('user', $param);
+        $this->db->where('user_username', $param['user_username'])->update('user', $param);
     }
     public function delete($param){
         $this->db->delete('user', $param);
