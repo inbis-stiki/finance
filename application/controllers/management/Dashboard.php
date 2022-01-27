@@ -19,7 +19,7 @@ class Dashboard extends CI_Controller{
 			'DaftarKendaraan' => $dataDaftarKendaraan
 		];
 
-		$this->template->index('admin/dashboard', $data);
+		$this->template->index('admin/dashboard_management', $data);
 		$this->load->view('_components/sideNavigation', $data);
     }
 }
