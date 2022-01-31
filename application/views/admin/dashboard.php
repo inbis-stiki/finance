@@ -3,7 +3,9 @@
         <div class="card-section">
             <div class="head">
                 <p>Global Cost</p>
-                <input type="date">
+                <select name="" style="width: 30%;" class="login-input" id="">
+                    <option value="Makang">Malang</option>
+                </select>
             </div>
             <div class="body">
                 <table class="table-custom">
@@ -12,7 +14,7 @@
                             <?php
                             $template = array('table_open' => '<table id="tblDashboard" class="table-custom">');
                             $this->table->set_template($template);
-                            $this->table->set_heading('No', 'No. STNK', 'Merk', 'Umur Kendaraan', 'Region', 'Jumlah Transaksi', 'Total transaksi');
+                            $this->table->set_heading('No', 'Area Operasional', 'Jumlah Transaksi', 'Total Transaksi');
                             ?>
                         </tr>
                     </thead>
@@ -25,12 +27,7 @@
                                     $no++,
                                     $row->kendaraan_stnk,
                                     $row->kendaraan_merk,
-                                    $row->umur_kendaraan,
-                                    $row->pengeluaran_jenis,
-                                    // $row->region_kota,
-                                    $row->jumlah_transaksi,
-                                    $row->total_transaksi
-
+                                    $row->umur_kendaraan
                                 );
 
                             ?>
@@ -54,7 +51,7 @@
                             <!-- <?php
                             $template = array('table_open' => '<table id="tblDashboard" class="table-custom">');
                             $this->table->set_template($template);
-                            $this->table->set_heading('No','No. STNK', 'Merk', 'Umur Kendaraan', 'Region', 'Jumlah Transaksi', 'Total transaksi');
+                            $this->table->set_heading('No','No. STNK', 'Klien', 'Merk Kendaraan', 'Umur Kendaraan', 'Area Operasional');
                             ?> -->
                         </tr>
                     </thead>
@@ -70,10 +67,7 @@
                                     $row->kendaraan_merk,
                                     $row->umur_kendaraan,
                                     $row->pengeluaran_jenis,
-                                    // $row->region_kota,
-                                    $row->jumlah_transaksi,
                                     $row->total_transaksi
-
                                 );
 
                             ?>
