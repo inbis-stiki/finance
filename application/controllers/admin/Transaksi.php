@@ -20,6 +20,7 @@ class Transaksi extends CI_Controller
         $data['pengMaint']      = $this->MPengeluaran->get(['pengeluaran_group' => 'Maintenance', 'deleted_date' => NULL]);
         $data['pengExp']        = $this->MPengeluaran->get(['pengeluaran_group' => 'Expense', 'deleted_date' => NULL]);
         $data['sparepart']      = $this->MSparepart->get(['deleted_date' => NULL]);
+        $data['saldo']          = $this->db->get('balance')->row();
 
         $this->template->index('admin/pencatatan/jenis_biaya', $data);
 		$this->load->view('_components/sideNavigation', $data);
@@ -33,6 +34,17 @@ class Transaksi extends CI_Controller
         }
     }
     public function storeAdministrasi(){
+        // check saldo
+        $saldo = $this->db->get('balance')->row()->balance;
+        $totalTrans = array_sum(str_replace(',', '', $_POST['total']));
+        if($saldo < $totalTrans){
+            $this->session->set_flashdata('err_msg', 'Saldo tidak mencukupi untuk melakukan transaksi');
+            redirect('admin/transaksi');
+        }
+        $saldo -= $totalTrans;
+        $this->db->update('balance', ['balance' => $saldo]);
+        // end check
+
         $dataStore['transaksi_tanggal'] = $_POST['tglTransaksi'];
         $dataStore['no_rangka']         = explode('|', $_POST['kendaraan'])[0];
         $dataStore['kendaraan_stnk']    = explode('|', $_POST['kendaraan'])[1];
@@ -44,10 +56,22 @@ class Transaksi extends CI_Controller
             $this->MJenisBiaya->insert($dataStore);
             $index++;
         }
+
         $this->session->set_flashdata('succ_modal', true);
         redirect('admin/transaksi');
     }
     public function storeMaintenance(){
+        // check saldo
+        $saldo = $this->db->get('balance')->row()->balance;
+        $totalTrans = array_sum(str_replace(',', '', $_POST['total']));
+        if($saldo < $totalTrans){
+            $this->session->set_flashdata('err_msg', 'Saldo tidak mencukupi untuk melakukan transaksi');
+            redirect('admin/transaksi');
+        }
+        $saldo -= $totalTrans;
+        $this->db->update('balance', ['balance' => $saldo]);
+        // end check
+
         $dataStore['transaksi_tanggal']         = $_POST['tglService'];
         $dataStore['no_rangka']                 = explode('|', $_POST['kendaraan'])[0];
         $dataStore['kendaraan_stnk']            = explode('|', $_POST['kendaraan'])[1];
@@ -69,6 +93,17 @@ class Transaksi extends CI_Controller
         redirect('admin/transaksi');
     }
     public function storeExpense(){
+        // check saldo
+        $saldo = $this->db->get('balance')->row()->balance;
+        $totalTrans = array_sum(str_replace(',', '', $_POST['bbm']['total'])) + array_sum(str_replace(',', '', $_POST['driver']['total'])) + array_sum(str_replace(',', '', $_POST['lain']['total']));
+        if($saldo < $totalTrans){
+            $this->session->set_flashdata('err_msg', 'Saldo tidak mencukupi untuk melakukan transaksi');
+            redirect('admin/transaksi');
+        }
+        $saldo -= $totalTrans;
+        $this->db->update('balance', ['balance' => $saldo]);
+        // end check
+
         $dataStore['transaksi_tanggal']         = $_POST['tglService'];
         $dataStore['no_rangka']                 = explode('|', $_POST['kendaraan'])[0];
         $dataStore['kendaraan_stnk']            = explode('|', $_POST['kendaraan'])[1];
