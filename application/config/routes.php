@@ -59,7 +59,8 @@ $route['login'] = 'Auth/login';
 $route['logout'] = 'Auth/logout';
 
 // ========== MANAGEMENT ==========
-$route['management'] = 'management/Dashboard';
+$route['management']            = 'management/Dashboard';
+$route['management/set-saldo']  = 'management/Dashboard/setSaldo';
 // ========== END MANAGEMENT ==========
 
 // ========== ADMIN ==========

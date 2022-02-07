@@ -1,5 +1,28 @@
 <div class="min-vh-100 general-padding bg-light-purple">
+    
     <div class="p-5">
+        <div class="d-flex flex-row justify-content-between align-items-center mb-4">
+            <p class="mb-0 fs-5 font-w-500 color-darker">
+                Transaksi
+            </p>
+            <a href="#" class="btn-table green" type="button">Saldo: Rp. <?= number_format($saldo->balance)?></a>
+        </div>
+        <?php
+            if(!empty($this->session->flashdata('err_msg'))){
+                echo '
+                    <div class="alert alert-danger" role="alert">
+                    '.$this->session->flashdata('err_msg').'
+                    </div>
+                ';        
+            }
+            if(!empty($this->session->flashdata('succ_msg'))){
+                echo '
+                    <div class="alert alert-success" role="alert">
+                        '.$this->session->flashdata('succ_msg').'
+                    </div>
+                ';        
+            }
+        ?>
         <div class="card-section">
             <div class="head pb-0">
                 <nav>
