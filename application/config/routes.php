@@ -123,6 +123,7 @@ $route['super/pengguna/store']              = 'super/Pengguna/store';
 $route['super/pengguna/update']             = 'super/Pengguna/update';
 $route['super/pengguna/reset-password']     = 'super/Pengguna/resetPassword';
 $route['super/pengguna/destroy']            = 'super/Pengguna/destroy';
-
-
 // ========== END SUPER ==========
+
+// ========== CRONJOB ==========
+$route['cronjob/report'] = 'Cronjob/JobReport';

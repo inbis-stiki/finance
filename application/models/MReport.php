@@ -12,6 +12,10 @@ class MReport extends CI_Model{
             $this->db->order_by($param['orderBy']);
             unset($param['orderBy']);
         }
+        if(!empty($param['groupBy'])){
+            $this->db->group_by(explode(',', $param['groupBy']));
+            unset($param['groupBy']);
+        }
         if(!empty($param['limit'])){ // limit
             $this->db->limit($param['limit']);
             unset($param['limit']);
@@ -30,5 +34,37 @@ class MReport extends CI_Model{
     }
     public function deleteAll(){
         $this->db->delete('report_transaksi');
+    }
+    public function globalCostArea(){
+        return $this->db->query('
+            SELECT 
+                rt.report_wilayah ,
+                SUM(rt.report_jumlah_transaksi) AS report_jumlah_transaksi,
+                SUM(rt.report_total_transaksi) AS report_total_transaksi
+            FROM report_transaksi rt 
+            GROUP BY rt.report_wilayah 
+        ')->result();
+    }
+    public function globalCostTahun($thn){
+        return $this->db->query('
+            SELECT 
+                MONTH(rt.report_tanggal) as report_bulan,
+                SUM(rt. report_total_transaksi) AS report_total_transaksi
+            FROM report_transaksi rt 
+            WHERE YEAR(rt.report_tanggal) = "'.$thn.'"
+            GROUP BY MONTH(rt.report_tanggal)
+            ORDER BY MONTH(rt.report_tanggal) ASC
+        ')->result();
+    }
+    public function globalCostTahunArea($area){
+        return $this->db->query('
+            SELECT 
+                MONTH(rt.report_tanggal) as report_bulan,
+                SUM(rt. report_total_transaksi) AS report_total_transaksi
+            FROM report_transaksi rt 
+            WHERE YEAR(rt.report_tanggal) = "'.date('Y').'" AND rt.report_wilayah = "'.$area.'"
+            GROUP BY MONTH(rt.report_tanggal)
+            ORDER BY MONTH(rt.report_tanggal) ASC
+        ')->result();
     }
 }
