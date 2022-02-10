@@ -10,16 +10,21 @@ class Dashboard extends CI_Controller
 		}
 		$this->load->library('table');
         $this->load->model('M_dashboard');
+		$this->load->model('MDropdown');
+		$this->load->model('MReport');
+		$this->load->model('MKendaraan');
     }
 
     public function index(){
-		$dataDaftarKendaraan = $this->M_dashboard->getDaftarKendaraan();
-		$dataGlobalCost = $this->M_dashboard->getGlobalCost();
+		$wilayah 			 = $this->MDropdown->get(['dropdown_menu' => 'Wilayah', 'deleted_date' => null]);
+		$globalCost 		 = $this->MReport->globalCost();
+		$daftarKendaraan	 = $this->MKendaraan->get(['disabled_date' => null, 'is_active' => 1]);
 
 		$data = [
 			'title' => "admin",
-			'GlobalCost' => $dataGlobalCost,
-			'DaftarKendaraan' => $dataDaftarKendaraan
+			'GlobalCost' => $globalCost,
+			'DaftarKendaraan' => $daftarKendaraan,
+			'DaftarWilayah' => $wilayah
 		];
 
 		$this->template->index('admin/dashboard', $data);

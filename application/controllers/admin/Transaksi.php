@@ -49,10 +49,15 @@ class Transaksi extends CI_Controller
         $dataStore['no_rangka']         = explode('|', $_POST['kendaraan'])[0];
         $dataStore['kendaraan_stnk']    = explode('|', $_POST['kendaraan'])[1];
 
+        $klien = $this->MJenisBiaya->getWilayah(['noRangka' => $dataStore['no_rangka'], 'stnk' => $dataStore['kendaraan_stnk']]);
+        $dataStore['transaksi_wilayah'] = $klien->client_region;
+        $dataStore['transaksi_klien']   = $klien->client_nama;
+
         $index = 0;
         foreach ($_POST['jenPeng'] as $item) {
             $dataStore['id_pengeluaran']    = $item;
             $dataStore['transaksi_total']   = str_replace(',', '', $_POST['total'][$index]);
+            
             $this->MJenisBiaya->insert($dataStore);
             $index++;
         }
@@ -76,6 +81,10 @@ class Transaksi extends CI_Controller
         $dataStore['no_rangka']                 = explode('|', $_POST['kendaraan'])[0];
         $dataStore['kendaraan_stnk']            = explode('|', $_POST['kendaraan'])[1];
         $dataStore['transaksi_detail']          = $_POST['toko'];
+        
+        $klien = $this->MJenisBiaya->getWilayah(['noRangka' => $dataStore['no_rangka'], 'stnk' => $dataStore['kendaraan_stnk']]);
+        $dataStore['transaksi_wilayah'] = $klien->client_region;
+        $dataStore['transaksi_klien']   = $klien->client_nama;
         
         $index = 0;
         foreach ($_POST['jenPeng'] as $item) {
@@ -107,6 +116,10 @@ class Transaksi extends CI_Controller
         $dataStore['transaksi_tanggal']         = $_POST['tglService'];
         $dataStore['no_rangka']                 = explode('|', $_POST['kendaraan'])[0];
         $dataStore['kendaraan_stnk']            = explode('|', $_POST['kendaraan'])[1];
+        
+        $klien = $this->MJenisBiaya->getWilayah(['noRangka' => $dataStore['no_rangka'], 'stnk' => $dataStore['kendaraan_stnk']]);
+        $dataStore['transaksi_wilayah'] = $klien->client_region;
+        $dataStore['transaksi_klien']   = $klien->client_nama;
 
         $index = 0;
         foreach ($_POST['bbm']['jenPeng'] as $item) {

@@ -3,39 +3,23 @@
         <div class="card-section">
             <div class="head">
                 <p>Global Cost</p>
-                <select name="" style="width: 30%;" class="login-input" id="">
-                    <option value="Makang">Malang</option>
-                </select>
             </div>
-            <div class="body">
-                <table class="table-custom">
-                    <thead>
-                        <tr>
-                            <?php
-                            $template = array('table_open' => '<table id="tblDashboard" class="table-custom">');
-                            $this->table->set_template($template);
-                            $this->table->set_heading('No', 'Area Operasional', 'Jumlah Transaksi', 'Total Transaksi');
-                            ?>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <?php
-                            $no = 1;
-                            foreach ($GlobalCost as $row) {
-                                $this->table->add_row(
-                                    $no++,
-                                    $row->kendaraan_stnk,
-                                    $row->kendaraan_merk,
-                                    $row->umur_kendaraan
-                                );
-
-                            ?>
-                            <?php }
-                            echo $this->table->generate(); ?>
-                        </tr>
-                    </tbody>
-                </table>
+            <div class="body" style="padding: 15px;">
+                <?php
+                    $template = array('table_open' => '<table id="tblGlobal" class="table-custom" border="0">');
+                    $this->table->set_template($template);
+                    $this->table->set_heading('Area Operasional', 'Jumlah Transaksi', 'Total Transaksi');
+                
+                    foreach ($GlobalCost as $row) {
+                        $this->table->add_row(
+                            $row->report_wilayah,
+                            $row->report_jumlah_transaksi,
+                            "Rp.".number_format($row->report_total_transaksi)
+                        );
+                    }
+                    echo $this->table->generate(); 
+                ?>
+                
             </div>
             <div class="foot">
             </div>
@@ -44,41 +28,36 @@
             <div class="head">
                 <p>Daftar Kendaraan</p>
             </div>
-            <div class="body">
-                <table class="table-custom">
-                    <thead>
-                        <tr>
-                            <!-- <?php
-                            $template = array('table_open' => '<table id="tblDashboard" class="table-custom">');
-                            $this->table->set_template($template);
-                            $this->table->set_heading('No','No. STNK', 'Klien', 'Merk Kendaraan', 'Umur Kendaraan', 'Area Operasional');
-                            ?> -->
-                        </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                            <?php
-                            $no = 1;
-                            foreach ($DaftarKendaraan as $row) {
-                                // $tgl = date_format(date_create($row->kendaraan_tanggal_beli), 'j M Y');
-                                $this->table->add_row(
-                                    $no++,
-                                    $row->kendaraan_stnk,
-                                    $row->kendaraan_merk,
-                                    $row->umur_kendaraan,
-                                    $row->pengeluaran_jenis,
-                                    $row->total_transaksi
-                                );
+            <div class="body" style="padding: 15px">
+                <?php
+                    $template = array('table_open' => '<table id="tblKendaraan" class="table-custom">');
+                    $this->table->set_template($template);
+                    $this->table->set_heading('No. STNK', 'Klien', 'Merk Kendaraan', 'Umur Kendaraan', 'Area Operasional');
 
-                            ?>
-                            <?php }
-                            echo $this->table->generate(); ?>
-                        </tr>
-                    </tbody>
-                </table>
+                    foreach ($DaftarKendaraan as $row) {
+                        $currentDate = date("Y-m-d");
+                        $umur = date_diff(date_create($row->kendaraan_tanggal_beli), date_create($currentDate));
+                        $klien = $this->MGeneral->getKendaraanKlien(['noRangka' => $row->kendaraan_no_rangka, 'stnk' => $row->kendaraan_stnk]);
+
+                        $this->table->add_row(
+                            $row->kendaraan_stnk,
+                            $klien->client_nama,
+                            $row->kendaraan_merk,
+                            $umur->format("%m") . " Bulan " . $umur->format('%y') . "Tahun",
+                            $klien->client_region
+                        );
+                    }
+                    echo $this->table->generate(); 
+                ?>
             </div>
             <div class="foot">
             </div>
         </div>
     </div>
 </div>
+<script>
+    $(document).ready(function(){
+        $('#tblGlobal').DataTable();
+        $('#tblKendaraan').DataTable();
+    })
+</script>

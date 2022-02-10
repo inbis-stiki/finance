@@ -28,7 +28,7 @@
                         </div>
                         <div class="col-9">
                             <div style="color:#fff; font-size: 14px;">Jumlah Kendaraan</div>
-                            <div style="color:#fff; font-size: 18px;font-weight: bold;">150 Kendaraan</div>
+                            <div style="color:#fff; font-size: 18px;font-weight: bold;"><?= $JmlKendaraan?> Kendaraan</div>
                         </div>
                     </div>
                 </div>
@@ -41,7 +41,7 @@
                         </div>
                         <div class="col-9">
                             <div style="color:#fff; font-size: 14px;">Pengajuan Baru</div>
-                            <div style="color:#fff; font-size: 18px;font-weight: bold;">10 Pengajuan</div>
+                            <div style="color:#fff; font-size: 18px;font-weight: bold;"><?= $JmlPengajuan?> Pengajuan</div>
                         </div>
                     </div>
                 </div>
@@ -155,16 +155,28 @@
         },
         series: [{
             name: 'sales',
-            data: [40,30,20,20,0.5,1,5,5,8,60,0.02]
+            data: [
+                <?php
+                    foreach ($GlobalCost as $item) {
+                        echo ((int)$item->report_total_transaksi / 1000000).'.toFixed(1),';
+                    }    
+                ?>
+            ]
         }],
         colors: ['#4F48ED'],
         xaxis: {
-            categories: ["Januari","Februari","Maret","April","Mei","Juni","Juli", "Agustus","September", "Oktober", "November", "Desember"]
+            categories: [
+                <?php
+                    foreach ($GlobalCost as $item) {
+                        echo 'getFullMonthh('.((int)$item->report_bulan - 1).'),';
+                    }        
+                ?> 
+            ]
         },
         yaxis: {
             labels: {
                 formatter: function (value) {
-                    return value+" Jt";
+                    return value.toFixed(1)+" Jt";
                 }
             },
         },
@@ -179,16 +191,28 @@
         },
         series: [{
             name: 'sales',
-            data: [40,30,20,20,0.5,1,5,5,8,60,0.02]
+            data: [
+                <?php
+                    foreach ($CostPerArea as $item) {
+                        echo ((int)$item->report_total_transaksi / 1000000).'.toFixed(1),';
+                    }    
+                ?>
+            ]
         }],
         colors: ['#4F48ED'],
         xaxis: {
-            categories: ["Jan","Feb","Mar","Apr","Mei","Jun","Jul", "Agu","Sep", "Okt", "Nov", "Des"]
+            categories: [
+                <?php
+                    foreach ($CostPerArea as $item) {
+                        echo 'getFullMonthh('.((int)$item->report_bulan - 1).'),';
+                    }        
+                ?> 
+            ]
         },
         yaxis: {
             labels: {
                 formatter: function (value) {
-                    return value+" Jt";
+                    return value.toFixed(1)+" Jt";
                 }
             },
         },
@@ -216,4 +240,47 @@
     chart.render();
     chart2.render();
     chart3.render();
+
+    function getFullMonthh (month){
+            switch (month) {
+                case 0:
+                    return 'Januari'
+                    break;
+                case 1:
+                    return 'Februari'
+                    break;
+                case 2:
+                    return 'Maret'
+                    break;
+                case 3:
+                    return 'April'
+                    break;
+                case 4:
+                    return 'Mei'
+                    break;
+                case 5:
+                    return 'Juni'
+                    break;
+                case 6:
+                    return 'Juli'
+                    break;
+                case 7:
+                    return 'Agustus'
+                    break;
+                case 8:
+                    return 'September'
+                    break;
+                case 9:
+                    return 'Oktober'
+                    break;
+                case 10:
+                    return 'November'
+                    break;
+                case 11:
+                    return 'Desember'
+                    break;
+                default:
+                    break;
+            }
+        }
 </script>
