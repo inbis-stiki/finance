@@ -67,4 +67,37 @@ class MReport extends CI_Model{
             ORDER BY MONTH(rt.report_tanggal) ASC
         ')->result();
     }
+    public function reportSparepart(){
+        return $this->db->query('
+            SELECT 
+                ms.sparepart_nama ,
+                SUM(t.transaksi_jumlah) as sparepart_total
+            FROM 
+                transaksi t, 
+                master_jenis_pengeluaran mjp ,
+                master_sparepart ms 
+            WHERE 
+                mjp.pengeluaran_group = "Maintenance"
+                AND mjp.pengeluaran_id = t.id_pengeluaran 
+                AND ms.sparepart_id = t.id_sparepart 
+            GROUP BY t.id_sparepart 
+            ORDER BY SUM(t.transaksi_jumlah) DESC
+        ')->result();
+    }
+    public function reportKendaraan(){
+        return $this->db->query('
+            SELECT
+                rt.report_stnk ,
+                rt.report_klien ,
+                SUM(rt.report_jumlah_transaksi) as report_jumlah_transaksi ,
+                SUM(rt.report_total_transaksi) as report_total_transaksi
+            FROM report_transaksi rt 
+            GROUP BY
+                rt.report_no_rangka , 
+                rt.report_stnk ,
+                rt.report_klien ,
+                rt.report_wilayah 
+            ORDER BY SUM(rt.report_total_transaksi) DESC
+        ')->result();
+    }
 }

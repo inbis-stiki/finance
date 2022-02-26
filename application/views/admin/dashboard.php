@@ -41,10 +41,10 @@
 
                         $this->table->add_row(
                             $row->kendaraan_stnk,
-                            $klien->client_nama,
+                            !empty($klien->client_nama) ? $klien->client_nama : '-',
                             $row->kendaraan_merk,
                             $umur->format("%m") . " Bulan " . $umur->format('%y') . "Tahun",
-                            $klien->client_region
+                            !empty($klien->client_region) ? $klien->client_region : '-',
                         );
                     }
                     echo $this->table->generate(); 

@@ -97,8 +97,20 @@
                         <p>Sparepart</p>
                         <input type="date">
                     </div>
-                    <div class="body">
-                        <!-- <div style="width: 99%;" id="chart_area"></div> -->
+                    <div class="body" style="padding: 15px">
+                        <?php
+                            $template = array('table_open' => '<table id="tblSparepart" class="table-custom">');
+                            $this->table->set_template($template);
+                            $this->table->set_heading('Detail', 'Jumlah',);
+
+                            foreach ($Sparepart as $row) {
+                                $this->table->add_row(
+                                    $row->sparepart_nama,
+                                    $row->sparepart_total
+                                );
+                            }
+                            echo $this->table->generate(); 
+                        ?>
                     </div>
                     <div class="foot">
                     </div>
@@ -110,8 +122,22 @@
                         <p>Cost Per Kendaraan</p>
                         <input type="date">
                     </div>
-                    <div class="body" style="margin-bottom: 12px;">
-                        <!-- <div style="width: 99%;" id="chart_jenis"></div> -->
+                    <div class="body" style="padding: 15px">
+                        <?php
+                            $template = array('table_open' => '<table id="tblKendaraan" class="table-custom">');
+                            $this->table->set_template($template);
+                            $this->table->set_heading('No STNK', 'Klien', 'Jumlah Transaksi', 'Total Transaksi');
+
+                            foreach ($Kendaraan as $row) {
+                                $this->table->add_row(
+                                    $row->report_stnk,
+                                    $row->report_klien,
+                                    number_format($row->report_jumlah_transaksi),
+                                    'Rp.'.number_format($row->report_total_transaksi)
+                                );
+                            }
+                            echo $this->table->generate(); 
+                        ?>
                     </div>
                     <div class="foot">
                     </div>
@@ -148,6 +174,13 @@
 </div>
 <script src="<?= site_url() ?>/assets/src/js/apexchart.js"></script>
 <script>
+    $(document).ready(function(){
+        $('#tblSparepart').DataTable({
+            'searching': false,
+            'ordering': false
+        });
+        $('#tblKendaraan').DataTable();
+    })
     var options = {
         chart: {
             type: 'area',
