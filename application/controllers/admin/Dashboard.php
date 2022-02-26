@@ -17,7 +17,7 @@ class Dashboard extends CI_Controller
 
     public function index(){
 		$wilayah 			 = $this->MDropdown->get(['dropdown_menu' => 'Wilayah', 'deleted_date' => null]);
-		$globalCost 		 = $this->MReport->globalCost();
+		$globalCost 		 = $this->MReport->globalCostArea();
 		$daftarKendaraan	 = $this->MKendaraan->get(['disabled_date' => null, 'is_active' => 1]);
 
 		$data = [

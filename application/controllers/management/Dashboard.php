@@ -13,8 +13,6 @@ class Dashboard extends CI_Controller{
 		$this->load->model('MReport');
     }
     public function index(){
-        $dataDaftarKendaraan = $this->M_dashboard->getDaftarKendaraan();
-		$dataGlobalCost = $this->M_dashboard->getGlobalCost();
 		$dataSaldo	= $this->db->get('balance')->row();
 		$jmlKendaraan = count($this->MKendaraan->get(['disabled_date' => null, 'is_active' => '1']));
 		
@@ -22,17 +20,19 @@ class Dashboard extends CI_Controller{
 		$transaksi  = count($this->MJenisBiaya->get(['DATE(created_date)' => date('Y-m-d')]));
 
 		$globalCost 	= $this->MReport->globalCostTahun("2022");
-		$costPerArea 	= $this->MReport->globalCostTahunArea("Jombang");
+		$costPerArea 	= $this->MReport->globalCostTahunArea("Surabaya");
+		$sparepart		= $this->MReport->reportSparepart();
+		$kendaraan		= $this->MReport->reportKendaraan();
 
 		$data = [
 			'title' => "admin",
-			'GlobalCost' => $dataGlobalCost,
-			'DaftarKendaraan' => $dataDaftarKendaraan,
 			'JmlKendaraan' => $jmlKendaraan,
 			'JmlPengajuan' => ((int)$peminjaman + (int)$transaksi),
 			'saldo'	=> $dataSaldo,
 			'GlobalCost' => $globalCost,
-			'CostPerArea' => $costPerArea
+			'CostPerArea' => $costPerArea,
+			'Sparepart' => $sparepart,
+			'Kendaraan' => $kendaraan
 		];
 
 		$this->template->index('admin/dashboard_management', $data);
