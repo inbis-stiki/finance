@@ -126,14 +126,17 @@
                         <?php
                             $template = array('table_open' => '<table id="tblKendaraan" class="table-custom">');
                             $this->table->set_template($template);
-                            $this->table->set_heading('No STNK', 'Klien', 'Jumlah Transaksi', 'Total Transaksi');
+                            $this->table->set_heading('No STNK', 'Klien', 'Jumlah Transaksi', 'Total Transaksi', 'Detail');
 
                             foreach ($Kendaraan as $row) {
                                 $this->table->add_row(
                                     $row->report_stnk,
                                     $row->report_klien,
                                     number_format($row->report_jumlah_transaksi),
-                                    'Rp.'.number_format($row->report_total_transaksi)
+                                    'Rp.'.number_format($row->report_total_transaksi),
+                                    '<a href="'.site_url('management/cost-kendaraan/'.str_replace(' ', '_', $row->report_no_rangka).'/'.str_replace(' ', '_', $row->report_stnk)).'">
+                                        <span class="iconify-inline" style="color: #4F48ED;" data-icon="ci:external-link"data-width="20" data-height="20"></span>
+                                    </a>'
                                 );
                             }
                             echo $this->table->generate(); 
@@ -179,7 +182,9 @@
             'searching': false,
             'ordering': false
         });
-        $('#tblKendaraan').DataTable();
+        $('#tblKendaraan').DataTable({
+            'ordering': false
+        });
     })
     var options = {
         chart: {

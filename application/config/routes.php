@@ -61,6 +61,7 @@ $route['logout'] = 'Auth/logout';
 // ========== MANAGEMENT ==========
 $route['management']            = 'management/Dashboard';
 $route['management/set-saldo']  = 'management/Dashboard/setSaldo';
+$route['management/cost-kendaraan/(:any)/(:any)']  = 'management/Dashboard/costKendaraan/$1/$2';
 // ========== END MANAGEMENT ==========
 
 // ========== ADMIN ==========

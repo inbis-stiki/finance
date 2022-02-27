@@ -103,8 +103,18 @@ class Transaksi extends CI_Controller
     }
     public function storeExpense(){
         // check saldo
+        $totalTrans = 0;
+        if(!empty($_POST['bbm']['total'])){
+            $totalTrans += array_sum(str_replace(',', '', $_POST['bbm']['total']));
+        }
+        if(!empty($_POST['driver']['total'])){
+            $totalTrans += array_sum(str_replace(',', '', $_POST['driver']['total']));
+        }
+        if(!empty($_POST['lain']['total'])){
+            $totalTrans += array_sum(str_replace(',', '', $_POST['lain']['total']));
+        }
+
         $saldo = $this->db->get('balance')->row()->balance;
-        $totalTrans = array_sum(str_replace(',', '', $_POST['bbm']['total'])) + array_sum(str_replace(',', '', $_POST['driver']['total'])) + array_sum(str_replace(',', '', $_POST['lain']['total']));
         if($saldo < $totalTrans){
             $this->session->set_flashdata('err_msg', 'Saldo tidak mencukupi untuk melakukan transaksi');
             redirect('admin/transaksi');
@@ -118,8 +128,8 @@ class Transaksi extends CI_Controller
         $dataStore['kendaraan_stnk']            = explode('|', $_POST['kendaraan'])[1];
         
         $klien = $this->MJenisBiaya->getWilayah(['noRangka' => $dataStore['no_rangka'], 'stnk' => $dataStore['kendaraan_stnk']]);
-        $dataStore['transaksi_wilayah'] = $klien->client_region;
-        $dataStore['transaksi_klien']   = $klien->client_nama;
+        $dataStore['transaksi_wilayah'] = !empty($klien->client_region) ? !empty($klien->client_region) : NULL;
+        $dataStore['transaksi_klien']   = !empty($klien->client_nama) ? !empty($klien->client_nama) : NULL;
 
         $index = 0;
         foreach ($_POST['bbm']['jenPeng'] as $item) {
