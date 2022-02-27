@@ -38,6 +38,7 @@
                                     </button>
                                     <button type="button" data-id="' . $row->client_id . '" class="btn-table red hapus_masterKlien btnHapus" data-bs-toggle="modal" data-bs-target="#hapus_masterKlien">
                                         <span class="iconify-inline" data-icon="carbon:trash-can"data-width="20" data-height="20"></span>
+                                        
                                     </button>'
                                 );
                             ?>

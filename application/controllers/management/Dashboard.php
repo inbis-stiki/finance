@@ -42,4 +42,27 @@ class Dashboard extends CI_Controller{
 		$this->db->update('balance', ['balance' => str_replace(',', '', $_POST['balance'])]);
 		redirect('management');
 	}
+	public function costKendaraan($noRangka, $noSTNK){
+		$noRangka 	= str_replace('_', ' ', $noRangka);
+		$noSTNK 	= str_replace('_', ' ', $noSTNK);
+
+		$administrasi 	= $this->MReport->costAdministrasi($noRangka, $noSTNK);
+		$maintenance 	= $this->MReport->costMaintenance($noRangka, $noSTNK);
+		$bbm 			= $this->MReport->costBBM($noRangka, $noSTNK);
+		$driver 		= $this->MReport->costDriver($noRangka, $noSTNK);
+		$lain 			= $this->MReport->costLain($noRangka, $noSTNK);
+
+		$data = [
+			'title' => "admin",
+			'noSTNK' => $noSTNK,
+			'administrasi' => $administrasi,
+			'maintenance' => $maintenance,
+			'bbm' => $bbm,
+			'driver' => $driver,
+			'lain' => $lain,
+		];
+
+		$this->template->index('admin/cost_kendaraan', $data);
+		$this->load->view('_components/sideNavigation', $data);
+	}
 }

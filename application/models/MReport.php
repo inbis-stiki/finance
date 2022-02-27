@@ -87,6 +87,7 @@ class MReport extends CI_Model{
     public function reportKendaraan(){
         return $this->db->query('
             SELECT
+                rt.report_no_rangka,
                 rt.report_stnk ,
                 rt.report_klien ,
                 SUM(rt.report_jumlah_transaksi) as report_jumlah_transaksi ,
@@ -98,6 +99,97 @@ class MReport extends CI_Model{
                 rt.report_klien ,
                 rt.report_wilayah 
             ORDER BY SUM(rt.report_total_transaksi) DESC
+        ')->result();
+    }
+    public function costAdministrasi($noRangka, $noSTNK){
+        return $this->db->query('
+            SELECT 
+                t.transaksi_tanggal as tanggal_transaksi,
+                mjp.pengeluaran_jenis as jenis_pengeluaran, 
+                t.transaksi_total as total_biaya
+            FROM transaksi t , master_jenis_pengeluaran mjp 
+            WHERE 
+                t.no_rangka = "'.$noRangka.'"
+                AND t.kendaraan_stnk = "'.$noSTNK.'"
+                AND t.id_pengeluaran = mjp.pengeluaran_id 
+                AND mjp.pengeluaran_group = "Administrasi"
+            ORDER BY t.transaksi_tanggal DESC
+        ')->result();
+    }
+    public function costMaintenance($noRangka, $noSTNK){
+        return $this->db->query('
+            SELECT 
+                t.transaksi_tanggal as tanggal_service,
+                mjp.pengeluaran_jenis as jenis_pengeluaran,
+                ms.sparepart_nama as jenis_sparepart,
+                t.transaksi_keterangan as merek,
+                t.transaksi_no_seri as nomor_seri,
+                t.transaksi_jarak_tempuh as pemakaian,
+                t.transaksi_jumlah as jumlah,
+                t.transaksi_total as total_biaya
+            FROM 
+                transaksi t , 
+                master_jenis_pengeluaran mjp , 
+                master_sparepart ms 
+            WHERE 
+                t.no_rangka = "'.$noRangka.'"
+                AND t.kendaraan_stnk = "'.$noSTNK.'"
+                AND t.id_pengeluaran = mjp.pengeluaran_id 
+                AND mjp.pengeluaran_group = "Maintenance"
+                AND ms.sparepart_id = t.id_sparepart 
+            ORDER BY t.transaksi_tanggal DESC
+        ')->result();
+    }
+    public function costBBM($noRangka, $noSTNK){
+        return $this->db->query('
+            SELECT 
+                t.transaksi_tanggal as tanggal_service,
+                t.transaksi_total as total_biaya, 
+                t.transaksi_keterangan as catatan
+            FROM 
+                transaksi t , 
+                master_jenis_pengeluaran mjp
+            WHERE 
+                t.no_rangka = "'.$noRangka.'"
+                AND t.kendaraan_stnk = "'.$noSTNK.'"
+                AND t.id_pengeluaran = mjp.pengeluaran_id 
+                AND mjp.pengeluaran_jenis = "BBM"
+            ORDER BY t.transaksi_tanggal DESC
+        ')->result();
+    }
+    public function costDriver($noRangka, $noSTNK){
+        return $this->db->query('
+            SELECT 
+                t.transaksi_tanggal as tanggal_service,
+                t.transaksi_jumlah as total_hari_masuk,
+                t.transaksi_total as total_biaya
+            FROM 
+                transaksi t , 
+                master_jenis_pengeluaran mjp
+            WHERE 
+                t.no_rangka = "'.$noRangka.'"
+                AND t.kendaraan_stnk = "'.$noSTNK.'"
+                AND t.id_pengeluaran = mjp.pengeluaran_id 
+                AND mjp.pengeluaran_jenis = "Driver"
+            ORDER BY t.transaksi_tanggal DESC
+        ')->result();
+    }
+    public function costLain($noRangka, $noSTNK){
+        return $this->db->query('
+            SELECT 
+                t.transaksi_tanggal as tanggal_service,
+                t.transaksi_keterangan as keterangan,
+                t.transaksi_jumlah as jumlah,
+                t.transaksi_total as total_biaya
+            FROM 
+                transaksi t , 
+                master_jenis_pengeluaran mjp
+            WHERE 
+                t.no_rangka = "'.$noRangka.'"
+                AND t.kendaraan_stnk = "'.$noSTNK.'"
+                AND t.id_pengeluaran = mjp.pengeluaran_id 
+                AND mjp.pengeluaran_jenis = "Lain - Lain"
+            ORDER BY t.transaksi_tanggal DESC
         ')->result();
     }
 }
