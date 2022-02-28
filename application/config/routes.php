@@ -64,6 +64,7 @@ $route['management/set-saldo']                      = 'management/Dashboard/setS
 $route['management/cost-kendaraan/(:any)/(:any)']   = 'management/Dashboard/costKendaraan/$1/$2';
 $route['management/ajxUpdateGlobalCost']            = 'management/Dashboard/ajxUpdateGlobalCost';
 $route['management/ajxUpdateCostArea']              = 'management/Dashboard/ajxUpdateCostArea';
+$route['management/ajxUpdateSparepart']             = 'management/Dashboard/ajxUpdateSparepart';
 // ========== END MANAGEMENT ==========
 
 // ========== ADMIN ==========

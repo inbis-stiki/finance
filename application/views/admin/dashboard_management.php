@@ -59,8 +59,9 @@
                                     <?php
                                         $currYear = date('Y');
                                         for($year = (int)$currYear; $startYear = 2020 <= $year; $year--){
+                                            $isSelected = $currYear == $year ? 'selected' : '';
                                             echo '
-                                                <option value="'.$year.'">'.$year.'</option>
+                                                <option value="'.$year.'" '.$isSelected.'>'.$year.'</option>
                                             ';
                                         }
                                     ?>
@@ -85,7 +86,6 @@
                             <label for="">Area</label>
                             <select name="" id="filCostArea1" class="form-control filCostArea" style="width: 150px;" id="">
                                 <?php
-                                    $currYear = date('Y');
                                     foreach ($masterArea as $item) {
                                         echo '
                                             <option value="'.$item->dropdown_list.'">'.$item->dropdown_list.'</option>
@@ -100,8 +100,9 @@
                                 <?php
                                     $currYear = date('Y');
                                     for($year = (int)$currYear; $startYear = 2020 <= $year; $year--){
+                                        $isSelected = $currYear == $year ? 'selected' : '';
                                         echo '
-                                            <option value="'.$year.'">'.$year.'</option>
+                                            <option value="'.$year.'" '.$isSelected.'>'.$year.'</option>
                                         ';
                                     }
                                 ?>
@@ -130,32 +131,61 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-3">
+            <div class="col-4">
                 <div class="card-section">
                     <div class="head">
                         <p>Sparepart</p>
-                        <input type="date">
+                        <div class="form-group">
+                            <label for="">Bulan</label>
+                            <select name="" id="filSparepart1" class="form-control filSparepart" style="width: 150px;" id="">
+                                <?php
+                                    $i = 0;
+                                    $currMonth = date('n');
+                                    foreach ($masterBulan as $item) {
+                                        $isSelected = $currMonth == ++$i ? 'selected' : '';
+                                        echo '
+                                            <option value="'.$i.'" '.$isSelected.'>'.$item.'</option>
+                                        ';
+                                    }
+                                ?>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="">Tahun</label>
+                            <select name="" id="filSparepart2" class="form-control filSparepart" style="width: 150px;" id="">
+                                <?php
+                                    $currYear = date('Y');
+                                    for($year = (int)$currYear; $startYear = 2020 <= $year; $year--){
+                                        $isSelected = $currYear == $year ? 'selected' : '';
+                                        echo '
+                                            <option value="'.$year.'" '.$isSelected.'>'.$year.'</option>
+                                        ';
+                                    }
+                                ?>
+                            </select>
+                        </div>
                     </div>
                     <div class="body" style="padding: 15px">
+                        <table id="tblSparepart" class="table-custom"></table>
                         <?php
-                            $template = array('table_open' => '<table id="tblSparepart" class="table-custom">');
-                            $this->table->set_template($template);
-                            $this->table->set_heading('Detail', 'Jumlah',);
+                            // $template = array('table_open' => '<table id="tblSparepart" class="table-custom">');
+                            // $this->table->set_template($template);
+                            // $this->table->set_heading('Detail', 'Jumlah',);
 
-                            foreach ($Sparepart as $row) {
-                                $this->table->add_row(
-                                    $row->sparepart_nama,
-                                    $row->sparepart_total
-                                );
-                            }
-                            echo $this->table->generate(); 
+                            // foreach ($Sparepart as $row) {
+                            //     $this->table->add_row(
+                            //         $row->sparepart_nama,
+                            //         $row->sparepart_total
+                            //     );
+                            // }
+                            // echo $this->table->generate(); 
                         ?>
                     </div>
                     <div class="foot">
                     </div>
                 </div>
             </div>
-            <div class="col-9">
+            <div class="col-8">
                 <div class="card-section">
                     <div class="head">
                         <p>Cost Per Kendaraan</p>
@@ -216,15 +246,27 @@
 </div>
 <script src="<?= site_url() ?>/assets/src/js/apexchart.js"></script>
 <script>
-    $(document).ready(function(){
-        $('#tblSparepart').DataTable({
-            'searching': false,
-            'ordering': false
-        });
-        $('#tblKendaraan').DataTable({
-            'ordering': false
-        });
-    })
+    var tblSparepart = $('#tblSparepart').DataTable({
+        'processing': true,
+        'serverSide': true,
+        'ordering': false,
+        'searching': false,
+        'serverMethod': 'post',
+        'ajax': {
+            'url':'<?= site_url('management/ajxUpdateSparepart')?>',
+            'data': {
+                'month': $('#filSparepart1').val(),
+                'year': $('#filSparepart2').val()
+            }
+        },
+        'columns': [
+            { data: 'detail' },
+            { data: 'jumlah' }
+        ]
+    });
+    $('#tblKendaraan').DataTable({
+        'ordering': false
+    });
     var options = {
         chart: {
             type: 'area',
@@ -367,7 +409,6 @@
 
     $('.filCostArea').change(function (){
         const area = $('#filCostArea1').val()
-        console.log(area)
         const year = $('#filCostArea2').val()
         $.ajax({
             url: '<?= site_url('management/ajxUpdateCostArea')?>',
@@ -407,13 +448,33 @@
                         enabled: true,
                     },
                 }
-                console.log('masuk2')
                 $('#chart_area').empty()
                 var updateChart2 = new ApexCharts(document.querySelector("#chart_area"), updateOptions2);
                 updateChart2.render();
 
             }
         })
+    })
+    $('.filSparepart').change(function(){
+        tblSparepart.destroy()
+        tblSparepart = $('#tblSparepart').DataTable({
+            'processing': true,
+            'serverSide': true,
+            'ordering': false,
+            'searching': false,
+            'serverMethod': 'post',
+            'ajax': {
+                'url':'<?= site_url('management/ajxUpdateSparepart')?>',
+                'data': {
+                    'month': $('#filSparepart1').val(),
+                    'year': $('#filSparepart2').val()
+                }
+            },
+            'columns': [
+                { data: 'detail' },
+                { data: 'jumlah' }
+            ]
+        });
     })
 
     function getFullMonthh (month){

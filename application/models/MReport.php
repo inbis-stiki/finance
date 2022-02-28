@@ -67,8 +67,8 @@ class MReport extends CI_Model{
             ORDER BY MONTH(rt.report_tanggal) ASC
         ')->result();
     }
-    public function reportSparepart(){
-        return $this->db->query('
+    public function reportSparepart($param){
+        $records = $this->db->query('
             SELECT 
                 ms.sparepart_nama ,
                 SUM(t.transaksi_jumlah) as sparepart_total
@@ -80,9 +80,31 @@ class MReport extends CI_Model{
                 mjp.pengeluaran_group = "Maintenance"
                 AND mjp.pengeluaran_id = t.id_pengeluaran 
                 AND ms.sparepart_id = t.id_sparepart 
+                AND YEAR(t.transaksi_tanggal) = "'.$param['year'].'"
+                AND MONTH(t.transaksi_tanggal) = "'.$param['month'].'"
+            GROUP BY t.id_sparepart 
+            ORDER BY SUM(t.transaksi_jumlah) DESC
+            LIMIT '.$param['limit'].'
+            OFFSET '.$param['offset'].'
+        ')->result();
+        $totalRecords = $this->db->query('
+            SELECT 
+                ms.sparepart_nama ,
+                SUM(t.transaksi_jumlah) as sparepart_total
+            FROM 
+                transaksi t, 
+                master_jenis_pengeluaran mjp ,
+                master_sparepart ms 
+            WHERE 
+                mjp.pengeluaran_group = "Maintenance"
+                AND mjp.pengeluaran_id = t.id_pengeluaran 
+                AND ms.sparepart_id = t.id_sparepart 
+                AND YEAR(t.transaksi_tanggal) = "'.$param['year'].'"
+                AND MONTH(t.transaksi_tanggal) = "'.$param['month'].'"
             GROUP BY t.id_sparepart 
             ORDER BY SUM(t.transaksi_jumlah) DESC
         ')->result();
+        return ['records' => $records, 'totalDisplayRecords' => count($totalRecords), 'totalRecords' => count($totalRecords)];
     }
     public function reportKendaraan(){
         return $this->db->query('
