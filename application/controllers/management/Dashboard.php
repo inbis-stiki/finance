@@ -11,6 +11,7 @@ class Dashboard extends CI_Controller{
 		$this->load->model('MKendaraan');
 		$this->load->model('MJenisBiaya');
 		$this->load->model('MReport');
+		$this->load->model('MDropdown');
     }
     public function index(){
 		$dataSaldo	= $this->db->get('balance')->row();
@@ -19,8 +20,9 @@ class Dashboard extends CI_Controller{
 		$peminjaman = count($this->db->get_where('transaksi_peminjaman', ['DATE(created_date)' => date('Y-m-d')])->result());
 		$transaksi  = count($this->MJenisBiaya->get(['DATE(created_date)' => date('Y-m-d')]));
 
-		$globalCost 	= $this->MReport->globalCostTahun("2022");
-		$costPerArea 	= $this->MReport->globalCostTahunArea("Surabaya");
+		$masterArea		= $this->MDropdown->get(['dropdown_menu' => 'Wilayah', 'deleted_date' => NULL]);
+		$globalCost 	= $this->MReport->globalCostTahun(date('Y'));
+		$costPerArea 	= $this->MReport->globalCostTahunArea($masterArea[0]->dropdown_list, date('Y'));
 		$sparepart		= $this->MReport->reportSparepart();
 		$kendaraan		= $this->MReport->reportKendaraan();
 
@@ -32,7 +34,8 @@ class Dashboard extends CI_Controller{
 			'GlobalCost' => $globalCost,
 			'CostPerArea' => $costPerArea,
 			'Sparepart' => $sparepart,
-			'Kendaraan' => $kendaraan
+			'Kendaraan' => $kendaraan,
+			'masterArea' =>  $masterArea
 		];
 
 		$this->template->index('admin/dashboard_management', $data);
@@ -64,5 +67,15 @@ class Dashboard extends CI_Controller{
 
 		$this->template->index('admin/cost_kendaraan', $data);
 		$this->load->view('_components/sideNavigation', $data);
+	}
+	public function ajxUpdateGlobalCost(){
+		$globalCost	= $this->MReport->globalCostTahun($_POST['year']);
+
+		echo json_encode($globalCost);
+	}
+	public function ajxUpdateCostArea(){
+		$costPerArea	= $this->MReport->globalCostTahunArea($_POST['area'], $_POST['year']);
+
+		echo json_encode($costPerArea);
 	}
 }

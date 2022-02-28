@@ -56,13 +56,13 @@ class MReport extends CI_Model{
             ORDER BY MONTH(rt.report_tanggal) ASC
         ')->result();
     }
-    public function globalCostTahunArea($area){
+    public function globalCostTahunArea($area, $year){
         return $this->db->query('
             SELECT 
                 MONTH(rt.report_tanggal) as report_bulan,
                 SUM(rt. report_total_transaksi) AS report_total_transaksi
             FROM report_transaksi rt 
-            WHERE YEAR(rt.report_tanggal) = "'.date('Y').'" AND rt.report_wilayah = "'.$area.'"
+            WHERE YEAR(rt.report_tanggal) = "'.$year.'" AND rt.report_wilayah = "'.$area.'"
             GROUP BY MONTH(rt.report_tanggal)
             ORDER BY MONTH(rt.report_tanggal) ASC
         ')->result();

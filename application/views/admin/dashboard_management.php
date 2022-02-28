@@ -52,7 +52,21 @@
                 <div class="card-section">
                     <div class="head">
                         <p>Global Cost</p>
-                        <input type="date">
+                        <div style="float: right;">
+                            <div class="form-group">
+                                <label>Tahun</label>
+                                <select name="" id="filGlobalCost" class="form-control" style="width: 150px;" id="">
+                                    <?php
+                                        $currYear = date('Y');
+                                        for($year = (int)$currYear; $startYear = 2020 <= $year; $year--){
+                                            echo '
+                                                <option value="'.$year.'">'.$year.'</option>
+                                            ';
+                                        }
+                                    ?>
+                                </select>
+                            </div>
+                        </div>
                     </div>
                     <div class="body">
                         <div style="width: 99%;" id="chart_global"></div>
@@ -67,7 +81,32 @@
                 <div class="card-section">
                     <div class="head">
                         <p>Total Cost Per Area</p>
-                        <input type="date">
+                        <div class="form-group">
+                            <label for="">Area</label>
+                            <select name="" id="filCostArea1" class="form-control filCostArea" style="width: 150px;" id="">
+                                <?php
+                                    $currYear = date('Y');
+                                    foreach ($masterArea as $item) {
+                                        echo '
+                                            <option value="'.$item->dropdown_list.'">'.$item->dropdown_list.'</option>
+                                        ';
+                                    }
+                                ?>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="">Tahun</label>
+                            <select name="" id="filCostArea2" class="form-control filCostArea" style="width: 150px;" id="">
+                                <?php
+                                    $currYear = date('Y');
+                                    for($year = (int)$currYear; $startYear = 2020 <= $year; $year--){
+                                        echo '
+                                            <option value="'.$year.'">'.$year.'</option>
+                                        ';
+                                    }
+                                ?>
+                            </select>
+                        </div>
                     </div>
                     <div class="body">
                         <div style="width: 99%;" id="chart_area"></div>
@@ -278,6 +317,104 @@
     chart.render();
     chart2.render();
     chart3.render();
+
+    $('#filGlobalCost').change(function(){
+        $.ajax({
+            url: '<?= site_url('management/ajxUpdateGlobalCost')?>',
+            method: 'POST',
+            data: {year: $(this).val()},
+            success: function(res){
+                res = JSON.parse(res)
+                
+                data = []
+                categories = []
+
+                for(let i of res){
+                    data.push((i.report_total_transaksi / 1000000).toFixed(1))
+                    categories.push(getFullMonthh(i.report_bulan - 1))
+                }
+                var updateOptions = {
+                    chart: {
+                        type: 'area',
+                        height: '300px'
+                    },
+                    series: [{
+                        name: 'sales',
+                        data
+                    }],
+                    colors: ['#4F48ED'],
+                    xaxis: {
+                        categories
+                    },
+                    yaxis: {
+                        labels: {
+                            formatter: function (value) {
+                                return value.toFixed(1)+" Jt";
+                            }
+                        },
+                    },
+                    dataLabels: {
+                    enabled: true,
+                    },
+                }
+                $('#chart_global').empty()
+                var updateChart = new ApexCharts(document.querySelector("#chart_global"), updateOptions);
+                updateChart.render();
+
+            }
+        })
+    })
+
+    $('.filCostArea').change(function (){
+        const area = $('#filCostArea1').val()
+        console.log(area)
+        const year = $('#filCostArea2').val()
+        $.ajax({
+            url: '<?= site_url('management/ajxUpdateCostArea')?>',
+            method: 'POST',
+            data: {area, year},
+            success: function(res){
+                res = JSON.parse(res)
+                
+                data = []
+                categories = []
+
+                for(let i of res){
+                    data.push((i.report_total_transaksi / 1000000).toFixed(1))
+                    categories.push(getFullMonthh(i.report_bulan - 1))
+                }
+                var updateOptions2 = {
+                    chart: {
+                        type: 'bar',
+                        height: '300px'
+                    },
+                    series: [{
+                        name: 'sales',
+                        data
+                    }],
+                    colors: ['#4F48ED'],
+                    xaxis: {
+                        categories
+                    },
+                    yaxis: {
+                        labels: {
+                            formatter: function (value) {
+                                return value.toFixed(1)+" Jt";
+                            }
+                        },
+                    },
+                    dataLabels: {
+                        enabled: true,
+                    },
+                }
+                console.log('masuk2')
+                $('#chart_area').empty()
+                var updateChart2 = new ApexCharts(document.querySelector("#chart_area"), updateOptions2);
+                updateChart2.render();
+
+            }
+        })
+    })
 
     function getFullMonthh (month){
             switch (month) {

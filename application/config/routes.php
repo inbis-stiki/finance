@@ -59,9 +59,11 @@ $route['login'] = 'Auth/login';
 $route['logout'] = 'Auth/logout';
 
 // ========== MANAGEMENT ==========
-$route['management']            = 'management/Dashboard';
-$route['management/set-saldo']  = 'management/Dashboard/setSaldo';
-$route['management/cost-kendaraan/(:any)/(:any)']  = 'management/Dashboard/costKendaraan/$1/$2';
+$route['management']                                = 'management/Dashboard';
+$route['management/set-saldo']                      = 'management/Dashboard/setSaldo';
+$route['management/cost-kendaraan/(:any)/(:any)']   = 'management/Dashboard/costKendaraan/$1/$2';
+$route['management/ajxUpdateGlobalCost']            = 'management/Dashboard/ajxUpdateGlobalCost';
+$route['management/ajxUpdateCostArea']              = 'management/Dashboard/ajxUpdateCostArea';
 // ========== END MANAGEMENT ==========
 
 // ========== ADMIN ==========
