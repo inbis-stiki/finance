@@ -20,7 +20,6 @@ class MJenisBiaya extends CI_Model{
         return $this->db->get_where('transaksi', $param)->result();
     }
     public function getWilayah($param){
-        $currDate = date('Y-m-d');
         return $this->db->query('
             SELECT
                 mc.client_region , mc.client_nama
@@ -28,8 +27,8 @@ class MJenisBiaya extends CI_Model{
             WHERE 
                 tp.kendaraan_no_rangka = "'.$param['noRangka'].'" 
                 AND tp.kendaraan_stnk =  "'.$param['stnk'].'"
-                AND "'.$currDate.'" >= tp.transaksi_peminjaman_start
-                AND "'.$currDate.'" <= tp.transaksi_peminjaman_end
+                AND "'.$param['tglTrans'].'" >= tp.transaksi_peminjaman_start
+                AND "'.$param['tglTrans'].'" <= tp.transaksi_peminjaman_end
                 AND tp.client_id = mc.client_id
             LIMIT 1
             ')->row();
