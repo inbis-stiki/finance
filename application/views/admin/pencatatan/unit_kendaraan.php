@@ -420,7 +420,7 @@
         const id = $(this).val()
         if(id){
             $.ajax({
-                url: '<?= site_url('admin/ajxGetKlien')?>',
+                url: '<?= site_url('master/klien/ajxGetKlien')?>',
                 method: 'post',
                 data: {id},
                 success: function(res){

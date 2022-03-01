@@ -49,9 +49,9 @@ class Transaksi extends CI_Controller
         $dataStore['no_rangka']         = explode('|', $_POST['kendaraan'])[0];
         $dataStore['kendaraan_stnk']    = explode('|', $_POST['kendaraan'])[1];
 
-        $klien = $this->MJenisBiaya->getWilayah(['noRangka' => $dataStore['no_rangka'], 'stnk' => $dataStore['kendaraan_stnk']]);
-        $dataStore['transaksi_wilayah'] = $klien->client_region;
-        $dataStore['transaksi_klien']   = $klien->client_nama;
+        $klien = $this->MJenisBiaya->getWilayah(['tglTrans' => $_POST['tglTransaksi'], 'noRangka' => $dataStore['no_rangka'], 'stnk' => $dataStore['kendaraan_stnk']]);
+        $dataStore['transaksi_wilayah'] = !empty($klien->client_region) ? $klien->client_region : NULL;
+        $dataStore['transaksi_klien']   = !empty($klien->client_nama) ? $klien->client_nama : NULL;
 
         $index = 0;
         foreach ($_POST['jenPeng'] as $item) {
@@ -82,9 +82,9 @@ class Transaksi extends CI_Controller
         $dataStore['kendaraan_stnk']            = explode('|', $_POST['kendaraan'])[1];
         $dataStore['transaksi_detail']          = $_POST['toko'];
         
-        $klien = $this->MJenisBiaya->getWilayah(['noRangka' => $dataStore['no_rangka'], 'stnk' => $dataStore['kendaraan_stnk']]);
-        $dataStore['transaksi_wilayah'] = $klien->client_region;
-        $dataStore['transaksi_klien']   = $klien->client_nama;
+        $klien = $this->MJenisBiaya->getWilayah(['tglTrans' => $_POST['tglService'], 'noRangka' => $dataStore['no_rangka'], 'stnk' => $dataStore['kendaraan_stnk']]);
+        $dataStore['transaksi_wilayah'] = !empty($klien->client_region) ? $klien->client_region : NULL;
+        $dataStore['transaksi_klien']   = !empty($klien->client_nama) ? $klien->client_nama : NULL;
         
         $index = 0;
         foreach ($_POST['jenPeng'] as $item) {
@@ -127,9 +127,9 @@ class Transaksi extends CI_Controller
         $dataStore['no_rangka']                 = explode('|', $_POST['kendaraan'])[0];
         $dataStore['kendaraan_stnk']            = explode('|', $_POST['kendaraan'])[1];
         
-        $klien = $this->MJenisBiaya->getWilayah(['noRangka' => $dataStore['no_rangka'], 'stnk' => $dataStore['kendaraan_stnk']]);
-        $dataStore['transaksi_wilayah'] = !empty($klien->client_region) ? !empty($klien->client_region) : NULL;
-        $dataStore['transaksi_klien']   = !empty($klien->client_nama) ? !empty($klien->client_nama) : NULL;
+        $klien = $this->MJenisBiaya->getWilayah(['tglTrans' => $_POST['tglService'], 'noRangka' => $dataStore['no_rangka'], 'stnk' => $dataStore['kendaraan_stnk']]);
+        $dataStore['transaksi_wilayah'] = !empty($klien->client_region) ? $klien->client_region : NULL;
+        $dataStore['transaksi_klien']   = !empty($klien->client_nama) ? $klien->client_nama : NULL;
 
         $index = 0;
         foreach ($_POST['bbm']['jenPeng'] as $item) {

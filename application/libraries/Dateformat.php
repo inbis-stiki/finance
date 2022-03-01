@@ -1,6 +1,6 @@
 <?php
 
-class DateFormat{
+class Dateformat{
     public function getFullMonth($param){
         switch ($param) {
             case 1:

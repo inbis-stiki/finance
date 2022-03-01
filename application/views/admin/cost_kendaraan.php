@@ -17,6 +17,7 @@
                                 <tr>
                                     <th>No</th>
                                     <th>Tgl Transaksi</th>
+                                    <th>Klien</th>
                                     <th>Jenis Pengeluaran</th>
                                     <th>Total Biaya</th>
                                 </tr>
@@ -30,6 +31,7 @@
                                             <tr>
                                                 <td>'.$no++.'</td>
                                                 <td>'.$date.'</td>
+                                                <td>'.$item->klien.'</td>
                                                 <td>'.$item->jenis_pengeluaran.'</td>
                                                 <td>Rp.'.number_format($item->total_biaya).'</td>
                                             </tr>
@@ -56,6 +58,7 @@
                                 <tr>
                                     <th>No</th>
                                     <th>Tgl Service</th>
+                                    <th>Klien</th>
                                     <th>Jenis Pengeluaran</th>
                                     <th>Jenis Sparepart</th>
                                     <th>Merek</th>
@@ -74,6 +77,7 @@
                                             <tr>
                                                 <td>'.$no++.'</td>
                                                 <td>'.$date.'</td>
+                                                <td>'.$item->klien.'</td>
                                                 <td>'.$item->jenis_pengeluaran.'</td>
                                                 <td>'.$item->jenis_sparepart.'</td>
                                                 <td>'.$item->merek.'</td>
@@ -118,6 +122,7 @@
                                         <tr>
                                             <th>No</th>
                                             <th>Tgl Service</th>
+                                            <th>Klien</th>
                                             <th>Total Biaya</th>
                                             <th>Catatan</th>
                                         </tr>
@@ -131,6 +136,7 @@
                                                     <tr>
                                                         <td>'.$no++.'</td>
                                                         <td>'.$date.'</td>
+                                                        <td>'.$item->klien.'</td>
                                                         <td>Rp.'.number_format($item->total_biaya).'</td>
                                                         <td>'.$item->catatan.'</td>
                                                     </tr>
@@ -146,6 +152,7 @@
                                         <tr>
                                             <th>No</th>
                                             <th>Tgl Service</th>
+                                            <th>Klien</th>
                                             <th>Total Hari Masuk</th>
                                             <th>Total Biaya</th>
                                         </tr>
@@ -159,6 +166,7 @@
                                                     <tr>
                                                         <td>'.$no++.'</td>
                                                         <td>'.$date.'</td>
+                                                        <td>'.$item->klien.'</td>
                                                         <td>'.number_format($item->total_hari_masuk).'</td>
                                                         <td>Rp.'.number_format($item->total_biaya).'</td>
                                                     </tr>
@@ -174,6 +182,7 @@
                                         <tr>
                                             <th>No</th>
                                             <th>Tgl Service</th>
+                                            <th>Klien</th>
                                             <th>Keterangan</th>
                                             <th>Jumlah</th>
                                             <th>Total Biaya</th>
@@ -188,6 +197,7 @@
                                                     <tr>
                                                         <td>'.$no++.'</td>
                                                         <td>'.$date.'</td>
+                                                        <td>'.$item->klien.'</td>
                                                         <td>'.$item->keterangan.'</td>
                                                         <td>'.number_format($item->jumlah).'</td>
                                                         <td>Rp.'.number_format($item->total_biaya).'</td>

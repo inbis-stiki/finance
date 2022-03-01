@@ -63,9 +63,10 @@
                             <div class="form-group">
                                 <label>Tahun</label>
                                 <select name="" id="filGlobalCost" class="form-control" style="width: 150px;" id="">
+                                    <option value="All">Semua</option>
                                     <?php
                                         $currYear = date('Y');
-                                        for($year = (int)$currYear; $startYear = 2020 <= $year; $year--){
+                                        for($year = (int)$currYear; $startYear = 2021 <= $year; $year--){
                                             $isSelected = $currYear == $year ? 'selected' : '';
                                             echo '
                                                 <option value="'.$year.'" '.$isSelected.'>'.$year.'</option>
@@ -92,6 +93,7 @@
                         <div class="form-group">
                             <label for="">Area</label>
                             <select name="" id="filCostArea1" class="form-control filCostArea" style="width: 150px;" id="">
+                                <option value="All">Semua</option>
                                 <?php
                                     foreach ($masterArea as $item) {
                                         echo '
@@ -104,9 +106,10 @@
                         <div class="form-group">
                             <label for="">Tahun</label>
                             <select name="" id="filCostArea2" class="form-control filCostArea" style="width: 150px;" id="">
+                                <option value="All">Semua</option>
                                 <?php
                                     $currYear = date('Y');
-                                    for($year = (int)$currYear; $startYear = 2020 <= $year; $year--){
+                                    for($year = (int)$currYear; $startYear = 2021 <= $year; $year--){
                                         $isSelected = $currYear == $year ? 'selected' : '';
                                         echo '
                                             <option value="'.$year.'" '.$isSelected.'>'.$year.'</option>
@@ -147,7 +150,7 @@
                             <select name="" id="filJenisBiayaSparepart2" class="form-control filJenisBiayaSparepart" style="width: 150px;" id="">
                                 <?php
                                     $currYear = date('Y');
-                                    for($year = (int)$currYear; $startYear = 2020 <= $year; $year--){
+                                    for($year = (int)$currYear; $startYear = 2021 <= $year; $year--){
                                         $isSelected = $currYear == $year ? 'selected' : '';
                                         echo '
                                             <option value="'.$year.'" '.$isSelected.'>'.$year.'</option>
@@ -173,6 +176,7 @@
                         <div class="form-group">
                             <label for="">Bulan</label>
                             <select name="" id="filSparepart1" class="form-control filSparepart" style="width: 150px;" id="">
+                                <option value="All">Semua</option>
                                 <?php
                                     $i = 0;
                                     $currMonth = date('n');
@@ -188,9 +192,10 @@
                         <div class="form-group">
                             <label for="">Tahun</label>
                             <select name="" id="filSparepart2" class="form-control filSparepart" style="width: 150px;" id="">
+                                <option value="All">Semua</option>
                                 <?php
                                     $currYear = date('Y');
-                                    for($year = (int)$currYear; $startYear = 2020 <= $year; $year--){
+                                    for($year = (int)$currYear; $startYear = 2021 <= $year; $year--){
                                         $isSelected = $currYear == $year ? 'selected' : '';
                                         echo '
                                             <option value="'.$year.'" '.$isSelected.'>'.$year.'</option>
@@ -224,7 +229,7 @@
                                     $row->report_klien,
                                     number_format($row->report_jumlah_transaksi),
                                     'Rp.'.number_format($row->report_total_transaksi),
-                                    '<a href="'.site_url('management/cost-kendaraan/'.str_replace(' ', '_', $row->report_no_rangka).'/'.str_replace(' ', '_', $row->report_stnk)).'">
+                                    '<a href="'.site_url('management/cost-kendaraan/'.str_replace(' ', '_', $row->report_no_rangka).'/'.str_replace(' ', '_', $row->report_stnk)).'" target="_blank">
                                         <span class="iconify-inline" style="color: #4F48ED;" data-icon="ci:external-link"data-width="20" data-height="20"></span>
                                     </a>'
                                 );
