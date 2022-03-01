@@ -75,6 +75,11 @@ class MReport extends CI_Model{
         ')->result();
     }
     public function jenisBiayaSparepart($month, $year){
+        $filter = [];
+        if($month != "All") array_push($filter, 'MONTH(t.transaksi_tanggal) = "'.$month.'"');
+        if($year != "All") array_push($filter, 'YEAR(t.transaksi_tanggal) = "'.$year.'"');
+        $and = count($filter) > 0 ? ' AND ' : '';
+
         return $this->db->query('
             SELECT 
                 ms.sparepart_nama as nama ,
@@ -82,8 +87,8 @@ class MReport extends CI_Model{
             FROM transaksi t , master_sparepart ms 
             WHERE 
                 t.id_sparepart IS NOT NULL
-                AND MONTH(t.transaksi_tanggal) = "'.$month.'"
-                AND YEAR(t.transaksi_tanggal) = "'.$year.'"
+                '.$and.'
+                '.implode(' AND ', $filter).'
                 AND t.id_sparepart = ms.sparepart_id 
             GROUP BY t.id_sparepart  
         ')->result();
