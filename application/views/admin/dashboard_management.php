@@ -86,7 +86,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-12">
+            <div class="col-6">
                 <div class="card-section">
                     <div class="head">
                         <p>Total Cost Per Area</p>
@@ -95,9 +95,11 @@
                             <select name="" id="filCostArea1" class="form-control filCostArea" style="width: 150px;" id="">
                                 <option value="All">Semua</option>
                                 <?php
+                                    $i = 1;
                                     foreach ($masterArea as $item) {
+                                        $first = $i++ == 1 ? 'selected' : '';
                                         echo '
-                                            <option value="'.$item->dropdown_list.'">'.$item->dropdown_list.'</option>
+                                            <option value="'.$item->dropdown_list.'" '.$first.'>'.$item->dropdown_list.'</option>
                                         ';
                                     }
                                 ?>
@@ -126,13 +128,14 @@
                     </div>
                 </div>
             </div>
-            <!-- <div class="col-6">
+            <div class="col-6">
                 <div class="card-section">
                     <div class="head">
                         <p>Total Cost Per Jenis Biaya</p>
                         <div class="form-group">
                             <label for="">Bulan</label>
                             <select name="" id="filJenisBiayaSparepart1" class="form-control filJenisBiayaSparepart" style="width: 150px;" id="">
+                                <option value="All">Semua</option>
                                 <?php
                                     $i = 0;
                                     $currMonth = date('n');
@@ -148,6 +151,7 @@
                         <div class="form-group">
                             <label for="">Tahun</label>
                             <select name="" id="filJenisBiayaSparepart2" class="form-control filJenisBiayaSparepart" style="width: 150px;" id="">
+                                <option value="All">Semua</option>
                                 <?php
                                     $currYear = date('Y');
                                     for($year = (int)$currYear; $startYear = 2021 <= $year; $year--){
@@ -166,7 +170,7 @@
                     <div class="foot">
                     </div>
                 </div>
-            </div> -->
+            </div>
         </div>
         <div class="row">
             <div class="col-4">
@@ -392,11 +396,11 @@
 
     var chart = new ApexCharts(document.querySelector("#chart_global"), options);
     var chart2 = new ApexCharts(document.querySelector("#chart_area"), options2);
-    // var chart3 = new ApexCharts(document.querySelector("#chart_jenis"), options3);
+    var chart3 = new ApexCharts(document.querySelector("#chart_jenis"), options3);
 
     chart.render();
     chart2.render();
-    // chart3.render();
+    chart3.render();
 
     $('#filGlobalCost').change(function(){
         $.ajax({
@@ -509,9 +513,10 @@
                 categories = []
 
                 for(let i of res){
-                    data.push(i.total)
+                    data.push(parseInt(i.total))
                     categories.push(i.nama)
                 }
+                console.log(data)
                 
 
                 var updateOptions3 = {
@@ -519,13 +524,9 @@
                         type: 'pie',
                         height: '300px'
                     },
-                    series: [
-                        data
-                    ],
-                    labels: [
-                        categories
-                    ],
-                    // colors: ['#322E8C', '#4F48ED', '#FFBE1A', '#E5E5E5'],
+                    series: data,
+                    labels: categories,
+                    colors: ['#322E8C', '#4F48ED', '#FFBE1A', '#E5E5E5'],
                     dataLabels: {
                         enabled: true,
                     },
