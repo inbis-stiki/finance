@@ -24,7 +24,7 @@ class Dashboard extends CI_Controller{
 		$masterArea		= $this->MDropdown->get(['dropdown_menu' => 'Wilayah', 'deleted_date' => NULL]);
 		$globalCost 	= $this->MReport->globalCostTahun(date('Y'));
 		$costPerArea 	= $this->MReport->globalCostTahunArea($masterArea[0]->dropdown_list, date('Y'));
-		// $sparepart		= $this->MReport->reportSparepart(date('Y'), date('n'));
+		$costSparepart	= $this->MReport->jenisBiayaSparepart(date('n'), date('Y'));
 		$kendaraan		= $this->MReport->reportKendaraan();
 
 		$masterBulan = [];
@@ -40,7 +40,7 @@ class Dashboard extends CI_Controller{
 			'saldo'	=> $dataSaldo,
 			'GlobalCost' => $globalCost,
 			'CostPerArea' => $costPerArea,
-			// 'Sparepart' => $sparepart,
+			'CostSparepart' => $costSparepart,
 			'Kendaraan' => $kendaraan,
 			'masterArea' =>  $masterArea,
 			'masterBulan' => $masterBulan
@@ -82,9 +82,14 @@ class Dashboard extends CI_Controller{
 		echo json_encode($globalCost);
 	}
 	public function ajxUpdateCostArea(){
-		$costPerArea	= $this->MReport->globalCostTahunArea($_POST['area'], $_POST['year']);
+		$costPerArea = $this->MReport->globalCostTahunArea($_POST['area'], $_POST['year']);
 
 		echo json_encode($costPerArea);
+	}
+	public function ajxUpdateJenisBiayaSparepart(){
+		$costJenisBiayaSparepart = $this->MReport->jenisBiayaSparepart($_POST['month'], $_POST['year']);
+
+		echo json_encode($costJenisBiayaSparepart);
 	}
 	public function ajxUpdateSparepart(){
 		$draw   = $_POST['draw'];

@@ -78,8 +78,8 @@
                                                 <td>'.$item->jenis_sparepart.'</td>
                                                 <td>'.$item->merek.'</td>
                                                 <td>'.$item->nomor_seri.'</td>
-                                                <td>'.$item->pemakaian.'</td>
                                                 <td>'.number_format($item->pemakaian).'</td>
+                                                <td>'.number_format($item->jumlah).'</td>
                                                 <td>Rp.'.number_format($item->total_biaya).'</td>
                                             </tr>
                                         ';

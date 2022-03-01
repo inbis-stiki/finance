@@ -67,6 +67,20 @@ class MReport extends CI_Model{
             ORDER BY MONTH(rt.report_tanggal) ASC
         ')->result();
     }
+    public function jenisBiayaSparepart($month, $year){
+        return $this->db->query('
+            SELECT 
+                ms.sparepart_nama as nama ,
+                SUM(t.transaksi_total) as total
+            FROM transaksi t , master_sparepart ms 
+            WHERE 
+                t.id_sparepart IS NOT NULL
+                AND MONTH(t.transaksi_tanggal) = "'.$month.'"
+                AND YEAR(t.transaksi_tanggal) = "'.$year.'"
+                AND t.id_sparepart = ms.sparepart_id 
+            GROUP BY t.id_sparepart  
+        ')->result();
+    }
     public function reportSparepart($param){
         $records = $this->db->query('
             SELECT 
