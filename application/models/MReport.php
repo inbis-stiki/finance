@@ -90,8 +90,8 @@ class MReport extends CI_Model{
     }
     public function reportSparepart($param){
         $filter = [];
-        if($param['month'] != "All") array_push($filter, 'MONTH(t.report_tanggal) = "'.$param['month'].'"');
-        if($param['year'] != "All") array_push($filter, 'YEAR(rt.report_tanggal) = "'.$param['year'].'"');
+        if($param['month'] != "All") array_push($filter, 'MONTH(t.transaksi_tanggal) = "'.$param['month'].'"');
+        if($param['year'] != "All") array_push($filter, 'YEAR(t.transaksi_tanggal) = "'.$param['year'].'"');
         $and = count($filter) > 0 ? ' AND ' : '';
 
         $records = $this->db->query('
