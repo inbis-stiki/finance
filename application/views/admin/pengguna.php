@@ -30,7 +30,7 @@
                             <?php
                             $template = array('table_open' => '<table id="tablePengguna" class="table-custom">');
                             $this->table->set_template($template);
-                            $this->table->set_heading('No', 'Foto', 'Nama', 'Hak Akses', 'Aksi');
+                            $this->table->set_heading('No', 'Foto', 'Username', 'Nama', 'Hak Akses', 'Aksi');
                             ?>
                         </tr>
                     </thead>
@@ -40,6 +40,12 @@
                             $no = 1;
                             foreach ($User as $row) {
                                 $img = $row->user_img == null || $row->user_img == '' ? site_url().'assets/src/img/admin.png' : $row->user_img;
+                                $role = '';
+                                if($row->user_ismanagement == "1") $role .= '<span class="badge" style="background: #55C860;">Management</span>&nbsp;';
+                                if($row->user_isadmin == "1") $role .= '<span class="badge" style="background: #4F48ED;">Admin</span>&nbsp;';
+                                if($row->user_ismaster == "1") $role .= '<span class="badge" style="background: #f39c12;">Master</span>&nbsp';
+                                if($row->user_issuper == "1") $role .= '<span class="badge" style="background: #e74c3c;">Super</span>';
+
                                 $this->table->add_row(
                                     $no++,
                                     '
@@ -47,8 +53,9 @@
                                             <img style="width: 50px;height: 50px;border-radius: 50%;" src="'.$img.'" alt="">
                                         </div>
                                     ',
+                                    $row->user_username,
                                     $row->user_nama,
-                                    $row->user_nama,
+                                    $role,
                                     '
                                     <button type="button" data-id="' . $row->user_username . '" data-nama="' . $row->user_nama . '" class="btn-table green edit_masterSparepart btnReset" data-bs-toggle="modal" data-bs-target="#reset_pengguna">
                                         <span class="iconify-inline" data-icon="fluent:key-reset-24-regular" data-width="20" data-height="20"></span>

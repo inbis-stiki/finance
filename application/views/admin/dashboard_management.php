@@ -52,7 +52,29 @@
                 <div class="card-section">
                     <div class="head">
                         <p>Global Cost</p>
-                        <input type="date">
+                        <?php
+                            $totalGlobalCost = 0;
+                            foreach ($GlobalCost as $item) {
+                                $totalGlobalCost += $item->report_total_transaksi;
+                            }    
+                        ?>
+                        <p id="totalGlobalCost">Total : Rp.<?= number_format($totalGlobalCost)?></p>
+                        <div style="float: right;">
+                            <div class="form-group">
+                                <label>Tahun</label>
+                                <select name="" id="filGlobalCost" class="form-control" style="width: 150px;" id="">
+                                    <?php
+                                        $currYear = date('Y');
+                                        for($year = (int)$currYear; $startYear = 2020 <= $year; $year--){
+                                            $isSelected = $currYear == $year ? 'selected' : '';
+                                            echo '
+                                                <option value="'.$year.'" '.$isSelected.'>'.$year.'</option>
+                                            ';
+                                        }
+                                    ?>
+                                </select>
+                            </div>
+                        </div>
                     </div>
                     <div class="body">
                         <div style="width: 99%;" id="chart_global"></div>
@@ -63,11 +85,36 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-6">
+            <div class="col-12">
                 <div class="card-section">
                     <div class="head">
                         <p>Total Cost Per Area</p>
-                        <input type="date">
+                        <div class="form-group">
+                            <label for="">Area</label>
+                            <select name="" id="filCostArea1" class="form-control filCostArea" style="width: 150px;" id="">
+                                <?php
+                                    foreach ($masterArea as $item) {
+                                        echo '
+                                            <option value="'.$item->dropdown_list.'">'.$item->dropdown_list.'</option>
+                                        ';
+                                    }
+                                ?>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="">Tahun</label>
+                            <select name="" id="filCostArea2" class="form-control filCostArea" style="width: 150px;" id="">
+                                <?php
+                                    $currYear = date('Y');
+                                    for($year = (int)$currYear; $startYear = 2020 <= $year; $year--){
+                                        $isSelected = $currYear == $year ? 'selected' : '';
+                                        echo '
+                                            <option value="'.$year.'" '.$isSelected.'>'.$year.'</option>
+                                        ';
+                                    }
+                                ?>
+                            </select>
+                        </div>
                     </div>
                     <div class="body">
                         <div style="width: 99%;" id="chart_area"></div>
@@ -76,11 +123,39 @@
                     </div>
                 </div>
             </div>
-            <div class="col-6">
+            <!-- <div class="col-6">
                 <div class="card-section">
                     <div class="head">
                         <p>Total Cost Per Jenis Biaya</p>
-                        <input type="date">
+                        <div class="form-group">
+                            <label for="">Bulan</label>
+                            <select name="" id="filJenisBiayaSparepart1" class="form-control filJenisBiayaSparepart" style="width: 150px;" id="">
+                                <?php
+                                    $i = 0;
+                                    $currMonth = date('n');
+                                    foreach ($masterBulan as $item) {
+                                        $isSelected = $currMonth == ++$i ? 'selected' : '';
+                                        echo '
+                                            <option value="'.$i.'" '.$isSelected.'>'.$item.'</option>
+                                        ';
+                                    }
+                                ?>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="">Tahun</label>
+                            <select name="" id="filJenisBiayaSparepart2" class="form-control filJenisBiayaSparepart" style="width: 150px;" id="">
+                                <?php
+                                    $currYear = date('Y');
+                                    for($year = (int)$currYear; $startYear = 2020 <= $year; $year--){
+                                        $isSelected = $currYear == $year ? 'selected' : '';
+                                        echo '
+                                            <option value="'.$year.'" '.$isSelected.'>'.$year.'</option>
+                                        ';
+                                    }
+                                ?>
+                            </select>
+                        </div>
                     </div>
                     <div class="body" style="margin-bottom: 12px;">
                         <div style="width: 99%;" id="chart_jenis"></div>
@@ -88,39 +163,54 @@
                     <div class="foot">
                     </div>
                 </div>
-            </div>
+            </div> -->
         </div>
         <div class="row">
-            <div class="col-3">
+            <div class="col-4">
                 <div class="card-section">
                     <div class="head">
                         <p>Sparepart</p>
-                        <input type="date">
+                        <div class="form-group">
+                            <label for="">Bulan</label>
+                            <select name="" id="filSparepart1" class="form-control filSparepart" style="width: 150px;" id="">
+                                <?php
+                                    $i = 0;
+                                    $currMonth = date('n');
+                                    foreach ($masterBulan as $item) {
+                                        $isSelected = $currMonth == ++$i ? 'selected' : '';
+                                        echo '
+                                            <option value="'.$i.'" '.$isSelected.'>'.$item.'</option>
+                                        ';
+                                    }
+                                ?>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="">Tahun</label>
+                            <select name="" id="filSparepart2" class="form-control filSparepart" style="width: 150px;" id="">
+                                <?php
+                                    $currYear = date('Y');
+                                    for($year = (int)$currYear; $startYear = 2020 <= $year; $year--){
+                                        $isSelected = $currYear == $year ? 'selected' : '';
+                                        echo '
+                                            <option value="'.$year.'" '.$isSelected.'>'.$year.'</option>
+                                        ';
+                                    }
+                                ?>
+                            </select>
+                        </div>
                     </div>
                     <div class="body" style="padding: 15px">
-                        <?php
-                            $template = array('table_open' => '<table id="tblSparepart" class="table-custom">');
-                            $this->table->set_template($template);
-                            $this->table->set_heading('Detail', 'Jumlah',);
-
-                            foreach ($Sparepart as $row) {
-                                $this->table->add_row(
-                                    $row->sparepart_nama,
-                                    $row->sparepart_total
-                                );
-                            }
-                            echo $this->table->generate(); 
-                        ?>
+                        <table id="tblSparepart" class="table-custom"></table>
                     </div>
                     <div class="foot">
                     </div>
                 </div>
             </div>
-            <div class="col-9">
+            <div class="col-8">
                 <div class="card-section">
                     <div class="head">
                         <p>Cost Per Kendaraan</p>
-                        <input type="date">
                     </div>
                     <div class="body" style="padding: 15px">
                         <?php
@@ -177,15 +267,27 @@
 </div>
 <script src="<?= site_url() ?>/assets/src/js/apexchart.js"></script>
 <script>
-    $(document).ready(function(){
-        $('#tblSparepart').DataTable({
-            'searching': false,
-            'ordering': false
-        });
-        $('#tblKendaraan').DataTable({
-            'ordering': false
-        });
-    })
+    var tblSparepart = $('#tblSparepart').DataTable({
+        'processing': true,
+        'serverSide': true,
+        'ordering': false,
+        'searching': false,
+        'serverMethod': 'post',
+        'ajax': {
+            'url':'<?= site_url('management/ajxUpdateSparepart')?>',
+            'data': {
+                'month': $('#filSparepart1').val(),
+                'year': $('#filSparepart2').val()
+            }
+        },
+        'columns': [
+            { data: 'detail' },
+            { data: 'jumlah' }
+        ]
+    });
+    $('#tblKendaraan').DataTable({
+        'ordering': false
+    });
     var options = {
         chart: {
             type: 'area',
@@ -263,8 +365,20 @@
             type: 'pie',
             height: '300px'
         },
-        series: [44, 55, 41, 17],
-        labels: ['Karburator', 'Kipas Pendingin', 'Plunger', 'Lain-lain'],
+        series: [
+            <?php
+                foreach ($CostSparepart as $item) {
+                    echo $item->total.',';
+                }    
+            ?>
+        ],
+        labels: [
+            <?php
+                foreach ($CostSparepart as $item) {
+                    echo '"'.$item->nama.'",';
+                }    
+            ?>
+        ],
         colors: ['#322E8C', '#4F48ED', '#FFBE1A', '#E5E5E5'],
         dataLabels: {
           enabled: true,
@@ -273,11 +387,172 @@
 
     var chart = new ApexCharts(document.querySelector("#chart_global"), options);
     var chart2 = new ApexCharts(document.querySelector("#chart_area"), options2);
-    var chart3 = new ApexCharts(document.querySelector("#chart_jenis"), options3);
+    // var chart3 = new ApexCharts(document.querySelector("#chart_jenis"), options3);
 
     chart.render();
     chart2.render();
-    chart3.render();
+    // chart3.render();
+
+    $('#filGlobalCost').change(function(){
+        $.ajax({
+            url: '<?= site_url('management/ajxUpdateGlobalCost')?>',
+            method: 'POST',
+            data: {year: $(this).val()},
+            success: function(res){
+                res = JSON.parse(res)
+                
+                data = []
+                categories = []
+                totalCost = 0
+
+                for(let i of res){
+                    data.push((i.report_total_transaksi / 1000000).toFixed(1))
+                    categories.push(getFullMonthh(i.report_bulan - 1))
+                    totalCost += parseInt(i.report_total_transaksi)
+                }
+                $('#totalGlobalCost').html(`Total : Rp.${numberWithCommas(totalCost)}`)
+                var updateOptions = {
+                    chart: {
+                        type: 'area',
+                        height: '300px'
+                    },
+                    series: [{
+                        name: 'sales',
+                        data
+                    }],
+                    colors: ['#4F48ED'],
+                    xaxis: {
+                        categories
+                    },
+                    yaxis: {
+                        labels: {
+                            formatter: function (value) {
+                                return value.toFixed(1)+" Jt";
+                            }
+                        },
+                    },
+                    dataLabels: {
+                    enabled: true,
+                    },
+                }
+                $('#chart_global').empty()
+                var updateChart = new ApexCharts(document.querySelector("#chart_global"), updateOptions);
+                updateChart.render();
+
+            }
+        })
+    })
+
+    $('.filCostArea').change(function (){
+        const area = $('#filCostArea1').val()
+        const year = $('#filCostArea2').val()
+        $.ajax({
+            url: '<?= site_url('management/ajxUpdateCostArea')?>',
+            method: 'POST',
+            data: {area, year},
+            success: function(res){
+                res = JSON.parse(res)
+                
+                data = []
+                categories = []
+
+                for(let i of res){
+                    data.push((i.report_total_transaksi / 1000000).toFixed(1))
+                    categories.push(getFullMonthh(i.report_bulan - 1))
+                }
+                var updateOptions2 = {
+                    chart: {
+                        type: 'bar',
+                        height: '300px'
+                    },
+                    series: [{
+                        name: 'sales',
+                        data
+                    }],
+                    colors: ['#4F48ED'],
+                    xaxis: {
+                        categories
+                    },
+                    yaxis: {
+                        labels: {
+                            formatter: function (value) {
+                                return value.toFixed(1)+" Jt";
+                            }
+                        },
+                    },
+                    dataLabels: {
+                        enabled: true,
+                    },
+                }
+                $('#chart_area').empty()
+                var updateChart2 = new ApexCharts(document.querySelector("#chart_area"), updateOptions2);
+                updateChart2.render();
+            }
+        })
+    })
+    $('.filJenisBiayaSparepart').change(function(){
+        const month = $('#filJenisBiayaSparepart1').val()
+        const year = $('#filJenisBiayaSparepart2').val()
+        $.ajax({
+            url: '<?= site_url('management/ajxUpdateJenisBiayaSparepart')?>',
+            method: 'POST',
+            data: {month, year},
+            success: function(res){
+                res = JSON.parse(res)
+                
+                data = []
+                categories = []
+
+                for(let i of res){
+                    data.push(i.total)
+                    categories.push(i.nama)
+                }
+                
+
+                var updateOptions3 = {
+                    chart: {
+                        type: 'pie',
+                        height: '300px'
+                    },
+                    series: [
+                        data
+                    ],
+                    labels: [
+                        categories
+                    ],
+                    // colors: ['#322E8C', '#4F48ED', '#FFBE1A', '#E5E5E5'],
+                    dataLabels: {
+                        enabled: true,
+                    },
+                }
+                $('#chart_jenis').empty()
+                var updateChart3 = new ApexCharts(document.querySelector("#chart_jenis"), updateOptions3);
+                updateChart3.render();
+
+            }
+        })
+    })
+    $('.filSparepart').change(function(){
+        tblSparepart.destroy()
+        tblSparepart = $('#tblSparepart').DataTable({
+            'processing': true,
+            'serverSide': true,
+            'ordering': false,
+            'searching': false,
+            'serverMethod': 'post',
+            'ajax': {
+                'url':'<?= site_url('management/ajxUpdateSparepart')?>',
+                'data': {
+                    'month': $('#filSparepart1').val(),
+                    'year': $('#filSparepart2').val()
+                }
+            },
+            'columns': [
+                { data: 'detail' },
+                { data: 'jumlah' }
+            ]
+        });
+    })
 
     function getFullMonthh (month){
             switch (month) {
