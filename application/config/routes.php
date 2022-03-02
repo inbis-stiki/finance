@@ -78,6 +78,7 @@ $route['admin'] = 'admin/Dashboard';
 // peminjaman
 $route['admin/peminjaman']          = 'admin/Peminjaman';
 $route['admin/peminjaman/store']    = 'admin/Peminjaman/store';
+$route['admin/peminjaman/ajxGetKendaraanPeminjaman']    = 'admin/Peminjaman/ajxGetKendaraanPeminjaman';
 // transaksi
 $route['admin/transaksi']                         = 'admin/Transaksi';
 $route['admin/transaksi/store-administrasi']      = 'admin/Transaksi/storeAdministrasi';
