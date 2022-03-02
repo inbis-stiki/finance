@@ -12,13 +12,17 @@
             <div class="body form">
                 <div class="col-12 col-lg-12 pe-0 d-flex flex-column justify-content-between">
                     <div class="row m-0 p-0 w-100">
-                        <div class="col-12 col-lg-6 ps-0">
+                        <!-- <div class="col-12 col-lg-6 ps-0">
                             <label class="my-3">Tanggal Awal Transaksi</label>
                             <input type="date" class="login-input regular col-xl-6" name="tanggal_start" id="datepicker" required>
                         </div>
                         <div class="col-12 col-lg-6 pe-0">
                             <label class="my-3">Tanggal Akhir Transaksi</label>
                             <input type="date" class="login-input regular col-xl-6" name="tanggal_end" id="datepicker" required>
+                        </div> -->
+                        <div class="col-12 col-lg-6 ps-0">
+                            <label class="my-3">Tanggal Transaksi</label>
+                            <input type="text" class="login-input regular col-xl-6" id="tglTrans" name="tglTrans" value="" />
                         </div>
                     </div>
                     <label class="mb-3">Kendaraan</label>
@@ -356,6 +360,34 @@
     </div>
 </div>
 <script>
+    $(function() {
+        $('#tglTrans').daterangepicker({
+            locale: {
+                format: 'YYYY-MM-DD'
+            },
+            startDate: '<?= date('Y-m-d')?>',
+            endDate: '<?= date('Y-m-d')?>'
+        });
+    });
+    $('#tglTrans').change(function(){
+        const tglTrans = $(this).val();
+        $.ajax({
+            url: '<?= site_url('admin/peminjaman/ajxGetKendaraanPeminjaman')?>',
+            method: 'POST',
+            data: {tglTrans: tglTrans},
+            success: function(res){
+                res = JSON.parse(res);
+                html = "";
+
+                for(i of res){
+                    html += `
+                        <option value="${i.kendaraan_no_rangka}|${i.kendaraan_stnk}">${i.kendaraan_stnk}</option>
+                    `;
+                }
+                $('#slct_kendaraan').html(html);
+            }
+        })
+    })
     $('#slct_kendaraan').change(function(){
         const id = $(this).val()
         if(id){
