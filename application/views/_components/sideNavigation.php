@@ -1,8 +1,8 @@
 <div class="side-nav">
     <div class="top-space"></div>
     <div class="profile-section">
-        <img src="<?= site_url() ?>assets/src/img/admin.png" alt="">
-        <p class="mb-0"><?= $this->session->userdata['name']; ?></p>
+        <img src="<?= $this->session->userdata('foto')?>" alt="">
+        <p class="mb-0"><?= $this->session->userdata['name']; ?> <br> <a href="<?= site_url('profile/edit/'.$this->session->userdata('username'))?>" style="font-size: 12px;color: #FFBE1A;font-weight: bold;">Edit</a></p>
     </div>
     <div class="nav-section">
         <?php

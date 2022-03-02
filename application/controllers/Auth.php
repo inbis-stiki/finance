@@ -31,6 +31,7 @@ class Auth extends CI_Controller{
     public function setSession($param){
         $data['username']       = $param[0]->user_username;
         $data['name']           = $param[0]->user_nama;
+        $data['foto']           = $param[0]->user_img != NULL || $param[0]->user_img != '' ? $param[0]->user_img : base_url("assets/src/img/admin.png");
         $data['isLogged']       = true;
         $data['isAdmin']        = $param[0]->user_isadmin;
         $data['isManagement']   = $param[0]->user_ismanagement;
