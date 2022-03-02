@@ -58,6 +58,11 @@ $route['translate_uri_dashes'] = FALSE;
 $route['login'] = 'Auth/login';
 $route['logout'] = 'Auth/logout';
 
+// PROFILE
+$route['profile/change-pass'] = 'Profile/changePass';
+$route['profile/update']      = 'Profile/update';
+$route['profile/(:any)']      = 'Profile/edit/$1';
+
 // ========== MANAGEMENT ==========
 $route['management']                                = 'management/Dashboard';
 $route['management/set-saldo']                      = 'management/Dashboard/setSaldo';
