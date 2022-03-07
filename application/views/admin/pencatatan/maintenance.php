@@ -32,20 +32,27 @@
                         <input type="text" id="main_inpt_toko" class="login-input regular fs-16px input-maintenance-input">
                     </div>
                 </div>
-                <div class="col-6">
-                    <label class="mb-3">Jarak Tempuh</label>
-                    <div class="input-group mb-3">
-                        <input type="number" class="form-control input-maintenance-input" aria-describedby="basic-addon2">
-                        <span class="input-group-text" id="basic-addon2">km</span>
+                <div class="row w-100">
+                    <div class="alert alert-danger mt-3" style="margin-bottom: -0.5rem;" id="main_alert2" role="alert" hidden>
+                        Harap masukkan data dengan benar!
                     </div>
+                    <button type="button" class="btn-table submit-modal mt-3" id="input-maintenance">
+                        Masukkan Data
+                    </button>
                 </div>
             </div>
         </div>
-        <div class="col-12 col-lg-6 mt-auto mb-3 pe-0 input-maintenance">
-            <button class="btn-table submit-modal" id="input-maintenance">
-                Masukkan Data
-            </button>
+    </div>
+    <div class="head mid maintenance-extend">
+        <p>CATATAN PENGELUARAN MAINTENANCE</p>
+    </div>
+    <div class="body form maintenance-extend">
+        <div id="main_boxInput">
+
         </div>
+        <button style="color: gray !important;" type="button" class="btn-table add-entry mt-3" id="main_tambahInput">
+            Tambah Data
+        </button>
     </div>
     <input type="hidden" name="kendaraan" id="main_inptKendaraan">
     <input type="hidden" name="tglService" id="main_inptTglService">
@@ -82,7 +89,7 @@
     const mainRenderHtml = () => {
         main_inptCount++;
         return `
-            <div id="main_boxInputItem_${main_inptCount}">
+        <div id="main_boxInputItem_${main_inptCount}">
                 <p class="font-w-700 fs-16px my-2">
                     <button type="button" class="btn-table red" onclick="deleteItemMaintenance(${main_inptCount})">
                         <span class="iconify-inline" data-icon="carbon:trash-can"data-width="15" data-height="15"></span>

@@ -30,7 +30,7 @@
                                         $row->sparepart_jenis,
                                         $row->sparepart_ukuran,
                                         $row->sparepart_bulan . ' Bulan',
-
+                                        $row->sparepart_detail,
                                         '<button type="button" data-id="' . $row->sparepart_id . '" data-nama="' . $row->sparepart_nama . '" data-jenis="' . $row->sparepart_jenis . '" data-km="' . $row->sparepart_km . '" data-bulan="' . $row->sparepart_bulan . '" data-ukuran="' . $row->sparepart_ukuran . '" data-detail="' . $row->sparepart_detail . '" class="btn-table edit_masterSparepart btnEdit" data-bs-toggle="modal" data-bs-target="#edit_masterSparepart">
                                             <span class="iconify-inline" data-icon="bx:bx-edit" data-width="20" data-height="20"></span>
                                         </button>
