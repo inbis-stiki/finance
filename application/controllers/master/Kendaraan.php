@@ -32,14 +32,16 @@ class Kendaraan extends CI_Controller
         $this->load->model('M_User');
 		$this->load->model('MDropdown');
 
-		$datajenis	= $this->MDropdown->get(['dropdown_menu' => 'Jenis Kendaraan', 'deleted_date' => NULL]);
-		$datapt		= $this->MDropdown->get(['dropdown_menu' => 'PT', 'deleted_date' => NULL]);
+		$datajenis	    = $this->MDropdown->get(['dropdown_menu' => 'Jenis Kendaraan', 'deleted_date' => NULL]);
+		$datapt		    = $this->MDropdown->get(['dropdown_menu' => 'PT', 'deleted_date' => NULL]);
+        $datawilayah    = $this->MDropdown->get(['dropdown_menu' => 'Wilayah', 'deleted_date' => NULL]);
 
 		$data = [
-			'title' 	=> "admin",
-			'auth' 		=> $this->db->get_where('master_user', ['username' => $this->session->userdata('username')])->row_array(),
-			'datajenis' => $datajenis,
-			'datapt' 	=> $datapt
+			'title' 	    => "admin",
+			'auth' 		    => $this->db->get_where('master_user', ['username' => $this->session->userdata('username')])->row_array(),
+			'datajenis'     => $datajenis,
+			'datapt' 	    => $datapt,
+            'datawilayah'   => $datawilayah
 		];
 
 		$this->template->index('admin/add_kendaraan', $data);
@@ -50,18 +52,20 @@ class Kendaraan extends CI_Controller
 		$this->load->model('M_User');
 		$this->load->model('M_kendaraan_master');$this->load->model('MDropdown');
 
-		$datajenis	= $this->MDropdown->get(['dropdown_menu' => 'Jenis Kendaraan', 'deleted_date' => NULL]);
-		$datapt		= $this->MDropdown->get(['dropdown_menu' => 'PT', 'deleted_date' => NULL]);
-		$dataEdit = $this->M_kendaraan_master->getById($id);
+		$datajenis	    = $this->MDropdown->get(['dropdown_menu' => 'Jenis Kendaraan', 'deleted_date' => NULL]);
+		$datapt		    = $this->MDropdown->get(['dropdown_menu' => 'PT', 'deleted_date' => NULL]);
+        $datawilayah    = $this->MDropdown->get(['dropdown_menu' => 'Wilayah', 'deleted_date' => NULL]);
+		$dataEdit       = $this->M_kendaraan_master->getById($id);
 
 
 
 		$data = [
-			'title' => "admin",
-			'auth' => $this->db->get_where('master_user', ['username' => $this->session->userdata('username')])->row_array(),
-			'kendaraan' => $dataEdit,
-			'datajenis' => $datajenis,
-			'datapt' 	=> $datapt
+			'title'         => "admin",
+			'auth'          => $this->db->get_where('master_user', ['username' => $this->session->userdata('username')])->row_array(),
+			'kendaraan'     => $dataEdit,
+			'datajenis'     => $datajenis,
+			'datapt' 	    => $datapt,
+            'datawilayah'   => $datawilayah
 		];
 
 
@@ -142,16 +146,17 @@ class Kendaraan extends CI_Controller
             }
             $jenis = $this->input->post('jenis_kendaraan');
             $data = array(
-                'kendaraan_no_rangka'         => strtoupper($this->input->post('rangka')),
-                'kendaraan_stnk'             => strtoupper($this->input->post('stnk')),
-                'kendaraan_merk'             => $this->input->post('merk'),
-                'kendaraan_tanggal_beli'     => $this->input->post('tanggal'),
-                'kendaraan_jenis'            => $jenis,
-                'kendaraan_pt'              => $jenis == "Perusahaan" ? $this->input->post('pt') : null,
-                'kendaraan_deadlinesim'     => $this->input->post('pajak'),
-                'kendaraan_deadlinekir'     => $this->input->post('kir'),
-                'kendaraan_kapasitas_tangki'     => $this->input->post('tangki'),
-                'kendaraan_foto'            => str_replace(" ", "_", $fotokendaraan)
+                'kendaraan_no_rangka'           => strtoupper($this->input->post('rangka')),
+                'kendaraan_stnk'                => strtoupper($this->input->post('stnk')),
+                'kendaraan_merk'                => $this->input->post('merk'),
+                'kendaraan_tanggal_beli'        => $this->input->post('tanggal'),
+                'kendaraan_jenis'               => $jenis,
+                'kendaraan_pt'                  => $jenis == "Perusahaan" ? $this->input->post('pt') : null,
+                'kendaraan_deadlinesim'         => $this->input->post('pajak'),
+                'kendaraan_deadlinekir'         => $this->input->post('kir'),
+                'kendaraan_kapasitas_tangki'    => $this->input->post('tangki'),
+                'kendaraan_foto'                => str_replace(" ", "_", $fotokendaraan),
+                'kendaraan_lokasi_ambil'        => $this->input->post('lokasi_ambil')
             );
 
             // $this->db->query("CALL disable_kendaraan('" . $data_lama['kendaraan_no_rangka'] . "')");
@@ -193,7 +198,7 @@ class Kendaraan extends CI_Controller
         $dataDuplicate = $this->db->get_where('master_kendaraan', ['kendaraan_no_rangka' => $_POST['rangka'], 'kendaraan_stnk' => $_POST['stnk']])->result();
         if ($dataDuplicate == null) {
             $kendaraan = $this->MKendaraan->getById($_POST['rangka'], $_POST['stnkLama']);
-            $dataStore['kendaraan_no_rangka']              = $kendaraan->kendaraan_no_rangka;
+            $dataStore['kendaraan_no_rangka']           = $kendaraan->kendaraan_no_rangka;
             $dataStore['kendaraan_stnk']                = $_POST['stnk'];
             $dataStore['kendaraan_merk']                = $kendaraan->kendaraan_merk;
             $dataStore['kendaraan_tanggal_beli']        = $kendaraan->kendaraan_tanggal_beli;
@@ -204,6 +209,7 @@ class Kendaraan extends CI_Controller
             $dataStore['kendaraan_kapasitas_tangki']    = $kendaraan->kendaraan_kapasitas_tangki;
             $dataStore['kendaraan_jenis']               = $kendaraan->kendaraan_jenis;
             $dataStore['kendaraan_pt']                  = $kendaraan->kendaraan_pt;
+            $dataStore['kendaraan_lokasi_ambil']        = $kendaraan->kendaraan_lokasi_ambil;
             $this->MKendaraan->insert($dataStore);
 
             $dataUpdate['kendaraan_no_rangka'] = $_POST['rangka'];
@@ -272,6 +278,7 @@ class Kendaraan extends CI_Controller
         $data['kendaraan_tanggal_beli'] = $this->input->post('tanggal');
         $data['kendaraan_jenis'] = $jenis;
         $data['kendaraan_pt'] = $jenis == "Perusahaan" ? $this->input->post('pt') : null;
+        $data['kendaraan_lokasi_ambil'] = $this->input->post('lokasi_ambil');
         $data['is_active'] = $this->input->post('status');
         // $data = array(
         //     'kendaraan_merk'             => $this->input->post('merk'),
