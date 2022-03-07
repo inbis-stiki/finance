@@ -4,7 +4,7 @@
             <p class="mb-0 fs-5 font-w-500 color-darker">
                 Master Driver
             </p>
-            <a href="<?= base_url('admin/tambah_driver'); ?>" class="btn-table green" type="button">Tambah</a>
+            <a href="<?= base_url('master/driver/add'); ?>" class="btn-table green" type="button">Tambah</a>
             <!-- <button type="button" class="btn-table" data-bs-toggle="modal">Add</button> -->
         </div>
         <div class="card-section">
@@ -15,7 +15,7 @@
                             <?php
                             $template = array('table_open' => '<table id="tableDriver" class="table-custom">');
                             $this->table->set_template($template);
-                            $this->table->set_heading('No', 'Nama Driver', 'Foto Driver', 'KTP Driver', 'Alamat Driver', 'Nomor Telepon Driver', 'SIM Driver', 'Tanggal Masuk', 'Aksi');
+                            $this->table->set_heading('No', 'Nama Driver', 'Foto Driver', 'Kendaraan', 'Alamat Driver', 'Nomor Telepon Driver', 'SIM Driver', 'Tanggal Masuk', 'Aksi');
                             ?>
                         </tr>
                     </thead>
@@ -38,14 +38,15 @@
                                         </button>
                                     ';
                                 }
+
                                 $this->table->add_row(
                                     $no++,
                                     $row->driver_nama,
                                     '<img src="' . $row->driver_foto . '" style="width:100px">',
-                                    '<img src="' . $row->driver_foto_ktp . '" style="width:100px">',
+                                    $kendaraan,
                                     $row->driver_alamat,
                                     $row->driver_telepon,
-                                    implode(', ', $sims),
+                                    $row->driver_sim,
                                     $tanggal,
 
                                     '
@@ -56,8 +57,9 @@
                                         </button>
                                     </a>
                                     <button type="button" data-id="' . $row->driver_nik . '" class="btn-table red hapus_masterDriver btnHapus" data-bs-toggle="modal" data-bs-target="#hapus_masterDriver">
-                                        <span class="iconify-inline" data-icon="carbon:trash-can"data-width="20" data-height="20"></span>
-                                    </button>'
+                                        <span class="iconify-inline" data-icon="carbon:trash-can" data-width="20" data-height="20"></span>
+                                    </button>
+                                    '
                                 );
                             ?>
                             <?php }
@@ -77,7 +79,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body fs-14px pt-0 d-flex flex-column">
-                        <?= form_open_multipart('admin/Driver/aksiHapus'); ?>
+                        <?= form_open_multipart('master/driver/destroy'); ?>
                         <div class="pb-4">
                             <div class="d-flex flex-column my-2 w-100">
                                 <p class="font-w-700 color-darker mb-0">Apakah anda yakin menghapus data ini ?</p>
@@ -103,14 +105,14 @@
                     <div class="modal-body fs-14px pt-0 d-flex flex-column">
                         <?= form_open_multipart('master/driver/assign'); ?>
                         <div class="pb-4">
-                            <!-- <div class="d-flex flex-column my-2 w-100">
+                            <div class="d-flex flex-column my-2 w-100">
                                 <label class="my-2 color-secondary">Awal Pemakaian</label>
                                 <input type="date" class="login-input regular fs-16px" name="awal" id="datepicker" value="" required>
                             </div>
                             <div class="d-flex flex-column my-2 w-100">
                                 <label class="my-2 color-secondary">Selesai Pemakaian</label>
                                 <input type="date" class="login-input regular fs-16px" name="akhir" id="datepicker" value="" required>
-                            </div> -->
+                            </div>
                             <div class="d-flex flex-column my-2 w-100">
                                 <label class="my-2 color-secondary">Kendaraan</label>
                                 <select name="kendaraan" class="login-input regular" required>

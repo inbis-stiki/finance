@@ -72,7 +72,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body fs-14px pt-0 d-flex flex-column">
-                        <?= form_open_multipart('admin/Sparepart/aksiEditPart'); ?>
+                        <?= form_open_multipart('master/sparepart/update'); ?>
                         <div class="pb-4">
 
                             <div class="d-flex flex-column my-2 w-100">
@@ -90,6 +90,10 @@
                                 <!-- <input type="text" class="login-input regular" name="jenis2" value="" required> -->
                                 <input type="hidden" id="sparepart_id" name="sparepart_id" value="">
                             </div>
+                            <div class="d-flex flex-column my-2 w-100">
+                                <label class="my-2 color-secondary">Ukuran</label>
+                                <input type="text" class="login-input regular" name="ukuran2" placeholder="" required>
+                            </div>
                             <div class="row m-0 p-0 w-full">
                                 <label class="font-w-400 my-2 color-secondary ps-0">Ideal Penggantian</label>
                                 <div class="col-6 ps-0 d-flex flex-row align-items-center">
@@ -106,6 +110,10 @@
                                     </div>
                                     <input type="number" onkeypress="return isNumberKey(event)" name="bulan-txt2" id="pilihbln" class="login-input regular" min="0" value="" disabled required>
                                 </div>
+                            </div>
+                            <div class="d-flex flex-column my-2 w-100">
+                                <label class="my-2 color-secondary">Keterangan</label>
+                                <textarea name="detail2" id="" cols="30" class="login-input" rows="3"></textarea>
                             </div>
                         </div>
                         <div class="d-flex flex-row">
@@ -126,7 +134,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body fs-14px pt-0 d-flex flex-column">
-                        <?= form_open_multipart('admin/Sparepart/aksiHapus'); ?>
+                        <?= form_open_multipart('master/sparepart/destroy'); ?>
                         <div class="pb-4">
                             <div class="d-flex flex-column my-2 w-100">
                                 <p class="font-w-700 color-darker mb-0">Apakah anda yakin menghapus data ini ?</p>
@@ -148,6 +156,8 @@
                 const jenis = $(this).data('jenis')
                 const km = $(this).data('km')
                 const bulan = $(this).data('bulan')
+                const ukuran = $(this).data('ukuran')
+                const detail = $(this).data('detail')
 
                 $('input[name=nama2]').val(nama);
                 $('input[name=jenis2]').val(jenis);
