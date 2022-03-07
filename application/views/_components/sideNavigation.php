@@ -1,33 +1,39 @@
 <div class="side-nav">
     <div class="top-space"></div>
     <div class="profile-section">
-        <img src="<?= $this->session->userdata('foto')?>" alt="">
-        <p class="mb-0"><?= $this->session->userdata['name']; ?> <br> <a href="<?= site_url('profile/edit/'.$this->session->userdata('username'))?>" style="font-size: 12px;color: #FFBE1A;font-weight: bold;">Edit</a></p>
+        <img src="<?= $this->session->userdata('foto') ?>" alt="">
+        <p class="mb-0"><?= $this->session->userdata['name']; ?> <br> <a href="<?= site_url('profile/edit/' . $this->session->userdata('username')) ?>" style="font-size: 12px;color: #FFBE1A;font-weight: bold;">Edit</a></p>
     </div>
     <div class="nav-section">
         <?php
-            if($this->session->userdata('isManagement') == "1"){
-                $statusActive = uri_string() == 'management' ? 'active' : '';
-                echo '
-                    <div class="nav-links '.$statusActive.'">
-                        <a href="'.site_url().'management">Dashboard Management</a>
+        if ($this->session->userdata('isManagement') == "1") {
+            $statusActive = uri_string() == 'management' ? 'active' : '';
+            echo '
+                    <div class="nav-links ' . $statusActive . '">
+                        <a href="' . site_url() . 'management">Dashboard Management</a>
                     </div>        
                 ';
-            }
+        }
         ?>
-        
+
         <?php
-            if($this->session->userdata('isAdmin') == "1"){
-                $statusActive = uri_string() == 'admin' ? 'active' : '';
-                echo '
-                    <div class="nav-links '.$statusActive.'">
-                        <a href="'.site_url().'admin">Dashboard Admin</a>
+        if ($this->session->userdata('isAdmin') == "1") {
+            $statusActive = uri_string() == 'admin' ? 'active' : '';
+            echo '
+                    <div class="nav-links ' . $statusActive . '">
+                        <a href="' . site_url() . 'admin">Dashboard Admin</a>
                     </div>
                 ';
-            }
+        }
         ?>
 
 
+        <div class="nav-links <?= uri_string() == 'admin/dashboard' ? 'active' : '' ?>">
+            <a href="<?= site_url() ?>admin/dashboard">Dashboard</a>
+        </div>
+        <!-- <div class="nav-links <?= uri_string() == 'admin/form_pengajuan' ? 'active' : '' ?>">
+            <a href="<?= site_url() ?>admin/form_pengajuan">Form Pengajuan</a>
+        </div> -->
         <?php
         $active = (uri_string() == 'admin/master_driver' || uri_string() == 'admin/master_region' || uri_string() == 'admin/master_instansi' || uri_string() == 'admin/master_sparepart' || uri_string() == 'admin/master_kendaraan' || uri_string() == 'admin/master_pengeluaran' ? "active" : "");
         ?>
@@ -35,52 +41,62 @@
         $activeform = (uri_string() == 'admin/form_pengajuan/unit_kendaraan' || uri_string() == 'admin/form_pengajuan/jenis_biaya' ? "active" : "");
         ?>
         <?php
-            if($this->session->userdata('isMaster') == "1"){
-                echo '
-                    <div class="nav-links accordion-nav '.$active.'">
+        if ($this->session->userdata('isMaster') == "1") {
+            echo '
+                    <div class="nav-links accordion-nav ' . $active . '">
                         <div class="position-relative">
                             <a>Master</a>
                             <span class="iconify chevron" data-icon="akar-icons:chevron-left"></span>
                         </div>
             
                         <div class="sub-nav">
-                            <a href="'.site_url().'master/driver">Driver</a>
-                            <a href="'.site_url().'master/klien">Klien</a>
-                            <a href="'.site_url().'master/dropdown">Dropdown</a>
-                            <a href="'.site_url().'master/sparepart">Sparepart</a>
-                            <a href="'.site_url().'master/kendaraan">Kendaraan</a>
-                            <a href="'.site_url().'master/pengeluaran">Jenis Pengeluaran</a>
+                            <a href="' . site_url() . 'master/driver">Driver</a>
+                            <a href="' . site_url() . 'master/klien">Klien</a>
+                            <a href="' . site_url() . 'master/dropdown">Dropdown</a>
+                            <a href="' . site_url() . 'master/sparepart">Sparepart</a>
+                            <a href="' . site_url() . 'master/kendaraan">Kendaraan</a>
+                            <a href="' . site_url() . 'master/pengeluaran">Jenis Pengeluaran</a>
                         </div>
                     </div>
                 ';
-            }
+        }
         ?>
-        <?php
-            if($this->session->userdata('isAdmin') == "1"){
-                echo '
-                    <div class="nav-links accordion-nav '.$activeform.'">
+        <!-- <?php
+                if ($this->session->userdata('isAdmin') == "1") {
+                    echo '
+                    <div class="nav-links accordion-nav ' . $activeform . '">
                         <div class="position-relative">
                             <a>Form Pengajuan</a>
                             <span class="iconify chevron" data-icon="akar-icons:chevron-left"></span>
                         </div>
             
                         <div class="sub-nav">
-                            <a href="'.site_url().'admin/peminjaman">Peminjaman</a>
-                            <a href="'.site_url().'admin/transaksi">Transaksi</a>
+                        <a href="' . site_url() . 'admin/peminjaman">Peminjaman</a>
+                        <a href="' . site_url() . 'admin/transaksi">Transaksi</a>
                         </div>
                     </div>        
                 ';
-            }
-        ?>
+                }
+                ?> -->
         <?php
-            if($this->session->userdata('isSuper') == "1"){
-                $statusActive = uri_string() == 'super/pengguna' ? 'active' : '';
-                echo '
-                    <div class="nav-links '.$statusActive.'">
-                        <a href="'.site_url().'super/pengguna">Pengguna</a>
+        if ($this->session->userdata('isAdmin') == "1") {
+            $statusActive = uri_string() == 'admin/transaksi' ? 'active' : '';
+            echo '
+                    <div class="nav-links ' . $statusActive . '">
+                            <a href="' . site_url() . 'admin/transaksi">Transaksi</a>
                     </div>        
                 ';
-            }
+        }
+        ?>
+        <?php
+        if ($this->session->userdata('isSuper') == "1") {
+            $statusActive = uri_string() == 'super/pengguna' ? 'active' : '';
+            echo '
+                    <div class="nav-links ' . $statusActive . '">
+                        <a href="' . site_url() . 'super/pengguna">Pengguna</a>
+                    </div>        
+                ';
+        }
         ?>
     </div>
 </div>
@@ -115,7 +131,7 @@
                     </div>
                 </div>
                 <div class="d-flex flex-row">
-                    <a href="<?= base_url('logout') ?>" class="btn-table submit-modal ms-1" style="text-align: center;">Keluar</a>
+                    <a href="<?= base_url('admin/Auth/logout') ?>" class="btn-table submit-modal ms-1" style="text-align: center;">Keluar</a>
                 </div>
             </div>
         </div>
