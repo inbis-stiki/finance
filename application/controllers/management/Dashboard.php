@@ -11,6 +11,7 @@ class Dashboard extends CI_Controller{
 		$this->load->model('MKendaraan');
 		$this->load->model('MJenisBiaya');
 		$this->load->model('MReport');
+		$this->load->model('MPengeluaran');
 		$this->load->model('MDropdown');
     }
     public function index(){
@@ -24,6 +25,7 @@ class Dashboard extends CI_Controller{
 		$globalCost 	= $this->MReport->globalCostTahun(date('Y'));
 		$costPerArea 	= $this->MReport->globalCostTahunArea($masterArea[0]->dropdown_list, date('Y'));
 		$costSparepart	= $this->MReport->jenisBiayaSparepart(date('n'), date('Y'));
+		$jenisPengeluaran= $this->MPengeluaran->jenisPengeluaran(date('n'), date('Y'));
 		$kendaraan		= $this->MReport->reportKendaraan();
 
 		$masterBulan = [];
@@ -40,11 +42,13 @@ class Dashboard extends CI_Controller{
 			'GlobalCost' => $globalCost,
 			'CostPerArea' => $costPerArea,
 			'CostSparepart' => $costSparepart,
+			'JenisPengeluaran' => $jenisPengeluaran,
 			'Kendaraan' => $kendaraan,
 			'masterArea' =>  $masterArea,
 			'masterBulan' => $masterBulan
 		];
 
+		// print_r($jenisPengeluaran);
 		$this->template->index('admin/dashboard_management', $data);
 		$this->load->view('_components/sideNavigation', $data);
     }
@@ -89,6 +93,11 @@ class Dashboard extends CI_Controller{
 		$costJenisBiayaSparepart = $this->MReport->jenisBiayaSparepart($_POST['month'], $_POST['year']);
 
 		echo json_encode($costJenisBiayaSparepart);
+	}
+	public function ajxUpdateJenisPengeluaran(){
+		$costJenisPengeluaran = $this->MPengeluaran->jenisPengeluaran($_POST['month'], $_POST['year']);
+
+		echo json_encode($costJenisPengeluaran);
 	}
 	public function ajxUpdateSparepart(){
 		$draw   = $_POST['draw'];

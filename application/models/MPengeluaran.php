@@ -28,4 +28,23 @@ class MPengeluaran extends CI_Model{
     public function delete($param){
         $this->db->delete('master_jenis_pengeluaran', $param);
     }
+    public function jenisPengeluaran($month, $year){
+        $filter = [];
+        if($month != "All") array_push($filter, 'MONTH(t.transaksi_tanggal) = "'.$month.'"');
+        if($year != "All") array_push($filter, 'YEAR(t.transaksi_tanggal) = "'.$year.'"');
+        $and = count($filter) > 0 ? ' AND ' : '';
+
+        return $this->db->query('
+            SELECT 
+                mjp.pengeluaran_group, sum(t.transaksi_total) as total_jenis_pengeluaran 
+            FROM 
+                transaksi t, master_jenis_pengeluaran mjp
+            WHERE 
+                t.id_pengeluaran IS NOT NULL
+                '.$and.'
+                '.implode(' AND ', $filter).'
+                AND t.id_pengeluaran = mjp.pengeluaran_id 
+            GROUP BY mjp.pengeluaran_group  
+        ')->result();
+    }
 }
