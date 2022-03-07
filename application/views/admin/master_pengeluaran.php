@@ -53,7 +53,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body fs-14px pt-0 d-flex flex-column">
-                        <?= form_open_multipart('admin/Pengeluaran/aksiTambahPengeluaran'); ?>
+                        <?= form_open_multipart('master/pengeluaran/store'); ?>
                         <div class="pb-4">
 
                             <div class="d-flex flex-column my-2 w-100">
@@ -86,7 +86,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body fs-14px pt-0 d-flex flex-column">
-                        <?= form_open_multipart('admin/Pengeluaran/aksiEditPengeluaran'); ?>
+                        <?= form_open_multipart('master/pengeluaran/update'); ?>
                         <div class="pb-4">
                             <div class="d-flex flex-column my-2 w-100">
                                 <label class="font-w-400 my-2 color-secondary">Jenis Pengeluaran</label>
@@ -120,7 +120,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body fs-14px pt-0 d-flex flex-column">
-                        <?= form_open_multipart('admin/Pengeluaran/aksiHapus'); ?>
+                        <?= form_open_multipart('master/pengeluaran/destroy'); ?>
                         <div class="pb-4">
                             <div class="d-flex flex-column my-2 w-100">
                                 <p class="font-w-700 color-darker mb-0">Apakah anda yakin menghapus data ini ?</p>

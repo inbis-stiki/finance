@@ -1,12 +1,6 @@
 <div class="side-nav">
     <div class="top-space"></div>
     <div class="profile-section">
-<<<<<<< Updated upstream
-        <img src="<?= site_url() ?>assets/src/img/admin.png" alt="">
-        <p class="mb-0"><?= $auth['username']; ?></p>
-    </div>
-    <div class="nav-section">
-=======
         <img src="<?= $this->session->userdata('foto') ?>" alt="">
         <p class="mb-0"><?= $this->session->userdata['name']; ?> <br> <a href="<?= site_url('profile/edit/' . $this->session->userdata('username')) ?>" style="font-size: 12px;color: #FFBE1A;font-weight: bold;">Edit</a></p>
     </div>
@@ -33,7 +27,6 @@
         }
         ?>
 
->>>>>>> Stashed changes
 
         <div class="nav-links <?= uri_string() == 'admin/dashboard' ? 'active' : '' ?>">
             <a href="<?= site_url() ?>admin/dashboard">Dashboard</a>
@@ -47,36 +40,6 @@
         <?php
         $activeform = (uri_string() == 'admin/form_pengajuan/unit_kendaraan' || uri_string() == 'admin/form_pengajuan/jenis_biaya' ? "active" : "");
         ?>
-<<<<<<< Updated upstream
-        <div class="nav-links accordion-nav <?= $active ?>">
-            <div class="position-relative">
-                <a>Master</a>
-                <span class="iconify chevron" data-icon="akar-icons:chevron-left"></span>
-            </div>
-
-            <div class="sub-nav">
-                <a href="<?= site_url() ?>admin/master_driver">Driver</a>
-                <a href="<?= site_url() ?>admin/master_region">Wilayah</a>
-                <a href="<?= site_url() ?>admin/master_klien">Klien</a>
-                <a href="<?= site_url() ?>admin/master_dropdown">Dropdown</a>
-                <a href="<?= site_url() ?>admin/master_sparepart">Sparepart</a>
-                <a href="<?= site_url() ?>admin/master_kendaraan">Kendaraan</a>
-                <a href="<?= site_url() ?>admin/master_pengeluaran">Jenis Pengeluaran</a>
-            </div>
-        </div>
-        <div class="nav-links accordion-nav <?= $activeform ?>">
-            <div class="position-relative">
-                <a>Form Pengajuan</a>
-                <span class="iconify chevron" data-icon="akar-icons:chevron-left"></span>
-            </div>
-
-            <div class="sub-nav">
-                <a href="<?= site_url() ?>admin/form_pengajuan/unit_kendaraan">Peminjaman</a>
-                <a href="<?= site_url() ?>admin/form_pengajuan/jenis_biaya">Sparepart</a>
-            </div>
-        </div>
-
-=======
         <?php
         if ($this->session->userdata('isMaster') == "1") {
             echo '
@@ -135,7 +98,6 @@
                 ';
         }
         ?>
->>>>>>> Stashed changes
     </div>
 </div>
 <div class="top-nav">

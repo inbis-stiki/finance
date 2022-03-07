@@ -26,22 +26,63 @@ $(document).ready(function () {
 
 $(document).ready(function () {
     $("#input-administrasi").click(function () {
-        $(".administrasi-extend").addClass('active');
-        $(".submit-administrasi").prop('disabled', false);
-        $(".input-administrasi").hide();
-        $(".input-administrasi-input").prop('disabled', true);
+        const kendaraan = $('#adm_slct_kendaraan').val()
+        const tglTrans = $('#adm_inpt_tglBeli').val()
+        if(kendaraan && tglTrans){
+            $('#adm_alert').attr('hidden', true);
+            $('#adm_alert2').attr('hidden', true);
+            $('#adm_boxInput').html(admRenderHtml())
+            generateNoAdministrasi();
+            $(".administrasi-extend").addClass('active');
+            $(".submit-administrasi").prop('disabled', false);
+            $(".input-administrasi").hide();
+            $(".input-administrasi-input").prop('disabled', true);    
+            $('#adm_inptKendaraan').val(kendaraan)
+            $('#adm_inptTglTrans').val(tglTrans)
+        }else{
+            $('#adm_alert2').attr('hidden', false);
+        }
     });
     $("#input-maintenance").click(function () {
-        $(".maintenance-extend").addClass('active');
-        $(".submit-maintenance").prop('disabled', false);
-        $(".input-maintenance").hide();
-        $(".input-maintenance-input").prop('disabled', true);
+        const kendaraan     = $('#main_slct_kendaraan').val()
+        const tglService    = $('#main_inpt_tglService').val()
+        const toko          = $('#main_inpt_toko').val()
+        // const jarak         = $('#main_inpt_jarak').val()
+
+        if(kendaraan && tglService && toko){
+            $('#main_alert').attr('hidden', true)
+            $('#main_alert2').attr('hidden', true)
+            $('#main_boxInput').html(mainRenderHtml())
+            generateNoMaintenance();
+            $(".maintenance-extend").addClass('active');
+            $(".submit-maintenance").prop('disabled', false);
+            $(".input-maintenance").hide();
+            $(".input-maintenance-input").prop('disabled', true);
+            $('#main_inptKendaraan').val(kendaraan)
+            $('#main_inptTglService').val(tglService)
+            $('#main_inptToko').val(toko)
+            // $('#main_inptJarak').val(jarak)
+        }else{
+            $('#main_alert2').attr('hidden', false)
+        }
+        
+        
     });
     $("#input-expense").click(function () {
-        $(".expense-extend").addClass('active');
-        $(".submit-expense").prop('disabled', false);
-        $(".input-expense").hide();
-        $(".input-expense-input").prop('disabled', true);
+        const kendaraan = $('#exp_slct_kendaraan').val()
+        const tglService = $('#exp_inpt_tglService').val()
+
+        if(kendaraan && tglService){
+            $('#exp_alert').attr('hidden', true);
+            $('#exp_alert2').attr('hidden', true);
+            $(".expense-extend").addClass('active');
+            $(".input-expense").hide();
+            $(".input-expense-input").prop('disabled', true);    
+            $('#exp_inptKendaraan').val(kendaraan)
+            $('#exp_inptTglService').val(tglService)
+        }else{
+            $('#exp_alert2').attr('hidden', false);
+        }
     });
 });
 

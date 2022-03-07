@@ -25,13 +25,6 @@
                             $no = 1;
                             foreach ($Driver as $row) {
                                 $tanggal = date_format(date_create($row->driver_tanggalmasuk), 'j M Y');
-<<<<<<< Updated upstream
-                                $sim    = explode(";", $row->dropdown_id);
-                                $sims   = array();
-                                foreach ($sim as $row2) {
-                                    $tempSim = $this->M_Driver->getSIM($row2);
-                                    array_push($sims, $tempSim->dropdown_list);
-=======
                                 $transaksiKendaraan = $this->MGeneral->get('transaksi_driverkendaraan', ['driver_nik' => $row->driver_nik, 'disabled_date' => NULL]);
 
                                 $aksiAssign = "";
@@ -44,7 +37,6 @@
                                             <span class="iconify-inline" data-icon="ps:car" data-width="20" data-height="20"></span>
                                         </button>
                                     ';
->>>>>>> Stashed changes
                                 }
                                 $this->table->add_row(
                                     $no++,
@@ -57,12 +49,8 @@
                                     $tanggal,
 
                                     '
-<<<<<<< Updated upstream
-                                    <a href="' .  base_url("admin/ubah_driver/" . $row->driver_nik) . '" >
-=======
                                     ' . $aksiAssign . '
                                     <a href="' .  base_url("master/driver/edit/" . $row->driver_nik) . '" >
->>>>>>> Stashed changes
                                         <button type="button" class="btn-table edit_masterDriver btnEdit">
                                             <span class="iconify-inline" data-icon="bx:bx-edit" data-width="20" data-height="20"></span>
                                         </button>
@@ -104,8 +92,6 @@
                 </div>
             </div>
         </div>
-<<<<<<< Updated upstream
-=======
         <!-- Modal Assign Kendaraan -->
         <div class="modal fade" id="assign_masterDriver" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
@@ -247,15 +233,12 @@
                 </div>
             </div>
         </div>
->>>>>>> Stashed changes
         <script>
             $('#tableDriver tbody').on('click', '.btnHapus', function() {
                 const id = $(this).data('id')
 
                 $('input[name=driver_nik]').val(id);
             })
-<<<<<<< Updated upstream
-=======
             $('#tableDriver tbody').on('click', '.btnAssign', function() {
                 const id = $(this).data('id')
                 $('input[name=driver_nik]').val(id);
@@ -318,7 +301,6 @@
                     }
                 })
             })
->>>>>>> Stashed changes
         </script>
         <div class="foot">
         </div>

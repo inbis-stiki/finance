@@ -1,7 +1,7 @@
 <div class="min-vh-100 general-padding bg-light-purple">
     <div class="p-5">
         <?php echo validation_errors(); ?>
-        <?= form_open_multipart('admin/aksiUbahKendaraan'); ?>
+        <?= form_open_multipart('master/kendaraan/update'); ?>
         <p class="mb-3 fs-5 font-w-500 color-darker">
             Ubah Kendaraan
         </p>
@@ -65,6 +65,47 @@
                         <label class="my-3">Tanggal Beli</label>
                         <input type="date" class="login-input regular fs-16px" name="tanggal" id="datepicker" value="<?= $kendaraan->kendaraan_tanggal_beli ?>" required>
                         <label class="my-3">Status Kendaraan</label>
+                        <select name="jenis_kendaraan" id="jenis_kendaraan" class="login-input regular fs-16px" required>
+                            <option value="" disabled>Pilih Jenis Kendaraan</option>
+                            <?php
+                                foreach ($datajenis as $item) {
+                                    $status = '';
+                                    if($kendaraan->kendaraan_jenis == $item->dropdown_list){
+                                        $status = 'selected';
+                                    }
+                                    echo '
+                                        <option value="'.$item->dropdown_list.'" '.$status.' >'.$item->dropdown_list.'</option>
+                                    ';
+                                }
+                            ?>
+                        </select>
+                        <label class="my-3 groupPT" hidden="true">Nama Perusahaan</label>
+                        <select name="pt" id="pt" class="login-input regular fs-16px groupPT" hidden="true">
+                            <option value="" disabled selected>Pilih Perusahaan</option>
+                            <?php
+                                foreach ($datapt as $item) {
+                                    echo '
+                                        <option value="'.$item->dropdown_list.'">'.$item->dropdown_list.'</option>
+                                    ';
+                                }
+                            ?>
+                        </select>
+                        <label class="my-3">Lokasi Ambil</label>
+                        <select name="lokasi_ambil" id="lokasi_ambil" class="login-input regular fs-16px" required>
+                            <option value="" disabled>Pilih Lokasi Ambil</option>
+                            <?php
+                                foreach ($datawilayah as $item) {
+                                    $status = '';
+                                    if($kendaraan->kendaraan_lokasi_ambil == $item->dropdown_list){
+                                        $status = 'selected';
+                                    }
+                                    echo '
+                                        <option value="'.$item->dropdown_list.'" '.$status.' >'.$item->dropdown_list.'</option>
+                                    ';
+                                }
+                            ?>
+                        </select>
+                        <label class="my-3">Status</label>
                         <select class="login-input regular" name="status" id="" required>
                             <option value="">Pilih Status</option>
                             <option value="1" selected>Aktif</option>
@@ -91,3 +132,23 @@
     </script>
 
 <?php } ?>
+<script>
+    $(document).ready(function(){
+        const jenKend = "<?= $kendaraan->kendaraan_jenis ?>"
+        if(jenKend == "Perusahaan"){
+            $('.groupPT').attr('hidden', false)
+            $('#pt').attr('disabled', false)
+            $('#pt').val("<?= $kendaraan->kendaraan_pt?>").change()
+        }
+    })
+    $('#jenis_kendaraan').change(function(){
+        const val = $(this).val()
+        if(val == 'Pribadi'){
+            $('.groupPT').attr('hidden', true)
+            $('#pt').attr('disabled', true)
+        }else{
+            $('.groupPT').attr('hidden', false)
+            $('#pt').attr('disabled', false)
+        }
+    })
+</script>

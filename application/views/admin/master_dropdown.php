@@ -129,8 +129,6 @@
                 </table>
             </div>
         </div>
-<<<<<<< Updated upstream
-=======
         <!--Dropdown Jenis Kendaraan--->
         <div class="d-flex flex-row justify-content-between align-items-center mb-4">
             <p class="mb-0 fs-5 font-w-500 color-darker">
@@ -217,7 +215,6 @@
                 </table>
             </div>
         </div>
->>>>>>> Stashed changes
 
 
         <!-- Modal Tambah Dropdown -->
@@ -237,11 +234,8 @@
                                     <option value="Wilayah">Wilayah</option>
                                     <option value="SIM">SIM</option>
                                     <option value="PT">PT</option>
-<<<<<<< Updated upstream
-=======
                                     <option value="Jenis Kendaraan">Jenis Kendaraan</option>
                                     <option value="Jenis Sparepart">Jenis Sparepart</option>
->>>>>>> Stashed changes
                                 </select>
                                 <!-- <input type="" class="login-input regular" name="menu" value="Wilayah" disabled> -->
                             </div>
@@ -271,10 +265,6 @@
 
                             <div class="d-flex flex-column my-2 w-100">
                                 <label class="my-2 color-secondary">Menu Dropdown</label>
-<<<<<<< Updated upstream
-                                <input type="text" class="login-input regular" name="menu" value="" required>
-                                <input type="hidden" id="dropdown_id" name="dropdown_id" value="">
-=======
                                 <select id="mdlEdit_menu" name="menu" class="login-input regular" required>
                                     <option value="Wilayah">Wilayah</option>
                                     <option value="SIM">SIM</option>
@@ -282,7 +272,6 @@
                                     <option value="Jenis Kendaraan">Jenis Kendaraan</option>
                                     <option value="Jenis Sparepart">Jenis Sparepart</option>
                                 </select>
->>>>>>> Stashed changes
                             </div>
                             <div class="d-flex flex-column my-2 w-100">
                                 <label class="my-2 color-secondary">List Dropdown</label>

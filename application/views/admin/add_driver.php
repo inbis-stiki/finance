@@ -1,7 +1,7 @@
 <div class="min-vh-100 general-padding bg-light-purple">
     <div class="p-5">
         <?php echo validation_errors(); ?>
-        <?= form_open_multipart('admin/aksiTambahDriver'); ?>
+        <?= form_open_multipart('master/driver/store'); ?>
         <p class="mb-3 fs-5 font-w-500 color-darker">
             Master Tambah Driver
         </p>
@@ -30,10 +30,12 @@
                         <input type="text" class="login-input regular" name="alamat" placeholder="Alamat" required>
                         <label class="my-3">Telefon</label>
                         <input type="telp" class="login-input regular" onkeypress="return isNumberKey(event)" name="telp" placeholder="Telefon" required>
+                        <label class="my-3">Gaji</label>
+                        <input type="telp" class="login-input regular" onkeypress="return isNumberKey(event)" name="gaji" placeholder="Gaji" required>
                         <label class="my-3">SIM Driver</label>
                         <select class="js-example-basic-multiple" name="sim[]" multiple="multiple" required>
                             <?php foreach ($Sim as $row) : ?>
-                                <option value="<?= $row->dropdown_id ?>"><?= $row->dropdown_list ?></option>
+                                <option value="<?= $row->dropdown_list ?>"><?= $row->dropdown_list ?></option>
                             <?php endforeach ?>
                         </select>
                         <label class="my-3">Tanggal Driver Masuk</label>
@@ -98,13 +100,6 @@
     $("#imgPoster2").change(function() {
         readURL2(this);
     });
-
-    function isNumberKey(evt) {
-        var charCode = (evt.which) ? evt.which : evt.keyCode
-        if (charCode > 31 && (charCode < 48 || charCode > 57))
-            return false;
-        return true;
-    }
 </script>
 <script>
     $(document).ready(function() {

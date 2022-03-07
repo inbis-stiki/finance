@@ -1,7 +1,7 @@
 <div class="min-vh-100 general-padding bg-light-purple">
     <div class="p-5">
         <?php echo validation_errors(); ?>
-        <?= form_open_multipart('admin/aksiTambahKendaraan'); ?>
+        <?= form_open_multipart('master/kendaraan/store'); ?>
         <p class="mb-3 fs-5 font-w-500 color-darker">
             Master Tambah Kendaraan
         </p>
@@ -51,7 +51,7 @@
                         <label class="my-3">Merk</label>
                         <input type="text" class="login-input regular" name="merk" value="<?= !empty($temp['merk']) ? $temp['merk'] : "" ?>" required>
                         <label class="my-3">Kapasitas Tangki</label>
-                        <input type="number" class="login-input regular" name="tangki" value="<?= !empty($temp['tangki']) ? $temp['tangki'] : "" ?>" required>
+                        <input type="number" class="login-input regular" onkeypress="return isNumberKey(event)" placeholder="Satuan Liter" name="tangki" value="<?= !empty($temp['tangki']) ? $temp['tangki'] : "" ?>" required>
                         <label class="my-3">Tanggal Beli</label>
                         <input type="date" class="login-input regular fs-16px" name="tanggal" id="datepicker" value="<?= !empty($temp['tanggal']) ? $temp['tanggal'] : "" ?>" required>
                         <label class="my-3">Tanggal Deadline Bayar Pajak</label>
@@ -59,13 +59,38 @@
                         <label class="my-3">Tanggal Deadline Bayar KIR</label>
                         <input type="date" class="login-input regular fs-16px" name="kir" id="datepicker" value="<?= !empty($temp['kir']) ? $temp['kir'] : "" ?>" required>
                         <label class="my-3">Jenis Kendaraan</label>
-                        <select name="jenis_kendaraan" id="jenis_kendaraan" class="login-input regular fs-16px">
+                        <select name="jenis_kendaraan" id="jenis_kendaraan" class="login-input regular fs-16px" required>
                             <option value="" disabled selected>Pilih Jenis Kendaraan</option>
-                            <option value="Kendaraan Pribadi">Kendaraan Pribadi</option>
-                            <option value="Kendaraan PT">Kendaraan PT</option>
-                            <option value="Kendaraan Disewa">Kendaraan Disewa</option>
+                            <?php
+                                foreach ($datajenis as $item) {
+                                    echo '
+                                        <option value="'.$item->dropdown_list.'">'.$item->dropdown_list.'</option>
+                                    ';
+                                }
+                            ?>
                         </select>
-
+                        <label class="my-3 groupPT" hidden="true">Nama Perusahaan</label>
+                        <select name="pt" id="pt" class="login-input regular fs-16px groupPT" hidden="true">
+                            <option value="" disabled selected>Pilih Perusahaan</option>
+                            <?php
+                                foreach ($datapt as $item) {
+                                    echo '
+                                        <option value="'.$item->dropdown_list.'">'.$item->dropdown_list.'</option>
+                                    ';
+                                }
+                            ?>
+                        </select>
+                        <label class="my-3">Lokasi Ambil</label>
+                        <select name="lokasi_ambil" id="lokasi_ambil" class="login-input regular fs-16px" required>
+                            <option value="" disabled selected>Pilih Lokasi Ambil</option>
+                            <?php
+                                foreach ($datawilayah as $item) {
+                                    echo '
+                                        <option value="'.$item->dropdown_list.'">'.$item->dropdown_list.'</option>
+                                    ';
+                                }
+                            ?>
+                        </select>
                     </div>
                 </div>
 
@@ -84,6 +109,19 @@
         $(document).ready(function() {
             $('#success').modal('show');
         });
+        
     </script>
 
 <?php } ?>
+<script>
+    $('#jenis_kendaraan').change(function(){
+        const val = $(this).val()
+        if(val == 'Pribadi'){
+            $('.groupPT').attr('hidden', true)
+            $('#pt').attr('disabled', true)
+        }else{
+            $('.groupPT').attr('hidden', false)
+            $('#pt').attr('disabled', false)
+        }
+    })
+</script>

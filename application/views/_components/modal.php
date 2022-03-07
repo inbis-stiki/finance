@@ -7,7 +7,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body fs-14px pt-0 d-flex flex-column">
-                <?= form_open_multipart('admin/Sparepart/aksiTambahPart'); ?>
+                <?= form_open_multipart('master/sparepart/store'); ?>
                 <div class="pb-4">
 
                     <div class="d-flex flex-column my-2 w-100">
@@ -23,6 +23,10 @@
                             <?php endforeach ?>
                         </select>
                         <!-- <input type="text" class="login-input regular" name="jenis" placeholder="" required> -->
+                    </div>
+                    <div class="d-flex flex-column my-2 w-100">
+                        <label class="my-2 color-secondary">Ukuran</label>
+                        <input type="text" class="login-input regular" name="ukuran" placeholder="" required>
                     </div>
                     <div class="row m-0 p-0 w-full">
                         <label class="my-2 color-secondary ps-0">Ideal Penggantian</label>
@@ -41,6 +45,10 @@
 
                             <input type="number" name="bulan-txt" id="input-bulan" onkeypress="return isNumberKey(event)" class="login-input regular" min="0" disabled required>
                         </div>
+                    </div>
+                    <div class="d-flex flex-column my-2 w-100">
+                        <label class="my-2 color-secondary">Keterangan</label>
+                        <textarea name="detail" id="" cols="30" class="login-input" rows="3"></textarea>
                     </div>
                 </div>
                 <button type="submit" class="btn-table submit-modal">Tambah data</button>
