@@ -80,6 +80,17 @@
                                 }
                             ?>
                         </select>
+                        <label class="my-3">Lokasi Ambil</label>
+                        <select name="lokasi_ambil" id="lokasi_ambil" class="login-input regular fs-16px" required>
+                            <option value="" disabled selected>Pilih Lokasi Ambil</option>
+                            <?php
+                                foreach ($datawilayah as $item) {
+                                    echo '
+                                        <option value="'.$item->dropdown_list.'">'.$item->dropdown_list.'</option>
+                                    ';
+                                }
+                            ?>
+                        </select>
                     </div>
                 </div>
 

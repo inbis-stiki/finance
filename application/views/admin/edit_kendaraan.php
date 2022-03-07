@@ -90,6 +90,21 @@
                                 }
                             ?>
                         </select>
+                        <label class="my-3">Lokasi Ambil</label>
+                        <select name="lokasi_ambil" id="lokasi_ambil" class="login-input regular fs-16px" required>
+                            <option value="" disabled>Pilih Lokasi Ambil</option>
+                            <?php
+                                foreach ($datawilayah as $item) {
+                                    $status = '';
+                                    if($kendaraan->kendaraan_lokasi_ambil == $item->dropdown_list){
+                                        $status = 'selected';
+                                    }
+                                    echo '
+                                        <option value="'.$item->dropdown_list.'" '.$status.' >'.$item->dropdown_list.'</option>
+                                    ';
+                                }
+                            ?>
+                        </select>
                         <label class="my-3">Status</label>
                         <select class="login-input regular" name="status" id="" required>
                             <option value="">Pilih Status</option>
