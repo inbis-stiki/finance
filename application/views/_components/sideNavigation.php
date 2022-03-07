@@ -131,7 +131,7 @@
                     </div>
                 </div>
                 <div class="d-flex flex-row">
-                    <a href="<?= base_url('admin/Auth/logout') ?>" class="btn-table submit-modal ms-1" style="text-align: center;">Keluar</a>
+                    <a href="<?= base_url('logout') ?>" class="btn-table submit-modal ms-1" style="text-align: center;">Keluar</a>
                 </div>
             </div>
         </div>
