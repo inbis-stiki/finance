@@ -14,7 +14,11 @@
                             <?php
                             $template = array('table_open' => '<table id="tableSparepart" class="table-custom">');
                             $this->table->set_template($template);
+<<<<<<< Updated upstream
                             $this->table->set_heading('No', 'Jenis Sparepart', 'Ideal Pemakaian', 'Aksi');
+=======
+                            $this->table->set_heading('No', 'Nama Sparepart', 'Jenis Sparepart', 'Ukuran', 'Ideal Pemakaian', 'Keterangan', 'Aksi');
+>>>>>>> Stashed changes
                             ?>
                         </tr>
                     </thead>
@@ -27,12 +31,21 @@
                                     $this->table->add_row(
                                         $no++,
                                         $row->sparepart_nama,
+<<<<<<< Updated upstream
+=======
+                                        $row->sparepart_jenis,
+                                        $row->sparepart_ukuran,
+>>>>>>> Stashed changes
                                         $row->sparepart_bulan . ' Bulan',
 
+<<<<<<< Updated upstream
                                         '<button type="button" data-id="' . $row->sparepart_id . '" data-nama="' . $row->sparepart_nama . '" data-km="' . $row->sparepart_km . '" data-bulan="' . $row->sparepart_bulan . '" class="btn-table edit_masterSparepart btnEdit" data-bs-toggle="modal" data-bs-target="#edit_masterSparepart">
+=======
+                                        '<button type="button" data-id="' . $row->sparepart_id . '" data-nama="' . $row->sparepart_nama . '" data-jenis="' . $row->sparepart_jenis . '" data-km="' . $row->sparepart_km . '" data-bulan="' . $row->sparepart_bulan . '" data-ukuran="' . $row->sparepart_ukuran . '" data-detail="' . $row->sparepart_detail . '" class="btn-table edit_masterSparepart btnEdit" data-bs-toggle="modal" data-bs-target="#edit_masterSparepart">
+>>>>>>> Stashed changes
                                             <span class="iconify-inline" data-icon="bx:bx-edit" data-width="20" data-height="20"></span>
                                         </button>
-                                        <button type="button" data-id="' . $row->sparepart_id . '" data-nama="' . $row->sparepart_nama . '" data-km="' . $row->sparepart_km . '" data-bulan="' . $row->sparepart_bulan . '" class="btn-table red hapus_masterSparepart btnEdit" data-bs-toggle="modal" data-bs-target="#hapus_masterSparepart">
+                                        <button type="button" data-id="' . $row->sparepart_id . '" data-nama="' . $row->sparepart_nama . '" data-jenis="' . $row->sparepart_jenis . '" data-km="' . $row->sparepart_km . '" data-bulan="' . $row->sparepart_bulan . '" class="btn-table red hapus_masterSparepart btnEdit" data-bs-toggle="modal" data-bs-target="#hapus_masterSparepart">
                                             <span class="iconify-inline" data-icon="carbon:trash-can"data-width="20" data-height="20"></span>
                                         </button>'
                                     );
@@ -40,11 +53,19 @@
                                     $this->table->add_row(
                                         $no++,
                                         $row->sparepart_nama,
+<<<<<<< Updated upstream
                                         $row->sparepart_km . ' Km',
                                         '<button type="button" data-id="' . $row->sparepart_id . '" data-nama="' . $row->sparepart_nama . '" data-km="' . $row->sparepart_km . '" data-bulan="' . $row->sparepart_bulan . '" class="btn-table edit_masterSparepart btnEdit" data-bs-toggle="modal" data-bs-target="#edit_masterSparepart">
+=======
+                                        $row->sparepart_jenis,
+                                        $row->sparepart_ukuran,
+                                        $row->sparepart_km . ' Km',
+                                        $row->sparepart_detail,
+                                        '<button type="button" data-id="' . $row->sparepart_id . '" data-nama="' . $row->sparepart_nama . '" data-jenis="' . $row->sparepart_jenis . '" data-km="' . $row->sparepart_km . '" data-bulan="' . $row->sparepart_bulan . '" data-ukuran="' . $row->sparepart_ukuran . '" data-detail="' . $row->sparepart_detail . '" class="btn-table edit_masterSparepart btnEdit" data-bs-toggle="modal" data-bs-target="#edit_masterSparepart">
+>>>>>>> Stashed changes
                                             <span class="iconify-inline" data-icon="bx:bx-edit" data-width="20" data-height="20"></span>
                                         </button>
-                                        <button type="button" data-id="' . $row->sparepart_id . '" data-nama="' . $row->sparepart_nama . '" data-km="' . $row->sparepart_km . '" data-bulan="' . $row->sparepart_bulan . '" class="btn-table red hapus_masterSparepart btnEdit" data-bs-toggle="modal" data-bs-target="#hapus_masterSparepart">
+                                        <button type="button" data-id="' . $row->sparepart_id . '" data-nama="' . $row->sparepart_nama . '" data-jenis="' . $row->sparepart_jenis . '" data-km="' . $row->sparepart_km . '" data-bulan="' . $row->sparepart_bulan . '" class="btn-table red hapus_masterSparepart btnEdit" data-bs-toggle="modal" data-bs-target="#hapus_masterSparepart">
                                             <span class="iconify-inline" data-icon="carbon:trash-can"data-width="20" data-height="20"></span>
                                         </button>'
                                     );
@@ -71,8 +92,18 @@
                         <div class="pb-4">
 
                             <div class="d-flex flex-column my-2 w-100">
+                                <label class="font-w-400 my-2 color-secondary">Nama Sparepart</label>
+                                <input type="text" class="login-input regular" name="nama2" value="" required>
+                                <input type="hidden" id="sparepart_id" name="sparepart_id" value="">
+                            </div>
+                            <div class="d-flex flex-column my-2 w-100">
                                 <label class="font-w-400 my-2 color-secondary">Jenis Sparepart</label>
-                                <input type="text" class="login-input regular" name="jenis2" value="" required>
+                                <select class="login-input regular" name="jenis2" id="edt_jenis">
+                                    <?php foreach ($Jenis as $row) { ?>
+                                        <option value="<?= $row->dropdown_list ?>"><?= $row->dropdown_list ?></option>
+                                    <?php } ?>
+                                </select>
+                                <!-- <input type="text" class="login-input regular" name="jenis2" value="" required> -->
                                 <input type="hidden" id="sparepart_id" name="sparepart_id" value="">
                             </div>
                             <div class="row m-0 p-0 w-full">
@@ -130,11 +161,19 @@
             $('#tableSparepart tbody').on('click', '.btnEdit', function() {
                 const id = $(this).data('id')
                 const nama = $(this).data('nama')
+                const jenis = $(this).data('jenis')
                 const km = $(this).data('km')
                 const bulan = $(this).data('bulan')
 
-                $('input[name=jenis2]').val(nama);
+                $('input[name=nama2]').val(nama);
+                $('input[name=jenis2]').val(jenis);
                 $('input[name=sparepart_id]').val(id);
+<<<<<<< Updated upstream
+=======
+                $('input[name=ukuran2]').val(ukuran);
+                $('textarea[name=detail2]').html(detail);
+                $('#edt_jenis').val(jenis).change();
+>>>>>>> Stashed changes
 
                 if (km != "") {
                     $('#km2').prop('checked', true)

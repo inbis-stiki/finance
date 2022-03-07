@@ -129,6 +129,95 @@
                 </table>
             </div>
         </div>
+<<<<<<< Updated upstream
+=======
+        <!--Dropdown Jenis Kendaraan--->
+        <div class="d-flex flex-row justify-content-between align-items-center mb-4">
+            <p class="mb-0 fs-5 font-w-500 color-darker">
+                Jenis Kendaraan
+            </p>
+        </div>
+        <div class="card-section">
+            <div class="body">
+                <table class="table-custom">
+                    <thead>
+                        <tr>
+                            <?php
+                            $template = array('table_open' => '<table id="tableDropdown" class="table-custom">');
+                            $this->table->set_template($template);
+                            $this->table->set_heading('No', 'Menu Dropdown', 'List Dropdown', 'Aksi');
+                            ?>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <?php
+                            $no = 1;
+                            foreach ($JenKen as $row) {
+                                $this->table->add_row(
+                                    $no++,
+                                    $row->dropdown_menu,
+                                    $row->dropdown_list,
+
+                                    '<button type="button" data-id="' . $row->dropdown_id . '" data-menu="' . $row->dropdown_menu . '" data-list="' . $row->dropdown_list . '"  class="btn-table edit_masterDropdown btnEdit" data-bs-toggle="modal" data-bs-target="#edit_masterDropdown">
+                                        <span class="iconify-inline" data-icon="bx:bx-edit" data-width="20" data-height="20"></span>
+                                    </button>
+                                    <button type="button" data-id="' . $row->dropdown_id . '" class="btn-table red hapus_masterDropdown btnEdit" data-bs-toggle="modal" data-bs-target="#hapus_masterDropdown">
+                                        <span class="iconify-inline" data-icon="carbon:trash-can"data-width="20" data-height="20"></span>
+                                    </button>'
+                                );
+                            ?>
+                            <?php }
+                            echo $this->table->generate(); ?>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!--Dropdown Jenis Sparepart--->
+        <div class="d-flex flex-row justify-content-between align-items-center mb-4">
+            <p class="mb-0 fs-5 font-w-500 color-darker">
+                Master Jenis Sparepart
+            </p>
+        </div>
+        <div class="card-section">
+            <div class="body">
+                <table class="table-custom">
+                    <thead>
+                        <tr>
+                            <?php
+                            $template = array('table_open' => '<table id="tableDropdown" class="table-custom">');
+                            $this->table->set_template($template);
+                            $this->table->set_heading('No', 'Menu Dropdown', 'List Dropdown', 'Aksi');
+                            ?>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <?php
+                            $no = 1;
+                            foreach ($JenSpa as $row) {
+                                $this->table->add_row(
+                                    $no++,
+                                    $row->dropdown_menu,
+                                    $row->dropdown_list,
+
+                                    '<button type="button" data-id="' . $row->dropdown_id . '" data-menu="' . $row->dropdown_menu . '" data-list="' . $row->dropdown_list . '"  class="btn-table edit_masterDropdown btnEdit" data-bs-toggle="modal" data-bs-target="#edit_masterDropdown">
+                                        <span class="iconify-inline" data-icon="bx:bx-edit" data-width="20" data-height="20"></span>
+                                    </button>
+                                    <button type="button" data-id="' . $row->dropdown_id . '" class="btn-table red hapus_masterDropdown btnEdit" data-bs-toggle="modal" data-bs-target="#hapus_masterDropdown">
+                                        <span class="iconify-inline" data-icon="carbon:trash-can"data-width="20" data-height="20"></span>
+                                    </button>'
+                                );
+                            ?>
+                            <?php }
+                            echo $this->table->generate(); ?>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+>>>>>>> Stashed changes
 
 
         <!-- Modal Tambah Dropdown -->
@@ -148,6 +237,11 @@
                                     <option value="Wilayah">Wilayah</option>
                                     <option value="SIM">SIM</option>
                                     <option value="PT">PT</option>
+<<<<<<< Updated upstream
+=======
+                                    <option value="Jenis Kendaraan">Jenis Kendaraan</option>
+                                    <option value="Jenis Sparepart">Jenis Sparepart</option>
+>>>>>>> Stashed changes
                                 </select>
                                 <!-- <input type="" class="login-input regular" name="menu" value="Wilayah" disabled> -->
                             </div>
@@ -177,8 +271,18 @@
 
                             <div class="d-flex flex-column my-2 w-100">
                                 <label class="my-2 color-secondary">Menu Dropdown</label>
+<<<<<<< Updated upstream
                                 <input type="text" class="login-input regular" name="menu" value="" required>
                                 <input type="hidden" id="dropdown_id" name="dropdown_id" value="">
+=======
+                                <select id="mdlEdit_menu" name="menu" class="login-input regular" required>
+                                    <option value="Wilayah">Wilayah</option>
+                                    <option value="SIM">SIM</option>
+                                    <option value="PT">PT</option>
+                                    <option value="Jenis Kendaraan">Jenis Kendaraan</option>
+                                    <option value="Jenis Sparepart">Jenis Sparepart</option>
+                                </select>
+>>>>>>> Stashed changes
                             </div>
                             <div class="d-flex flex-column my-2 w-100">
                                 <label class="my-2 color-secondary">List Dropdown</label>

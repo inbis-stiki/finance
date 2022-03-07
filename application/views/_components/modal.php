@@ -11,8 +11,18 @@
                 <div class="pb-4">
 
                     <div class="d-flex flex-column my-2 w-100">
+                        <label class="my-2 color-secondary">Nama Sparepart</label>
+                        <input type="text" class="login-input regular" name="nama" placeholder="" required>
+                    </div>
+                    <div class="d-flex flex-column my-2 w-100">
                         <label class="my-2 color-secondary">Jenis Sparepart</label>
-                        <input type="text" class="login-input regular" name="jenis" placeholder="" required>
+                        <select class="login-input regular" name="jenis" required>
+                            <option value="" disabled selected>Pilih Jenis Sparepart</option>
+                            <?php foreach ($Jenis as $row) : ?>
+                                <option value="<?= $row->dropdown_list ?>"><?= $row->dropdown_list ?></option>
+                            <?php endforeach ?>
+                        </select>
+                        <!-- <input type="text" class="login-input regular" name="jenis" placeholder="" required> -->
                     </div>
                     <div class="row m-0 p-0 w-full">
                         <label class="my-2 color-secondary ps-0">Ideal Penggantian</label>
