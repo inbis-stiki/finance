@@ -307,7 +307,7 @@
             data: [
                 <?php
                     foreach ($GlobalCost as $item) {
-                        echo ((int)$item->report_total_transaksi / 1000000).'.toFixed(1),';
+                        echo ((int)$item->report_total_transaksi / 1000000).'.toFixed(2),';
                     }    
                 ?>
             ]
@@ -325,7 +325,7 @@
         yaxis: {
             labels: {
                 formatter: function (value) {
-                    return value.toFixed(1)+" Jt";
+                    return value.toFixed(2)+" Jt";
                 }
             },
         },
@@ -343,7 +343,7 @@
             data: [
                 <?php
                     foreach ($CostPerArea as $item) {
-                        echo ((int)$item->report_total_transaksi / 1000000).'.toFixed(1),';
+                        echo ((int)$item->report_total_transaksi / 1000000).'.toFixed(2),';
                     }    
                 ?>
             ]
@@ -361,7 +361,7 @@
         yaxis: {
             labels: {
                 formatter: function (value) {
-                    return value.toFixed(1)+" Jt";
+                    return value.toFixed(2)+" Jt";
                 }
             },
         },
@@ -371,24 +371,37 @@
     }
     var options3 = {
         chart: {
-            type: 'pie',
+            type: 'bar',
             height: '300px'
         },
-        series: [
-            <?php
-                foreach ($CostSparepart as $item) {
-                    echo $item->total.',';
-                }    
-            ?>
-        ],
-        labels: [
-            <?php
-                foreach ($CostSparepart as $item) {
-                    echo '"'.$item->nama.'",';
-                }    
-            ?>
-        ],
-        colors: ['#322E8C', '#4F48ED', '#FFBE1A', '#E5E5E5'],
+        series: [{
+            name: 'sales',
+            data: [
+                <?php
+                    foreach ($JenisPengeluaran as $item) {
+                        // echo ((int)$item->report_total_transaksi / 1000000).'.toFixed(1),';
+                        echo ((int)$item->total_jenis_pengeluaran / 1000000).'.toFixed(2),';
+                    }    
+                ?>
+            ]
+        }],
+        colors: ['#4F48ED'],
+        xaxis: {
+            categories: [
+                <?php
+                    foreach ($JenisPengeluaran as $item) {
+                        echo '"'.$item->pengeluaran_group.'",';
+                    }        
+                ?> 
+            ]
+        },
+        yaxis: {
+            labels: {
+                formatter: function (value) {
+                    return value.toFixed(2)+" Jt";
+                }
+            },
+        },
         dataLabels: {
           enabled: true,
         },
@@ -415,7 +428,7 @@
                 totalCost = 0
 
                 for(let i of res){
-                    data.push((i.report_total_transaksi / 1000000).toFixed(1))
+                    data.push((i.report_total_transaksi / 1000000).toFixed(2))
                     categories.push(getFullMonthh(i.report_bulan - 1))
                     totalCost += parseInt(i.report_total_transaksi)
                 }
@@ -436,7 +449,7 @@
                     yaxis: {
                         labels: {
                             formatter: function (value) {
-                                return value.toFixed(1)+" Jt";
+                                return value.toFixed(2)+" Jt";
                             }
                         },
                     },
@@ -466,7 +479,7 @@
                 categories = []
 
                 for(let i of res){
-                    data.push((i.report_total_transaksi / 1000000).toFixed(1))
+                    data.push((i.report_total_transaksi / 1000000).toFixed(2))
                     categories.push(getFullMonthh(i.report_bulan - 1))
                 }
                 var updateOptions2 = {
@@ -485,7 +498,7 @@
                     yaxis: {
                         labels: {
                             formatter: function (value) {
-                                return value.toFixed(1)+" Jt";
+                                return value.toFixed(2)+" Jt";
                             }
                         },
                     },
@@ -503,7 +516,7 @@
         const month = $('#filJenisBiayaSparepart1').val()
         const year = $('#filJenisBiayaSparepart2').val()
         $.ajax({
-            url: '<?= site_url('management/ajxUpdateJenisBiayaSparepart')?>',
+            url: '<?= site_url('management/ajxUpdateJenisPengeluaran')?>',
             method: 'POST',
             data: {month, year},
             success: function(res){
@@ -513,20 +526,29 @@
                 categories = []
 
                 for(let i of res){
-                    data.push(parseInt(i.total))
-                    categories.push(i.nama)
+                    data.push((i.total_jenis_pengeluaran / 1000000).toFixed(2))
+                    categories.push(i.pengeluaran_group)
                 }
-                console.log(data)
-                
-
                 var updateOptions3 = {
                     chart: {
-                        type: 'pie',
+                        type: 'bar',
                         height: '300px'
                     },
-                    series: data,
-                    labels: categories,
-                    colors: ['#322E8C', '#4F48ED', '#FFBE1A', '#E5E5E5'],
+                    series: [{
+                        name: 'sales',
+                        data
+                    }],
+                    colors: ['#4F48ED'],
+                    xaxis: {
+                        categories
+                    },
+                    yaxis: {
+                        labels: {
+                            formatter: function (value) {
+                                return value.toFixed(2)+" Jt";
+                            }
+                        },
+                    },
                     dataLabels: {
                         enabled: true,
                     },
@@ -534,7 +556,6 @@
                 $('#chart_jenis').empty()
                 var updateChart3 = new ApexCharts(document.querySelector("#chart_jenis"), updateOptions3);
                 updateChart3.render();
-
             }
         })
     })
