@@ -161,7 +161,7 @@
                 const id = $(this).data('id')
                 
                 $.ajax({
-                    url: '<?= site_url('master/kendaraan/ajxGet')?>',
+                    url: '<?= site_url('master/kendaraan/ajxGetKendaraan')?>',
                     method: 'post',
                     data: {id},
                     success: function(res){
@@ -182,7 +182,7 @@
 
                             carouselInner += `
                                 <div class="carousel-item ${status}">
-                                    <img class="d-block w-100 imgItem" style="height: 450px;width: 500px;background-size: cover;" src="<?= site_url('')?>assets/images/fotokendaraan/${i}" alt="Second slide" alt="">
+                                    <img class="d-block w-100 imgItem" style="height: 450px;width: 500px;background-size: cover;" src="${i}" alt="Second slide" alt="">
                                 </div>
                             `;
                             index++
