@@ -33,7 +33,7 @@
                             <?php
                             $template = array('table_open' => '<table id="tableKendaraan" class="table-custom">');
                             $this->table->set_template($template);
-                            $this->table->set_heading('No', 'Foto', 'No. Rangka', 'No. STNK', 'Merk', 'Tanggal Beli', 'Umur', 'Aksi');
+                            $this->table->set_heading('No', 'Foto','STNK', 'No. Rangka', 'No. STNK', 'Merk', 'Tanggal Beli', 'Umur', 'Aksi');
                             ?>
                         </tr>
                     </thead>
@@ -50,6 +50,11 @@
                                     '
                                         <button type="button" data-id="'.$row->kendaraan_no_rangka.'|'.$row->kendaraan_stnk.'" class="btn-table orange view_masterKendaraan" title="Foto">
                                             <span class="iconify-inline" data-icon="ic:baseline-insert-photo" data-width="20" data-height="21"></span>
+                                        </button>
+                                    ',
+                                    '
+                                        <button type="button" data-id="'.$row->kendaraan_no_rangka.'|'.$row->kendaraan_stnk.'" class="btn-table red view_stnk" title="Foto STNK">
+                                            <span class="iconify-inline" data-icon="ic:baseline-newspaper" data-width="20" data-height="21"></span>
                                         </button>
                                     ',
                                     $row->kendaraan_no_rangka,
@@ -96,6 +101,32 @@
                                 <span class="sr-only"></span>
                             </a>
                             <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="sr-only"></span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="view_stnk" nama="view_stnk" method="POST" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content p-2">
+                    <div class="modal-header">
+                        <p class="font-w-700 color-darker mb-0">Foto STNK</p>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body p-0">
+                        <div id="carouselExampleIndicatorsStnk" class="carousel slide" data-bs-ride="carousel">
+                            <ol class="carousel-indicators">
+                            </ol>
+                            <div class="carousel-inner">
+                            </div>
+                            <a class="carousel-control-prev" href="#carouselExampleIndicatorsStnk" role="button" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="sr-only"></span>
+                            </a>
+                            <a class="carousel-control-next" href="#carouselExampleIndicatorsStnk" role="button" data-bs-slide="next">
                                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                                 <span class="sr-only"></span>
                             </a>
@@ -193,6 +224,45 @@
                             on: 'grab'
                         })
                         $('#view_masterKendaraan').modal('show')
+                    }
+                })
+            })
+            $('#tableKendaraan tbody').on('click', '.view_stnk', function() {
+                const id = $(this).data('id')
+                
+                $.ajax({
+                    url: '<?= site_url('master/kendaraan/ajxGetStnk')?>',
+                    method: 'post',
+                    data: {id},
+                    success: function(res){
+                        res = JSON.parse(res)
+                        let index = 0;
+                        let indicators = '';
+                        let carouselInner = '';
+                        let status = 'active';
+
+                        for(let i of res['kendaraan_foto_stnk']){
+                            if(index != 0){
+                                status = '';
+                            }
+                            
+                            indicators += `
+                                <li data-bs-target="#carouselExampleIndicatorsStnk" data-bs-slide-to="${index}" class="${status}"></li>
+                            `;
+
+                            carouselInner += `
+                                <div class="carousel-item ${status}">
+                                    <img class="d-block w-100 imgItem" style="height: 450px;width: 500px;background-size: cover;" src="${i}" alt="Second slide" alt="">
+                                </div>
+                            `;
+                            index++
+                        }
+                        $('.carousel-indicators').html(indicators)
+                        $('.carousel-inner').html(carouselInner)
+                        $('.carousel-item').zoom({
+                            on: 'grab'
+                        })
+                        $('#view_stnk').modal('show')
                     }
                 })
             })

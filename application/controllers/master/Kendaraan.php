@@ -82,6 +82,16 @@ class Kendaraan extends CI_Controller
         $kendaraan->umur = $umur->format("%m") . " Bulan " . $umur->format('%y') . "Tahun";
         echo json_encode($kendaraan);
     }
+    public function ajxGetStnk(){
+        $this->load->model('MKendaraan');
+        $id = explode('|', $_POST['id']);
+        $kendaraan = $this->MKendaraan->getById($id[0], $id[1]);
+        $kendaraan->kendaraan_foto_stnk = json_decode($kendaraan->kendaraan_foto_stnk);
+
+        $umur = date_diff(date_create($kendaraan->kendaraan_tanggal_beli), date_create(date('Y-m-d')));
+        $kendaraan->umur = $umur->format("%m") . " Bulan " . $umur->format('%y') . "Tahun";
+        echo json_encode($kendaraan);
+    }
 
     public function store()
     {
@@ -146,6 +156,7 @@ class Kendaraan extends CI_Controller
             //     }
             // }
             $uploadFoto = $this->upload_image('foto');
+            $uploadStnk = $this->upload_image('stnk');
             // var_dump($uploadFoto);
             // die;
             // if ($uploadFoto['status' == false]) {
@@ -163,6 +174,7 @@ class Kendaraan extends CI_Controller
                 'kendaraan_deadlinekir'         => $this->input->post('kir'),
                 'kendaraan_kapasitas_tangki'    => $this->input->post('tangki'),
                 'kendaraan_foto'                => str_replace(" ", "_", $uploadFoto['link']),
+                'kendaraan_foto_stnk'           => str_replace(" ", "_", $uploadStnk['link']),
                 'kendaraan_lokasi_ambil'        => $this->input->post('lokasi_ambil')
             );
 

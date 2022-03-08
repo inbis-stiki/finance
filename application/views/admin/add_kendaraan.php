@@ -32,6 +32,10 @@
                         <div>
                             <input type="file" name="foto[]" accept=".jpg,.png,.jpeg" multiple requried>
                         </div>
+                        <label class="my-3">Upload Foto STNK</label>
+                        <div>
+                            <input type="file" name="stnk[]" accept=".jpg,.png,.jpeg" multiple requried>
+                        </div>
                         <!-- <div class="upload-img color-dark">
                             <span class="iconify fs-80px mb-3 z-2" data-icon="ic:baseline-photo-camera"></span>
                             <p class="z-2">Klik disini untuk upload foto</p>
