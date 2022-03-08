@@ -87,63 +87,70 @@ class Kendaraan extends CI_Controller
     {
         $dataDuplicate = $this->db->get_where('master_kendaraan', ['kendaraan_no_rangka' => $_POST['rangka'], 'kendaraan_stnk' => $_POST['stnk']])->result();
         if ($dataDuplicate == null) {
-            //get foto
-            $config['upload_path'] = './assets/images/fotokendaraan';
-            $config['allowed_types'] = 'jpg|png|jpeg';
-            $config['max_size'] = '2048';  //2MB max
-            $config['max_width'] = '4480'; // pixel
-            $config['max_height'] = '4480'; // pixel
-            // $config['file_name'] = $_FILES['foto']['name'];
+            // //get foto
+            // $path = './assets/images/fotokendaraan';
+            // $config['upload_path'] = $path;
+            // $config['allowed_types'] = 'jpg|png|jpeg';
+            // $config['max_size'] = '2048';  //2MB max
+            // $config['max_width'] = '4480'; // pixel
+            // $config['max_height'] = '4480'; // pixel
+            // // $config['file_name'] = $_FILES['foto']['name'];
 
-            // var_dump($_FILES['foto']);
-            // echo json_encode($_FILES['foto']['name']);
-            // die;
-            $fotokendaraan = json_encode($_FILES['foto']['name']);
-            $files = $_FILES['foto'];
+            // // var_dump($_FILES['foto']);
+            // // echo json_encode($_FILES['foto']['name']);
+            // // die;
+            // $fotokendaraan = json_encode($_FILES['foto']['name']);
+            // $files = $_FILES['foto'];
 
-            $this->upload->initialize($config);
+            // $this->upload->initialize($config);
 
             $data_lama = $this->db->get_where("master_kendaraan", array('kendaraan_no_rangka' => $this->input->post('rangka')))->result();
 
-            foreach ($files['name'] as $key => $image) {
-                $_FILES['images[]']['name'] = $files['name'][$key];
-                $_FILES['images[]']['type'] = $files['type'][$key];
-                $_FILES['images[]']['tmp_name'] = $files['tmp_name'][$key];
-                $_FILES['images[]']['error'] = $files['error'][$key];
-                $_FILES['images[]']['size'] = $files['size'][$key];
+            // foreach ($files['name'] as $key => $image) {
+            //     $_FILES['images[]']['name'] = $files['name'][$key];
+            //     $_FILES['images[]']['type'] = $files['type'][$key];
+            //     $_FILES['images[]']['tmp_name'] = $files['tmp_name'][$key];
+            //     $_FILES['images[]']['error'] = $files['error'][$key];
+            //     $_FILES['images[]']['size'] = $files['size'][$key];
 
-                $fileName = $image;
+            //     $fileName = $image;
 
-                $images[] = $fileName;
+            //     $images[] = $fileName;
 
-                $config['file_name'] = $fileName;
+            //     $config['file_name'] = $fileName;
 
-                $this->upload->initialize($config);
+            //     $this->upload->initialize($config);
 
-                if ($this->upload->do_upload('images[]')) {
-                    $tmpdata = $this->upload->data();
-                    // $fotokendaraan .= $tmpdata['file_name'] . ", ";
-                } else {
-                    $this->load->model('M_User');
-                    $this->load->model('MDropdown');
+            //     if ($this->upload->do_upload('images[]')) {
+            //         $tmpdata = $this->upload->data();
+            //         // $fotokendaraan .= $tmpdata['file_name'] . ", ";
+            //     } else {
+            //         $this->load->model('M_User');
+            //         $this->load->model('MDropdown');
         
-                    $datajenis	= $this->MDropdown->get(['dropdown_menu' => 'Jenis Kendaraan', 'deleted_date' => NULL]);
-                    $datapt		= $this->MDropdown->get(['dropdown_menu' => 'PT', 'deleted_date' => NULL]);
+            //         $datajenis	= $this->MDropdown->get(['dropdown_menu' => 'Jenis Kendaraan', 'deleted_date' => NULL]);
+            //         $datapt		= $this->MDropdown->get(['dropdown_menu' => 'PT', 'deleted_date' => NULL]);
         
-                    $data = [
-                        'title' => "admin",
-                        'auth' => $this->db->get_where('master_user', ['username' => $this->session->userdata('username')])->row_array(),
-                        'temp' => $_POST,
-                        'datajenis' => $datajenis,
-                        'datapt' 	=> $datapt
-                    ];
+            //         $data = [
+            //             'title' => "admin",
+            //             'auth' => $this->db->get_where('master_user', ['username' => $this->session->userdata('username')])->row_array(),
+            //             'temp' => $_POST,
+            //             'datajenis' => $datajenis,
+            //             'datapt' 	=> $datapt
+            //         ];
         
-                    $this->session->set_flashdata('err_msg', $this->upload->display_errors());
-                    $this->template->index('admin/add_kendaraan', $data);
-                    $this->load->view('_components/sideNavigation', $data);
-                    return false;
-                }
-            }
+            //         $this->session->set_flashdata('err_msg', $this->upload->display_errors());
+            //         $this->template->index('admin/add_kendaraan', $data);
+            //         $this->load->view('_components/sideNavigation', $data);
+            //         return false;
+            //     }
+            // }
+            $uploadFoto = $this->upload_image('foto');
+            // var_dump($uploadFoto);
+            // die;
+            // if ($uploadFoto['status' == false]) {
+            //     redirect('admin/')
+            // }
             $jenis = $this->input->post('jenis_kendaraan');
             $data = array(
                 'kendaraan_no_rangka'           => strtoupper($this->input->post('rangka')),
@@ -155,7 +162,7 @@ class Kendaraan extends CI_Controller
                 'kendaraan_deadlinesim'         => $this->input->post('pajak'),
                 'kendaraan_deadlinekir'         => $this->input->post('kir'),
                 'kendaraan_kapasitas_tangki'    => $this->input->post('tangki'),
-                'kendaraan_foto'                => str_replace(" ", "_", $fotokendaraan),
+                'kendaraan_foto'                => str_replace(" ", "_", $uploadFoto['link']),
                 'kendaraan_lokasi_ambil'        => $this->input->post('lokasi_ambil')
             );
 
@@ -328,5 +335,77 @@ class Kendaraan extends CI_Controller
         //     $this->template->index('admin/add_kendaraan', $data);
         //     $this->load->view('_components/sideNavigation', $data);
         // }
+    }
+
+    public function upload_image($resource)
+    {
+        // var_dump($_FILES[$resource]['name']);
+        // die;
+        $path = './assets/images/kendaraan/' . $resource;
+            $config['upload_path'] = $path;
+            $config['allowed_types'] = 'jpg|png|jpeg';
+            $config['max_size'] = '2048';  //2MB max
+            $config['max_width'] = '4480'; // pixel
+            $config['max_height'] = '4480'; // pixel
+            // $config['file_name'] = $_FILES['foto']['name'];
+
+            // var_dump($_FILES['foto']);
+            // echo json_encode($_FILES['foto']['name']);
+            // die;
+            $fotokendaraan = [] ;
+            $files = $_FILES[$resource];
+
+            $this->upload->initialize($config);
+
+            $data_lama = $this->db->get_where("master_kendaraan", array('kendaraan_no_rangka' => $this->input->post('rangka')))->result();
+
+            foreach ($files['name'] as $key => $image) {
+                $_FILES['images[]']['name'] = $files['name'][$key];
+                $_FILES['images[]']['type'] = $files['type'][$key];
+                $_FILES['images[]']['tmp_name'] = $files['tmp_name'][$key];
+                $_FILES['images[]']['error'] = $files['error'][$key];
+                $_FILES['images[]']['size'] = $files['size'][$key];
+
+                $fileName = $image;
+
+                $images[] = $fileName;
+
+                $config['file_name'] = $fileName;
+
+                $this->upload->initialize($config);
+
+                if ($this->upload->do_upload('images[]')) {
+                    $img = $this->upload->data();
+                    array_push($fotokendaraan, base_url($path . '/' . $img['file_name']));
+                } else {
+                    $this->load->model('M_User');
+                    $this->load->model('MDropdown');
+        
+                    $datajenis	= $this->MDropdown->get(['dropdown_menu' => 'Jenis Kendaraan', 'deleted_date' => NULL]);
+                    $datapt		= $this->MDropdown->get(['dropdown_menu' => 'PT', 'deleted_date' => NULL]);
+        
+                    $data = [
+                        'title' => "admin",
+                        'auth' => $this->db->get_where('master_user', ['username' => $this->session->userdata('username')])->row_array(),
+                        'temp' => $_POST,
+                        'datajenis' => $datajenis,
+                        'datapt' 	=> $datapt
+                    ];
+        
+                    $this->session->set_flashdata('err_msg', $this->upload->display_errors());
+                    $this->template->index('admin/add_kendaraan', $data);
+                    $this->load->view('_components/sideNavigation', $data);
+                    // return false;
+                }
+            }
+            // $tmp = json_encode($fotokendaraan);
+            // var_dump(json_encode($fotokendaraan));
+            // var_dump(json_decode($tmp));
+            // die;
+            return [
+                'status' => true,
+                'msg'   => 'Data berhasil terupload',
+                'link'  => json_encode($fotokendaraan)
+            ];
     }
 }
