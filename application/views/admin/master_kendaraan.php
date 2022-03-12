@@ -1,68 +1,63 @@
 <div class="min-vh-100 general-padding bg-light-purple">
     <div class="p-5">
         <div class="d-flex flex-row justify-content-between align-items-center mb-4">
-            <p class="mb-0 fs-5 font-w-500 color-darker">
+            <!-- <p class="mb-0 fs-5 font-w-500 color-darker">
                 Master Kendaraan
-            </p>
+            </p> -->
             <a href="<?php echo site_url(); ?>master/kendaraan/add">
                 <button type="button" class="btn-table green">Tambah</button>
             </a>
 
         </div>
         <?php
-            if(!empty($this->session->flashdata('err_msg'))){
-                echo '
+        if (!empty($this->session->flashdata('err_msg'))) {
+            echo '
                     <div class="alert alert-danger" role="alert">
-                    '.$this->session->flashdata('err_msg').'
+                    ' . $this->session->flashdata('err_msg') . '
                     </div>
-                ';        
-            }
-            if(!empty($this->session->flashdata('succ_msg'))){
-                echo '
+                ';
+        }
+        if (!empty($this->session->flashdata('succ_msg'))) {
+            echo '
                     <div class="alert alert-success" role="alert">
-                        '.$this->session->flashdata('succ_msg').'
+                        ' . $this->session->flashdata('succ_msg') . '
                     </div>
-                ';        
-            }
+                ';
+        }
         ?>
         <div class="card-section">
-            <div class="body">
-                <table class="table-custom" id="tblKendaraan">
-                    <thead>
-                        <tr>
-                            <?php
-                            $template = array('table_open' => '<table id="tableKendaraan" class="table-custom">');
-                            $this->table->set_template($template);
-                            $this->table->set_heading('No', 'Foto','STNK', 'No. Rangka', 'No. STNK', 'Merk', 'Tanggal Beli', 'Umur', 'Aksi');
-                            ?>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <?php
-                            $no = 1;
-                            foreach ($Kendaraan as $row) {
-                                $tgl = date_format(date_create($row->kendaraan_tanggal_beli), 'j M Y');
-                                $currentDate = date("Y-m-d");
-                                $umur = date_diff(date_create($row->kendaraan_tanggal_beli), date_create($currentDate));
-                                $this->table->add_row(
-                                    $no++,
-                                    '
-                                        <button type="button" data-id="'.$row->kendaraan_no_rangka.'|'.$row->kendaraan_stnk.'" class="btn-table orange view_masterKendaraan" title="Foto">
+            <div class="head">
+                <p>Master Kendaraan</p>
+            </div>
+            <div class="body" style="padding: 15px;" id="tblKendaraan">
+                <?php
+                $template = array('table_open' => '<table id="tableKendaraan" class="table-custom border="0">');
+                $this->table->set_template($template);
+                $this->table->set_heading('No', 'Foto', 'STNK', 'No. Rangka', 'No. STNK', 'Merk', 'Tanggal Beli', 'Umur', 'Aksi');
+
+                $no = 1;
+                foreach ($Kendaraan as $row) {
+                    $tgl = date_format(date_create($row->kendaraan_tanggal_beli), 'j M Y');
+                    $currentDate = date("Y-m-d");
+                    $umur = date_diff(date_create($row->kendaraan_tanggal_beli), date_create($currentDate));
+                    $this->table->add_row(
+                        $no++,
+                        '
+                                        <button type="button" data-id="' . $row->kendaraan_no_rangka . '|' . $row->kendaraan_stnk . '" class="btn-table orange view_masterKendaraan" title="Foto">
                                             <span class="iconify-inline" data-icon="ic:baseline-insert-photo" data-width="20" data-height="21"></span>
                                         </button>
                                     ',
-                                    '
-                                        <button type="button" data-id="'.$row->kendaraan_no_rangka.'|'.$row->kendaraan_stnk.'" class="btn-table red view_stnk" title="Foto STNK">
+                        '
+                                        <button type="button" data-id="' . $row->kendaraan_no_rangka . '|' . $row->kendaraan_stnk . '" class="btn-table red view_stnk" title="Foto STNK">
                                             <span class="iconify-inline" data-icon="ic:baseline-newspaper" data-width="20" data-height="21"></span>
                                         </button>
                                     ',
-                                    $row->kendaraan_no_rangka,
-                                    $row->kendaraan_stnk,
-                                    $row->kendaraan_merk,
-                                    $tgl,
-                                    $umur->format("%m") . " Bulan " . $umur->format('%y') . "Tahun",
-                                    '
+                        $row->kendaraan_no_rangka,
+                        $row->kendaraan_stnk,
+                        $row->kendaraan_merk,
+                        $tgl,
+                        $umur->format("%m") . " Bulan " . $umur->format('%y') . "Tahun",
+                        '
                                     <button type="button" data-id="' . $row->kendaraan_no_rangka . '" data-stnk="' . $row->kendaraan_stnk . '" class="btn-table green stnk_masterKendaraan btnStnk" data-bs-toggle="modal" data-bs-target="#stnk_masterKendaraan">
                                         <span class="iconify-inline" data-icon="bi:credit-card" data-width="20" data-height="20"></span>
                                     </button>
@@ -73,14 +68,11 @@
                                     </a>
                                     '
 
-                                );
-
-                            ?>
-                            <?php }
-                            echo $this->table->generate(); ?>
-                        </tr>
-                    </tbody>
-                </table>
+                    );
+                }
+                echo $this->table->generate(); ?>
+            </div>
+            <div class="foot">
             </div>
         </div>
         <div class="modal fade" id="view_masterKendaraan" nama="view_masterKendaraan" method="POST" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -173,14 +165,14 @@
             //     $('#region_kota').val(region_id);
             // })
         </script>
-        
+
         <!-- Image Zoom -->
         <script>
-            $(document).ready(function(){
+            $(document).ready(function() {
                 $('.carousel').carousel({
                     interval: 5000
                 })
-                
+
             })
             $('#tableKendaraan tbody').on('click', '.btnStnk', function() {
                 const id = $(this).data('id')
@@ -190,23 +182,25 @@
             })
             $('#tableKendaraan tbody').on('click', '.view_masterKendaraan', function() {
                 const id = $(this).data('id')
-                
+
                 $.ajax({
-                    url: '<?= site_url('master/kendaraan/ajxGetKendaraan')?>',
+                    url: '<?= site_url('master/kendaraan/ajxGetKendaraan') ?>',
                     method: 'post',
-                    data: {id},
-                    success: function(res){
+                    data: {
+                        id
+                    },
+                    success: function(res) {
                         res = JSON.parse(res)
                         let index = 0;
                         let indicators = '';
                         let carouselInner = '';
                         let status = 'active';
 
-                        for(let i of res['kendaraan_foto']){
-                            if(index != 0){
+                        for (let i of res['kendaraan_foto']) {
+                            if (index != 0) {
                                 status = '';
                             }
-                            
+
                             indicators += `
                                 <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="${index}" class="${status}"></li>
                             `;
@@ -229,23 +223,25 @@
             })
             $('#tableKendaraan tbody').on('click', '.view_stnk', function() {
                 const id = $(this).data('id')
-                
+
                 $.ajax({
-                    url: '<?= site_url('master/kendaraan/ajxGetStnk')?>',
+                    url: '<?= site_url('master/kendaraan/ajxGetStnk') ?>',
                     method: 'post',
-                    data: {id},
-                    success: function(res){
+                    data: {
+                        id
+                    },
+                    success: function(res) {
                         res = JSON.parse(res)
                         let index = 0;
                         let indicators = '';
                         let carouselInner = '';
                         let status = 'active';
 
-                        for(let i of res['kendaraan_foto_stnk']){
-                            if(index != 0){
+                        for (let i of res['kendaraan_foto_stnk']) {
+                            if (index != 0) {
                                 status = '';
                             }
-                            
+
                             indicators += `
                                 <li data-bs-target="#carouselExampleIndicatorsStnk" data-bs-slide-to="${index}" class="${status}"></li>
                             `;
@@ -266,7 +262,10 @@
                     }
                 })
             })
-            
+
+            $(document).ready(function() {
+                $('#tableKendaraan').DataTable();
+            })
         </script>
 
         <div class="foot">
