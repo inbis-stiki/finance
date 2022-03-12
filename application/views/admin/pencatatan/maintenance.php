@@ -2,8 +2,10 @@
     <div class="body form">
         <div class="row m-0 p-0 w-100">
             <div class="col-12 col-lg-6 ps-0">
+                <div class="form-group"></div>
                 <label class="mb-3">Nomor STNK Kendaraan</label>
-                <select id="main_slct_kendaraan" class="login-input regular fs-16px input-maintenance-input">
+                <br>
+                <select id="main_slct_kendaraan" class="select2 input-maintenance-input" style="width: 100%;">
                     <option value="" disabled selected>Pilih STNK</option>
                     <?php
                     foreach ($kendaraans as $item) {
