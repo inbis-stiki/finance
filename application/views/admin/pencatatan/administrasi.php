@@ -3,7 +3,7 @@
         <div class="row m-0 p-0 w-100">
             <div class="col-12 col-lg-6 ps-0">
                 <label class="mb-3">Nomor STNK Kendaraan</label>
-                <select name="admin_stnk" id="adm_slct_kendaraan" class="login-input regular fs-16px input-administrasi-input">
+                <select name="admin_stnk" id="adm_slct_kendaraan" class="select2 form-control input-administrasi-input">
                     <option value="" disabled selected>Pilih STNK</option>
                     <?php
                         foreach ($kendaraans as $item) {

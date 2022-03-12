@@ -153,6 +153,7 @@
                 echo '$("#success").modal("show")';
             }    
         ?>
+        $('.select2').select2();
     })
     $('.infoKendaraan').click(function(){
         const slct = $(this).data('slct')
