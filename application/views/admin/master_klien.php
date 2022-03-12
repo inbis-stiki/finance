@@ -1,54 +1,46 @@
 <div class="min-vh-100 general-padding bg-light-purple">
     <div class="p-5">
         <div class="d-flex flex-row justify-content-between align-items-center mb-4">
-            <p class="mb-0 fs-5 font-w-500 color-darker">
+            <!-- <p class="mb-0 fs-5 font-w-500 color-darker">
                 Master Klien
-            </p>
+            </p> -->
             <button type="button" class="btn-table green" data-bs-toggle="modal" data-bs-target="#add_masterKlien">Tambah</button>
         </div>
         <div class="card-section">
-            <div class="body">
-                <table class="table-custom">
-                    <thead>
-                        <tr>
-                            <?php
-                            $template = array('table_open' => '<table id="tableKlien" class="table-custom">');
-                            $this->table->set_template($template);
-                            $this->table->set_heading('No', 'Nama Klien', 'Jenis', 'Alamat', 'Kontak', 'NPWP', 'No. Rekening', 'Wilayah Klien', 'Aksi');
-                            ?>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <?php
-                            $no = 1;
-                            foreach ($Klien as $row) {
-                                $this->table->add_row(
-                                    $no++,
-                                    $row->client_nama,
-                                    $row->client_jenis,
-                                    $row->client_alamat,
-                                    $row->client_contact,
-                                    $row->client_npwp,
-                                    $row->client_norek,
-                                    $row->client_region,
+            <div class="head">
+                <p>Master Klien</p>
+            </div>
+            <div class="body" style="padding: 15px;">
+                <?php
+                $template = array('table_open' => '<table id="tableKlien" class="table-custom" border="0">');
+                $this->table->set_template($template);
+                $this->table->set_heading('No', 'Nama Klien', 'Jenis', 'Alamat', 'Kontak', 'NPWP', 'No. Rekening', 'Wilayah Klien', 'Aksi');
 
-                                    '<button type="button" data-id="'.$row->client_id.'" data-nama="' . $row->client_nama . '" data-jenis="' . $row->client_jenis . '" data-alamat="' . $row->client_alamat . '" data-kontak="' . $row->client_contact . '" data-npwp="' . $row->client_npwp . '" data-norek="' . $row->client_norek . '" data-group="' . $row->client_region . '" class="btn-table edit_masterKlien btnEdit" data-bs-toggle="modal" data-bs-target="#edit_masterKlien">
+                $no = 1;
+                foreach ($Klien as $row) {
+                    $this->table->add_row(
+                        $no++,
+                        $row->client_nama,
+                        $row->client_jenis,
+                        $row->client_alamat,
+                        $row->client_contact,
+                        $row->client_npwp,
+                        $row->client_norek,
+                        $row->client_region,
+
+                        '<button type="button" data-id="' . $row->client_id . '" data-nama="' . $row->client_nama . '" data-jenis="' . $row->client_jenis . '" data-alamat="' . $row->client_alamat . '" data-kontak="' . $row->client_contact . '" data-npwp="' . $row->client_npwp . '" data-norek="' . $row->client_norek . '" data-group="' . $row->client_region . '" class="btn-table edit_masterKlien btnEdit" data-bs-toggle="modal" data-bs-target="#edit_masterKlien">
                                         <span class="iconify-inline" data-icon="bx:bx-edit" data-width="20" data-height="20"></span>
                                     </button>
                                     <button type="button" data-id="' . $row->client_id . '" class="btn-table red hapus_masterKlien btnHapus" data-bs-toggle="modal" data-bs-target="#hapus_masterKlien">
                                         <span class="iconify-inline" data-icon="carbon:trash-can"data-width="20" data-height="20"></span>
                                         
                                     </button>'
-                                );
-                            ?>
-                            <?php 
-                                }
-                                echo $this->table->generate(); 
-                            ?>
-                        </tr>
-                    </tbody>
-                </table>
+                    );
+                }
+                echo $this->table->generate();
+                ?>
+            </div>
+            <div class="foot">
             </div>
         </div>
 
@@ -242,6 +234,10 @@
                     return false;
                 return true;
             }
+
+            $(document).ready(function() {
+                $('#tableKlien').DataTable();
+            })
         </script>
         <div class="foot">
         </div>

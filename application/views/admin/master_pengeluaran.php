@@ -1,46 +1,39 @@
 <div class="min-vh-100 general-padding bg-light-purple">
     <div class="p-5">
         <div class="d-flex flex-row justify-content-between align-items-center mb-4">
-            <p class="mb-0 fs-5 font-w-500 color-darker">
+            <!-- <p class="mb-0 fs-5 font-w-500 color-darker">
                 Master Jenis Pengeluaran
-            </p>
+            </p> -->
             <button type="button" class="btn-table green" data-bs-toggle="modal" data-bs-target="#add_masterPengeluaran">Tambah</button>
         </div>
         <div class="card-section">
-            <div class="body">
-                <table class="table-custom">
-                    <thead>
-                        <tr>
-                            <?php
-                            $template = array('table_open' => '<table id="tablePengeluaran" class="table-custom">');
-                            $this->table->set_template($template);
-                            $this->table->set_heading('No', 'Jenis Pengeluaran', 'Grup Pengeluaran', 'Aksi');
-                            ?>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <?php
-                            $no = 1;
-                            foreach ($Pengeluaran as $row) {
-                                $this->table->add_row(
-                                    $no++,
-                                    $row->pengeluaran_jenis,
-                                    $row->pengeluaran_group,
+            <div class="head">
+                <p>Master Jenis Pengeluaran</p>
+            </div>
+            <div class="body" style="padding: 15px;">
+                <?php
+                $template = array('table_open' => '<table id="tablePengeluaran" class="table-custom">');
+                $this->table->set_template($template);
+                $this->table->set_heading('No', 'Jenis Pengeluaran', 'Grup Pengeluaran', 'Aksi');
 
-                                    '<button type="button" data-id="' . $row->pengeluaran_id . '" data-jenis="' . $row->pengeluaran_jenis . '" data-group="' . $row->pengeluaran_group . '" class="btn-table edit_masterPengeluaran btnEdit" data-bs-toggle="modal" data-bs-target="#edit_masterPengeluaran">
+                $no = 1;
+                foreach ($Pengeluaran as $row) {
+                    $this->table->add_row(
+                        $no++,
+                        $row->pengeluaran_jenis,
+                        $row->pengeluaran_group,
+
+                        '<button type="button" data-id="' . $row->pengeluaran_id . '" data-jenis="' . $row->pengeluaran_jenis . '" data-group="' . $row->pengeluaran_group . '" class="btn-table edit_masterPengeluaran btnEdit" data-bs-toggle="modal" data-bs-target="#edit_masterPengeluaran">
                                         <span class="iconify-inline" data-icon="bx:bx-edit" data-width="20" data-height="20"></span>
                                     </button>
                                     <button type="button" data-id="' . $row->pengeluaran_id . '" class="btn-table red hapus_masterPengeluaran btnEdit" data-bs-toggle="modal" data-bs-target="#hapus_masterPengeluaran">
                                         <span class="iconify-inline" data-icon="carbon:trash-can"data-width="20" data-height="20"></span>
                                     </button>'
-                                );
-                            ?>
-                            <?php }
-                            echo $this->table->generate(); ?>
-                        </tr>
-                    </tbody>
-                </table>
+                    );
+                }
+                echo $this->table->generate(); ?>
+            </div>
+            <div class="foot">
             </div>
         </div>
 
@@ -144,6 +137,10 @@
                 $('#pengeluaran_jenis').val(jenis);
                 $('#pengeluaran_group').val(group);
                 $('input[name=pengeluaran_id]').val(id);
+            })
+
+            $(document).ready(function() {
+                $('#tablePengeluaran').DataTable();
             })
         </script>
         <div class="foot">
