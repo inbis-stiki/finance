@@ -175,7 +175,7 @@ class Kendaraan extends CI_Controller
                 'kendaraan_kapasitas_tangki'    => $this->input->post('tangki'),
                 'kendaraan_foto'                => str_replace(" ", "_", $uploadFoto['link']),
                 'kendaraan_foto_stnk'           => str_replace(" ", "_", $uploadStnk['link']),
-                'kendaraan_lokasi_ambil'        => $this->input->post('lokasi_ambil')
+                'kendaraan_wilayah'             => $this->input->post('lokasi_ambil')
             );
 
             // $this->db->query("CALL disable_kendaraan('" . $data_lama['kendaraan_no_rangka'] . "')");
