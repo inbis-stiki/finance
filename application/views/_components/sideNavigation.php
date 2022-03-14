@@ -28,9 +28,9 @@
         ?>
 
 
-        <div class="nav-links <?= uri_string() == 'admin/dashboard' ? 'active' : '' ?>">
+        <!-- <div class="nav-links <?= uri_string() == 'admin/dashboard' ? 'active' : '' ?>">
             <a href="<?= site_url() ?>admin/dashboard">Dashboard</a>
-        </div>
+        </div> -->
         <!-- <div class="nav-links <?= uri_string() == 'admin/form_pengajuan' ? 'active' : '' ?>">
             <a href="<?= site_url() ?>admin/form_pengajuan">Form Pengajuan</a>
         </div> -->
@@ -51,7 +51,6 @@
             
                         <div class="sub-nav">
                             <a href="' . site_url() . 'master/driver">Driver</a>
-                            <a href="' . site_url() . 'master/klien">Klien</a>
                             <a href="' . site_url() . 'master/dropdown">Dropdown</a>
                             <a href="' . site_url() . 'master/sparepart">Sparepart</a>
                             <a href="' . site_url() . 'master/kendaraan">Kendaraan</a>

@@ -142,14 +142,14 @@ class MReport extends CI_Model{
             SELECT
                 rt.report_no_rangka,
                 rt.report_stnk ,
-                rt.report_klien ,
+                rt.report_pt ,
                 SUM(rt.report_jumlah_transaksi) as report_jumlah_transaksi ,
                 SUM(rt.report_total_transaksi) as report_total_transaksi
             FROM report_transaksi rt 
             GROUP BY
                 rt.report_no_rangka , 
                 rt.report_stnk ,
-                rt.report_klien ,
+                rt.report_pt ,
                 rt.report_wilayah 
             ORDER BY SUM(rt.report_total_transaksi) DESC
         ')->result();
@@ -158,7 +158,7 @@ class MReport extends CI_Model{
         return $this->db->query('
             SELECT 
                 t.transaksi_tanggal as tanggal_transaksi,
-                t.transaksi_klien as klien,
+                t.transaksi_pt as pt,
                 mjp.pengeluaran_jenis as jenis_pengeluaran, 
                 t.transaksi_total as total_biaya
             FROM transaksi t , master_jenis_pengeluaran mjp 
@@ -174,7 +174,7 @@ class MReport extends CI_Model{
         return $this->db->query('
             SELECT 
                 t.transaksi_tanggal as tanggal_service,
-                t.transaksi_klien as klien,
+                t.transaksi_pt as pt,
                 mjp.pengeluaran_jenis as jenis_pengeluaran,
                 ms.sparepart_nama as jenis_sparepart,
                 t.transaksi_keterangan as merek,
@@ -199,7 +199,7 @@ class MReport extends CI_Model{
         return $this->db->query('
             SELECT 
                 t.transaksi_tanggal as tanggal_service,
-                t.transaksi_klien as klien,
+                t.transaksi_pt as pt,
                 t.transaksi_total as total_biaya, 
                 t.transaksi_keterangan as catatan
             FROM 
@@ -217,7 +217,7 @@ class MReport extends CI_Model{
         return $this->db->query('
             SELECT 
                 t.transaksi_tanggal as tanggal_service,
-                t.transaksi_klien as klien,
+                t.transaksi_pt as pt,
                 t.transaksi_jumlah as total_hari_masuk,
                 t.transaksi_total as total_biaya
             FROM 
@@ -235,7 +235,7 @@ class MReport extends CI_Model{
         return $this->db->query('
             SELECT 
                 t.transaksi_tanggal as tanggal_service,
-                t.transaksi_klien as klien,
+                t.transaksi_pt as pt,
                 t.transaksi_keterangan as keterangan,
                 t.transaksi_jumlah as jumlah,
                 t.transaksi_total as total_biaya

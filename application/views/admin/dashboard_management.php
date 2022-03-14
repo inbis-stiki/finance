@@ -230,7 +230,7 @@
                             foreach ($Kendaraan as $row) {
                                 $this->table->add_row(
                                     $row->report_stnk,
-                                    $row->report_klien,
+                                    $row->report_pt,
                                     number_format($row->report_jumlah_transaksi),
                                     'Rp.'.number_format($row->report_total_transaksi),
                                     '<a href="'.site_url('management/cost-kendaraan/'.str_replace(' ', '_', $row->report_no_rangka).'/'.str_replace(' ', '_', $row->report_stnk)).'" target="_blank">
