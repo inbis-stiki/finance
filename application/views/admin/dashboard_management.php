@@ -225,7 +225,7 @@
                         <?php
                             $template = array('table_open' => '<table id="tblKendaraan" class="table-custom">');
                             $this->table->set_template($template);
-                            $this->table->set_heading('No STNK', 'Klien', 'Jumlah Transaksi', 'Total Transaksi', 'Detail');
+                            $this->table->set_heading('No STNK', 'Pemilik', 'Jumlah Transaksi', 'Total Transaksi', 'Detail');
 
                             foreach ($Kendaraan as $row) {
                                 $this->table->add_row(
