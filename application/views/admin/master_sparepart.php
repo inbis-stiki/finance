@@ -1,66 +1,58 @@
 <div class="min-vh-100 general-padding bg-light-purple">
     <div class="p-5">
         <div class="d-flex flex-row justify-content-between align-items-center mb-4">
-            <p class="mb-0 fs-5 font-w-500 color-darker">
+            <!-- <p class="mb-0 fs-5 font-w-500 color-darker">
                 Master Sparepart
-            </p>
+            </p> -->
             <button type="button" class="btn-table green" data-bs-toggle="modal" data-bs-target="#add_masterSparepart">Tambah</button>
         </div>
         <div class="card-section">
-            <div class="body">
-                <table class="table-custom">
-                    <thead>
-                        <tr>
-                            <?php
-                            $template = array('table_open' => '<table id="tableSparepart" class="table-custom">');
-                            $this->table->set_template($template);
-                            $this->table->set_heading('No', 'Nama Sparepart', 'Jenis Sparepart', 'Ukuran', 'Ideal Pemakaian', 'Keterangan', 'Aksi');
-                            ?>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <?php
-                            $no = 1;
-                            foreach ($Sparepart as $row) {
-                                if ($row->sparepart_bulan > 0) {
-                                    $this->table->add_row(
-                                        $no++,
-                                        $row->sparepart_nama,
-                                        $row->sparepart_jenis,
-                                        $row->sparepart_ukuran,
-                                        $row->sparepart_bulan . ' Bulan',
-                                        $row->sparepart_detail,
-                                        '<button type="button" data-id="' . $row->sparepart_id . '" data-nama="' . $row->sparepart_nama . '" data-jenis="' . $row->sparepart_jenis . '" data-km="' . $row->sparepart_km . '" data-bulan="' . $row->sparepart_bulan . '" data-ukuran="' . $row->sparepart_ukuran . '" data-detail="' . $row->sparepart_detail . '" class="btn-table edit_masterSparepart btnEdit" data-bs-toggle="modal" data-bs-target="#edit_masterSparepart">
-                                            <span class="iconify-inline" data-icon="bx:bx-edit" data-width="20" data-height="20"></span>
-                                        </button>
-                                        <button type="button" data-id="' . $row->sparepart_id . '" data-nama="' . $row->sparepart_nama . '" data-jenis="' . $row->sparepart_jenis . '" data-km="' . $row->sparepart_km . '" data-bulan="' . $row->sparepart_bulan . '" class="btn-table red hapus_masterSparepart btnEdit" data-bs-toggle="modal" data-bs-target="#hapus_masterSparepart">
-                                            <span class="iconify-inline" data-icon="carbon:trash-can"data-width="20" data-height="20"></span>
-                                        </button>'
-                                    );
-                                } else {
-                                    $this->table->add_row(
-                                        $no++,
-                                        $row->sparepart_nama,
-                                        $row->sparepart_jenis,
-                                        $row->sparepart_ukuran,
-                                        $row->sparepart_km . ' Km',
-                                        $row->sparepart_detail,
-                                        '<button type="button" data-id="' . $row->sparepart_id . '" data-nama="' . $row->sparepart_nama . '" data-jenis="' . $row->sparepart_jenis . '" data-km="' . $row->sparepart_km . '" data-bulan="' . $row->sparepart_bulan . '" data-ukuran="' . $row->sparepart_ukuran . '" data-detail="' . $row->sparepart_detail . '" class="btn-table edit_masterSparepart btnEdit" data-bs-toggle="modal" data-bs-target="#edit_masterSparepart">
-                                            <span class="iconify-inline" data-icon="bx:bx-edit" data-width="20" data-height="20"></span>
-                                        </button>
-                                        <button type="button" data-id="' . $row->sparepart_id . '" data-nama="' . $row->sparepart_nama . '" data-jenis="' . $row->sparepart_jenis . '" data-km="' . $row->sparepart_km . '" data-bulan="' . $row->sparepart_bulan . '" class="btn-table red hapus_masterSparepart btnEdit" data-bs-toggle="modal" data-bs-target="#hapus_masterSparepart">
-                                            <span class="iconify-inline" data-icon="carbon:trash-can"data-width="20" data-height="20"></span>
-                                        </button>'
-                                    );
-                                }
+            <div class="head">
+                <p>Master Sparepart</p>
+            </div>
+            <div class="body" style="padding: 15px;">
+                <?php
+                $template = array('table_open' => '<table id="tableSparepart" class="table-custom">');
+                $this->table->set_template($template);
+                $this->table->set_heading('No', 'Nama Sparepart', 'Jenis Sparepart', 'Ukuran', 'Ideal Pemakaian', 'Keterangan', 'Aksi');
 
-                            ?>
-                            <?php }
-                            echo $this->table->generate(); ?>
-                        </tr>
-                    </tbody>
-                </table>
+                $no = 1;
+                foreach ($Sparepart as $row) {
+                    if ($row->sparepart_bulan > 0) {
+                        $this->table->add_row(
+                            $no++,
+                            $row->sparepart_nama,
+                            $row->sparepart_jenis,
+                            $row->sparepart_ukuran,
+                            $row->sparepart_bulan . ' Bulan',
+                            $row->sparepart_detail,
+                            '<button type="button" data-id="' . $row->sparepart_id . '" data-nama="' . $row->sparepart_nama . '" data-jenis="' . $row->sparepart_jenis . '" data-km="' . $row->sparepart_km . '" data-bulan="' . $row->sparepart_bulan . '" data-ukuran="' . $row->sparepart_ukuran . '" data-detail="' . $row->sparepart_detail . '" class="btn-table edit_masterSparepart btnEdit" data-bs-toggle="modal" data-bs-target="#edit_masterSparepart">
+                                            <span class="iconify-inline" data-icon="bx:bx-edit" data-width="20" data-height="20"></span>
+                                        </button>
+                                        <button type="button" data-id="' . $row->sparepart_id . '" data-nama="' . $row->sparepart_nama . '" data-jenis="' . $row->sparepart_jenis . '" data-km="' . $row->sparepart_km . '" data-bulan="' . $row->sparepart_bulan . '" class="btn-table red hapus_masterSparepart btnEdit" data-bs-toggle="modal" data-bs-target="#hapus_masterSparepart">
+                                            <span class="iconify-inline" data-icon="carbon:trash-can"data-width="20" data-height="20"></span>
+                                        </button>'
+                        );
+                    } else {
+                        $this->table->add_row(
+                            $no++,
+                            $row->sparepart_nama,
+                            $row->sparepart_jenis,
+                            $row->sparepart_ukuran,
+                            $row->sparepart_km . ' Km',
+                            $row->sparepart_detail,
+                            '<button type="button" data-id="' . $row->sparepart_id . '" data-nama="' . $row->sparepart_nama . '" data-jenis="' . $row->sparepart_jenis . '" data-km="' . $row->sparepart_km . '" data-bulan="' . $row->sparepart_bulan . '" data-ukuran="' . $row->sparepart_ukuran . '" data-detail="' . $row->sparepart_detail . '" class="btn-table edit_masterSparepart btnEdit" data-bs-toggle="modal" data-bs-target="#edit_masterSparepart">
+                                            <span class="iconify-inline" data-icon="bx:bx-edit" data-width="20" data-height="20"></span>
+                                        </button>
+                                        <button type="button" data-id="' . $row->sparepart_id . '" data-nama="' . $row->sparepart_nama . '" data-jenis="' . $row->sparepart_jenis . '" data-km="' . $row->sparepart_km . '" data-bulan="' . $row->sparepart_bulan . '" class="btn-table red hapus_masterSparepart btnEdit" data-bs-toggle="modal" data-bs-target="#hapus_masterSparepart">
+                                            <span class="iconify-inline" data-icon="carbon:trash-can"data-width="20" data-height="20"></span>
+                                        </button>'
+                        );
+                    }
+                }
+                echo $this->table->generate(); ?>
+            </div>
+            <div class="foot">
             </div>
         </div>
         <!-- Modal Edit Sparepart -->
@@ -201,6 +193,10 @@
                     return false;
                 return true;
             }
+
+            $(document).ready(function() {
+                $('#tableSparepart').DataTable();
+            })
         </script>
         <div class="foot">
         </div>

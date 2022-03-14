@@ -1,55 +1,47 @@
 <div class="min-vh-100 general-padding bg-light-purple">
     <div class="p-5">
         <div class="d-flex flex-row justify-content-between align-items-center mb-4">
-            <p class="mb-0 fs-5 font-w-500 color-darker">
-                Master Driver
-            </p>
             <a href="<?= base_url('master/driver/add'); ?>" class="btn-table green" type="button">Tambah</a>
             <!-- <button type="button" class="btn-table" data-bs-toggle="modal">Add</button> -->
         </div>
         <div class="card-section">
-            <div class="body">
-                <table class="table-custom">
-                    <thead>
-                        <tr>
-                            <?php
-                            $template = array('table_open' => '<table id="tableDriver" class="table-custom">');
-                            $this->table->set_template($template);
-                            $this->table->set_heading('No', 'Nama Driver', 'Foto Driver', 'Kendaraan', 'Alamat Driver', 'Nomor Telepon Driver', 'SIM Driver', 'Tanggal Masuk', 'Aksi');
-                            ?>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <?php
-                            $no = 1;
-                            foreach ($Driver as $row) {
-                                $tanggal = date_format(date_create($row->driver_tanggalmasuk), 'j M Y');
-                                $transaksiKendaraan = $this->MGeneral->get('transaksi_driverkendaraan', ['driver_nik' => $row->driver_nik, 'disabled_date' => NULL]);
+            <div class="head">
+                <p>Master Driver</p>
+            </div>
+            <div class="body" style="padding: 15px;">
+                <?php
+                $template = array('table_open' => '<table id="tableDriver" class="table-custom" border="0">');
+                $this->table->set_template($template);
+                $this->table->set_heading('No', 'Nama Driver', 'Foto Driver', 'Kendaraan', 'Alamat Driver', 'Nomor Telepon Driver', 'SIM Driver', 'Tanggal Masuk', 'Aksi');
 
-                                $aksiAssign = "";
-                                $kendaraan  = '-';
-                                if ($transaksiKendaraan != null) {
-                                    $kendaraan = '<a class="btnInfoKendaraan" data-bs-toggle="modal" data-id="' . $transaksiKendaraan[0]->kendaraan_no_rangka . '|' . $transaksiKendaraan[0]->kendaraan_stnk . '" data-bs-target="#info_kendaraan" style="color: blue;text-decoration: underline;cursor: pointer;">' . $transaksiKendaraan[0]->kendaraan_stnk . '</a>';
-                                } else {
-                                    $aksiAssign = '
+                $no = 1;
+                foreach ($Driver as $row) {
+                    $tanggal = date_format(date_create($row->driver_tanggalmasuk), 'j M Y');
+                    $transaksiKendaraan = $this->MGeneral->get('transaksi_driverkendaraan', ['driver_nik' => $row->driver_nik, 'disabled_date' => NULL]);
+
+                    $aksiAssign = "";
+                    $kendaraan  = '-';
+                    if ($transaksiKendaraan != null) {
+                        $kendaraan = '<a class="btnInfoKendaraan" data-bs-toggle="modal" data-id="' . $transaksiKendaraan[0]->kendaraan_no_rangka . '|' . $transaksiKendaraan[0]->kendaraan_stnk . '" data-bs-target="#info_kendaraan" style="color: blue;text-decoration: underline;cursor: pointer;">' . $transaksiKendaraan[0]->kendaraan_stnk . '</a>';
+                    } else {
+                        $aksiAssign = '
                                         <button type="button" data-id="' . $row->driver_nik . '" class="btn-table green assign_masterDriver btnAssign" data-bs-toggle="modal" data-bs-target="#assign_masterDriver">
                                             <span class="iconify-inline" data-icon="ps:car" data-width="20" data-height="20"></span>
                                         </button>
                                     ';
-                                }
+                    }
 
-                                $this->table->add_row(
-                                    $no++,
-                                    $row->driver_nama,
-                                    '<img src="' . $row->driver_foto . '" style="width:100px">',
-                                    $kendaraan,
-                                    $row->driver_alamat,
-                                    $row->driver_telepon,
-                                    $row->driver_sim,
-                                    $tanggal,
+                    $this->table->add_row(
+                        $no++,
+                        $row->driver_nama,
+                        '<img src="' . $row->driver_foto . '" style="width:100px">',
+                        $kendaraan,
+                        $row->driver_alamat,
+                        $row->driver_telepon,
+                        $row->driver_sim,
+                        $tanggal,
 
-                                    '
+                        '
                                     ' . $aksiAssign . '
                                     <a href="' .  base_url("master/driver/edit/" . $row->driver_nik) . '" >
                                         <button type="button" class="btn-table edit_masterDriver btnEdit">
@@ -60,13 +52,11 @@
                                         <span class="iconify-inline" data-icon="carbon:trash-can" data-width="20" data-height="20"></span>
                                     </button>
                                     '
-                                );
-                            ?>
-                            <?php }
-                            echo $this->table->generate(); ?>
-                        </tr>
-                    </tbody>
-                </table>
+                    );
+                }
+                echo $this->table->generate(); ?>
+            </div>
+            <div class="foot">
             </div>
         </div>
 
@@ -105,14 +95,6 @@
                     <div class="modal-body fs-14px pt-0 d-flex flex-column">
                         <?= form_open_multipart('master/driver/assign'); ?>
                         <div class="pb-4">
-                            <div class="d-flex flex-column my-2 w-100">
-                                <label class="my-2 color-secondary">Awal Pemakaian</label>
-                                <input type="date" class="login-input regular fs-16px" name="awal" id="datepicker" value="" required>
-                            </div>
-                            <div class="d-flex flex-column my-2 w-100">
-                                <label class="my-2 color-secondary">Selesai Pemakaian</label>
-                                <input type="date" class="login-input regular fs-16px" name="akhir" id="datepicker" value="" required>
-                            </div>
                             <div class="d-flex flex-column my-2 w-100">
                                 <label class="my-2 color-secondary">Kendaraan</label>
                                 <select name="kendaraan" class="login-input regular" required>
@@ -302,6 +284,10 @@
                         $('#boxInfoKendaraan').attr('hidden', false);
                     }
                 })
+            })
+
+            $(document).ready(function() {
+                $('#tableDriver').DataTable();
             })
         </script>
         <div class="foot">

@@ -84,9 +84,9 @@
                                 }
                             ?>
                         </select>
-                        <label class="my-3">Lokasi</label>
+                        <label class="my-3">Wialayah</label>
                         <select name="lokasi_ambil" id="lokasi_ambil" class="login-input regular fs-16px" required>
-                            <option value="" disabled selected>Pilih Lokasi</option>
+                            <option value="" disabled selected>Pilih Wialayah</option>
                             <?php
                                 foreach ($datawilayah as $item) {
                                     echo '
