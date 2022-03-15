@@ -93,6 +93,33 @@ class MReport extends CI_Model{
             GROUP BY t.id_sparepart  
         ')->result();
     }
+    public function transaksiPT($pt, $year){
+        $filter = [];
+        if($year != "All") array_push($filter, 'YEAR(rt.report_tanggal) = "'.$year.'"');
+        if($pt != "All") array_push($filter, 'rt.report_pt = "'.$pt.'"');
+        $where = count($filter) > 0 ? 'WHERE' : '';
+
+        return $this->db->query('
+            SELECT 
+                MONTH(rt.report_tanggal) as report_bulan,
+                SUM(rt. report_total_transaksi) AS report_total_transaksi
+            FROM report_transaksi rt 
+            '.$where.'
+            '.implode(' AND ', $filter).'
+            GROUP BY MONTH(rt.report_pt)
+            ORDER BY MONTH(rt.report_tanggal) ASC
+        ')->result();
+    //     return '
+    //     SELECT 
+    //     MONTH(rt.report_tanggal) as report_bulan,
+    //     SUM(rt. report_total_transaksi) AS report_total_transaksi
+    // FROM report_transaksi rt 
+    // '.$where.'
+    // '.implode(' AND ', $filter).'
+    // GROUP BY MONTH(rt.report_tanggal)
+    // ORDER BY MONTH(rt.report_tanggal) ASC
+    //     ';
+    }
     public function reportSparepart($param){
         $filter = [];
         if($param['month'] != "All") array_push($filter, 'MONTH(t.transaksi_tanggal) = "'.$param['month'].'"');
