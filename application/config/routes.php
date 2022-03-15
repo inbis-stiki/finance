@@ -85,7 +85,7 @@ $route['admin/transaksi']                         = 'admin/Transaksi';
 $route['admin/transaksi/store-administrasi']      = 'admin/Transaksi/storeAdministrasi';
 $route['admin/transaksi/store-maintenance']       = 'admin/Transaksi/storeMaintenance';
 $route['admin/transaksi/store-expense']           = 'admin/Transaksi/storeExpense';
-$route['admin/transaksi/ajxGetNoSeri']            = 'admin/Transaksi/ajxGetNoSeri';
+$route['admin/transaksi/ajxKdBarang']             = 'admin/Transaksi/ajxKdBarang';
 // report
 $route['admin/report']  = 'admin/Report';
 // ========== END ADMIN ==========
