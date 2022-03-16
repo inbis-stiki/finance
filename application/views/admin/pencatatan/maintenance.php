@@ -75,12 +75,12 @@
     }
     ?>
 
-    let sparepart = "";
+    let jenSparepart = "";
     <?php
-    foreach ($sparepart as $item) {
+    foreach ($jenSparepart as $item) {
         echo '
-                sparepart += \'<option value="' . $item->sparepart_id . '|' . $item->sparepart_km . '|' . $item->sparepart_bulan . '">' . $item->sparepart_nama . '</option>\'
-            ';
+            jenSparepart += \'<option value="' . $item->dropdown_list . '">' . $item->dropdown_list . '</option>\'
+        ';
     }
     ?>
 
@@ -112,8 +112,8 @@
                             <div class="col-6 ps-0 pe-0">
                                 <label class="mb-3">Kode Barang</label>
                                 <div class="input-group">
-                                    <input type="text" id="main_inptSeri_${main_inptCount}" name="noSeri[]" class="form-control regular fs-16px" required>
-                                    <button type="button" onclick="checkSeri(${main_inptCount})" class="input-group-text btn-primary"><span class="iconify-inline text-white" data-icon="fluent:search-info-24-regular" data-width="20" data-height="20"></span></button>
+                                    <input type="text" id="main_inptSeri_${main_inptCount}" name="kdBarang[]" class="form-control regular fs-16px" required>
+                                    <button type="button" onclick="checkKode(${main_inptCount})" class="input-group-text btn-primary"><span class="iconify-inline text-white" data-icon="fluent:search-info-24-regular" data-width="20" data-height="20"></span></button>
                                 </div>
                                 <label id="main_inptSeriAlert_${main_inptCount}"></label>
                             </div>
@@ -122,16 +122,18 @@
                     <div class="col-6 col-lg-6 ps-0">
                         <div class="row m-0 p-0 w-100">
                             <div class="col-6 col-lg-6 pe-2 ps-0">
-                                    <label class="mb-3">Jenis Sparepart</label>
-                                    <select name="sparepart[]" id="main_slctSparepart_${main_inptCount}" onchange="showLoadSparepart(${main_inptCount})" class="login-input regular fs-16px" required>
+                                <label class="mb-3">Jenis Sparepart</label>
+                                <select id="main_slctJenSparepart_${main_inptCount}" onchange="onChangeJenSparepart(${main_inptCount})" class="login-input regular fs-16px" disabled required>
                                     <option value="" disabled selected>Pilih Jenis Sparepart</option>
-                                    ${sparepart}
+                                    ${jenSparepart}
                                 </select>
+                                <input type="hidden" id="main_slctInptJenSparepart_${main_inptCount}" name="jenSparepart[]" />
                             </div>
                             <div class="col-6 col-lg-6 ps-0 pe-0">
                                 <label class="mb-3">Nama Barang</label>
                                 <div class="input-group mb-3">
-                                    <input type="text" id="" name="merek[]" class="form-control" aria-describedby="basic-addon1" required>
+                                    <input type="text" onkeyup="onKeyUpBarang(${main_inptCount})" id="main_inptBarang_${main_inptCount}" class="form-control main_inptBarang_${main_inptCount}" aria-describedby="basic-addon1 " disabled required>
+                                    <input type="hidden" class="main_inptBarang_${main_inptCount}" name="barang[]" />
                                 </div> 
                             </div>
                         </div>
@@ -222,21 +224,46 @@
         $('#main_boxLoadIdeal_' + id).attr('hidden', false);
         $('#main_inptLoad_' + id).attr('disabled', false);
     }
-    const checkSeri = idElementSeri => {
-        noSeri = $('#main_inptSeri_' + idElementSeri).val()
+    const checkKode = idElmKdBarang => {
+        kdBarang = $('#main_inptSeri_' + idElmKdBarang).val()
+        // alert(kdBarang)
         $.ajax({
-            url: '<?= site_url('admin/transaksi/ajxGetNoSeri') ?>',
+            url: '<?= site_url('admin/transaksi/ajxKdBarang') ?>',
             method: 'post',
             data: {
-                noSeri
+                kdBarang
             },
             success: function(res) {
-                if (res == "true")
-                    $('#main_inptSeriAlert_' + idElementSeri).html('<span style="color: red;">Nomor seri sudah digunakan</span>');
-                else
-                    $('#main_inptSeriAlert_' + idElementSeri).html('<span style="color: green;">Nomor seri belum digunakan</span>');
+                res = JSON.parse(res)
+                if (res['status'] == true){
+                    $('#main_slctJenSparepart_'+idElmKdBarang).attr('disabled', true);
+                    $('#main_inptBarang_'+idElmKdBarang).attr('disabled', true);
+                    
+                    $('#main_slctJenSparepart_'+idElmKdBarang).val(res['data'][0]['sparepart_jenis']).change();
+                    $('#main_slctInptJenSparepart_'+idElmKdBarang).val(res['data'][0]['sparepart_jenis']);
+                    $('.main_inptBarang_'+idElmKdBarang).val(res['data'][0]['sparepart_nama']);
+
+                    $('#main_inptSeriAlert_' + idElmKdBarang).html('<span style="color: green;">Kode barang telah terdaftar</span>');
+                }else{
+                    $('#main_slctJenSparepart_'+idElmKdBarang).attr('disabled', false);
+                    $('#main_inptBarang_'+idElmKdBarang).attr('disabled', false);
+
+                    $('#main_slctJenSparepart_'+idElmKdBarang).val('').change();
+                    $('#main_slctInptJenSparepart_'+idElmKdBarang).val('');
+                    $('.main_inptBarang_'+idElmKdBarang).val('');
+
+                    $('#main_inptSeriAlert_' + idElmKdBarang).html('<span style="color: orange;">Kode barang belum terdaftar</span>');
+                }
 
             }
         })
+    }
+    const onChangeJenSparepart = elm => {
+        const val = $('#main_slctJenSparepart_'+elm).val()
+        $('#main_slctInptJenSparepart_'+elm).val(val);
+    }
+    const onKeyUpBarang = elm => {
+        const val = $('#main_inptBarang_'+elm).val();
+        $('.main_inptBarang_'+elm).val(val);
     }
 </script>

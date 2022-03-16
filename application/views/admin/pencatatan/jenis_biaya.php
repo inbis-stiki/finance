@@ -150,7 +150,7 @@
     $(document).ready(function(){
         <?php
             if($this->session->flashdata('succ_modal')){
-                echo '$("#success").modal("show")';
+                echo '$("#success").modal("show");';
             }    
         ?>
         $('.select2').select2();
