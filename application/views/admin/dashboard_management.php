@@ -207,7 +207,7 @@
                         </div>
                     </div>
                     <div class="body">
-                        <div style="width: 99%;" id="chart_area"></div>
+                        <div style="width: 99%;" id="chart_pt"></div>
                     </div>
                     <div class="foot">
                     </div>
@@ -681,7 +681,7 @@
                     },
                 }
                 $('#chart_pt').empty()
-                var updateChart4 = new ApexCharts(document.querySelector("#chart_area"), updateOptions4);
+                var updateChart4 = new ApexCharts(document.querySelector("#chart_pt"), updateOptions4);
                 updateChart4.render();
             }
         })
