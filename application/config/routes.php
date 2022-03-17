@@ -72,7 +72,8 @@ $route['management/ajxUpdateCostArea']              = 'management/Dashboard/ajxU
 $route['management/ajxUpdateSparepart']             = 'management/Dashboard/ajxUpdateSparepart';
 $route['management/ajxUpdateJenisBiayaSparepart']   = 'management/Dashboard/ajxUpdateJenisBiayaSparepart';
 $route['management/ajxUpdateJenisPengeluaran']      = 'management/Dashboard/ajxUpdateJenisPengeluaran';
-// ========== END MANAGEMENT ==========
+$route['management/ajxUpdateUpdateCostPT']          = 'management/Dashboard/ajxUpdateCostPT';
+// ========== END MANAGEMENT ========== 
 
 // ========== ADMIN ==========
 $route['admin'] = 'admin/Dashboard';

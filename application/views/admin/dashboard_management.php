@@ -171,6 +171,48 @@
                     </div>
                 </div>
             </div>
+            <div class="col-6">
+                <div class="card-section">
+                    <div class="head">
+                        <p>Total Cost Per PT</p>
+                        <div class="form-group">
+                            <label for="">Daftar PT</label>
+                            <select name="" id="filCostPT1" class="form-control filCostPT" style="width: 150px;" id="">
+                                <option value="All">Semua</option>
+                                <?php
+                                    $i = 1;
+                                    foreach ($masterPT as $item) {
+                                        $first = $i++ == 1 ? 'selected' : '';
+                                        echo '
+                                            <option value="'.$item->dropdown_list.'" '.$first.'>'.$item->dropdown_list.'</option>
+                                        ';
+                                    }
+                                ?>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="">Tahun</label>
+                            <select name="" id="filCostPT2" class="form-control filCostPT" style="width: 150px;" id="">
+                                <option value="All">Semua</option>
+                                <?php
+                                    $currYear = date('Y');
+                                    for($year = (int)$currYear; $startYear = 2021 <= $year; $year--){
+                                        $isSelected = $currYear == $year ? 'selected' : '';
+                                        echo '
+                                            <option value="'.$year.'" '.$isSelected.'>'.$year.'</option>
+                                        ';
+                                    }
+                                ?>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="body">
+                        <div style="width: 99%;" id="chart_pt"></div>
+                    </div>
+                    <div class="foot">
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="row">
             <div class="col-4">
@@ -406,14 +448,52 @@
           enabled: true,
         },
     }
+    var options4 = {
+        chart: {
+            type: 'bar',
+            height: '300px'
+        },
+        series: [{
+            name: 'sales',
+            data: [
+                <?php
+                    foreach ($TransaksiPT as $item) {
+                        echo ((int)$item->report_total_transaksi / 1000000).'.toFixed(2),';
+                    }    
+                ?>
+            ]
+        }],
+        colors: ['#4F48ED'],
+        xaxis: {
+            categories: [
+                <?php
+                    foreach ($TransaksiPT as $item) {
+                        echo 'getFullMonthh('.((int)$item->report_bulan - 1).'),';
+                    }        
+                ?> 
+            ]
+        },
+        yaxis: {
+            labels: {
+                formatter: function (value) {
+                    return value.toFixed(2)+" Jt";
+                }
+            },
+        },
+        dataLabels: {
+          enabled: true,
+        },
+    }
 
     var chart = new ApexCharts(document.querySelector("#chart_global"), options);
     var chart2 = new ApexCharts(document.querySelector("#chart_area"), options2);
     var chart3 = new ApexCharts(document.querySelector("#chart_jenis"), options3);
+    var chart4 = new ApexCharts(document.querySelector("#chart_pt"), options4);
 
     chart.render();
     chart2.render();
     chart3.render();
+    chart4.render();
 
     $('#filGlobalCost').change(function(){
         $.ajax({
@@ -556,6 +636,53 @@
                 $('#chart_jenis').empty()
                 var updateChart3 = new ApexCharts(document.querySelector("#chart_jenis"), updateOptions3);
                 updateChart3.render();
+            }
+        })
+    })
+    $('.filCostPT').change(function (){
+        const area = $('#filCostPT1').val()
+        const year = $('#filCostPT2').val()
+        $.ajax({
+            url: '<?= site_url('management/ajxUpdateCostPT')?>',
+            method: 'POST',
+            data: {pt, year},
+            success: function(res){
+                res = JSON.parse(res)
+                
+                data = []
+                categories = []
+
+                for(let i of res){
+                    data.push((i.report_total_transaksi / 1000000).toFixed(2))
+                    categories.push(getFullMonthh(i.report_bulan - 1))
+                }
+                var updateOptions4 = {
+                    chart: {
+                        type: 'bar',
+                        height: '300px'
+                    },
+                    series: [{
+                        name: 'sales',
+                        data
+                    }],
+                    colors: ['#4F48ED'],
+                    xaxis: {
+                        categories
+                    },
+                    yaxis: {
+                        labels: {
+                            formatter: function (value) {
+                                return value.toFixed(2)+" Jt";
+                            }
+                        },
+                    },
+                    dataLabels: {
+                        enabled: true,
+                    },
+                }
+                $('#chart_pt').empty()
+                var updateChart4 = new ApexCharts(document.querySelector("#chart_pt"), updateOptions4);
+                updateChart4.render();
             }
         })
     })
