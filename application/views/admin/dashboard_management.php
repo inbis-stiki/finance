@@ -171,6 +171,51 @@
                     </div>
                 </div>
             </div>
+            
+        <div class="row">
+            <div class="col-6">
+                <div class="card-section">
+                    <div class="head">
+                        <p>Sparepart</p>
+                        <div class="form-group">
+                            <label for="">Bulan</label>
+                            <select name="" id="filSparepart1" class="form-control filSparepart" style="width: 150px;" id="">
+                                <option value="All">Semua</option>
+                                <?php
+                                    $i = 0;
+                                    $currMonth = date('n');
+                                    foreach ($masterBulan as $item) {
+                                        $isSelected = $currMonth == ++$i ? 'selected' : '';
+                                        echo '
+                                            <option value="'.$i.'" '.$isSelected.'>'.$item.'</option>
+                                        ';
+                                    }
+                                ?>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="">Tahun</label>
+                            <select name="" id="filSparepart2" class="form-control filSparepart" style="width: 150px;" id="">
+                                <option value="All">Semua</option>
+                                <?php
+                                    $currYear = date('Y');
+                                    for($year = (int)$currYear; $startYear = 2021 <= $year; $year--){
+                                        $isSelected = $currYear == $year ? 'selected' : '';
+                                        echo '
+                                            <option value="'.$year.'" '.$isSelected.'>'.$year.'</option>
+                                        ';
+                                    }
+                                ?>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="body" style="padding: 15px">
+                        <table id="tblSparepart" class="table-custom"></table>
+                    </div>
+                    <div class="foot">
+                    </div>
+                </div>
+            </div>
             <div class="col-6">
                 <div class="card-section">
                     <div class="head">
@@ -214,51 +259,9 @@
                 </div>
             </div>
         </div>
+        
         <div class="row">
-            <div class="col-4">
-                <div class="card-section">
-                    <div class="head">
-                        <p>Sparepart</p>
-                        <div class="form-group">
-                            <label for="">Bulan</label>
-                            <select name="" id="filSparepart1" class="form-control filSparepart" style="width: 150px;" id="">
-                                <option value="All">Semua</option>
-                                <?php
-                                    $i = 0;
-                                    $currMonth = date('n');
-                                    foreach ($masterBulan as $item) {
-                                        $isSelected = $currMonth == ++$i ? 'selected' : '';
-                                        echo '
-                                            <option value="'.$i.'" '.$isSelected.'>'.$item.'</option>
-                                        ';
-                                    }
-                                ?>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="">Tahun</label>
-                            <select name="" id="filSparepart2" class="form-control filSparepart" style="width: 150px;" id="">
-                                <option value="All">Semua</option>
-                                <?php
-                                    $currYear = date('Y');
-                                    for($year = (int)$currYear; $startYear = 2021 <= $year; $year--){
-                                        $isSelected = $currYear == $year ? 'selected' : '';
-                                        echo '
-                                            <option value="'.$year.'" '.$isSelected.'>'.$year.'</option>
-                                        ';
-                                    }
-                                ?>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="body" style="padding: 15px">
-                        <table id="tblSparepart" class="table-custom"></table>
-                    </div>
-                    <div class="foot">
-                    </div>
-                </div>
-            </div>
-            <div class="col-8">
+            <div class="col-12">
                 <div class="card-section">
                     <div class="head">
                         <p>Cost Per Kendaraan</p>
@@ -640,7 +643,7 @@
         })
     })
     $('.filCostPT').change(function (){
-        const area = $('#filCostPT1').val()
+        const pt = $('#filCostPT1').val()
         const year = $('#filCostPT2').val()
         $.ajax({
             url: '<?= site_url('management/ajxUpdateCostPT')?>',
