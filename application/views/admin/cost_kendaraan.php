@@ -61,9 +61,7 @@
                                     <th>Pemilik</th>
                                     <th>Jenis Pengeluaran</th>
                                     <th>Jenis Sparepart</th>
-                                    <th>Merek</th>
-                                    <th>Nomor Seri</th>
-                                    <th>Pemakaian</th>
+                                    <th>Kode Barang</th>
                                     <th>Jumlah</th>
                                     <th>Total Biaya</th>
                                 </tr>
@@ -80,9 +78,7 @@
                                                 <td>'.$item->pt.'</td>
                                                 <td>'.$item->jenis_pengeluaran.'</td>
                                                 <td>'.$item->jenis_sparepart.'</td>
-                                                <td>'.$item->merek.'</td>
-                                                <td>'.$item->nomor_seri.'</td>
-                                                <td>'.number_format($item->pemakaian).'</td>
+                                                <td>'.$item->kode_barang.'</td>
                                                 <td>'.number_format($item->jumlah).'</td>
                                                 <td>Rp.'.number_format($item->total_biaya).'</td>
                                             </tr>

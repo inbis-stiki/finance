@@ -205,8 +205,7 @@ class MReport extends CI_Model{
                 mjp.pengeluaran_jenis as jenis_pengeluaran,
                 ms.sparepart_nama as jenis_sparepart,
                 t.transaksi_keterangan as merek,
-                t.transaksi_no_seri as nomor_seri,
-                t.transaksi_jarak_tempuh as pemakaian,
+                ms.sparepart_kode as kode_barang,
                 t.transaksi_jumlah as jumlah,
                 t.transaksi_total as total_biaya
             FROM 
