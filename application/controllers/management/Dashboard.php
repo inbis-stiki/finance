@@ -52,7 +52,6 @@ class Dashboard extends CI_Controller{
 			'masterPT' => $masterPT
 		];
 
-		print_r($transaksiPT);
 		$this->template->index('admin/dashboard_management', $data);
 		$this->load->view('_components/sideNavigation', $data);
     }

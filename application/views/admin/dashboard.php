@@ -32,19 +32,18 @@
                 <?php
                 $template = array('table_open' => '<table id="tblKendaraan" class="table-custom">');
                 $this->table->set_template($template);
-                $this->table->set_heading('No. STNK', 'Klien', 'Merk Kendaraan', 'Umur Kendaraan', 'Area Operasional');
+                $this->table->set_heading('No. STNK', 'Pemilik', 'Merk Kendaraan', 'Umur Kendaraan', 'Wilayah');
 
                 foreach ($DaftarKendaraan as $row) {
                     $currentDate = date("Y-m-d");
                     $umur = date_diff(date_create($row->kendaraan_tanggal_beli), date_create($currentDate));
-                    $klien = $this->MGeneral->getKendaraanKlien(['noRangka' => $row->kendaraan_no_rangka, 'stnk' => $row->kendaraan_stnk]);
 
                     $this->table->add_row(
                         $row->kendaraan_stnk,
-                        !empty($klien->client_nama) ? $klien->client_nama : '-',
+                        $row->kendaraan_jenis == "Pribadi" ? "Pribadi" : $row->kendaraan_pt,
                         $row->kendaraan_merk,
                         $umur->format("%m") . " Bulan " . $umur->format('%y') . "Tahun",
-                        !empty($klien->client_region) ? $klien->client_region : '-',
+                        $row->kendaraan_wilayah,
                     );
                 }
                 echo $this->table->generate();
