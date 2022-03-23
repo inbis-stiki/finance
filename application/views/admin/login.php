@@ -18,7 +18,7 @@
                         } 
                     ?>
                     <label class="font-w-500 my-2">Username</label>
-                    <input type="text" name="username" id="username" class="login-input" placeholder="username123" required>
+                    <input type="text" onkeypress="return preventSpace(event)" name="username" id="username" class="login-input" placeholder="username123" required>
                     <?= form_error('username', '<small>', '</small>'); ?>
                 </div>
                 <div class="d-flex flex-column my-2 w-100">

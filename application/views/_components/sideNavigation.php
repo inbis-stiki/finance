@@ -41,7 +41,7 @@
         $activeform = (uri_string() == 'admin/form_pengajuan/unit_kendaraan' || uri_string() == 'admin/form_pengajuan/jenis_biaya' ? "active" : "");
         ?>
         <?php
-        if ($this->session->userdata('isMaster') == "1") {
+        if ($this->session->userdata('isManagement') == "1") {
             echo '
                     <div class="nav-links accordion-nav ' . $active . '">
                         <div class="position-relative">
@@ -88,7 +88,7 @@
         }
         ?>
         <?php
-        if ($this->session->userdata('isSuper') == "1") {
+        if ($this->session->userdata('isManagement') == "1") {
             $statusActive = uri_string() == 'super/pengguna' ? 'active' : '';
             echo '
                     <div class="nav-links ' . $statusActive . '">

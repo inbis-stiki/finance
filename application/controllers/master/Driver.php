@@ -6,7 +6,7 @@ class Driver extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        if($this->session->userdata('isMaster') != '1'){
+        if($this->session->userdata('isManagement') != '1'){
 			redirect('/');
 		}
         $this->load->helper(array('form', 'url', 'date'));

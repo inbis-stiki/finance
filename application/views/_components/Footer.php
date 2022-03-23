@@ -36,6 +36,14 @@
         function numberWithCommas(x) {
             return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         }
+        function preventSpace(evt){
+            evt = (evt) ? evt : window.event;
+            var charCode = (evt.which) ? evt.which : evt.keyCode;
+            if(charCode == 32){
+            return false
+            }
+            return true
+        }
         $(".inpt-number").autoNumeric('init', {
             aSep: '.', 
             aDec: ',',
