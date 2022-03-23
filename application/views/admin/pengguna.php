@@ -88,7 +88,7 @@
                         <div class="pb-4">
                             <div class="d-flex flex-column my-2 w-100">
                                 <label class="my-2 color-secondary">Username</label>
-                                <input type="text" class="login-input regular" name="username" placeholder="" required>
+                                <input type="text" onkeypress="return preventSpace(event)" class="login-input regular" name="username" placeholder="" required>
                             </div>
                             <div class="d-flex flex-column my-2 w-100">
                                 <label class="my-2 color-secondary">Nama</label>
@@ -109,14 +109,14 @@
                                     <input class="form-check-input" type="checkbox" name="isAdmin" id="inlineCheckbox2">
                                     <label class="form-check-label" for="inlineCheckbox2">Admin</label>
                                 </div>
-                                <div class="form-check form-check-inline">
+                                <!-- <div class="form-check form-check-inline">
                                     <input class="form-check-input" type="checkbox" name="isMaster" id="inlineCheckbox3">
                                     <label class="form-check-label" for="inlineCheckbox3">Master</label>
                                 </div>
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input" type="checkbox" name="isSuper" id="inlineCheckbox4">
                                     <label class="form-check-label" for="inlineCheckbox4">Super</label>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                         <button type="submit" class="btn-table submit-modal">Tambah data</button>
@@ -138,7 +138,7 @@
                         <div class="pb-4">
                             <div class="d-flex flex-column my-2 w-100">
                                 <label class="my-2 color-secondary">Username</label>
-                                <input type="text" class="login-input regular mdlEdit_username" name="username" placeholder="" disabled>
+                                <input type="text"  onkeypress="return preventSpace(event)" class="login-input regular mdlEdit_username" name="username" placeholder="" disabled>
                                 <input type="hidden" class="login-input regular mdlEdit_username" name="username" placeholder="" required>
                             </div>
                             <div class="d-flex flex-column my-2 w-100">
@@ -155,14 +155,14 @@
                                     <input class="form-check-input" type="checkbox" name="isAdmin" id="mdlEdit_admin">
                                     <label class="form-check-label" for="mdlEdit_admin">Admin</label>
                                 </div>
-                                <div class="form-check form-check-inline">
+                                <!-- <div class="form-check form-check-inline">
                                     <input class="form-check-input" type="checkbox" name="isMaster" id="mdlEdit_master">
                                     <label class="form-check-label" for="mdlEdit_master">Master</label>
                                 </div>
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input" type="checkbox" name="isSuper" id="mdlEdit_super">
                                     <label class="form-check-label" for="mdlEdit_super">Super</label>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                         <div class="d-flex flex-row">
