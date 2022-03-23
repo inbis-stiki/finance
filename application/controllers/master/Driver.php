@@ -120,6 +120,8 @@ class Driver extends CI_Controller
         $dataStore['driver_nik']          = $_POST['driver_nik'];
         $dataStore['start_date']          = $_POST['awal'];
         $dataStore['end_date']            = $_POST['akhir'];
+        
+        $this->MDriver->deleteTransKendaraan(['noRangka' => $kendaraan[0], 'stnk' => $kendaraan[1]]);
         $this->MDriver->insertTransKendaraan($dataStore);
         redirect('master/driver');
     }
