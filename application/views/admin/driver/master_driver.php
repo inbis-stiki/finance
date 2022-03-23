@@ -23,12 +23,6 @@
                     $kendaraan  = '-';
                     if ($transaksiKendaraan != null) {
                         $kendaraan = '<a class="btnInfoKendaraan" data-bs-toggle="modal" data-id="' . $transaksiKendaraan[0]->kendaraan_no_rangka . '|' . $transaksiKendaraan[0]->kendaraan_stnk . '" data-bs-target="#info_kendaraan" style="color: blue;text-decoration: underline;cursor: pointer;">' . $transaksiKendaraan[0]->kendaraan_stnk . '</a>';
-                    } else {
-                        $aksiAssign = '
-                                        <button type="button" data-id="' . $row->driver_nik . '" class="btn-table green assign_masterDriver btnAssign" data-bs-toggle="modal" data-bs-target="#assign_masterDriver">
-                                            <span class="iconify-inline" data-icon="ps:car" data-width="20" data-height="20"></span>
-                                        </button>
-                                    ';
                     }
 
                     $this->table->add_row(
@@ -40,18 +34,19 @@
                         $row->driver_telepon,
                         $row->driver_sim,
                         $tanggal,
-
                         '
-                                    ' . $aksiAssign . '
-                                    <a href="' .  base_url("master/driver/edit/" . $row->driver_nik) . '" >
-                                        <button type="button" class="btn-table edit_masterDriver btnEdit">
-                                            <span class="iconify-inline" data-icon="bx:bx-edit" data-width="20" data-height="20"></span>
-                                        </button>
-                                    </a>
-                                    <button type="button" data-id="' . $row->driver_nik . '" class="btn-table red hapus_masterDriver btnHapus" data-bs-toggle="modal" data-bs-target="#hapus_masterDriver">
-                                        <span class="iconify-inline" data-icon="carbon:trash-can" data-width="20" data-height="20"></span>
-                                    </button>
-                                    '
+                        <button type="button" data-id="' . $row->driver_nik . '" class="btn-table green assign_masterDriver btnAssign" data-bs-toggle="modal" data-bs-target="#assign_masterDriver">
+                            <span class="iconify-inline" data-icon="ps:car" data-width="20" data-height="20"></span>
+                        </button>
+                        <a href="' .  base_url("master/driver/edit/" . $row->driver_nik) . '" >
+                            <button type="button" class="btn-table edit_masterDriver btnEdit">
+                                <span class="iconify-inline" data-icon="bx:bx-edit" data-width="20" data-height="20"></span>
+                            </button>
+                        </a>
+                        <button type="button" data-id="' . $row->driver_nik . '" class="btn-table red hapus_masterDriver btnHapus" data-bs-toggle="modal" data-bs-target="#hapus_masterDriver">
+                            <span class="iconify-inline" data-icon="carbon:trash-can" data-width="20" data-height="20"></span>
+                        </button>
+                        '
                     );
                 }
                 echo $this->table->generate(); ?>
@@ -100,12 +95,9 @@
                                 <select name="kendaraan" class="login-input regular" required>
                                     <?php
                                     foreach ($Kendaraan as $item) {
-                                        $tranRemaining = $this->MGeneral->get('transaksi_driverkendaraan', ['kendaraan_no_rangka' => $item->kendaraan_no_rangka, 'kendaraan_stnk' => $item->kendaraan_stnk, 'disabled_date' => NULL]);
-                                        if ($tranRemaining == null) {
-                                            echo '
-                                                    <option value="' . $item->kendaraan_no_rangka . '|' . $item->kendaraan_stnk . '">' . $item->kendaraan_stnk . '</option>
-                                                ';
-                                        }
+                                        echo '
+                                            <option value="' . $item->kendaraan_no_rangka . '|' . $item->kendaraan_stnk . '">' . $item->kendaraan_stnk . '</option>
+                                        ';
                                     }
                                     ?>
                                 </select>

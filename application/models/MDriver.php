@@ -28,6 +28,9 @@ class MDriver extends CI_Model{
     public function update($param){
         $this->db->where('driver_nik', $param['driver_nik'])->update('master_driver', $param);
     }
+    public function deleteTransKendaraan($param){
+        $this->db->where(['kendaraan_no_rangka' => $param['noRangka'], 'kendaraan_stnk' => $param['stnk']])->delete('transaksi_driverkendaraan');
+    }
     public function delete($param){
         $this->db->delete('master_driver', $param);
     }
