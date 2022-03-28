@@ -213,7 +213,7 @@
         </div>
     </div>
 </div>
-<script src="<?= site_url() ?>/assets/src/js/apexchart.js"></script>
+<script src="<?= site_url() ?>assets/src/js/apexchart.js"></script>
 <script>
     $(document).ready(function(){
         $('#tblAdministrasi').DataTable();

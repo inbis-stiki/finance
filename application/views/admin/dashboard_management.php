@@ -319,7 +319,7 @@
         </div>
     </div>
 </div>
-<script src="<?= site_url() ?>/assets/src/js/apexchart.js"></script>
+<script src="<?= site_url() ?>assets/src/js/apexchart.js"></script>
 <script>
     var tblSparepart = $('#tblSparepart').DataTable({
         'processing': true,
