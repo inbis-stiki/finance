@@ -9,5 +9,6 @@ class Cronjob extends CI_Controller{
         $this->db->empty_table('report_transaksi');
         $vReportTrans = $this->db->get('v_report_temp')->result_array();
         $this->db->insert_batch('report_transaksi', $vReportTrans);
+		$this->db->update('report_update', ['updated_at' => date('Y-m-d H:i:s')]);
     }
 }
