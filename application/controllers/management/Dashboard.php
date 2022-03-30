@@ -49,7 +49,8 @@ class Dashboard extends CI_Controller{
 			'Kendaraan' => $kendaraan,
 			'masterArea' =>  $masterArea,
 			'masterBulan' => $masterBulan,
-			'masterPT' => $masterPT
+			'masterPT' => $masterPT,
+			'reportUpdated' => $this->db->get('report_update')->row()
 		];
 
 		$this->template->index('admin/dashboard_management', $data);
@@ -130,6 +131,14 @@ class Dashboard extends CI_Controller{
         );
 
         echo json_encode($response);
+	}
+	public function updateReport(){
+        $this->load->model('MReport');
+        $this->db->empty_table('report_transaksi');
+        $vReportTrans = $this->db->get('v_report_temp')->result_array();
+        $this->db->insert_batch('report_transaksi', $vReportTrans);
+		$this->db->update('report_update', ['updated_at' => date('Y-m-d H:i:s')]);
+		redirect('management');
 	}
 	public function getFullMonth($param){
         switch ($param) {
