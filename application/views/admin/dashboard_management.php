@@ -47,6 +47,16 @@
                 </div>
             </div>
         </div>
+        <div class="row" style="margin-bottom: 10px;">
+            <div class="col">
+                <div style="float: right;">
+                    <span><i>Updated at : <?= date_format(date_create($reportUpdated->updated_at), 'j M Y H:i') ?></i></span>&nbsp;
+                    <a href="<?= site_url('management/update-report')?>" class="btn-table green" style="padding-top: 7px;">
+                        <span class="iconify-inline" data-icon="ci:refresh" data-width="20" data-height="20" style="margin-top: 3px;"></span>
+                    </a>
+                </div>
+            </div>
+        </div>
         <div class="row">
             <div class="col-12 col-sm-12">
                 <div class="card-section">

@@ -67,6 +67,7 @@ $route['profile/(:any)']      = 'Profile/edit/$1';
 $route['management']                                = 'management/Dashboard';
 $route['management/set-saldo']                      = 'management/Dashboard/setSaldo';
 $route['management/cost-kendaraan/(:any)/(:any)']   = 'management/Dashboard/costKendaraan/$1/$2';
+$route['management/update-report']                  = 'management/Dashboard/updateReport';
 $route['management/ajxUpdateGlobalCost']            = 'management/Dashboard/ajxUpdateGlobalCost';
 $route['management/ajxUpdateCostArea']              = 'management/Dashboard/ajxUpdateCostArea';
 $route['management/ajxUpdateSparepart']             = 'management/Dashboard/ajxUpdateSparepart';
@@ -76,7 +77,8 @@ $route['management/ajxUpdateCostPT']                = 'management/Dashboard/ajxU
 // ========== END MANAGEMENT ========== 
 
 // ========== ADMIN ==========
-$route['admin'] = 'admin/Dashboard';
+$route['admin']                 = 'admin/Dashboard';
+$route['admin/update-report']   = 'admin/Dashboard/updateReport';
 // peminjaman
 $route['admin/peminjaman']          = 'admin/Peminjaman';
 $route['admin/peminjaman/store']    = 'admin/Peminjaman/store';
