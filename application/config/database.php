@@ -75,7 +75,7 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'kristomoyo.com',
+	'hostname' => 'db.badabes.my.id',
 	'username' => 'finance',
 	'password' => '1sampaifinance',
 	'database' => 'finance',

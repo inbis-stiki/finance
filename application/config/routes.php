@@ -144,4 +144,5 @@ $route['super/pengguna/destroy']            = 'super/Pengguna/destroy';
 // ========== END SUPER ==========
 
 // ========== CRONJOB ==========
-$route['cronjob/report'] = 'Cronjob/JobReport';
+$route['cronjob/report']    = 'Cronjob/JobReport';
+$route['cronjob/notif']     = 'Cronjob/JobNotif';
