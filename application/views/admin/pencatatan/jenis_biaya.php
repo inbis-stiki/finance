@@ -174,7 +174,7 @@
         }
 
         $.ajax({
-            url: '<?= site_url('master/kendaraan/ajxGet')?>',
+            url: '<?= site_url('admin/transaksi/ajxGetKendaraan')?>',
             method: 'post',
             data: {id},
             success: function(res){
