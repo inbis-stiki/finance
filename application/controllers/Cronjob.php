@@ -13,8 +13,9 @@ class Cronjob extends CI_Controller{
     }
     public function JobNotif(){
         $nextWeekDate = date('Y-m-d', strtotime('+7 days'));
-        $this->db->set('kendaraan_isnotifsim', 1);
-        $this->db->where(['is_active' => 1, 'disabled_date' => NULL, 'kendaraan_isnotifsim' => 0, 'kendaraan_deadlinesim <= ' => $nextWeekDate]);
+        $this->db->set('kendaraan_isnotifstnk', 1);
+        $this->db->where(['is_active' => 1, 'disabled_date' => NULL, 'kendaraan_isnotifstnk' => 0, 'kendaraan_deadlinestnk <= ' => $nextWeekDate]);
+        
         $this->db->update('master_kendaraan');
 
         $this->db->set('kendaraan_isnotifkir', 1);

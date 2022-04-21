@@ -77,8 +77,9 @@ $route['management/ajxUpdateCostPT']                = 'management/Dashboard/ajxU
 // ========== END MANAGEMENT ========== 
 
 // ========== ADMIN ==========
-$route['admin']                 = 'admin/Dashboard';
-$route['admin/update-report']   = 'admin/Dashboard/updateReport';
+$route['admin']                     = 'admin/Dashboard';
+$route['admin/update-report']       = 'admin/Dashboard/updateReport';
+$route['admin/update-deadline']     = 'admin/Dashboard/updateDeadline';
 // peminjaman
 $route['admin/peminjaman']          = 'admin/Peminjaman';
 $route['admin/peminjaman/store']    = 'admin/Peminjaman/store';
@@ -92,6 +93,8 @@ $route['admin/transaksi/ajxKdBarang']             = 'admin/Transaksi/ajxKdBarang
 // report
 $route['admin/report/administrasi/(:any)']  = 'admin/Report/administrasi/$1';
 $route['admin/report/maintenance/(:any)']   = 'admin/Report/maintenance/$1';
+// Kendaraan
+$route['admin/transaksi/ajxGetKendaraan'] = 'admin/Transaksi/ajxGetKendaraan';
 // ========== END ADMIN ==========
 
 // ========== MASTER ==========

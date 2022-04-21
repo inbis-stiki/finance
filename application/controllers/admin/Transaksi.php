@@ -194,4 +194,14 @@ class Transaksi extends CI_Controller
         $this->session->set_flashdata('succ_modal', true);
         redirect('admin/transaksi');
     }
+    public function ajxGetKendaraan(){
+        $this->load->model('MKendaraan');
+        $id = explode('|', $_POST['id']);
+        $kendaraan = $this->MKendaraan->getById($id[0], $id[1]);
+        $kendaraan->kendaraan_foto = json_decode($kendaraan->kendaraan_foto);
+
+        $umur = date_diff(date_create($kendaraan->kendaraan_tanggal_beli), date_create(date('Y-m-d')));
+        $kendaraan->umur = $umur->format("%m") . " Bulan " . $umur->format('%y') . "Tahun";
+        echo json_encode($kendaraan);
+    }
 }
