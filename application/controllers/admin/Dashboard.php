@@ -19,13 +19,17 @@ class Dashboard extends CI_Controller
 		$wilayah 			 = $this->MDropdown->get(['dropdown_menu' => 'Wilayah', 'deleted_date' => null]);
 		$globalCost 		 = $this->MReport->globalCostArea();
 		$daftarKendaraan	 = $this->MKendaraan->get(['disabled_date' => null, 'is_active' => 1]);
+		$daftarNotifSTNK	 = $this->MKendaraan->get(['disabled_date' => null, 'is_active' => 1, 'kendaraan_isnotifstnk', 'orderBy' => 'kendaraan_deadlinestnk ASC']);
+		$daftarNotifKir	 	 = $this->MKendaraan->get(['disabled_date' => null, 'is_active' => 1, 'kendaraan_isnotifkir', 'orderBy' => 'kendaraan_deadlinekir ASC']);
 
 		$data = [
 			'title' => "admin",
 			'GlobalCost' => $globalCost,
 			'DaftarKendaraan' => $daftarKendaraan,
 			'DaftarWilayah' => $wilayah,
-			'reportUpdated' => $this->db->get('report_update')->row()
+			'reportUpdated' => $this->db->get('report_update')->row(),
+			'notifKir' => $daftarNotifKir,
+			'notifSTNK' => $daftarNotifSTNK
 		];
 
 		$this->template->index('admin/dashboard', $data);

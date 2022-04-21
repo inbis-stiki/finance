@@ -231,7 +231,7 @@
                         res = JSON.parse(res)
                         res['kendaraan_jenis'] = res['kendaraan_jenis'] == "Perusahaan" ? `${res['kendaraan_pt']}` : res['kendaraan_jenis'];
 
-                        tglJatuhSim = new Date(res['kendaraan_deadlinesim']);
+                        tglJatuhSim = new Date(res['kendaraan_deadlinestnk']);
                         tglJatuhSim = `${tglJatuhSim.getDay()} ${getFullMonth(tglJatuhSim.getMonth())} ${tglJatuhSim.getFullYear()}`;
 
                         tglJatuhKIR = new Date(res['kendaraan_deadlinekir']);
