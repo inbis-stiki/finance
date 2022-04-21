@@ -150,7 +150,7 @@
     $(document).ready(function(){
         <?php
             if($this->session->flashdata('succ_modal')){
-                echo '$("#success").modal("show")';
+                echo '$("#success").modal("show");';
             }    
         ?>
         $('.select2').select2();
@@ -174,14 +174,14 @@
         }
 
         $.ajax({
-            url: '<?= site_url('master/kendaraan/ajxGet')?>',
+            url: '<?= site_url('admin/transaksi/ajxGetKendaraan')?>',
             method: 'post',
             data: {id},
             success: function(res){
                 res = JSON.parse(res)
                 res['kendaraan_jenis'] = res['kendaraan_jenis'] == "Perusahaan" ? `${res['kendaraan_pt']}` : res['kendaraan_jenis'];
 
-                tglJatuhSim = new Date(res['kendaraan_deadlinesim']);
+                tglJatuhSim = new Date(res['kendaraan_deadlinestnk']);
                 tglJatuhSim = `${tglJatuhSim.getDay()} ${getFullMonth(tglJatuhSim.getMonth())} ${tglJatuhSim.getFullYear()}`;
                 
                 tglJatuhKIR = new Date(res['kendaraan_deadlinekir']);

@@ -66,7 +66,7 @@
                         <label class="my-3">Tanggal Beli</label>
                         <input type="date" class="login-input regular fs-16px" name="tanggal" id="datepicker" value="<?= $kendaraan->kendaraan_tanggal_beli ?>" required>
                         <label class="my-3">Tanggal Deadline Pajak</label>
-                        <input type="date" class="login-input regular fs-16px" name="pajak" id="datepicker" value="<?= $kendaraan->kendaraan_deadlinesim ?>" required>
+                        <input type="date" class="login-input regular fs-16px" name="pajak" id="datepicker" value="<?= $kendaraan->kendaraan_deadlinestnk ?>" required>
                         <label class="my-3">Tanggal Deadline KIR</label>
                         <input type="date" class="login-input regular fs-16px" name="kir" id="datepicker" value="<?= $kendaraan->kendaraan_deadlinekir ?>" required>
                     </div>

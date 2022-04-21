@@ -6,7 +6,7 @@ class Kendaraan extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        if($this->session->userdata('isMaster') != '1'){
+        if($this->session->userdata('isManagement') != '1'){
 			redirect('/');
 		}
         $this->load->helper(array('form', 'url', 'date'));
@@ -170,7 +170,7 @@ class Kendaraan extends CI_Controller
                 'kendaraan_tanggal_beli'        => $this->input->post('tanggal'),
                 'kendaraan_jenis'               => $jenis,
                 'kendaraan_pt'                  => $jenis == "Perusahaan" ? $this->input->post('pt') : null,
-                'kendaraan_deadlinesim'         => $this->input->post('pajak'),
+                'kendaraan_deadlinestnk'         => $this->input->post('pajak'),
                 'kendaraan_deadlinekir'         => $this->input->post('kir'),
                 'kendaraan_kapasitas_tangki'    => $this->input->post('tangki'),
                 'kendaraan_foto'                => str_replace(" ", "_", $uploadFoto['link']),
@@ -223,7 +223,7 @@ class Kendaraan extends CI_Controller
             $dataStore['kendaraan_tanggal_beli']        = $kendaraan->kendaraan_tanggal_beli;
             $dataStore['kendaraan_foto']                = $kendaraan->kendaraan_foto;
             $dataStore['kendaraan_pemilik']             = $kendaraan->kendaraan_pemilik;
-            $dataStore['kendaraan_deadlinesim']         = $kendaraan->kendaraan_deadlinesim;
+            $dataStore['kendaraan_deadlinestnk']         = $kendaraan->kendaraan_deadlinestnk;
             $dataStore['kendaraan_deadlinekir']         = $kendaraan->kendaraan_deadlinekir;
             $dataStore['kendaraan_kapasitas_tangki']    = $kendaraan->kendaraan_kapasitas_tangki;
             $dataStore['kendaraan_jenis']               = $kendaraan->kendaraan_jenis;

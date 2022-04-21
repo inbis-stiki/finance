@@ -47,6 +47,16 @@
                 </div>
             </div>
         </div>
+        <div class="row" style="margin-bottom: 10px;">
+            <div class="col">
+                <div style="float: right;">
+                    <span><i>Updated at : <?= date_format(date_create($reportUpdated->updated_at), 'j M Y H:i') ?></i></span>&nbsp;
+                    <a href="<?= site_url('management/update-report')?>" class="btn-table green" style="padding-top: 7px;">
+                        <span class="iconify-inline" data-icon="ci:refresh" data-width="20" data-height="20" style="margin-top: 3px;"></span>
+                    </a>
+                </div>
+            </div>
+        </div>
         <div class="row">
             <div class="col-12 col-sm-12">
                 <div class="card-section">
@@ -171,9 +181,9 @@
                     </div>
                 </div>
             </div>
-        </div>
+            
         <div class="row">
-            <div class="col-4">
+            <div class="col-6">
                 <div class="card-section">
                     <div class="head">
                         <p>Sparepart</p>
@@ -216,7 +226,52 @@
                     </div>
                 </div>
             </div>
-            <div class="col-8">
+            <div class="col-6">
+                <div class="card-section">
+                    <div class="head">
+                        <p>Total Cost Per PT</p>
+                        <div class="form-group">
+                            <label for="">Daftar PT</label>
+                            <select name="" id="filCostPT1" class="form-control filCostPT" style="width: 150px;" id="">
+                                <option value="All">Semua</option>
+                                <?php
+                                    $i = 1;
+                                    foreach ($masterPT as $item) {
+                                        $first = $i++ == 1 ? 'selected' : '';
+                                        echo '
+                                            <option value="'.$item->dropdown_list.'" '.$first.'>'.$item->dropdown_list.'</option>
+                                        ';
+                                    }
+                                ?>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="">Tahun</label>
+                            <select name="" id="filCostPT2" class="form-control filCostPT" style="width: 150px;" id="">
+                                <option value="All">Semua</option>
+                                <?php
+                                    $currYear = date('Y');
+                                    for($year = (int)$currYear; $startYear = 2021 <= $year; $year--){
+                                        $isSelected = $currYear == $year ? 'selected' : '';
+                                        echo '
+                                            <option value="'.$year.'" '.$isSelected.'>'.$year.'</option>
+                                        ';
+                                    }
+                                ?>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="body">
+                        <div style="width: 99%;" id="chart_pt"></div>
+                    </div>
+                    <div class="foot">
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-12">
                 <div class="card-section">
                     <div class="head">
                         <p>Cost Per Kendaraan</p>
@@ -225,12 +280,12 @@
                         <?php
                             $template = array('table_open' => '<table id="tblKendaraan" class="table-custom">');
                             $this->table->set_template($template);
-                            $this->table->set_heading('No STNK', 'Klien', 'Jumlah Transaksi', 'Total Transaksi', 'Detail');
+                            $this->table->set_heading('No STNK', 'Pemilik', 'Jumlah Transaksi', 'Total Transaksi', 'Detail');
 
                             foreach ($Kendaraan as $row) {
                                 $this->table->add_row(
                                     $row->report_stnk,
-                                    $row->report_klien,
+                                    $row->report_pt,
                                     number_format($row->report_jumlah_transaksi),
                                     'Rp.'.number_format($row->report_total_transaksi),
                                     '<a href="'.site_url('management/cost-kendaraan/'.str_replace(' ', '_', $row->report_no_rangka).'/'.str_replace(' ', '_', $row->report_stnk)).'" target="_blank">
@@ -274,7 +329,7 @@
         </div>
     </div>
 </div>
-<script src="<?= site_url() ?>/assets/src/js/apexchart.js"></script>
+<script src="<?= site_url() ?>assets/src/js/apexchart.js"></script>
 <script>
     var tblSparepart = $('#tblSparepart').DataTable({
         'processing': true,
@@ -406,14 +461,52 @@
           enabled: true,
         },
     }
+    var options4 = {
+        chart: {
+            type: 'bar',
+            height: '300px'
+        },
+        series: [{
+            name: 'sales',
+            data: [
+                <?php
+                    foreach ($TransaksiPT as $item) {
+                        echo ((int)$item->report_total_transaksi / 1000000).'.toFixed(2),';
+                    }    
+                ?>
+            ]
+        }],
+        colors: ['#4F48ED'],
+        xaxis: {
+            categories: [
+                <?php
+                    foreach ($TransaksiPT as $item) {
+                        echo 'getFullMonthh('.((int)$item->report_bulan - 1).'),';
+                    }        
+                ?> 
+            ]
+        },
+        yaxis: {
+            labels: {
+                formatter: function (value) {
+                    return value.toFixed(2)+" Jt";
+                }
+            },
+        },
+        dataLabels: {
+          enabled: true,
+        },
+    }
 
     var chart = new ApexCharts(document.querySelector("#chart_global"), options);
     var chart2 = new ApexCharts(document.querySelector("#chart_area"), options2);
     var chart3 = new ApexCharts(document.querySelector("#chart_jenis"), options3);
+    var chart4 = new ApexCharts(document.querySelector("#chart_pt"), options4);
 
     chart.render();
     chart2.render();
     chart3.render();
+    chart4.render();
 
     $('#filGlobalCost').change(function(){
         $.ajax({
@@ -556,6 +649,53 @@
                 $('#chart_jenis').empty()
                 var updateChart3 = new ApexCharts(document.querySelector("#chart_jenis"), updateOptions3);
                 updateChart3.render();
+            }
+        })
+    })
+    $('.filCostPT').change(function (){
+        const pt = $('#filCostPT1').val()
+        const year = $('#filCostPT2').val()
+        $.ajax({
+            url: '<?= site_url('management/ajxUpdateCostPT')?>',
+            method: 'POST',
+            data: {pt, year},
+            success: function(res){
+                res = JSON.parse(res)
+                
+                data = []
+                categories = []
+
+                for(let i of res){
+                    data.push((i.report_total_transaksi / 1000000).toFixed(2))
+                    categories.push(getFullMonthh(i.report_bulan - 1))
+                }
+                var updateOptions4 = {
+                    chart: {
+                        type: 'bar',
+                        height: '300px'
+                    },
+                    series: [{
+                        name: 'sales',
+                        data
+                    }],
+                    colors: ['#4F48ED'],
+                    xaxis: {
+                        categories
+                    },
+                    yaxis: {
+                        labels: {
+                            formatter: function (value) {
+                                return value.toFixed(2)+" Jt";
+                            }
+                        },
+                    },
+                    dataLabels: {
+                        enabled: true,
+                    },
+                }
+                $('#chart_pt').empty()
+                var updateChart4 = new ApexCharts(document.querySelector("#chart_pt"), updateOptions4);
+                updateChart4.render();
             }
         })
     })

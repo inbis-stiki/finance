@@ -28,9 +28,9 @@
         ?>
 
 
-        <div class="nav-links <?= uri_string() == 'admin/dashboard' ? 'active' : '' ?>">
+        <!-- <div class="nav-links <?= uri_string() == 'admin/dashboard' ? 'active' : '' ?>">
             <a href="<?= site_url() ?>admin/dashboard">Dashboard</a>
-        </div>
+        </div> -->
         <!-- <div class="nav-links <?= uri_string() == 'admin/form_pengajuan' ? 'active' : '' ?>">
             <a href="<?= site_url() ?>admin/form_pengajuan">Form Pengajuan</a>
         </div> -->
@@ -41,7 +41,7 @@
         $activeform = (uri_string() == 'admin/form_pengajuan/unit_kendaraan' || uri_string() == 'admin/form_pengajuan/jenis_biaya' ? "active" : "");
         ?>
         <?php
-        if ($this->session->userdata('isMaster') == "1") {
+        if ($this->session->userdata('isManagement') == "1") {
             echo '
                     <div class="nav-links accordion-nav ' . $active . '">
                         <div class="position-relative">
@@ -51,7 +51,6 @@
             
                         <div class="sub-nav">
                             <a href="' . site_url() . 'master/driver">Driver</a>
-                            <a href="' . site_url() . 'master/klien">Klien</a>
                             <a href="' . site_url() . 'master/dropdown">Dropdown</a>
                             <a href="' . site_url() . 'master/sparepart">Sparepart</a>
                             <a href="' . site_url() . 'master/kendaraan">Kendaraan</a>
@@ -89,7 +88,7 @@
         }
         ?>
         <?php
-        if ($this->session->userdata('isSuper') == "1") {
+        if ($this->session->userdata('isManagement') == "1") {
             $statusActive = uri_string() == 'super/pengguna' ? 'active' : '';
             echo '
                     <div class="nav-links ' . $statusActive . '">

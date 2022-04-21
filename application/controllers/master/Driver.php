@@ -6,7 +6,7 @@ class Driver extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        if($this->session->userdata('isMaster') != '1'){
+        if($this->session->userdata('isManagement') != '1'){
 			redirect('/');
 		}
         $this->load->helper(array('form', 'url', 'date'));
@@ -120,6 +120,8 @@ class Driver extends CI_Controller
         $dataStore['driver_nik']          = $_POST['driver_nik'];
         $dataStore['start_date']          = $_POST['awal'];
         $dataStore['end_date']            = $_POST['akhir'];
+        
+        $this->MDriver->deleteTransKendaraan(['noRangka' => $kendaraan[0], 'stnk' => $kendaraan[1]]);
         $this->MDriver->insertTransKendaraan($dataStore);
         redirect('master/driver');
     }

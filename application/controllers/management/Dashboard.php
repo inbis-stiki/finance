@@ -22,10 +22,12 @@ class Dashboard extends CI_Controller{
 		$transaksi  = count($this->MJenisBiaya->get(['DATE(created_date)' => date('Y-m-d')]));
 
 		$masterArea		= $this->MDropdown->get(['dropdown_menu' => 'Wilayah', 'deleted_date' => NULL]);
+		$masterPT		= $this->MDropdown->get(['dropdown_menu' => 'PT', 'deleted_date' => NULL]);
 		$globalCost 	= $this->MReport->globalCostTahun(date('Y'));
 		$costPerArea 	= $this->MReport->globalCostTahunArea($masterArea[0]->dropdown_list, date('Y'));
 		$costSparepart	= $this->MReport->jenisBiayaSparepart(date('n'), date('Y'));
 		$jenisPengeluaran= $this->MPengeluaran->jenisPengeluaran(date('n'), date('Y'));
+		$transaksiPT	= $this->MReport->transaksiPT($masterPT[0]->dropdown_list, date('Y'));
 		$kendaraan		= $this->MReport->reportKendaraan();
 
 		$masterBulan = [];
@@ -43,12 +45,14 @@ class Dashboard extends CI_Controller{
 			'CostPerArea' => $costPerArea,
 			'CostSparepart' => $costSparepart,
 			'JenisPengeluaran' => $jenisPengeluaran,
+			'TransaksiPT' => $transaksiPT,
 			'Kendaraan' => $kendaraan,
 			'masterArea' =>  $masterArea,
-			'masterBulan' => $masterBulan
+			'masterBulan' => $masterBulan,
+			'masterPT' => $masterPT,
+			'reportUpdated' => $this->db->get('report_update')->row()
 		];
 
-		// print_r($jenisPengeluaran);
 		$this->template->index('admin/dashboard_management', $data);
 		$this->load->view('_components/sideNavigation', $data);
     }
@@ -99,6 +103,11 @@ class Dashboard extends CI_Controller{
 
 		echo json_encode($costJenisPengeluaran);
 	}
+	public function ajxUpdateCostPT(){
+		$costPerPT = $this->MReport->transaksiPT($_POST['pt'], $_POST['year']);
+
+		echo json_encode($costPerPT);
+	}
 	public function ajxUpdateSparepart(){
 		$draw   = $_POST['draw'];
         $offset = $_POST['start'];
@@ -122,6 +131,14 @@ class Dashboard extends CI_Controller{
         );
 
         echo json_encode($response);
+	}
+	public function updateReport(){
+        $this->load->model('MReport');
+        $this->db->empty_table('report_transaksi');
+        $vReportTrans = $this->db->get('v_report_temp')->result_array();
+        $this->db->insert_batch('report_transaksi', $vReportTrans);
+		$this->db->update('report_update', ['updated_at' => date('Y-m-d H:i:s')]);
+		redirect('management');
 	}
 	public function getFullMonth($param){
         switch ($param) {

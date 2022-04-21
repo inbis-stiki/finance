@@ -12,6 +12,7 @@ class Transaksi extends CI_Controller
         $this->load->model('MKendaraan');
         $this->load->model('MPengeluaran');
         $this->load->model('MSparepart');
+        $this->load->model('MDropdown');
     }
     public function index(){
         $data['auth']           = $this->db->get_where('master_user', ['username' => $this->session->userdata('username')])->row_array();
@@ -19,18 +20,18 @@ class Transaksi extends CI_Controller
         $data['pengAdmin']      = $this->MPengeluaran->get(['pengeluaran_group' => 'Administrasi', 'deleted_date' => NULL]);
         $data['pengMaint']      = $this->MPengeluaran->get(['pengeluaran_group' => 'Maintenance', 'deleted_date' => NULL]);
         $data['pengExp']        = $this->MPengeluaran->get(['pengeluaran_group' => 'Expense', 'deleted_date' => NULL]);
-        $data['sparepart']      = $this->MSparepart->get(['deleted_date' => NULL]);
+        $data['jenSparepart']   = $this->MDropdown->get(['dropdown_menu' => 'Jenis Sparepart', 'deleted_date' => NULL]);
         $data['saldo']          = $this->db->get('balance')->row();
 
         $this->template->index('admin/pencatatan/jenis_biaya', $data);
 		$this->load->view('_components/sideNavigation', $data);
     }
-    public function ajxGetNoSeri(){
-        $noSeri = $this->MJenisBiaya->get(['transaksi_no_seri' => $_POST['noSeri']]);
-        if($noSeri != null){
-            echo json_encode(true);
+    public function ajxKdBarang(){
+        $kdBarang = $this->MSparepart->get(['sparepart_kode' => $_POST['kdBarang'], 'deleted_date' => NULL]);
+        if($kdBarang != null){
+            echo json_encode(['status' => true, 'data' => $kdBarang]);
         }else{
-            echo json_encode(false);
+            echo json_encode(['status' => false]);
         }
     }
     public function storeAdministrasi(){
@@ -66,6 +67,22 @@ class Transaksi extends CI_Controller
         redirect('admin/transaksi');
     }
     public function storeMaintenance(){
+        print_r($_POST);
+        foreach ($_POST['jenSparepart'] as $item) {
+            if($item == null || $item == ''){
+                $this->session->set_flashdata('err_msg', 'Jenis sparepart tidak boleh kosong!');
+                redirect('admin/transaksi');
+                break;
+            }
+        }
+        foreach ($_POST['barang'] as $item) {
+            if($item == null || $item == ''){
+                $this->session->set_flashdata('err_msg', 'Nama barang tidak boleh kosong!');
+                redirect('admin/transaksi');
+                break;
+            }
+        }
+        
         // check saldo
         $saldo = $this->db->get('balance')->row()->balance;
         $totalTrans = array_sum(str_replace(',', '', $_POST['total']));
@@ -75,6 +92,21 @@ class Transaksi extends CI_Controller
         }
         $saldo -= $totalTrans;
         $this->db->update('balance', ['balance' => $saldo]);
+        // end check
+
+        // check sparepart is exist
+        $index = 0;
+        foreach ($_POST['kdBarang'] as $item) {
+            $sparepart = $this->MSparepart->get(['sparepart_kode' => $item, 'deleted_date' => NULL]);
+            if($sparepart == null){
+                $this->MSparepart->insert([
+                    'sparepart_kode'  => $item, 
+                    'sparepart_jenis' => $_POST['jenSparepart'][$index],
+                    'sparepart_nama'  => $_POST['barang'][$index]
+                ]);
+            }
+            $index++;
+        }
         // end check
 
         $dataStore['transaksi_tanggal']         = $_POST['tglService'];
@@ -89,12 +121,10 @@ class Transaksi extends CI_Controller
         $index = 0;
         foreach ($_POST['jenPeng'] as $item) {
             $dataStore['id_pengeluaran']            = $item;
-            $dataStore['transaksi_no_seri']         = $_POST['noSeri'][$index];
-            $dataStore['id_sparepart']              = explode('|', $_POST['sparepart'][$index])[0];
-            $dataStore['transaksi_jarak_tempuh']    = str_replace(',', '', $_POST['jarak'][$index]);
+            $dataStore['id_sparepart']              = $this->MSparepart->get(['sparepart_kode' => $_POST['kdBarang'][$index], 'deleted_date' => NULL])[0]->sparepart_id;
             $dataStore['transaksi_jumlah']          = str_replace(',', '', $_POST['kuantitas'][$index]);
             $dataStore['transaksi_total']           = str_replace(',', '', $_POST['total'][$index]);
-            $dataStore['transaksi_keterangan']      = $_POST['merek'][$index];
+            $dataStore['transaksi_keterangan']      = $_POST['keterangan'][$index];
             $this->MJenisBiaya->insert($dataStore);
             $index++;
         }
@@ -163,5 +193,15 @@ class Transaksi extends CI_Controller
         }
         $this->session->set_flashdata('succ_modal', true);
         redirect('admin/transaksi');
+    }
+    public function ajxGetKendaraan(){
+        $this->load->model('MKendaraan');
+        $id = explode('|', $_POST['id']);
+        $kendaraan = $this->MKendaraan->getById($id[0], $id[1]);
+        $kendaraan->kendaraan_foto = json_decode($kendaraan->kendaraan_foto);
+
+        $umur = date_diff(date_create($kendaraan->kendaraan_tanggal_beli), date_create(date('Y-m-d')));
+        $kendaraan->umur = $umur->format("%m") . " Bulan " . $umur->format('%y') . "Tahun";
+        echo json_encode($kendaraan);
     }
 }

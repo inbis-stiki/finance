@@ -67,15 +67,19 @@ $route['profile/(:any)']      = 'Profile/edit/$1';
 $route['management']                                = 'management/Dashboard';
 $route['management/set-saldo']                      = 'management/Dashboard/setSaldo';
 $route['management/cost-kendaraan/(:any)/(:any)']   = 'management/Dashboard/costKendaraan/$1/$2';
+$route['management/update-report']                  = 'management/Dashboard/updateReport';
 $route['management/ajxUpdateGlobalCost']            = 'management/Dashboard/ajxUpdateGlobalCost';
 $route['management/ajxUpdateCostArea']              = 'management/Dashboard/ajxUpdateCostArea';
 $route['management/ajxUpdateSparepart']             = 'management/Dashboard/ajxUpdateSparepart';
 $route['management/ajxUpdateJenisBiayaSparepart']   = 'management/Dashboard/ajxUpdateJenisBiayaSparepart';
 $route['management/ajxUpdateJenisPengeluaran']      = 'management/Dashboard/ajxUpdateJenisPengeluaran';
-// ========== END MANAGEMENT ==========
+$route['management/ajxUpdateCostPT']                = 'management/Dashboard/ajxUpdateCostPT';
+// ========== END MANAGEMENT ========== 
 
 // ========== ADMIN ==========
-$route['admin'] = 'admin/Dashboard';
+$route['admin']                     = 'admin/Dashboard';
+$route['admin/update-report']       = 'admin/Dashboard/updateReport';
+$route['admin/update-deadline']     = 'admin/Dashboard/updateDeadline';
 // peminjaman
 $route['admin/peminjaman']          = 'admin/Peminjaman';
 $route['admin/peminjaman/store']    = 'admin/Peminjaman/store';
@@ -85,7 +89,12 @@ $route['admin/transaksi']                         = 'admin/Transaksi';
 $route['admin/transaksi/store-administrasi']      = 'admin/Transaksi/storeAdministrasi';
 $route['admin/transaksi/store-maintenance']       = 'admin/Transaksi/storeMaintenance';
 $route['admin/transaksi/store-expense']           = 'admin/Transaksi/storeExpense';
-$route['admin/transaksi/ajxGetNoSeri']            = 'admin/Transaksi/ajxGetNoSeri';
+$route['admin/transaksi/ajxKdBarang']             = 'admin/Transaksi/ajxKdBarang';
+// report
+$route['admin/report/administrasi/(:any)']  = 'admin/Report/administrasi/$1';
+$route['admin/report/maintenance/(:any)']   = 'admin/Report/maintenance/$1';
+// Kendaraan
+$route['admin/transaksi/ajxGetKendaraan'] = 'admin/Transaksi/ajxGetKendaraan';
 // ========== END ADMIN ==========
 
 // ========== MASTER ==========
@@ -138,4 +147,5 @@ $route['super/pengguna/destroy']            = 'super/Pengguna/destroy';
 // ========== END SUPER ==========
 
 // ========== CRONJOB ==========
-$route['cronjob/report'] = 'Cronjob/JobReport';
+$route['cronjob/report']    = 'Cronjob/JobReport';
+$route['cronjob/notif']     = 'Cronjob/JobNotif';

@@ -8,9 +8,9 @@
 
     <!-- Bootstrap 5.0.2 JS -->
     
-    <script src="<?= site_url() ?>/assets/src/js/style.js"></script>
-    <script src="<?= site_url() ?>/assets/src/js/autonumeric.js"></script>
-    <script src="<?= site_url() ?>/assets/plugin/image-zoom/jquery.zoom.js"></script>
+    <script src="<?= site_url() ?>assets/src/js/style.js"></script>
+    <script src="<?= site_url() ?>assets/src/js/autonumeric.js"></script>
+    <script src="<?= site_url() ?>assets/plugin/image-zoom/jquery.zoom.js"></script>
     <script>
         $(document).ready(function(){
             <?php
@@ -35,6 +35,14 @@
         }
         function numberWithCommas(x) {
             return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
+        function preventSpace(evt){
+            evt = (evt) ? evt : window.event;
+            var charCode = (evt.which) ? evt.which : evt.keyCode;
+            if(charCode == 32){
+            return false
+            }
+            return true
         }
         $(".inpt-number").autoNumeric('init', {
             aSep: '.', 
