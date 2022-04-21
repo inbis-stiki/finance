@@ -97,6 +97,24 @@
                 ';
         }
         ?>
+        <?php
+        if ($this->session->userdata('isManagement') == "1") {
+            echo '
+                    <div class="nav-links accordion-nav ' . $active . '">
+                        <div class="position-relative">
+                            <a>Laporan</a>
+                            <span class="iconify chevron" data-icon="akar-icons:chevron-left"></span>
+                        </div>
+            
+                        <div class="sub-nav">
+                            <a href="' . site_url() . 'laporan/Harian">Harian</a>
+                            <a href="' . site_url() . 'laporan/Bulanan">Bulanan</a>
+                            <a href="' . site_url() . 'laporan/Tahunan">Tahunan</a>
+                        </div>
+                    </div>
+                ';
+        }
+        ?>
     </div>
 </div>
 <div class="top-nav">
