@@ -107,9 +107,9 @@
                         </div>
             
                         <div class="sub-nav">
-                            <a href="' . site_url() . 'laporan/Harian">Harian</a>
-                            <a href="' . site_url() . 'laporan/Bulanan">Bulanan</a>
-                            <a href="' . site_url() . 'laporan/Tahunan">Tahunan</a>
+                            <a href="' . site_url() . 'management/laporan-harian">Harian</a>
+                            <a href="' . site_url() . 'management/laporan-bulanan">Bulanan</a>
+                            <a href="' . site_url() . 'management/laporan-tahunan">Tahunan</a>
                         </div>
                     </div>
                 ';

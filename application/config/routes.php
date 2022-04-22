@@ -74,6 +74,10 @@ $route['management/ajxUpdateSparepart']             = 'management/Dashboard/ajxU
 $route['management/ajxUpdateJenisBiayaSparepart']   = 'management/Dashboard/ajxUpdateJenisBiayaSparepart';
 $route['management/ajxUpdateJenisPengeluaran']      = 'management/Dashboard/ajxUpdateJenisPengeluaran';
 $route['management/ajxUpdateCostPT']                = 'management/Dashboard/ajxUpdateCostPT';
+// laporan
+$route['management/laporan-harian']     = 'management/Laporan/laporanHarian';
+$route['management/laporan-bulanan']    = 'management/Laporan/laporanBulanan';
+$route['management/laporan-tahunan']    = 'management/Laporan/laporanTahunan';
 // ========== END MANAGEMENT ========== 
 
 // ========== ADMIN ==========
