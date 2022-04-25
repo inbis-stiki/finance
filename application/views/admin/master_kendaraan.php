@@ -33,11 +33,10 @@
                 <?php
                 $template = array('table_open' => '<table id="tableKendaraan" class="table-custom border="0">');
                 $this->table->set_template($template);
-                $this->table->set_heading('No', 'Foto', 'STNK', 'No. Rangka', 'No. STNK', 'Merk', 'Tanggal Beli', 'Umur', 'Aksi');
+                $this->table->set_heading('No', 'Foto', 'STNK', 'No. Rangka', 'No. STNK', 'Merk', 'PT', 'Wilayah', 'Aksi');
 
                 $no = 1;
                 foreach ($Kendaraan as $row) {
-                    $tgl = date_format(date_create($row->kendaraan_tanggal_beli), 'j M Y');
                     $currentDate = date("Y-m-d");
                     $umur = date_diff(date_create($row->kendaraan_tanggal_beli), date_create($currentDate));
                     $this->table->add_row(
@@ -55,8 +54,8 @@
                         $row->kendaraan_no_rangka,
                         $row->kendaraan_stnk,
                         $row->kendaraan_merk,
-                        $tgl,
-                        $umur->format("%m") . " Bulan " . $umur->format('%y') . "Tahun",
+                        $row->kendaraan_pt,
+                        $row->kendaraan_wilayah,
                         '
                                     <button type="button" data-id="' . $row->kendaraan_no_rangka . '" data-stnk="' . $row->kendaraan_stnk . '" class="btn-table green stnk_masterKendaraan btnStnk" data-bs-toggle="modal" data-bs-target="#stnk_masterKendaraan">
                                         <span class="iconify-inline" data-icon="bi:credit-card" data-width="20" data-height="20"></span>
