@@ -21,14 +21,16 @@ class Dashboard extends CI_Controller{
 		$peminjaman = count($this->db->get_where('transaksi_peminjaman', ['DATE(created_date)' => date('Y-m-d')])->result());
 		$transaksi  = count($this->MJenisBiaya->get(['DATE(created_date)' => date('Y-m-d')]));
 
-		$masterArea		= $this->MDropdown->get(['dropdown_menu' => 'Wilayah', 'deleted_date' => NULL]);
-		$masterPT		= $this->MDropdown->get(['dropdown_menu' => 'PT', 'deleted_date' => NULL]);
-		$globalCost 	= $this->MReport->globalCostTahun(date('Y'));
-		$costPerArea 	= $this->MReport->globalCostTahunArea($masterArea[0]->dropdown_list, date('Y'));
-		$costSparepart	= $this->MReport->jenisBiayaSparepart(date('n'), date('Y'));
-		$jenisPengeluaran= $this->MPengeluaran->jenisPengeluaran(date('n'), date('Y'));
-		$transaksiPT	= $this->MReport->transaksiPT($masterPT[0]->dropdown_list, date('Y'));
-		$kendaraan		= $this->MReport->reportKendaraan();
+		$masterArea			= $this->MDropdown->get(['dropdown_menu' => 'Wilayah', 'deleted_date' => NULL]);
+		$masterPT			= $this->MDropdown->get(['dropdown_menu' => 'PT', 'deleted_date' => NULL]);
+		$globalCost 		= $this->MReport->globalCostTahun(date('Y'));
+		$costPerArea 		= $this->MReport->globalCostTahunArea($masterArea[0]->dropdown_list, date('Y'));
+		$costSparepart		= $this->MReport->jenisBiayaSparepart(date('n'), date('Y'));
+		$jenisPengeluaran	= $this->MPengeluaran->jenisPengeluaran(date('n'), date('Y'));
+		$transaksiPT		= $this->MReport->transaksiPT($masterPT[0]->dropdown_list, date('Y'));
+		$kendaraan			= $this->MReport->reportKendaraan();
+		$daftarNotifSTNK	= $this->MKendaraan->get(['disabled_date' => null, 'is_active' => 1, 'kendaraan_isnotifstnk' => 1, 'orderBy' => 'kendaraan_deadlinestnk ASC']);
+		$daftarNotifKir		= $this->MKendaraan->get(['disabled_date' => null, 'is_active' => 1, 'kendaraan_isnotifkir' => 1, 'orderBy' => 'kendaraan_deadlinekir ASC']);
 
 		$masterBulan = [];
 		for ($i=1; $i <= 12 ; $i++) { 
@@ -50,12 +52,29 @@ class Dashboard extends CI_Controller{
 			'masterArea' =>  $masterArea,
 			'masterBulan' => $masterBulan,
 			'masterPT' => $masterPT,
-			'reportUpdated' => $this->db->get('report_update')->row()
+			'reportUpdated' => $this->db->get('report_update')->row(),
+			'notifKir' => $daftarNotifKir,
+			'notifSTNK' => $daftarNotifSTNK
 		];
 
 		$this->template->index('admin/dashboard_management', $data);
 		$this->load->view('_components/sideNavigation', $data);
     }
+	public function updateDeadline(){
+		$this->load->model('MKendaraan');
+        $id = explode('|', $_POST['id']);
+		$formData['kendaraan_no_rangka'] = $id[0];
+		$formData['kendaraan_stnk'] 	 = $id[1];
+		if($_POST['status'] == '1'){
+			$formData['kendaraan_isnotifstnk'] 	= 0;
+			$formData['kendaraan_deadlinestnk'] = $_POST['deadline'];
+		}else{
+			$formData['kendaraan_isnotifkir'] 	= 0;
+			$formData['kendaraan_deadlinekir'] = $_POST['deadline'];
+		}
+        $this->MKendaraan->update($formData);
+		redirect('management');
+	}
 	public function setSaldo(){
 		$this->db->update('balance', ['balance' => str_replace(',', '', $_POST['balance'])]);
 		redirect('management');
