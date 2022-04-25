@@ -21,14 +21,15 @@ class Dashboard extends CI_Controller{
 		$peminjaman = count($this->db->get_where('transaksi_peminjaman', ['DATE(created_date)' => date('Y-m-d')])->result());
 		$transaksi  = count($this->MJenisBiaya->get(['DATE(created_date)' => date('Y-m-d')]));
 
-		$masterArea		= $this->MDropdown->get(['dropdown_menu' => 'Wilayah', 'deleted_date' => NULL]);
-		$masterPT		= $this->MDropdown->get(['dropdown_menu' => 'PT', 'deleted_date' => NULL]);
-		$globalCost 	= $this->MReport->globalCostTahun(date('Y'));
-		$costPerArea 	= $this->MReport->globalCostTahunArea($masterArea[0]->dropdown_list, date('Y'));
-		$costSparepart	= $this->MReport->jenisBiayaSparepart(date('n'), date('Y'));
-		$jenisPengeluaran= $this->MPengeluaran->jenisPengeluaran(date('n'), date('Y'));
-		$transaksiPT	= $this->MReport->transaksiPT($masterPT[0]->dropdown_list, date('Y'));
-		$kendaraan		= $this->MReport->reportKendaraan();
+		$masterArea			= $this->MDropdown->get(['dropdown_menu' => 'Wilayah', 'deleted_date' => NULL]);
+		$masterPT			= $this->MDropdown->get(['dropdown_menu' => 'PT', 'deleted_date' => NULL]);
+		$globalCost 		= $this->MReport->globalCostTahun(date('Y'));
+		$costPerArea 		= $this->MReport->globalCostTahunArea($masterArea[0]->dropdown_list, date('Y'));
+		$jenisPengeluaran	= $this->MPengeluaran->jenisPengeluaran(date('n'), date('Y'));
+		$transaksiPT		= $this->MReport->transaksiPT($masterPT[0]->dropdown_list, date('Y'));
+		$kendaraan			= $this->MReport->reportKendaraan();
+		$daftarNotifSTNK	= $this->MKendaraan->get(['disabled_date' => null, 'is_active' => 1, 'kendaraan_isnotifstnk' => 1, 'orderBy' => 'kendaraan_deadlinestnk ASC']);
+		$daftarNotifKir		= $this->MKendaraan->get(['disabled_date' => null, 'is_active' => 1, 'kendaraan_isnotifkir' => 1, 'orderBy' => 'kendaraan_deadlinekir ASC']);
 
 		$masterBulan = [];
 		for ($i=1; $i <= 12 ; $i++) { 
@@ -43,19 +44,35 @@ class Dashboard extends CI_Controller{
 			'saldo'	=> $dataSaldo,
 			'GlobalCost' => $globalCost,
 			'CostPerArea' => $costPerArea,
-			'CostSparepart' => $costSparepart,
 			'JenisPengeluaran' => $jenisPengeluaran,
 			'TransaksiPT' => $transaksiPT,
 			'Kendaraan' => $kendaraan,
 			'masterArea' =>  $masterArea,
 			'masterBulan' => $masterBulan,
 			'masterPT' => $masterPT,
-			'reportUpdated' => $this->db->get('report_update')->row()
+			'reportUpdated' => $this->db->get('report_update')->row(),
+			'notifKir' => $daftarNotifKir,
+			'notifSTNK' => $daftarNotifSTNK
 		];
 
 		$this->template->index('admin/dashboard_management', $data);
 		$this->load->view('_components/sideNavigation', $data);
     }
+	public function updateDeadline(){
+		$this->load->model('MKendaraan');
+        $id = explode('|', $_POST['id']);
+		$formData['kendaraan_no_rangka'] = $id[0];
+		$formData['kendaraan_stnk'] 	 = $id[1];
+		if($_POST['status'] == '1'){
+			$formData['kendaraan_isnotifstnk'] 	= 0;
+			$formData['kendaraan_deadlinestnk'] = $_POST['deadline'];
+		}else{
+			$formData['kendaraan_isnotifkir'] 	= 0;
+			$formData['kendaraan_deadlinekir'] = $_POST['deadline'];
+		}
+        $this->MKendaraan->update($formData);
+		redirect('management');
+	}
 	public function setSaldo(){
 		$this->db->update('balance', ['balance' => str_replace(',', '', $_POST['balance'])]);
 		redirect('management');
@@ -108,18 +125,19 @@ class Dashboard extends CI_Controller{
 
 		echo json_encode($costPerPT);
 	}
-	public function ajxUpdateSparepart(){
+	public function ajxUpdateCostPTAll(){
 		$draw   = $_POST['draw'];
         $offset = $_POST['start'];
         $limit  = $_POST['length']; // Rows display per page
         $search = $_POST['search']['value'];
         
-        $report = $this->MReport->reportSparepart(['year' => $_POST['year'], 'month' => $_POST['month'], 'offset' => $offset, 'limit' => $limit]);
+        $report = $this->MReport->reportCostPTAll(['year' => $_POST['year'], 'month' => $_POST['month'], 'offset' => $offset, 'limit' => $limit]);
         $datas = array();
         foreach ($report['records'] as $item) {
             $datas[] = array( 
-				'detail' => $item->sparepart_nama,
-                'jumlah' => number_format((int)$item->sparepart_total)
+				'pt' => $item->pt,
+				'wilayah' => $item->wilayah,
+                'total' => 'Rp.'.number_format((int)$item->total)
             );
         }
 

@@ -109,58 +109,33 @@ class MReport extends CI_Model{
             GROUP BY MONTH(rt.report_pt)
             ORDER BY MONTH(rt.report_tanggal) ASC
         ')->result();
-    //     return '
-    //     SELECT 
-    //     MONTH(rt.report_tanggal) as report_bulan,
-    //     SUM(rt. report_total_transaksi) AS report_total_transaksi
-    // FROM report_transaksi rt 
-    // '.$where.'
-    // '.implode(' AND ', $filter).'
-    // GROUP BY MONTH(rt.report_tanggal)
-    // ORDER BY MONTH(rt.report_tanggal) ASC
-    //     ';
     }
-    public function reportSparepart($param){
+    public function reportCostPTAll($param){
         $filter = [];
-        if($param['month'] != "All") array_push($filter, 'MONTH(t.transaksi_tanggal) = "'.$param['month'].'"');
-        if($param['year'] != "All") array_push($filter, 'YEAR(t.transaksi_tanggal) = "'.$param['year'].'"');
-        $and = count($filter) > 0 ? ' AND ' : '';
+        if($param['month'] != "All") array_push($filter, 'MONTH(rt.report_tanggal) = "'.$param['month'].'"');
+        if($param['year'] != "All") array_push($filter, 'YEAR(rt.report_tanggal) = "'.$param['year'].'"');
+        $queryFilter = $filter != null ? 'WHERE '.implode(' AND ', $filter) : "";
 
         $records = $this->db->query('
             SELECT 
-                ms.sparepart_nama ,
-                SUM(t.transaksi_jumlah) as sparepart_total
-            FROM 
-                transaksi t, 
-                master_jenis_pengeluaran mjp ,
-                master_sparepart ms 
-            WHERE 
-                mjp.pengeluaran_group = "Maintenance"
-                AND mjp.pengeluaran_id = t.id_pengeluaran 
-                AND ms.sparepart_id = t.id_sparepart 
-                '.$and.'
-                '.implode(' AND ', $filter).'
-            GROUP BY t.id_sparepart 
-            ORDER BY SUM(t.transaksi_jumlah) DESC
+                rt.report_pt as pt, 
+                rt.report_wilayah as wilayah ,
+                SUM(rt.report_total_transaksi) as total
+            FROM report_transaksi rt
+            '.$queryFilter.'
+            GROUP BY rt.report_pt , rt.report_wilayah 
             LIMIT '.$param['limit'].'
             OFFSET '.$param['offset'].'
         ')->result();
         $totalRecords = $this->db->query('
             SELECT 
-                ms.sparepart_nama ,
-                SUM(t.transaksi_jumlah) as sparepart_total
-            FROM 
-                transaksi t, 
-                master_jenis_pengeluaran mjp ,
-                master_sparepart ms 
-            WHERE 
-                mjp.pengeluaran_group = "Maintenance"
-                AND mjp.pengeluaran_id = t.id_pengeluaran 
-                AND ms.sparepart_id = t.id_sparepart 
-                '.$and.'
-                '.implode(' AND ', $filter).'
-            GROUP BY t.id_sparepart 
-            ORDER BY SUM(t.transaksi_jumlah) DESC
+                rt.report_pt as pt, 
+                rt.report_wilayah as wilayah ,
+            SUM(rt.report_total_transaksi) as total
+            FROM report_transaksi rt
+            '.$queryFilter.'
+            GROUP BY rt.report_pt , rt.report_wilayah 
+            ORDER BY SUM(rt.report_total_transaksi) DESC
         ')->result();
         return ['records' => $records, 'totalDisplayRecords' => count($totalRecords), 'totalRecords' => count($totalRecords)];
     }

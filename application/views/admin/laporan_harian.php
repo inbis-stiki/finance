@@ -1,7 +1,9 @@
 <div class="min-vh-100 general-padding bg-light-purple">
     <div class="p-5">
     <div class="d-flex flex-row justify-content-between align-items-center mb-4">
-
+            <p class="mb-0 fs-5 font-w-500 color-darker">
+                Laporan Harian
+            </p>
             <a href="<?php echo site_url(); ?>" style="padding-left: 760px;">
                 <button type="button" class="btn-table red">
                     <span class="iconify-inline" data-icon="uiw:file-pdf" data-width="20" data-height="20"></span>
@@ -32,44 +34,17 @@
         ?>
         <div class="card-section">
             <div class="head">
-                <p>Laporan Harian</p>
+                <p>Administrasi</p>
                 <div  style="padding-left: 520px;" class="form-group">
-                <label for="">Bulan</label>
-                            <select name="" id="filHarian1" class="form-control filHarian" style="width: 150px;" id="">
-                                <option value="All">Semua</option>
-                                <?php
-                                    $i = 0;
-                                    $currMonth = date('n');
-                                    foreach ($masterBulan as $item) {
-                                        $isSelected = $currMonth == ++$i ? 'selected' : '';
-                                        echo '
-                                            <option value="'.$i.'" '.$isSelected.'>'.$item.'</option>
-                                        ';
-                                    }
-                                ?>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="">Tahun</label>
-                            <select name="" id="filHarian2" class="form-control filHarian" style="width: 150px;" id="">
-                                <option value="All">Semua</option>
-                                <?php
-                                    $currYear = date('Y');
-                                    for($year = (int)$currYear; $startYear = 2021 <= $year; $year--){
-                                        $isSelected = $currYear == $year ? 'selected' : '';
-                                        echo '
-                                            <option value="'.$year.'" '.$isSelected.'>'.$year.'</option>
-                                        ';
-                                    }
-                                ?>
-                            </select>
-                        </div>
-                    </div>
+                    <label for="">Tanggal</label>
+                    <input class="form-control inptDate" type="text" style="width: 150px;">
+                </div>
+            </div>
             <div class="body" style="padding: 15px;" id="">
                 <?php
                 $template = array('table_open' => '<table id="tblHarian" class="table-custom border="0">');
                 $this->table->set_template($template);
-                $this->table->set_heading('No STNK', 'Jenis Pengeluaran', 'Kode Barang', 'Jenis Sparepart', 'Nama Barang', 'Qty', 'Harga', 'Total Biaya', 'Keterangan');
+                $this->table->set_heading('No', 'Tanggal', 'Nomor Polisi', 'Pengeluaran', 'Total Biaya');
             
                 echo $this->table->generate(); ?>
             </div>
@@ -78,31 +53,36 @@
         </div>
         </div>
         <script>
-            var tblHarian = $('#tblHarian').DataTable({
-            'processing': true,
-            'serverSide': true,
-            'ordering': false,
-            'searching': false,
-            'serverMethod': 'post',
-            'ajax': {
-                'url':'<?= site_url('management/ajxUpdateSparepart')?>',
-                'data': {
-                    'month': $('#filHarian1').val(),
-                    'year': $('#filHarian2').val()
-                }
-            },
-            'columns': [
-                { data: 'detail' },
-                { data: 'detail' },
-                { data: 'detail' },
-                { data: 'detail' },
-                { data: 'detail' },
-                { data: 'detail' },
-                { data: 'detail' },
-                { data: 'detail' },
-                { data: 'jumlah' }
-            ]
-        });
+            $(document).ready(function(){
+                $('.inptDate').flatpickr({
+                    dateFormat: "j F Y",
+                })
+            })
+        //     var tblHarian = $('#tblHarian').DataTable({
+        //     'processing': true,
+        //     'serverSide': true,
+        //     'ordering': false,
+        //     'searching': false,
+        //     'serverMethod': 'post',
+        //     'ajax': {
+        //         'url':'<?= site_url('management/ajxUpdateSparepart')?>',
+        //         'data': {
+        //             'month': $('#filHarian1').val(),
+        //             'year': $('#filHarian2').val()
+        //         }
+        //     },
+        //     'columns': [
+        //         { data: 'detail' },
+        //         { data: 'detail' },
+        //         { data: 'detail' },
+        //         { data: 'detail' },
+        //         { data: 'detail' },
+        //         { data: 'detail' },
+        //         { data: 'detail' },
+        //         { data: 'detail' },
+        //         { data: 'jumlah' }
+        //     ]
+        // });
 
             $('.filJenisBiayaSparepart').change(function(){
         const month = $('#filJenisBiayaSparepart1').val()

@@ -93,14 +93,14 @@
                                         <input type="radio" id="km2" value="km2" name="ideal2" class="pilih2" checked>
                                         <label for="km2" class="font-w-500 ms-2 me-3">Kilometer</label>
                                     </div>
-                                    <input type="number" onkeypress="return isNumberKey(event)" name="km-txt2" id="pilihkm" class="login-input regular" min="0" value="" required>
+                                    <input type="number" onkeypress="return isNumberKey(event)" name="km-txt2" id="pilihkm" class="login-input regular" min="0" value="">
                                 </div>
                                 <div class="col-6 pe-0 d-flex flex-row align-items-center">
                                     <div class="d-flex flex-row align-items-center radio-wrapper">
                                         <input type="radio" id="bulan2" value="bulan" name="ideal2" class="pilih2">
                                         <label for="bulan2" class="font-w-500 ms-2 me-3">Bulan</label>
                                     </div>
-                                    <input type="number" onkeypress="return isNumberKey(event)" name="bulan-txt2" id="pilihbln" class="login-input regular" min="0" value="" disabled required>
+                                    <input type="number" onkeypress="return isNumberKey(event)" name="bulan-txt2" id="pilihbln" class="login-input regular" min="0" value="" disabled>
                                 </div>
                             </div>
                             <div class="d-flex flex-column my-2 w-100">
