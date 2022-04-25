@@ -227,10 +227,10 @@
             <div class="col-6">
                 <div class="card-section">
                     <div class="head">
-                        <p>Sparepart</p>
+                        <p>Total Cost PT</p>
                         <div class="form-group">
                             <label for="">Bulan</label>
-                            <select name="" id="filSparepart1" class="form-control filSparepart" style="width: 150px;" id="">
+                            <select name="" id="filCostPT" class="form-control filCostPT" style="width: 150px;" id="">
                                 <option value="All">Semua</option>
                                 <?php
                                     $i = 0;
@@ -246,7 +246,7 @@
                         </div>
                         <div class="form-group">
                             <label for="">Tahun</label>
-                            <select name="" id="filSparepart2" class="form-control filSparepart" style="width: 150px;" id="">
+                            <select name="" id="filCostPT2" class="form-control filCostPT" style="width: 150px;" id="">
                                 <option value="All">Semua</option>
                                 <?php
                                     $currYear = date('Y');
@@ -261,7 +261,15 @@
                         </div>
                     </div>
                     <div class="body" style="padding: 15px">
-                        <table id="tblSparepart" class="table-custom"></table>
+                        <table id="tblCostPT" class="table-custom">
+                            <thead>
+                                <tr>
+                                    <th>PT</th>
+                                    <th style="width: 20%;">Wilayah</th>
+                                    <th style="width: 35%;">Total</th>
+                                </tr>
+                            </thead>
+                        </table>
                     </div>
                     <div class="foot">
                     </div>
@@ -273,7 +281,7 @@
                         <p>Total Cost Per PT</p>
                         <div class="form-group">
                             <label for="">Daftar PT</label>
-                            <select name="" id="filCostPT1" class="form-control filCostPT" style="width: 150px;" id="">
+                            <select name="" id="filCostPerPT1" class="form-control filCostPerPT" style="width: 150px;" id="">
                                 <option value="All">Semua</option>
                                 <?php
                                     $i = 1;
@@ -288,7 +296,7 @@
                         </div>
                         <div class="form-group">
                             <label for="">Tahun</label>
-                            <select name="" id="filCostPT2" class="form-control filCostPT" style="width: 150px;" id="">
+                            <select name="" id="filCostPerPT2" class="form-control filCostPerPT" style="width: 150px;" id="">
                                 <option value="All">Semua</option>
                                 <?php
                                     $currYear = date('Y');
@@ -486,22 +494,28 @@
 </div>
 <script src="<?= site_url() ?>assets/src/js/apexchart.js"></script>
 <script>
-    var tblSparepart = $('#tblSparepart').DataTable({
+    var tblCostPT = $('#tblCostPT').DataTable({
         'processing': true,
         'serverSide': true,
         'ordering': false,
         'searching': false,
         'serverMethod': 'post',
         'ajax': {
-            'url':'<?= site_url('management/ajxUpdateSparepart')?>',
+            'url':'<?= site_url('management/ajxUpdateCostPTAll')?>',
             'data': {
-                'month': $('#filSparepart1').val(),
-                'year': $('#filSparepart2').val()
+                'month': $('#filCostPT').val(),
+                'year': $('#filCostPT2').val()
             }
         },
+        "columnDefs": [
+            { "name": "PT",   "targets": 0 },
+            { "name": "Wilayah",  "targets": 1 },
+            { "name": "Total", "targets": 2 }
+        ],
         'columns': [
-            { data: 'detail' },
-            { data: 'jumlah' }
+            { data: 'pt' },
+            { data: 'wilayah' },
+            { data: 'total' }
         ]
     });
     $('#tblKendaraan').DataTable({
@@ -807,9 +821,9 @@
             }
         })
     })
-    $('.filCostPT').change(function (){
-        const pt = $('#filCostPT1').val()
-        const year = $('#filCostPT2').val()
+    $('.filCostPerPT').change(function (){
+        const pt = $('#filCostPerPT1').val()
+        const year = $('#filCostPerPT2').val()
         $.ajax({
             url: '<?= site_url('management/ajxUpdateCostPT')?>',
             method: 'POST',
@@ -854,24 +868,30 @@
             }
         })
     })
-    $('.filSparepart').change(function(){
-        tblSparepart.destroy()
-        tblSparepart = $('#tblSparepart').DataTable({
+    $('.filCostPT').change(function(){
+        tblCostPT.destroy()
+        tblCostPT = $('#tblCostPT').DataTable({
             'processing': true,
             'serverSide': true,
             'ordering': false,
             'searching': false,
             'serverMethod': 'post',
             'ajax': {
-                'url':'<?= site_url('management/ajxUpdateSparepart')?>',
+                'url':'<?= site_url('management/ajxUpdateCostPTAll')?>',
                 'data': {
-                    'month': $('#filSparepart1').val(),
-                    'year': $('#filSparepart2').val()
+                    'month': $('#filCostPT').val(),
+                    'year': $('#filCostPT2').val()
                 }
             },
+            "columnDefs": [
+                { "name": "PT",   "targets": 0 },
+                { "name": "Wilayah",  "targets": 1 },
+                { "name": "Total", "targets": 2 }
+            ],
             'columns': [
-                { data: 'detail' },
-                { data: 'jumlah' }
+                { data: 'pt' },
+                { data: 'wilayah' },
+                { data: 'total' }
             ]
         });
     })

@@ -25,7 +25,6 @@ class Dashboard extends CI_Controller{
 		$masterPT			= $this->MDropdown->get(['dropdown_menu' => 'PT', 'deleted_date' => NULL]);
 		$globalCost 		= $this->MReport->globalCostTahun(date('Y'));
 		$costPerArea 		= $this->MReport->globalCostTahunArea($masterArea[0]->dropdown_list, date('Y'));
-		$costSparepart		= $this->MReport->jenisBiayaSparepart(date('n'), date('Y'));
 		$jenisPengeluaran	= $this->MPengeluaran->jenisPengeluaran(date('n'), date('Y'));
 		$transaksiPT		= $this->MReport->transaksiPT($masterPT[0]->dropdown_list, date('Y'));
 		$kendaraan			= $this->MReport->reportKendaraan();
@@ -45,7 +44,6 @@ class Dashboard extends CI_Controller{
 			'saldo'	=> $dataSaldo,
 			'GlobalCost' => $globalCost,
 			'CostPerArea' => $costPerArea,
-			'CostSparepart' => $costSparepart,
 			'JenisPengeluaran' => $jenisPengeluaran,
 			'TransaksiPT' => $transaksiPT,
 			'Kendaraan' => $kendaraan,
@@ -127,18 +125,19 @@ class Dashboard extends CI_Controller{
 
 		echo json_encode($costPerPT);
 	}
-	public function ajxUpdateSparepart(){
+	public function ajxUpdateCostPTAll(){
 		$draw   = $_POST['draw'];
         $offset = $_POST['start'];
         $limit  = $_POST['length']; // Rows display per page
         $search = $_POST['search']['value'];
         
-        $report = $this->MReport->reportSparepart(['year' => $_POST['year'], 'month' => $_POST['month'], 'offset' => $offset, 'limit' => $limit]);
+        $report = $this->MReport->reportCostPTAll(['year' => $_POST['year'], 'month' => $_POST['month'], 'offset' => $offset, 'limit' => $limit]);
         $datas = array();
         foreach ($report['records'] as $item) {
             $datas[] = array( 
-				'detail' => $item->sparepart_nama,
-                'jumlah' => number_format((int)$item->sparepart_total)
+				'pt' => $item->pt,
+				'wilayah' => $item->wilayah,
+                'total' => 'Rp.'.number_format((int)$item->total)
             );
         }
 
