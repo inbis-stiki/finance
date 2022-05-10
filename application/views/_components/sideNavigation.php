@@ -99,19 +99,11 @@
         ?>
         <?php
         if ($this->session->userdata('isManagement') == "1") {
+            $statusActive = uri_string() == 'management/laporan' ? 'active' : '';
             echo '
-                    <div class="nav-links accordion-nav ' . $active . '">
-                        <div class="position-relative">
-                            <a>Laporan</a>
-                            <span class="iconify chevron" data-icon="akar-icons:chevron-left"></span>
-                        </div>
-            
-                        <div class="sub-nav">
-                            <a href="' . site_url() . 'management/laporan-harian">Harian</a>
-                            <a href="' . site_url() . 'management/laporan-bulanan">Bulanan</a>
-                            <a href="' . site_url() . 'management/laporan-tahunan">Tahunan</a>
-                        </div>
-                    </div>
+                    <div class="nav-links ' . $statusActive . '">
+                        <a href="' . site_url() . 'management/laporan">Laporan Transaksi</a>
+                    </div>        
                 ';
         }
         ?>

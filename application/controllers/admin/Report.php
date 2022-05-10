@@ -121,20 +121,33 @@ class Report extends CI_Controller{
         parent::__construct();
         $this->load->library('dateformat');
     }
-    public function administrasi($filter){
+    public function main(){
+        if($_POST['jenis'] == '1'){
+            $this->administrasi($_POST['period'], $_POST['tgl']);
+        }else if($_POST['jenis'] == '2'){
+            $this->maintenance($_POST['period'], $_POST['tgl']);
+        }
+    }
+    public function administrasi($filter, $tgl){
         $pdf = new MyPDF('Potrait', PDF_UNIT, "A4", true, 'UTF-8', false);
         $pdf->HeaderTitle = 'Administrasi';
 
         $data = "";
         if($filter == '1'){
-            $data = $this->getDataAdm(['filter' => '1', 'month' => date('n'), 'year' => date('Y')]);
-            $pdf->HeaderTitle2 = $this->dateformat->getFullMonth(date('n')).' '.date('Y');
+            $date  = explode(' ', $tgl);
+            $month = date_create($date[0]);
+            $data = $this->getDataAdm(['filter' => '1', 'month' => date_format($month, 'n'), 'year' => $date[1]]);
+            $pdf->HeaderTitle2 = $tgl;
         }else if($filter == '2'){
-            $data = $this->getDataAdm(['filter' => '2', 'start' => "2022-03-06", 'end' => "2022-03-12"]);
-            $pdf->HeaderTitle2 = "06/03/2022 - 12-03-2022";
+            $date       = explode(' to ', $tgl);
+            $startDate  = date_create($date[0]);
+            $endDate    = date_create($date[1]);
+            $data = $this->getDataAdm(['filter' => '2', 'start' => date_format($startDate, 'Y-m-d'), 'end' => date_format($endDate, 'Y-m-d')]);
+            $pdf->HeaderTitle2 = date_format($startDate, 'd-m-Y')." - ".date_format($endDate, 'd-m-Y');
         }else if($filter == '3'){
-            $data = $this->getDataAdm(['filter' => '3', 'date' => "2022-03-15"]);
-            $pdf->HeaderTitle2 = '15 Maret 2022';
+            $date = date_create($tgl);
+            $data = $this->getDataAdm(['filter' => '3', 'date' => date_format($date, 'Y-m-d')]);
+            $pdf->HeaderTitle2 = date_format($date, 'j F Y');
         }
 
         $pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, PDF_HEADER_TITLE.' 006', PDF_HEADER_STRING);
@@ -158,20 +171,26 @@ class Report extends CI_Controller{
         $pdf->setTableAdm($header, $data);
         $pdf->Output('Laporan_Administrasi_Tanggal_'.$this->dateformat->getFullMonth(date('d-m-Y')).'.pdf', 'I');
     }
-    public function maintenance($filter){
+    public function maintenance($filter, $tgl){
         $pdf = new MyPDF('Landscape', PDF_UNIT, "A4", true, 'UTF-8', false);
         $pdf->HeaderTitle = 'Maintenance';
 
         $data = "";
         if($filter == '1'){
-            $data = $this->getDataMain(['filter' => '1', 'month' => date('n'), 'year' => date('Y')]);
-            $pdf->HeaderTitle2 = $this->dateformat->getFullMonth(date('n')).' '.date('Y');
+            $date  = explode(' ', $tgl);
+            $month = date_create($date[0]);
+            $data = $this->getDataMain(['filter' => '1', 'month' => date_format($month, 'n'), 'year' => $date[1]]);
+            $pdf->HeaderTitle2 = $tgl;
         }else if($filter == '2'){
-            $data = $this->getDataMain(['filter' => '2', 'start' => "2022-03-06", 'end' => "2022-03-12"]);
-            $pdf->HeaderTitle2 = "06/03/2022 - 12-03-2022";
+            $date       = explode(' to ', $tgl);
+            $startDate  = date_create($date[0]);
+            $endDate    = date_create($date[1]);
+            $data = $this->getDataMain(['filter' => '2', 'start' => date_format($startDate, 'Y-m-d'), 'end' => date_format($endDate, 'Y-m-d')]);
+            $pdf->HeaderTitle2 = date_format($startDate, 'd-m-Y')." - ".date_format($endDate, 'd-m-Y');
         }else if($filter == '3'){
-            $data = $this->getDataMain(['filter' => '3', 'date' => "2022-03-15"]);
-            $pdf->HeaderTitle2 = '15 Maret 2022';
+            $date = date_create($tgl);
+            $data = $this->getDataMain(['filter' => '3', 'date' => date_format($date, 'Y-m-d')]);
+            $pdf->HeaderTitle2 = date_format($date, 'j F Y');
         }
 
         $pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, PDF_HEADER_TITLE.' 006', PDF_HEADER_STRING);
