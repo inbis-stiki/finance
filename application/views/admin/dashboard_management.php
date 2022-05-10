@@ -531,7 +531,7 @@
             data: [
                 <?php
                     foreach ($GlobalCost as $item) {
-                        echo ((int)$item->report_total_transaksi / 1000000).'.toFixed(2),';
+                        echo number_format(((float)$item->report_total_transaksi / 1000000), 2, '.', '').',';
                     }    
                 ?>
             ]
@@ -567,7 +567,7 @@
             data: [
                 <?php
                     foreach ($CostPerArea as $item) {
-                        echo ((int)$item->report_total_transaksi / 1000000).'.toFixed(2),';
+                        echo number_format(((float)$item->report_total_transaksi / 1000000), 2, '.', '').',';
                     }    
                 ?>
             ]
@@ -604,7 +604,7 @@
                 <?php
                     foreach ($JenisPengeluaran as $item) {
                         // echo ((int)$item->report_total_transaksi / 1000000).'.toFixed(1),';
-                        echo ((int)$item->total_jenis_pengeluaran / 1000000).'.toFixed(2),';
+                        echo number_format(((float)$item->total_jenis_pengeluaran / 1000000), 2, '.', '').',';
                     }    
                 ?>
             ]
@@ -640,7 +640,7 @@
             data: [
                 <?php
                     foreach ($TransaksiPT as $item) {
-                        echo ((int)$item->report_total_transaksi / 1000000).'.toFixed(2),';
+                        echo number_format(((float)$item->report_total_transaksi / 1000000), 2, '.', '').',';
                     }    
                 ?>
             ]

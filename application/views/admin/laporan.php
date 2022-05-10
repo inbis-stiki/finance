@@ -37,7 +37,9 @@
                                         <option value="" selected disabled>Pilih</option>
                                         <option value="1">Administrasi</option>
                                         <option value="2">Maintenance</option>
-                                        <option value="3">Expense</option>
+                                        <option value="3">Expense (BBM)</option>
+                                        <option value="4">Expense (Driver)</option>
+                                        <option value="5">Expense (Lain-Lain)</option>
                                     </select>
                                 </div>
                                 <div class="form-group mb-3">
@@ -68,7 +70,9 @@
                                         <option value="" selected disabled>Pilih</option>
                                         <option value="1">Administrasi</option>
                                         <option value="2">Maintenance</option>
-                                        <option value="3">Expense</option>
+                                        <option value="3">Expense (BBM)</option>
+                                        <option value="4">Expense (Driver)</option>
+                                        <option value="5">Expense (Lain-Lain)</option>
                                     </select>
                                 </div>
                                 <div class="form-group mb-3">
@@ -99,7 +103,9 @@
                                         <option value="" selected disabled>Pilih</option>
                                         <option value="1">Administrasi</option>
                                         <option value="2">Maintenance</option>
-                                        <option value="3">Expense</option>
+                                        <option value="3">Expense (BBM)</option>
+                                        <option value="4">Expense (Driver)</option>
+                                        <option value="5">Expense (Lain-Lain)</option>
                                     </select>
                                 </div>
                                 <div class="form-group mb-3">
