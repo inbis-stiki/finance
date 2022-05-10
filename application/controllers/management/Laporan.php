@@ -9,31 +9,13 @@ class Laporan extends CI_Controller{
 		$this->load->library('table');
     }
 
-    public function laporanHarian(){
+    public function laporan(){
 
 		$data = [
-			'title' => "Laporan Harian"
+			'title' => "Laporan Transaksi"
 		];
 
-		$this->template->index('admin/laporan_harian', $data);
-		$this->load->view('_components/sideNavigation', $data);
-    }
-    public function laporanBulanan(){
-
-		$data = [
-			'title' => "Laporan Bulanan"
-		];
-
-		$this->template->index('admin/laporan_bulanan', $data);
-		$this->load->view('_components/sideNavigation', $data);
-    }
-    public function laporanTahunan(){
-
-		$data = [
-			'title' => "Laporan Tahunan"
-		];
-
-		$this->template->index('admin/laporan_tahunan', $data);
+		$this->template->index('admin/laporan', $data);
 		$this->load->view('_components/sideNavigation', $data);
     }
 	public function getDataAdm($param){

@@ -76,9 +76,7 @@ $route['management/ajxUpdateJenisBiayaSparepart']   = 'management/Dashboard/ajxU
 $route['management/ajxUpdateJenisPengeluaran']      = 'management/Dashboard/ajxUpdateJenisPengeluaran';
 $route['management/ajxUpdateCostPT']                = 'management/Dashboard/ajxUpdateCostPT';
 // laporan
-$route['management/laporan-harian']     = 'management/Laporan/laporanHarian';
-$route['management/laporan-bulanan']    = 'management/Laporan/laporanBulanan';
-$route['management/laporan-tahunan']    = 'management/Laporan/laporanTahunan';
+$route['management/laporan']     = 'management/Laporan/laporan';
 // ========== END MANAGEMENT ========== 
 
 // ========== ADMIN ==========
@@ -96,6 +94,7 @@ $route['admin/transaksi/store-maintenance']       = 'admin/Transaksi/storeMainte
 $route['admin/transaksi/store-expense']           = 'admin/Transaksi/storeExpense';
 $route['admin/transaksi/ajxKdBarang']             = 'admin/Transaksi/ajxKdBarang';
 // report
+$route['admin/report/main'] = 'admin/Report/main';
 $route['admin/report/administrasi/(:any)']  = 'admin/Report/administrasi/$1';
 $route['admin/report/maintenance/(:any)']   = 'admin/Report/maintenance/$1';
 // Kendaraan

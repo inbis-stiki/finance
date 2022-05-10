@@ -29,7 +29,10 @@
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <link href="<?= site_url()?>assets/src/css/flatpickr.min.css" rel="stylesheet" />
+    <link href="<?= site_url()?>assets/src/css/monthSelect.css" rel="stylesheet" />
     <script src="<?= site_url()?>assets/src/js/flatpickr.min.js"></script>
+    <script src="<?= site_url()?>assets/src/js/weekSelect.js"></script>
+    <script src="<?= site_url()?>assets/src/js/monthSelect.js"></script>
     <script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
     <script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
 
