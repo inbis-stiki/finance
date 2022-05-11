@@ -114,7 +114,7 @@
                             <?php
                                 foreach ($datawilayah as $item) {
                                     $status = '';
-                                    if($kendaraan->kendaraan_lokasi_ambil == $item->dropdown_list){
+                                    if($kendaraan->kendaraan_wilayah == $item->dropdown_list){
                                         $status = 'selected';
                                     }
                                     echo '

@@ -228,7 +228,7 @@ class Kendaraan extends CI_Controller
             $dataStore['kendaraan_kapasitas_tangki']    = $kendaraan->kendaraan_kapasitas_tangki;
             $dataStore['kendaraan_jenis']               = $kendaraan->kendaraan_jenis;
             $dataStore['kendaraan_pt']                  = $kendaraan->kendaraan_pt;
-            $dataStore['kendaraan_lokasi_ambil']        = $kendaraan->kendaraan_lokasi_ambil;
+            $dataStore['kendaraan_wilayah']             = $kendaraan->kendaraan_wilayah;
             $this->MKendaraan->insert($dataStore);
 
             $dataUpdate['kendaraan_no_rangka'] = $_POST['rangka'];
@@ -306,7 +306,7 @@ class Kendaraan extends CI_Controller
         $data['kendaraan_tanggal_beli'] = $this->input->post('tanggal');
         $data['kendaraan_jenis'] = $jenis;
         $data['kendaraan_pt'] = $jenis == "Perusahaan" ? $this->input->post('pt') : null;
-        $data['kendaraan_lokasi_ambil'] = $this->input->post('lokasi_ambil');
+        $data['kendaraan_wilayah'] = $this->input->post('lokasi_ambil');
         $data['is_active'] = $this->input->post('status');
         // $data = array(
         //     'kendaraan_merk'             => $this->input->post('merk'),
