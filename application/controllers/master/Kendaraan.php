@@ -362,7 +362,7 @@ class Kendaraan extends CI_Controller
     {
         // var_dump($_FILES[$resource]['name']);
         // die;
-        $path = './assets/images/kendaraan/' . $resource;
+        $path = 'assets/images/kendaraan/' . $resource;
             $config['upload_path'] = $path;
             $config['allowed_types'] = 'jpg|png|jpeg';
             $config['max_size'] = '2048';  //2MB max
