@@ -54,6 +54,7 @@ class Profile extends CI_Controller{
         $conf['encrypt_name']   = TRUE;
 
         print_r($resource);
+	print_r($_FILES['foto']);
 
         $this->upload->initialize($conf);
         if ($this->upload->do_upload($resource)) {
