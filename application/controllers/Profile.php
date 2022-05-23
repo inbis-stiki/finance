@@ -45,7 +45,7 @@ class Profile extends CI_Controller{
     }
     public function upload_image($resource)
     {
-        $path = './assets/images/user';
+        $path = 'assets/images/user';
         $conf['upload_path']    = $path;
         $conf['allowed_types']  = "jpg|png|jpeg|bmp";
         $conf['max_size']       = 2048;
