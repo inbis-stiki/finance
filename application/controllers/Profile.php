@@ -30,14 +30,13 @@ class Profile extends CI_Controller{
 
         $formData['user_username'] = $_POST['username'];
         $formData['user_nama']     = $_POST['nama'];
-        print_r($formData);
-        // $this->MUser->update($formData);
+        $this->MUser->update($formData);
 
-        // if(!empty($formData)) $this->session->set_userdata('foto', $formData['user_img']);
-        // $this->session->set_userdata('name', $_POST['nama']);
+        if(!empty($formData)) $this->session->set_userdata('foto', $formData['user_img']);
+        $this->session->set_userdata('name', $_POST['nama']);
 
-        // $this->session->set_flashdata('succ_msg', 'Berhasil mengubah data pengguna!');
-        // redirect('profile/edit/'.$_POST['username']);
+        $this->session->set_flashdata('succ_msg', 'Berhasil mengubah data pengguna!');
+        redirect('profile/edit/'.$_POST['username']);
     }
     public function changePass(){
         $this->MUser->update(['user_username' => $_POST['username'], 'user_password' => hash('sha256', md5($_POST['pass']))]);
