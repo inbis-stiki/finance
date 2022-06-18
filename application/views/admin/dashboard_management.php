@@ -469,22 +469,6 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col">
-                            <form action="<?= site_url('management/update-deadline')?>" method="POST">
-                                <div class="d-flex flex-column my-2 w-100 col-md-6">
-                                    <label class="my-2 color-secondary">Tanggal Deadline Pajak <span id="update_label"></span> Terbaru</label>
-                                    <input type="date" name="deadline" min="<?= date('Y-m-d')?>" class="login-input regular fs-16px input-administrasi-input">
-                                </div>
-                                <input type="hidden" name="id" id="update_id">
-                                <input type="hidden" name="status" id="update_status">
-                                <button type="submit" data-slct="exp" class="btn-table green infoKendaraan">
-                                    <span class="iconify-inline" data-icon="fluent:save-16-filled" data-width="15" data-height="15"></span>
-                                    <span>Update</span>
-                                </button>
-                            </form>
-                        </div>
-                    </div>
                     <input type="hidden" class="login-input regular fs-16px" name="driver_nik">
                     <button class="btn-table submit-modal mt-5" data-bs-dismiss="modal">Tutup</button>
                 </div>
@@ -911,10 +895,10 @@
                 res['kendaraan_jenis'] = res['kendaraan_jenis'] == "Perusahaan" ? `${res['kendaraan_pt']}` : res['kendaraan_jenis'];
 
                 tglJatuhSim = new Date(res['kendaraan_deadlinestnk']);
-                tglJatuhSim = `${tglJatuhSim.getDay()} ${getFullMonth(tglJatuhSim.getMonth())} ${tglJatuhSim.getFullYear()}`;
+                tglJatuhSim = `${tglJatuhSim.getDate()} ${getFullMonth(tglJatuhSim.getMonth())} ${tglJatuhSim.getFullYear()}`;
                 
                 tglJatuhKIR = new Date(res['kendaraan_deadlinekir']);
-                tglJatuhKIR = `${tglJatuhKIR.getDay()} ${getFullMonth(tglJatuhKIR.getMonth())} ${tglJatuhKIR.getFullYear()}`;
+                tglJatuhKIR = `${tglJatuhKIR.getDate()} ${getFullMonth(tglJatuhKIR.getMonth())} ${tglJatuhKIR.getFullYear()}`;
 
                 $('#kendaraan_rangka').val(res['kendaraan_no_rangka']);
                 $('#kendaraan_stnk').val(res['kendaraan_stnk']);
@@ -941,7 +925,7 @@
 
                     carouselInner += `
                         <div class="carousel-item ${status}">
-                            <img class="d-block imgItem" style="height: 312px;width: 600px;background-size: cover;" src="<?= site_url('')?>assets/images/fotokendaraan/${i}" alt="Second slide" alt="">
+                            <img class="d-block imgItem" style="height: 312px;width: 600px;background-size: cover;" src="${i}" alt="Second slide" alt="">
                         </div>
                     `;
                     index++
