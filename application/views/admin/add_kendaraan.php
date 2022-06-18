@@ -1,4 +1,4 @@
-<div class="min-vh-100 general-padding bg-light-purple">
+isAdmin<div class="min-vh-100 general-padding bg-light-purple">
     <div class="p-5">
         <?php echo validation_errors(); ?>
         <?= form_open_multipart('master/kendaraan/store'); ?>
@@ -50,6 +50,8 @@
                                 } ?></small>
                         <label class="my-3">Nomor Rangka</label>
                         <input type="text" class="login-input regular" style="text-transform:uppercase" name="rangka" value="<?= !empty($temp['rangka']) ? $temp['rangka'] : "" ?>" required>
+                        <label class="my-3">Nomor Mesin</label>
+                        <input type="text" class="login-input regular" style="text-transform:uppercase" name="mesin" value="<?= !empty($temp['mesin']) ? $temp['mesin'] : "" ?>" required>
                         <label class="my-3">Nomor STNK</label>
                         <input type="text" class="login-input regular" style="text-transform:uppercase" name="stnk" value="<?= !empty($temp['stnk']) ? $temp['stnk'] : "" ?>" required>
                         <label class="my-3">Merk</label>

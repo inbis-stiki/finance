@@ -165,6 +165,7 @@ class Kendaraan extends CI_Controller
             $jenis = $this->input->post('jenis_kendaraan');
             $data = array(
                 'kendaraan_no_rangka'           => strtoupper($this->input->post('rangka')),
+                'kendaraan_no_mesin'            => strtoupper($this->input->post('mesin')),
                 'kendaraan_stnk'                => strtoupper($this->input->post('stnk')),
                 'kendaraan_merk'                => $this->input->post('merk'),
                 'kendaraan_tanggal_beli'        => $this->input->post('tanggal'),
@@ -218,6 +219,7 @@ class Kendaraan extends CI_Controller
         if ($dataDuplicate == null) {
             $kendaraan = $this->MKendaraan->getById($_POST['rangka'], $_POST['stnkLama']);
             $dataStore['kendaraan_no_rangka']           = $kendaraan->kendaraan_no_rangka;
+            $dataStore['kendaraan_no_mesin']            = $kendaraan->kendaraan_no_mesin;
             $dataStore['kendaraan_stnk']                = $_POST['stnk'];
             $dataStore['kendaraan_merk']                = $kendaraan->kendaraan_merk;
             $dataStore['kendaraan_tanggal_beli']        = $kendaraan->kendaraan_tanggal_beli;

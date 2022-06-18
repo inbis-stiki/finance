@@ -68,7 +68,9 @@
                                 } ?></small>
                         <label class="my-3">Nomor Rangka</label>
                         <input type="text" class="login-input regular" placeholder="Nomor Rangka" value="<?= $kendaraan->kendaraan_no_rangka ?>" disabled>
-                        <input type="hidden" name="rangka" value="<?= $kendaraan->kendaraan_no_rangka ?>">
+                        <label class="my-3">Nomor Mesin</label>
+                        <input type="text" class="login-input regular" placeholder="Nomor Mesin" value="<?= $kendaraan->kendaraan_no_mesin ?>" disabled>
+                        <input type="hidden" name="mesin" value="<?= $kendaraan->kendaraan_no_mesin ?>">
                         <label class="my-3">Nomor STNK</label>
                         <input type="text" class="login-input regular" name="stnk" placeholder="Nomor STNK" value="<?= $kendaraan->kendaraan_stnk ?>" disabled>
                         <input type="hidden" class="login-input regular" value="<?= $kendaraan->kendaraan_stnk ?>">
