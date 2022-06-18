@@ -222,10 +222,10 @@
                 res['kendaraan_jenis'] = res['kendaraan_jenis'] == "Perusahaan" ? `${res['kendaraan_pt']}` : res['kendaraan_jenis'];
 
                 tglJatuhSim = new Date(res['kendaraan_deadlinestnk']);
-                tglJatuhSim = `${tglJatuhSim.getDay()} ${getFullMonth(tglJatuhSim.getMonth())} ${tglJatuhSim.getFullYear()}`;
+                tglJatuhSim = `${tglJatuhSim.getDate()} ${getFullMonth(tglJatuhSim.getMonth())} ${tglJatuhSim.getFullYear()}`;
                 
                 tglJatuhKIR = new Date(res['kendaraan_deadlinekir']);
-                tglJatuhKIR = `${tglJatuhKIR.getDay()} ${getFullMonth(tglJatuhKIR.getMonth())} ${tglJatuhKIR.getFullYear()}`;
+                tglJatuhKIR = `${tglJatuhKIR.getDate()} ${getFullMonth(tglJatuhKIR.getMonth())} ${tglJatuhKIR.getFullYear()}`;
 
                 $('#kendaraan_rangka').val(res['kendaraan_no_rangka']);
                 $('#kendaraan_stnk').val(res['kendaraan_stnk']);

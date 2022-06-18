@@ -56,12 +56,32 @@ class Transaksi extends CI_Controller
 
         $index = 0;
         foreach ($_POST['jenPeng'] as $item) {
+            $jenPeng = $this->db->get_where('master_jenis_pengeluaran', ['pengeluaran_id' => $item])->row();
+            if($jenPeng->pengeluaran_jenis == "KIR"){
+                $kendaraan = $this->MKendaraan->getById($dataStore['no_rangka'], $dataStore['kendaraan_stnk']);
+                $this->MKendaraan->update([
+                    'kendaraan_no_rangka'       => $dataStore['no_rangka'],
+                    'kendaraan_stnk'            => $dataStore['kendaraan_stnk'],
+                    'kendaraan_deadlinekir'     => date('Y-m-d', strtotime("+6 months", strtotime($kendaraan->kendaraan_deadlinekir))),
+                    'kendaraan_isnotifkir'      => '0'
+                ]);
+            }else if($jenPeng->pengeluaran_jenis == "STNK"){
+                $kendaraan = $this->MKendaraan->getById($dataStore['no_rangka'], $dataStore['kendaraan_stnk']);
+                $this->MKendaraan->update([
+                    'kendaraan_no_rangka'       => $dataStore['no_rangka'],
+                    'kendaraan_stnk'            => $dataStore['kendaraan_stnk'],
+                    'kendaraan_deadlinestnk'    => date('Y-m-d', strtotime("+12 months", strtotime($kendaraan->kendaraan_deadlinestnk))),
+                    'kendaraan_isnotifstnk'     => '0'
+                ]);
+            }
+
             $dataStore['id_pengeluaran']    = $item;
             $dataStore['transaksi_total']   = str_replace(',', '', $_POST['total'][$index]);
             
             $this->MJenisBiaya->insert($dataStore);
             $index++;
         }
+
 
         $this->session->set_flashdata('succ_modal', true);
         redirect('admin/transaksi');
