@@ -303,7 +303,10 @@ class Kendaraan extends CI_Controller
         }
         $jenis = $this->input->post('jenis_kendaraan');
         $data['kendaraan_merk'] = $this->input->post('merk');
+        $data['kendaraan_kapasitas_tangki'] = $this->input->post('tangki');
         $data['kendaraan_tanggal_beli'] = $this->input->post('tanggal');
+        $data['kendaraan_deadlinestnk'] = $this->input->post('pajak');
+        $data['kendaraan_deadlinekir'] = $this->input->post('kir');
         $data['kendaraan_jenis'] = $jenis;
         $data['kendaraan_pt'] = $jenis == "Perusahaan" ? $this->input->post('pt') : null;
         $data['kendaraan_wilayah'] = $this->input->post('lokasi_ambil');
