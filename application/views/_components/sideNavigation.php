@@ -98,11 +98,11 @@
         }
         ?>
         <?php
-        if ($this->session->userdata('isManagement') == "1") {
-            $statusActive = uri_string() == 'management/laporan' ? 'active' : '';
+        if ($this->session->userdata('isAdmin') == "1") {
+            $statusActive = uri_string() == 'admin/laporan' ? 'active' : '';
             echo '
                     <div class="nav-links ' . $statusActive . '">
-                        <a href="' . site_url() . 'management/laporan">Laporan Transaksi</a>
+                        <a href="' . site_url() . 'admin/laporan">Laporan Transaksi</a>
                     </div>        
                 ';
         }
