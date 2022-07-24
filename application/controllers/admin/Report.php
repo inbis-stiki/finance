@@ -119,12 +119,19 @@ class MyPDF extends TCPDF{
         $this->setTableConf();
         $this->Ln(10);
         // Header
-        $w = array(10, 30, 35, 80, 50);
+        if($jenExp == "3"){
+            $w = array(10, 30, 35, 153, 50);
+        }else if($jenExp == "4"){
+            $w = array(10, 40, 45, 50, 65, 65);
+        }else if($jenExp == "5"){
+            $w = array(10, 30, 35, 72, 30, 50, 50);
+        }
+
         $num_headers = count($header);
         $first = 1;
         for($i = 0; $i < $num_headers; ++$i) {
             if($first++ == 1){
-                $this->setCellMargins(25, 0, 0, 0);
+                $this->setCellMargins(0, 0, 0, 0);
             }else{
                 $this->setCellMargins(0, 0, 0, 0);
             }
@@ -142,9 +149,6 @@ class MyPDF extends TCPDF{
 
         $total = 0;
         foreach ($data as $item) {
-            $total += (int)$item->total_biaya;
-            $harga = (int)$item->total_biaya / (int)$item->jumlah;
-
             // $this->setCellMargins(25, 0, 0, 0);
             $cellcount = array();
             //write text first
@@ -153,11 +157,36 @@ class MyPDF extends TCPDF{
             //draw cells and record maximum cellcount
             //cell height is 6 and width is 80
      
-            $cellcount[] = $this->MultiCell($w[0], 6, $no++, 0, 'C',$fill,0);
-            $cellcount[] = $this->MultiCell($w[1], 6, date_format(date_create($item->transaksi_tanggal), 'd/m/Y'), 0, 'C',$fill,0);
-            $cellcount[] = $this->MultiCell($w[2], 6, $item->kendaraan_stnk, 0, 'C',$fill,0);
-            $cellcount[] = $this->MultiCell($w[3], 6, $item->transaksi_keterangan, 0, 'L',$fill,0);
-            $cellcount[] = $this->MultiCell($w[4], 6, number_format($item->total_biaya), 0, 'R',$fill,0);
+            if($jenExp == "3"){
+                $total += (int)$item->total_biaya;
+
+                $cellcount[] = $this->MultiCell($w[0], 6, $no++, 0, 'C',$fill,0);
+                $cellcount[] = $this->MultiCell($w[1], 6, date_format(date_create($item->transaksi_tanggal), 'd/m/Y'), 0, 'C',$fill,0);
+                $cellcount[] = $this->MultiCell($w[2], 6, $item->kendaraan_stnk, 0, 'C',$fill,0);
+                $cellcount[] = $this->MultiCell($w[3], 6, $item->transaksi_keterangan, 0, 'L',$fill,0);
+                $cellcount[] = $this->MultiCell($w[4], 6, number_format($item->total_biaya), 0, 'R',$fill,0);
+            }else if($jenExp == "4"){
+                $total += (int)$item->total_biaya;
+                $fee    = (int)$item->total_biaya / (int)$item->jumlah;
+
+                $cellcount[] = $this->MultiCell($w[0], 6, $no++, 0, 'C',$fill,0);
+                $cellcount[] = $this->MultiCell($w[1], 6, date_format(date_create($item->transaksi_tanggal), 'd/m/Y'), 0, 'C',$fill,0);
+                $cellcount[] = $this->MultiCell($w[2], 6, $item->kendaraan_stnk, 0, 'C',$fill,0);
+                $cellcount[] = $this->MultiCell($w[3], 6, $item->jumlah, 0, 'C',$fill,0);
+                $cellcount[] = $this->MultiCell($w[4], 6, number_format($fee), 0, 'R',$fill,0);
+                $cellcount[] = $this->MultiCell($w[5], 6, number_format($item->total_biaya), 0, 'R',$fill,0);
+            }else if($jenExp == "5"){
+                $total += (int)$item->total_biaya;
+                $price    = (int)$item->total_biaya / (int)$item->jumlah;
+
+                $cellcount[] = $this->MultiCell($w[0], 6, $no++, 0, 'C',$fill,0);
+                $cellcount[] = $this->MultiCell($w[1], 6, date_format(date_create($item->transaksi_tanggal), 'd/m/Y'), 0, 'C',$fill,0);
+                $cellcount[] = $this->MultiCell($w[2], 6, $item->kendaraan_stnk, 0, 'C',$fill,0);
+                $cellcount[] = $this->MultiCell($w[3], 6, $item->transaksi_keterangan, 0, 'L',$fill,0);
+                $cellcount[] = $this->MultiCell($w[4], 6, $item->jumlah, 0, 'C',$fill,0);
+                $cellcount[] = $this->MultiCell($w[5], 6, number_format($price), 0, 'R',$fill,0);
+                $cellcount[] = $this->MultiCell($w[6], 6, number_format($item->total_biaya), 0, 'R',$fill,0);
+            }
             $this->SetXY($startX,$startY);
             
             $maxnocells = max($cellcount);
@@ -293,17 +322,17 @@ class Report extends CI_Controller{
         if($filter == '1'){
             $date  = explode(' ', $tgl);
             $month = date_create($date[0]);
-            $data = $this->getDataMain(['filter' => '1', 'month' => date_format($month, 'n'), 'year' => $date[1], 'jenExp' => $jenExpense]);
+            $data = $this->getDataExp(['filter' => '1', 'month' => date_format($month, 'n'), 'year' => $date[1], 'jenExp' => $jenExpense]);
             $pdf->HeaderTitle2 = $tgl;
         }else if($filter == '2'){
             $date       = explode(' to ', $tgl);
             $startDate  = date_create($date[0]);
             $endDate    = date_create($date[1]);
-            $data = $this->getDataMain(['filter' => '2', 'start' => date_format($startDate, 'Y-m-d'), 'end' => date_format($endDate, 'Y-m-d'), 'jenExp' => $jenExpense]);
+            $data = $this->getDataExp(['filter' => '2', 'start' => date_format($startDate, 'Y-m-d'), 'end' => date_format($endDate, 'Y-m-d'), 'jenExp' => $jenExpense]);
             $pdf->HeaderTitle2 = date_format($startDate, 'd-m-Y')." - ".date_format($endDate, 'd-m-Y');
         }else if($filter == '3'){
             $date = date_create($tgl);
-            $data = $this->getDataMain(['filter' => '3', 'date' => date_format($date, 'Y-m-d'), 'jenExp' => $jenExpense]);
+            $data = $this->getDataExp(['filter' => '3', 'date' => date_format($date, 'Y-m-d'), 'jenExp' => $jenExpense]);
             $pdf->HeaderTitle2 = date_format($date, 'j F Y');
         }
 
@@ -327,7 +356,7 @@ class Report extends CI_Controller{
         if($jenExp == '3'){
             $header = array('No', 'Tanggal', 'Nomor Polisi', 'Keterangan', 'Total Biaya');
         }else if($jenExp == '4'){
-            $header = array('No', 'Tanggal', 'Nomor Polisi', 'Total Hari Masuk', 'Fee per Hari', 'Total Fee');
+            $header = array('No', 'Tanggal', 'Nomor Polisi', 'Total Hari Masuk (Hari)', 'Fee per Hari', 'Total Fee');
         }else if($jenExp == '5'){
             $header = array('No', 'Tanggal', 'Nomor Polisi', 'Keterangan', 'Qty', 'Harga', 'Total Harga');
         }
@@ -335,7 +364,7 @@ class Report extends CI_Controller{
         $pdf->setTableExp($header, $data, $jenExp);
         // $pdf->Ln(10);
         // $pdf->writeHTML($this->setTablee());
-        $pdf->Output('Laporan_Expense-'.$jenExpense.'_Tanggal_'.$this->dateformat->getFullMonth(date('d-m-Y')).'.pdf', 'I');
+        $pdf->Output('Laporan_Expense-'.$jenExpense.'_'.$this->dateformat->getFullMonth(date('d-m-Y')).'.pdf', 'I');
     }
     public function getDataAdm($param){
         $filter = "";
