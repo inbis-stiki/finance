@@ -212,7 +212,7 @@
 
                     carouselInner += `
                         <div class="carousel-item ${status}">
-                            <img class="d-block imgItem" style="height: 312px;width: 600px;background-size: cover;" src="<?= site_url('')?>assets/images/fotokendaraan/${i}" alt="Second slide" alt="">
+                            <img class="d-block imgItem" style="height: 312px;width: 600px;background-size: cover;" src="${i}" alt="Second slide" alt="">
                         </div>
                     `;
                     index++
