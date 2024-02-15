@@ -84,12 +84,28 @@
     }
     ?>
 
+
     $('#main_tambahInput').click(function() {
-        $('#main_boxInput').append(mainRenderHtml())
-        generateNoMaintenance();
+        if(document.getElementById('main_inptSeri_'+main_inptCount).value==null||document.getElementById('main_inptSeri_'+main_inptCount).value==""){
+            alert('Isi Kode Barang terlebih dahulu');
+        }else{
+            $('#main_boxInput').append(mainRenderHtml())
+            generateNoMaintenance();
+        }
     })
     const mainRenderHtml = () => {
         main_inptCount++;
+        $(document).ready(function() {
+            $('.select2').select2();
+        });
+
+        $(document).ready(function() {
+            $('#main_inptSeri_'+main_inptCount).on('change', function() {
+            var selectedValue = $(this).val();
+            checkKode(main_inptCount);
+        });
+        });
+        
         return `
         <div id="main_boxInputItem_${main_inptCount}">
                 <p class="font-w-700 fs-16px my-2">
@@ -104,18 +120,23 @@
                         <div class="row m-0 p-0 w-100">
                             <div class="col-6 col-lg-6 pe-2 ps-0">
                                 <label class="mb-3">Jenis Pengeluaran</label>
-                                <select name="jenPeng[]" id="" class="login-input regular fs-16px" required>
-                                    <option value="" disabled selected>Pilih Jenis Pengeluaran</option>
-                                    ${jenPengMain}
-                                </select>
+                                <div class="input-group mb-3">
+                                    <select name="jenPeng[]" id="" class="select2 login-input regular fs-16px" required>
+                                        <option value="" disabled selected>Pilih Jenis Pengeluaran</option>
+                                        ${jenPengMain}
+                                    </select>
+                                </div>
                             </div>
                             <div class="col-6 ps-0 pe-0">
-                                <label class="mb-3">Kode Barang</label>
+                            <label class="mb-3">Kode Barang</label>
                                 <div class="input-group">
-                                    <input type="text" id="main_inptSeri_${main_inptCount}" name="kdBarang[]" class="form-control regular fs-16px" required>
-                                    <button type="button" onclick="checkKode(${main_inptCount})" class="input-group-text btn-primary"><span class="iconify-inline text-white" data-icon="fluent:search-info-24-regular" data-width="20" data-height="20"></span></button>
+                                    <select id="main_inptSeri_${main_inptCount}" name="kdBarang[]" class="login-input regular fs-16px select2" required>    
+                                    <option value="" selected disabled>Pilih...</option>
+                                    <?php foreach ($sparepartData as $item): ?>
+                                        <option value="<?php echo $item->sparepart_kode; ?>"><?php echo $item->sparepart_nama.'-' . $item->sparepart_kode; ?></option>
+                                    <?php endforeach; ?>
+                                    </select>
                                 </div>
-                                <label id="main_inptSeriAlert_${main_inptCount}"></label>
                             </div>
                         </div>
                     </div>
@@ -123,7 +144,7 @@
                         <div class="row m-0 p-0 w-100">
                             <div class="col-6 col-lg-6 pe-2 ps-0">
                                 <label class="mb-3">Jenis Sparepart</label>
-                                <select id="main_slctJenSparepart_${main_inptCount}" onchange="onChangeJenSparepart(${main_inptCount})" class="login-input regular fs-16px" disabled required>
+                                <select id="main_slctJenSparepart_${main_inptCount}" onchange="onChangeJenSparepart(${main_inptCount})" class="select2 login-input regular fs-16px" disabled required>
                                     <option value="" disabled selected>Pilih Jenis Sparepart</option>
                                     ${jenSparepart}
                                 </select>

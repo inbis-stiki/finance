@@ -22,6 +22,7 @@ class Transaksi extends CI_Controller
         $data['pengExp']        = $this->MPengeluaran->get(['pengeluaran_group' => 'Expense', 'deleted_date' => NULL]);
         $data['jenSparepart']   = $this->MDropdown->get(['dropdown_menu' => 'Jenis Sparepart', 'deleted_date' => NULL]);
         $data['saldo']          = $this->db->get('balance')->row();
+        $data['sparepartData']  = $this->MSparepart->getAll();
 
         $this->template->index('admin/pencatatan/jenis_biaya', $data);
 		$this->load->view('_components/sideNavigation', $data);
